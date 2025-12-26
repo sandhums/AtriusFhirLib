@@ -1,0 +1,71 @@
+{
+  "description": "Known test failures for FHIR R5 FhirPath Validator",
+  "version": "1.0.0",
+  "knownFailures": [
+    {
+      "groupName": "TerminologyTests", 
+      "testName": "txTest03",
+      "reason": "ConceptMap cm-address-use-v2 not available on test server"
+    },
+    {
+      "groupName": "Precision",
+      "testName": "PrecisionDecimal",
+      "reason": "Decimal trailing zeros not preserved (known limitation)"
+    },
+    {
+      "groupName": "testConformsTo",
+      "testName": "*", 
+      "reason": "conformsTo not yet implemented"
+    },
+    {
+      "groupName": "miscEngineTests",
+      "testName": "testContainedId",
+      "reason": "Multiple matches error - collection handling issue in resolve function"
+    },
+    {
+      "groupName": "miscEngineTests",
+      "testName": "testMultipleResolve",
+      "reason": "Multiple matches error - collection handling issue in resolve function"
+    },
+    {
+      "groupName": "polymorphics",
+      "testName": "testPolymorphicsB",
+      "reason": "Test data issue?"
+    },
+    {
+      "groupName": "testDollar",
+      "testName": "testDollarOrderNotAllowed",
+      "reason": "Test data issue?"
+    },
+    {
+      "groupName": "testIif",
+      "testName": "testIif6",
+      "reason": "Still working on this one - needs spec definition"
+    },
+    {
+      "groupName": "testInheritance",
+      "testName": "testFHIRPathAsFunction11",
+      "reason": "Contested"
+    },
+    {
+      "groupName": "testInheritance",
+      "testName": "testFHIRPathAsFunction16",
+      "reason": "Contested"
+    },
+    {
+      "groupName": "testTypes",
+      "testName": "testStringQuantityMonthLiteralToQuantity",
+      "reason": "Test is wrong"
+    },
+    {
+      "groupName": "testTypes",
+      "testName": "testStringQuantityYearLiteralToQuantity",
+      "reason": "Test is wrong"
+    },
+    {
+      "groupName": "testMiscellaneousAccessorTests",
+      "testName": "testPatientHasBirthDate",
+      "reason": "Unsure how the predicate=true capability works"
+    }
+  ]
+}

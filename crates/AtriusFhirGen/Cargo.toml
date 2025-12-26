@@ -1,0 +1,28 @@
+[package]
+name = "atrius-fhir-generator"
+version.workspace = true
+edition.workspace = true
+
+[features]
+default = ["R4"]
+R4 = ["atrius-fhir-lib/R4"]
+R4B = ["atrius-fhir-lib/R4B"]
+R5 = ["atrius-fhir-lib/R5"]
+R6 = ["atrius-fhir-lib/R6"]
+
+[dependencies]
+serde = { workspace = true}
+serde_json = { workspace = true}
+atrius-fhir-lib = { path = "../AtriusFhir"}
+
+chrono = { workspace = true }
+clap = { version = "4.5.53", features = ["derive"] }
+
+[build-dependencies]
+reqwest = { version = "0.12", features = ["blocking"] }
+zip = "0.6"
+serde_json = { workspace = true }
+
+[package.metadata.docs.rs]
+features = ["R4"]
+rustdoc-args = ["--cfg", "docsrs"]

@@ -1,0 +1,48 @@
+[package]
+name = "atrius-fhir-path"
+version.workspace = true
+edition.workspace = true
+
+[features]
+default = ["R4"]
+R4 = ["atrius-fhir-lib/R4"]
+R4B = ["atrius-fhir-lib/R4B"]
+R5 = ["atrius-fhir-lib/R5"]
+R6 = ["atrius-fhir-lib/R6"]
+
+[dependencies]
+atrius-fhir-lib = { path = "../AtriusFhir"}
+atrius-fhirpath-support = { path = "../AtriusFhirPathSupport"}
+chumsky = "0.10"
+roxmltree = "0.20"
+chrono = { workspace = true } # For date/time parsing and functions
+rust_decimal = { version = "1.0", features = ["serde-with-float", "macros"] }
+rust_decimal_macros = "1.0"
+regex = "1" # For string matches/replaceMatches functions
+serde = { workspace = true }
+serde_json = { workspace = true }
+once_cell = "1.0" # For lazy initialization of static values
+lazy_static = "1.4" # For lazy static initialization of tokio runtime
+base64 = "0.22" # For encode/decode functions
+hex = "0.4" # For hex encode/decode functions
+octofhir-ucum = { version = "0.5", features = ["fhir"] } # For UCUM unit handling and conversion
+reqwest = { version = "0.12", features = ["json"] } # For terminology server HTTP calls
+rayon = "1.8" # For data parallelism
+arc-swap = "1.6" # For lock-free atomic data structures
+parking_lot = "0.12" # For better mutexes than std
+
+# CLI and server dependencies
+clap = { version = "4.5", features = ["derive", "env"] }
+tokio = { version = "1", features = ["full"] }
+axum = { version = "0.8" }
+tower = { version = "0.5" }
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+http = { version = "1.0" }
+tracing = { version = "0.1" }
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+axum-test = "18.0"
+tempfile = "3.0"
+criterion = { version = "0.5", features = ["html_reports"] }
+futures = "0.3"

@@ -1,0 +1,25 @@
+[package]
+name = "atrius-fhir-lib"
+version.workspace = true
+edition.workspace = true
+
+[features]
+default = ["R4"]
+R4 = []
+R4B = []
+R5 = []
+R6 = []
+skip-r6-download = []
+
+[dependencies]
+serde = { workspace = true}
+serde_json = { workspace = true}
+
+chrono = { workspace = true }
+# Re-add serde-with-arbitrary-precision, keep macros
+rust_decimal = { version = "1.0", features = ["serde-with-arbitrary-precision", "macros"] }
+clap = "4.5.53"
+atrius-fhirpath-support = { path = "../AtriusFhirPathSupport"}
+atrius-macros = { path = "../AtriusMacros"}
+[dev-dependencies]
+rust_decimal_macros = "1.0"

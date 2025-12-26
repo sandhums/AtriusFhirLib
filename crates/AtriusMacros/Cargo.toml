@@ -1,0 +1,18 @@
+[package]
+name = "atrius-macros"
+version.workspace = true
+edition.workspace = true
+
+
+[lib]
+proc-macro = true
+
+
+[dependencies]
+syn = { version = "2.0.111", features = ["full", "derive", "parsing"] }
+quote = "1.0.42"
+proc-macro2 = "1.0.103"
+serde = { workspace = true}
+serde_json = { workspace = true}
+heck = "0.5.0"
+atrius-fhirpath-support = { path = "../AtriusFhirPathSupport"}

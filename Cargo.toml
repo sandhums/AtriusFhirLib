@@ -1,0 +1,26 @@
+[workspace]
+members = [
+    "crates/*",
+]
+# Build all Rust crates by default, but skip pysof unless explicitly requested.
+# This keeps `cargo build` working on machines without Python while still
+# making `crates/pysof` an actual workspace member for maturin.
+default-members = [
+    "crates/AtriusFhir",
+    "crates/AtriusFhirGen",
+    "crates/AtriusMacros",
+    "crates/AtriusFhirPath",
+    "crates/AtriusFhirPathSupport",
+#    "crates/hfs",
+#    "crates/sof",
+]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+
+[workspace.dependencies]
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = { version = "1.0.145", features = ["raw_value"] }
+chrono = { version = "0.4.42", features = ["serde"] }
