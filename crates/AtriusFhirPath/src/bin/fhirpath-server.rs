@@ -10,7 +10,7 @@
 //! See the server module documentation for configuration options.
 
 use clap::Parser;
-use helios_fhirpath::server::{ServerArgs, ServerConfig, run_server};
+use atrius_fhir_path::server::{ServerArgs, ServerConfig, run_server};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

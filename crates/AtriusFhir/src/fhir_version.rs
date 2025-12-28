@@ -1,6 +1,13 @@
 use atrius_fhirpath_support::evaluation_result::EvaluationResult;
 use atrius_fhirpath_support::traits::IntoEvaluationResult;
-use crate::{r4, r5};
+#[cfg(feature = "R4")]
+use crate::r4;
+#[cfg(feature = "R4B")]
+use crate::r4b;
+#[cfg(feature = "R5")]
+use crate::r5;
+#[cfg(feature = "R6")]
+use crate::r6;
 
 /// Multi-version FHIR resource container supporting version-agnostic operations.
 ///

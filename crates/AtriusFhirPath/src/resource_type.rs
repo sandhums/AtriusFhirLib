@@ -8,7 +8,7 @@ use crate::parser::TypeSpecifier;
 use atrius_fhirpath_support::evaluation_result::EvaluationError;
 use atrius_fhirpath_support::evaluation_result::EvaluationResult;
 use atrius_fhir_lib::fhir_version::{FhirComplexTypeProvider, FhirResourceTypeProvider, FhirVersion};
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
 /// Handles type operations for FHIR resources, supporting is/as operators.
 /// This module provides enhanced support for handling FHIR resource types
@@ -28,13 +28,13 @@ use std::collections::HashMap;
 pub fn is_resource_type_for_version(type_name: &str, fhir_version: &FhirVersion) -> bool {
     match fhir_version {
         #[cfg(feature = "R4")]
-        FhirVersion::R4 => helios_fhir::r4::Resource::is_resource_type(type_name),
+        FhirVersion::R4 => atrius_fhir_lib::r4::Resource::is_resource_type(type_name),
         #[cfg(feature = "R4B")]
-        FhirVersion::R4B => helios_fhir::r4b::Resource::is_resource_type(type_name),
+        FhirVersion::R4B => atrius_fhir_lib::r4b::Resource::is_resource_type(type_name),
         #[cfg(feature = "R5")]
-        FhirVersion::R5 => helios_fhir::r5::Resource::is_resource_type(type_name),
+        FhirVersion::R5 => atrius_fhir_lib::r5::Resource::is_resource_type(type_name),
         #[cfg(feature = "R6")]
-        FhirVersion::R6 => helios_fhir::r6::Resource::is_resource_type(type_name),
+        FhirVersion::R6 => atrius_fhir_lib::r6::Resource::is_resource_type(type_name),
         #[allow(unreachable_patterns)]
         _ => false, // For versions not enabled by feature flags
     }
@@ -53,13 +53,13 @@ pub fn is_resource_type_for_version(type_name: &str, fhir_version: &FhirVersion)
 pub fn is_complex_type_for_version(type_name: &str, fhir_version: &FhirVersion) -> bool {
     match fhir_version {
         #[cfg(feature = "R4")]
-        FhirVersion::R4 => helios_fhir::r4::ComplexTypes::is_complex_type(type_name),
+        FhirVersion::R4 => atrius_fhir_lib::r4::ComplexTypes::is_complex_type(type_name),
         #[cfg(feature = "R4B")]
-        FhirVersion::R4B => helios_fhir::r4b::ComplexTypes::is_complex_type(type_name),
+        FhirVersion::R4B => atrius_fhir_lib::r4b::ComplexTypes::is_complex_type(type_name),
         #[cfg(feature = "R5")]
-        FhirVersion::R5 => helios_fhir::r5::ComplexTypes::is_complex_type(type_name),
+        FhirVersion::R5 => atrius_fhir_lib::r5::ComplexTypes::is_complex_type(type_name),
         #[cfg(feature = "R6")]
-        FhirVersion::R6 => helios_fhir::r6::ComplexTypes::is_complex_type(type_name),
+        FhirVersion::R6 => atrius_fhir_lib::r6::ComplexTypes::is_complex_type(type_name),
         #[allow(unreachable_patterns)]
         _ => false, // For versions not enabled by feature flags
     }
@@ -806,19 +806,19 @@ fn check_type_match(
         if value_ns.eq_ignore_ascii_case("FHIR") && target_ns.eq_ignore_ascii_case("FHIR") {
             // Use generated type hierarchy to check if value_type is a subtype of target_type
             #[cfg(feature = "R4")]
-            if helios_fhir::r4::type_hierarchy::is_subtype_of(value_type, target_type) {
+            if atrius_fhir_lib::r4::type_hierarchy::is_subtype_of(value_type, target_type) {
                 return Ok(true);
             }
             #[cfg(feature = "R4B")]
-            if helios_fhir::r4b::type_hierarchy::is_subtype_of(value_type, target_type) {
+            if atrius_fhir_lib::r4b::type_hierarchy::is_subtype_of(value_type, target_type) {
                 return Ok(true);
             }
             #[cfg(feature = "R5")]
-            if helios_fhir::r5::type_hierarchy::is_subtype_of(value_type, target_type) {
+            if atrius_fhir_lib::r5::type_hierarchy::is_subtype_of(value_type, target_type) {
                 return Ok(true);
             }
             #[cfg(feature = "R6")]
-            if helios_fhir::r6::type_hierarchy::is_subtype_of(value_type, target_type) {
+            if atrius_fhir_lib::r6::type_hierarchy::is_subtype_of(value_type, target_type) {
                 return Ok(true);
             }
         }
@@ -830,28 +830,28 @@ fn check_type_match(
             if ns.eq_ignore_ascii_case("FHIR") {
                 // Use generated type hierarchy for FHIR subtypes
                 #[cfg(feature = "R4")]
-                if helios_fhir::r4::type_hierarchy::is_subtype_of(value_type, target_type) {
+                if atrius_fhir_lib::r4::type_hierarchy::is_subtype_of(value_type, target_type) {
                     if target_type.eq_ignore_ascii_case("string") {
                         eprintln!("Matched FHIR string subtype: {} -> string", value_type);
                     }
                     return Ok(true);
                 }
                 #[cfg(feature = "R4B")]
-                if helios_fhir::r4b::type_hierarchy::is_subtype_of(value_type, target_type) {
+                if atrius_fhir_lib::r4b::type_hierarchy::is_subtype_of(value_type, target_type) {
                     if target_type.eq_ignore_ascii_case("string") {
                         eprintln!("Matched FHIR string subtype: {} -> string", value_type);
                     }
                     return Ok(true);
                 }
                 #[cfg(feature = "R5")]
-                if helios_fhir::r5::type_hierarchy::is_subtype_of(value_type, target_type) {
+                if atrius_fhir_lib::r5::type_hierarchy::is_subtype_of(value_type, target_type) {
                     if target_type.eq_ignore_ascii_case("string") {
                         eprintln!("Matched FHIR string subtype: {} -> string", value_type);
                     }
                     return Ok(true);
                 }
                 #[cfg(feature = "R6")]
-                if helios_fhir::r6::type_hierarchy::is_subtype_of(value_type, target_type) {
+                if atrius_fhir_lib::r6::type_hierarchy::is_subtype_of(value_type, target_type) {
                     if target_type.eq_ignore_ascii_case("string") {
                         eprintln!("Matched FHIR string subtype: {} -> string", value_type);
                     }
@@ -883,7 +883,7 @@ fn check_type_match(
     // because FHIR.Age should match System.Quantity
     let allow_cross_namespace = if target_type.eq_ignore_ascii_case("quantity") {
         #[cfg(feature = "R4")]
-        if helios_fhir::r4::type_hierarchy::is_subtype_of(value_type, "Quantity") {
+        if atrius_fhir_lib::r4::type_hierarchy::is_subtype_of(value_type, "Quantity") {
             return check_type_match_with_cross_namespace(
                 value_namespace,
                 value_type,
@@ -893,7 +893,7 @@ fn check_type_match(
             );
         }
         #[cfg(feature = "R4B")]
-        if helios_fhir::r4b::type_hierarchy::is_subtype_of(value_type, "Quantity") {
+        if atrius_fhir_lib::r4b::type_hierarchy::is_subtype_of(value_type, "Quantity") {
             return check_type_match_with_cross_namespace(
                 value_namespace,
                 value_type,
@@ -903,7 +903,7 @@ fn check_type_match(
             );
         }
         #[cfg(feature = "R5")]
-        if helios_fhir::r5::type_hierarchy::is_subtype_of(value_type, "Quantity") {
+        if atrius_fhir_lib::r5::type_hierarchy::is_subtype_of(value_type, "Quantity") {
             return check_type_match_with_cross_namespace(
                 value_namespace,
                 value_type,
@@ -913,7 +913,7 @@ fn check_type_match(
             );
         }
         #[cfg(feature = "R6")]
-        if helios_fhir::r6::type_hierarchy::is_subtype_of(value_type, "Quantity") {
+        if atrius_fhir_lib::r6::type_hierarchy::is_subtype_of(value_type, "Quantity") {
             return check_type_match_with_cross_namespace(
                 value_namespace,
                 value_type,
@@ -953,19 +953,19 @@ fn check_type_match_with_cross_namespace(
             && value_namespace.as_deref() == Some("FHIR"))
     {
         #[cfg(feature = "R4")]
-        if helios_fhir::r4::type_hierarchy::is_subtype_of(value_type, target_type) {
+        if atrius_fhir_lib::r4::type_hierarchy::is_subtype_of(value_type, target_type) {
             return Ok(true);
         }
         #[cfg(feature = "R4B")]
-        if helios_fhir::r4b::type_hierarchy::is_subtype_of(value_type, target_type) {
+        if atrius_fhir_lib::r4b::type_hierarchy::is_subtype_of(value_type, target_type) {
             return Ok(true);
         }
         #[cfg(feature = "R5")]
-        if helios_fhir::r5::type_hierarchy::is_subtype_of(value_type, target_type) {
+        if atrius_fhir_lib::r5::type_hierarchy::is_subtype_of(value_type, target_type) {
             return Ok(true);
         }
         #[cfg(feature = "R6")]
-        if helios_fhir::r6::type_hierarchy::is_subtype_of(value_type, target_type) {
+        if atrius_fhir_lib::r6::type_hierarchy::is_subtype_of(value_type, target_type) {
             return Ok(true);
         }
         false

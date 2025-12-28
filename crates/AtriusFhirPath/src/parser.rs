@@ -129,11 +129,11 @@ pub enum Literal {
     /// Integer numbers (without a decimal point)
     Integer(i64),
     /// Date literals, starting with @, such as @2022-01-01
-    Date(helios_fhir::PrecisionDate),
+    Date(atrius_fhir_lib::date_time::PrecisionDate),
     /// DateTime literals with optional time and timezone parts
-    DateTime(helios_fhir::PrecisionDateTime),
+    DateTime(atrius_fhir_lib::date_time::PrecisionDateTime),
     /// Time literals, starting with @T, such as @T12:00:00
-    Time(helios_fhir::PrecisionTime),
+    Time(atrius_fhir_lib::date_time::PrecisionTime),
     /// Quantity values with a numeric value and a unit, such as 5 'mg'
     Quantity(Decimal, String),
 }
@@ -772,7 +772,7 @@ pub fn parser<'src>()
                 format!("{}T{}", date_str, time_str)
             };
 
-            helios_fhir::PrecisionDateTime::parse(&full_str)
+            atrius_fhir_lib::date_time::PrecisionDateTime::parse(&full_str)
                 .ok_or_else(|| Rich::custom(span, format!("Invalid datetime format: {}", full_str)))
                 .map(Literal::DateTime)
         });
@@ -783,7 +783,7 @@ pub fn parser<'src>()
         .then_ignore(just('T'))
         .try_map(|date_str, span| {
             let full_str = format!("{}T", date_str);
-            helios_fhir::PrecisionDateTime::parse(&full_str)
+            atrius_fhir_lib::date_time::PrecisionDateTime::parse(&full_str)
                 .ok_or_else(|| {
                     Rich::custom(
                         span,
@@ -809,7 +809,7 @@ pub fn parser<'src>()
                     "Time literal cannot have a timezone offset",
                 ))
             } else {
-                helios_fhir::PrecisionTime::parse(&time_str)
+                atrius_fhir_lib::date_time::PrecisionTime::parse(&time_str)
                     .ok_or_else(|| Rich::custom(span, format!("Invalid time format: {}", time_str)))
                     .map(Literal::Time)
             }
@@ -819,7 +819,7 @@ pub fn parser<'src>()
     let date_literal = just('@')
         .ignore_then(date_format_str.clone())
         .try_map(|date_str, span| {
-            helios_fhir::PrecisionDate::parse(&date_str)
+            atrius_fhir_lib::date_time::PrecisionDate::parse(&date_str)
                 .ok_or_else(|| Rich::custom(span, format!("Invalid date format: {}", date_str)))
                 .map(Literal::Date)
         });

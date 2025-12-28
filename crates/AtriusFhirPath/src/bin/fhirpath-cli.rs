@@ -7,7 +7,7 @@
 //! See the cli module documentation for detailed usage information.
 
 use clap::Parser;
-use helios_fhirpath::cli::{Args, run_cli};
+use atrius_fhir_path::cli::{Args, run_cli};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();

@@ -9,6 +9,7 @@ R4 = ["atrius-fhir-lib/R4"]
 R4B = ["atrius-fhir-lib/R4B"]
 R5 = ["atrius-fhir-lib/R5"]
 R6 = ["atrius-fhir-lib/R6"]
+skip-r6-download = []
 
 [dependencies]
 serde = { workspace = true}

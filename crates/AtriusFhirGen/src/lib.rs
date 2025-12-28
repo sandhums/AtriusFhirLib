@@ -54,6 +54,7 @@ mod generate_resource_enum;
 mod format_helpers;
 mod generate_struct_element_doc;
 mod gen_element_definitions;
+mod constraint_helpers;
 
 /// Processes one or more FHIR versions and generates corresponding Rust code.
 ///

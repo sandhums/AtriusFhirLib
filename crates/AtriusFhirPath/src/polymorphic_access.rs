@@ -241,7 +241,7 @@ fn convert_fhir_field_to_fhirpath_type(value: &EvaluationResult, suffix: &str) -
                     // Use DateTime with instant type info
                     EvaluationResult::DateTime(
                         s.clone(),
-                        Some(helios_fhirpath_support::TypeInfoResult::new(
+                        Some(atrius_fhirpath_support::type_info::TypeInfoResult::new(
                             "FHIR", "instant",
                         )),
                     )

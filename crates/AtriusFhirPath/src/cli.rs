@@ -280,22 +280,22 @@ fn parse_fhir_resource(json: Value, version: FhirVersion) -> FhirPathResult<Fhir
     match version {
         #[cfg(feature = "R4")]
         FhirVersion::R4 => {
-            let resource: helios_fhir::r4::Resource = serde_json::from_value(json)?;
+            let resource: atrius_fhir_lib::r4::Resource = serde_json::from_value(json)?;
             Ok(FhirResource::R4(Box::new(resource)))
         }
         #[cfg(feature = "R4B")]
         FhirVersion::R4B => {
-            let resource: helios_fhir::r4b::Resource = serde_json::from_value(json)?;
+            let resource: atrius_fhir_lib::r4b::Resource = serde_json::from_value(json)?;
             Ok(FhirResource::R4B(Box::new(resource)))
         }
         #[cfg(feature = "R5")]
         FhirVersion::R5 => {
-            let resource: helios_fhir::r5::Resource = serde_json::from_value(json)?;
+            let resource: atrius_fhir_lib::r5::Resource = serde_json::from_value(json)?;
             Ok(FhirResource::R5(Box::new(resource)))
         }
         #[cfg(feature = "R6")]
         FhirVersion::R6 => {
-            let resource: helios_fhir::r6::Resource = serde_json::from_value(json)?;
+            let resource: atrius_fhir_lib::r6::Resource = serde_json::from_value(json)?;
             Ok(FhirResource::R6(Box::new(resource)))
         }
         #[cfg(not(any(feature = "R4", feature = "R4B", feature = "R5", feature = "R6")))]

@@ -488,19 +488,19 @@ fn parse_fhir_resource(json: Value, version: FhirVersion) -> FhirPathResult<Fhir
         }
         #[cfg(feature = "R4B")]
         FhirVersion::R4B => {
-            let resource: helios_fhir::r4b::Resource = serde_json::from_value(json)
+            let resource: atrius_fhir_lib::r4b::Resource = serde_json::from_value(json)
                 .map_err(|e| FhirPathError::InvalidInput(format!("Invalid R4B resource: {}", e)))?;
             Ok(FhirResource::R4B(Box::new(resource)))
         }
         #[cfg(feature = "R5")]
         FhirVersion::R5 => {
-            let resource: helios_fhir::r5::Resource = serde_json::from_value(json)
+            let resource: atrius_fhir_lib::r5::Resource = serde_json::from_value(json)
                 .map_err(|e| FhirPathError::InvalidInput(format!("Invalid R5 resource: {}", e)))?;
             Ok(FhirResource::R5(Box::new(resource)))
         }
         #[cfg(feature = "R6")]
         FhirVersion::R6 => {
-            let resource: helios_fhir::r6::Resource = serde_json::from_value(json)
+            let resource: atrius_fhir_lib::r6::Resource = serde_json::from_value(json)
                 .map_err(|e| FhirPathError::InvalidInput(format!("Invalid R6 resource: {}", e)))?;
             Ok(FhirResource::R6(Box::new(resource)))
         }

@@ -1,3 +1,4 @@
+use crate::constraint_helpers::format_constraint_attributes;
 use crate::element_definition::ElementDefinition;
 use crate::format_helpers::{capitalize_first_letter, make_rust_safe};
 use crate::gen_helpers::{extract_content_reference_id, generate_type_name};
@@ -364,6 +365,19 @@ pub fn generate_element_definition(
                     // This line doesn't have a doc comment prefix - this is a bug!
                     eprintln!("WARNING: Doc comment line without /// prefix: {}", line);
                     output.push_str(&format!("    /// {}\n", line));
+                }
+            }
+        }
+        // New - Emit executable constraint attributes (in addition to doc-only constraints).
+        if let Some(constraints) = &element.constraint {
+            let attrs = format_constraint_attributes(constraints, &element.path);
+            if !attrs.is_empty() {
+                for line in attrs.lines() {
+                    if !line.trim().is_empty() {
+                        output.push_str("    ");
+                        output.push_str(line);
+                        output.push('\n');
+                    }
                 }
             }
         }

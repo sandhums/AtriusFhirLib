@@ -235,7 +235,7 @@ pub fn generate_global_constructs(
         writeln!(file, "pub struct ComplexTypes;")?;
         writeln!(
             file,
-            "\nimpl crate::FhirComplexTypeProvider for ComplexTypes {{"
+            "\nimpl crate::fhir_version::FhirComplexTypeProvider for ComplexTypes {{"
         )?;
         writeln!(
             file,
@@ -361,10 +361,10 @@ pub fn generate_primitive_type(sd: &StructureDefinition) -> String {
         "uuid" => "std::string::String",
         "markdown" => "std::string::String",
         "xhtml" => "std::string::String",
-        "date" => "crate::PrecisionDate",
-        "dateTime" => "crate::PrecisionDateTime",
-        "instant" => "crate::PrecisionInstant",
-        "time" => "crate::PrecisionTime",
+        "date" => "crate::date_time::PrecisionDate",
+        "dateTime" => "crate::date_time::PrecisionDateTime",
+        "instant" => "crate::date_time::PrecisionInstant",
+        "time" => "crate::date_time::PrecisionTime",
         _ => "std::string::String",
     };
 

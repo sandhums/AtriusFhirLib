@@ -21,6 +21,7 @@ version = "0.1.0"
 edition = "2024"
 
 [workspace.dependencies]
-serde = { version = "1.0.228", features = ["derive"] }
-serde_json = { version = "1.0.145", features = ["raw_value"] }
+serde = { version = "=1.0.219", features = ["derive"] }
+serde_json = { version = "=1.0.143"}
 chrono = { version = "0.4.42", features = ["serde"] }
+atrius-fhir-lib = { path = "crates/AtriusFhir"}

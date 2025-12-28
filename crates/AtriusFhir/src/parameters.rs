@@ -189,7 +189,7 @@ impl ParameterValueAccessor for crate::r4b::ParametersParameterValue {
         }
     }
 
-    fn as_decimal(&self) -> Option<&crate::PreciseDecimal> {
+    fn as_decimal(&self) -> Option<&PreciseDecimal> {
         match self {
             crate::r4b::ParametersParameterValue::Decimal(d) => d.value.as_ref(),
             _ => None,
