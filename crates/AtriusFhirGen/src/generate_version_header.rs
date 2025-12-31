@@ -210,11 +210,11 @@ pub fn generate_version_header(version: &FhirVersion) -> String {
 
 
 use serde::{{Deserialize, Serialize}};
-use atrius_macros::{{FhirPath, FhirSerde}};
+use atrius_macros::{{FhirPath, FhirSerde, FhirValidate}};
 use crate::precise_decimal::{{ DecimalElement}};
 use crate::element::Element;
-use crate::date_time::{{PrecisionTime, PrecisionDateTime, PrecisionDate, PrecisionInstant}};
-use crate::fhir_version::FhirComplexTypeProvider;
+// use crate::date_time::{{PrecisionTime, PrecisionDateTime, PrecisionDate, PrecisionInstant}};
+// use crate::fhir_version::FhirComplexTypeProvider;
 
 ",
         version.as_str(),

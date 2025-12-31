@@ -36,7 +36,7 @@ use crate::type_info::TypeInfoResult;
 /// # Examples
 ///
 /// ```rust
-/// use helios_fhirpath_support::EvaluationResult;
+/// use atrius_fhirpath_support::evaluation_result::EvaluationResult;
 /// use rust_decimal::Decimal;
 ///
 /// // Creating different result types
@@ -157,7 +157,7 @@ pub enum EvaluationResult {
 /// # Examples
 ///
 /// ```rust
-/// use helios_fhirpath_support::EvaluationResult;
+/// use atrius_fhirpath_support::evaluation_result::EvaluationResult;
 /// use rust_decimal::Decimal;
 ///
 /// let a = EvaluationResult::String("test".to_string(), None);
@@ -601,7 +601,7 @@ impl EvaluationResult {
     /// # Examples
     ///
     /// ```rust
-    /// use helios_fhirpath_support::EvaluationResult;
+    /// use atrius_fhirpath_support::evaluation_result::EvaluationResult;
     ///
     /// let collection = EvaluationResult::Collection {
     ///     items: vec![],
@@ -629,7 +629,7 @@ impl EvaluationResult {
     /// # Examples
     ///
     /// ```rust
-    /// use helios_fhirpath_support::EvaluationResult;
+    /// use atrius_fhirpath_support::evaluation_result::EvaluationResult;
     ///
     /// assert_eq!(EvaluationResult::Empty.count(), 0);
     /// assert_eq!(EvaluationResult::String("test".to_string(), None).count(), 1);
@@ -667,7 +667,7 @@ impl EvaluationResult {
     /// # Examples
     ///
     /// ```rust
-    /// use helios_fhirpath_support::EvaluationResult;
+    /// use atrius_fhirpath_support::evaluation_result::EvaluationResult;
     /// use rust_decimal::Decimal;
     ///
     /// assert_eq!(EvaluationResult::Empty.to_boolean(), false);
@@ -710,7 +710,7 @@ impl EvaluationResult {
     /// # Examples
     ///
     /// ```rust
-    /// use helios_fhirpath_support::EvaluationResult;
+    /// use atrius_fhirpath_support::evaluation_result::EvaluationResult;
     /// use rust_decimal::Decimal;
     ///
     /// assert_eq!(EvaluationResult::Empty.to_string_value(), "");
@@ -867,7 +867,7 @@ impl EvaluationResult {
     /// # Examples
     ///
     /// ```rust
-    /// use helios_fhirpath_support::EvaluationResult;
+    /// use atrius_fhirpath_support::evaluation_result::EvaluationResult;
     ///
     /// assert!(EvaluationResult::Empty.is_string_or_empty());
     /// assert!(EvaluationResult::String("test".to_string(), None).is_string_or_empty());
@@ -888,7 +888,7 @@ impl EvaluationResult {
     /// # Examples
     ///
     /// ```rust
-    /// use helios_fhirpath_support::EvaluationResult;
+    /// use atrius_fhirpath_support::evaluation_result::EvaluationResult;
     ///
     /// assert_eq!(EvaluationResult::Empty.type_name(), "Empty");
     /// assert_eq!(EvaluationResult::String("test".to_string(), None).type_name(), "String");

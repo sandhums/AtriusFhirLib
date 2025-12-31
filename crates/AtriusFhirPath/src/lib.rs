@@ -303,6 +303,7 @@ pub mod server;
 // Public modules needed for the public API
 pub mod evaluator;
 pub mod parser;
+pub mod engine;
 
 // Public API exports - this is what users of the fhirpath crate should use
 pub use evaluator::EvaluationContext;

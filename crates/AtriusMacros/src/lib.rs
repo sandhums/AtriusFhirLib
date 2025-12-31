@@ -92,6 +92,7 @@ pub(crate) mod deserialize_impl;
 pub(crate) mod fhir_path_field_struct_impl;
 pub(crate) mod extract_type_names_elements;
 pub(crate) mod fhir_path_enum_impl;
+pub(crate) mod fhir_validate;
 
 /// Derives `serde::Serialize` and `serde::Deserialize` implementations for FHIR types.
 ///
@@ -389,4 +390,9 @@ pub fn type_info_derive(input: TokenStream) -> TokenStream {
     };
 
     TokenStream::from(expanded)
+}
+
+#[proc_macro_derive(FhirValidate, attributes(fhir_invariant))]
+pub fn derive_fhir_validate(input: TokenStream) -> TokenStream {
+    fhir_validate::derive(input)
 }

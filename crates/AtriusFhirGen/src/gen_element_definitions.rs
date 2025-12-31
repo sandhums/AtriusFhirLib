@@ -158,6 +158,18 @@ pub fn process_elements(
             }
         }
 
+        // Collect (but do not emit yet) struct-level executable constraint attributes for the
+        // element that defines this struct itself (e.g., `Attachment`). We'll emit these
+        // after `#[derive(...)]` for prettier output ordering.
+        let struct_invariant_attrs: String = if let Some(type_element) = elements.iter().find(|e| e.path == path) {
+            if let Some(constraints) = &type_element.constraint {
+                format_constraint_attributes(constraints, &type_element.path)
+            } else {
+                String::new()
+            }
+        } else {
+            String::new()
+        };
         // Generate struct derives - Remove Eq to prevent MIR optimization cycles
         let derives = [
             "Debug",
@@ -166,6 +178,7 @@ pub fn process_elements(
             "FhirSerde",
             "FhirPath",
             "Default",
+            "FhirValidate",
         ];
         output.push_str(&format!("#[derive({})]\n", derives.join(", ")));
 
@@ -176,6 +189,16 @@ pub fn process_elements(
                 "#[fhir_resource(choice_elements = \"{}\")]\n",
                 choice_elements_str
             ));
+        }
+
+        // Emit struct-level invariants AFTER derive (and after fhir_resource if present)
+        if !struct_invariant_attrs.trim().is_empty() {
+            for line in struct_invariant_attrs.lines() {
+                if !line.trim().is_empty() {
+                    output.push_str(line);
+                    output.push('\n');
+                }
+            }
         }
 
         // Add other serde attributes and struct definition
