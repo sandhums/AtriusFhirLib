@@ -1,0 +1,52 @@
+{
+  "resourceType": "EventDefinition",
+  "id": "example",
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+      "valueCode": "informative"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm",
+      "valueInteger": 6
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
+      "valueCode": "cds"
+    }
+  ],
+  "url": "http://hl7.org/fhir/EventDefinition/example",
+  "name": "EventDefinitionExample",
+  "title": "EventDefinition Example",
+  "status": "draft",
+  "experimental": true,
+  "publisher": "HL7 International / Clinical Decision Support",
+  "contact": [
+    {
+      "telecom": [
+        {
+          "system": "url",
+          "value": "http://www.hl7.org/Special/committees/dss"
+        }
+      ]
+    }
+  ],
+  "description": "Example of an EventDefinition for monitoring emergency department admissions.",
+  "purpose": "Monitor all admissions to Emergency",
+  "trigger": [
+    {
+      "type": "data-changed",
+      "name": "monitor-emergency-admissions",
+      "data": [
+        {
+          "type": "Encounter"
+        }
+      ],
+      "condition": {
+        "description": "Encounter Location \u003d emergency (active/completed encounters, current or previous)",
+        "language": "text/fhirpath",
+        "expression": "(%current | %previous).location.where(location \u003d \u0027Location/emergency\u0027 and status in {\u0027active\u0027, \u0027completed\u0027}).exists()"
+      }
+    }
+  ]
+}
