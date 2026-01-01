@@ -4,7 +4,7 @@ version.workspace = true
 edition.workspace = true
 
 [features]
-default = ["R4"]
+default = ["R5"]
 R4 = ["atrius-fhir-lib/R4"]
 R4B = ["atrius-fhir-lib/R4B"]
 R5 = ["atrius-fhir-lib/R5"]

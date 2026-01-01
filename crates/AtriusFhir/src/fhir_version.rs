@@ -311,10 +311,10 @@ impl std::fmt::Display for FhirVersion {
 /// assert_eq!(default_version, FhirVersion::R4);
 /// # }
 /// ```
-#[cfg(feature = "R4")]
+#[cfg(feature = "R5")]
 impl Default for FhirVersion {
     fn default() -> Self {
-        FhirVersion::R4
+        FhirVersion::R5
     }
 }
 /// Implements `clap::ValueEnum` for command-line argument parsing.

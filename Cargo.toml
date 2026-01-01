@@ -11,6 +11,8 @@ default-members = [
     "crates/AtriusMacros",
     "crates/AtriusFhirPath",
     "crates/AtriusFhirPathSupport",
+    "crates/AtriusSqlOnFhir",
+    "crates/AtriusFhirServer",
 #    "crates/hfs",
 #    "crates/sof",
 ]

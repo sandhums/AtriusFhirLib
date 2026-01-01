@@ -1,5 +1,5 @@
-use atrius_fhir_lib::fhir_version::FhirVersion;
 use std::path::PathBuf;
+use atrius_fhir_lib::fhir_version::FhirVersion;
 /// Generates a comprehensive module documentation header for a FHIR version.
 ///
 /// This function creates module-level documentation that describes the FHIR

@@ -606,11 +606,11 @@ impl EvaluationContext {
         } else {
             // Use default servers based on FHIR version
             let default_url = match self.fhir_version {
-                FhirVersion::R4 => "https://tx.fhir.org/r4/",
+                FhirVersion::R5 => "https://tx.fhir.org/r5/",
                 #[cfg(feature = "R4B")]
                 FhirVersion::R4B => "https://tx.fhir.org/r4/",
-                #[cfg(feature = "R5")]
-                FhirVersion::R5 => "https://tx.fhir.org/r5/",
+                #[cfg(feature = "R4")]
+                FhirVersion::R4 => "https://tx.fhir.org/r4/",
                 #[cfg(feature = "R6")]
                 FhirVersion::R6 => "https://tx.fhir.org/r5/", // R6 may use R5 server for now
                 #[cfg(not(any(feature = "R4", feature = "R4B", feature = "R5", feature = "R6")))]

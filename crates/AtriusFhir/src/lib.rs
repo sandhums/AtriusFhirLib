@@ -11,7 +11,7 @@ pub mod r5;
 #[cfg(feature = "R6")]
 pub mod r6;
 pub mod date_time;
-mod element;
+pub mod element;
 
 
 use serde::{Deserialize, Deserializer};

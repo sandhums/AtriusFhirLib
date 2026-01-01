@@ -79,7 +79,9 @@ pub fn not_function(
         FhirVersion::R4 => true,
         #[cfg(feature = "R4B")]
         FhirVersion::R4B => true,
-        #[cfg(any(feature = "R5", feature = "R6"))]
+        #[cfg(feature = "R5")]
+        FhirVersion::R5 => false,
+        #[cfg(feature = "R6")]
         _ => false,
     };
     let base_as_logic_bool = invocation_base.to_boolean_for_logic_with_r4_compat(r4_compat)?;
@@ -98,9 +100,10 @@ pub fn not_function(
 
 #[cfg(test)]
 mod tests {
+    use atrius_fhir_lib::fhir_version::FhirVersion;
     use super::*;
     use crate::EvaluationContext;
-    use helios_fhir::FhirVersion;
+    use atrius_fhir_lib::fhir_version::FhirVersion;
 
     #[test]
     fn test_not_boolean() {
