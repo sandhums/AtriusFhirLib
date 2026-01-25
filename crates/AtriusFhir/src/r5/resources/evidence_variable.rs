@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in EvidenceVariable
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum EvidenceVariableVersionAlgorithm {
     /// Variant accepting the String type.
@@ -117,6 +117,7 @@ pub struct EvidenceVariable {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EvidenceVariable.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -358,6 +359,7 @@ pub struct EvidenceVariable {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EvidenceVariable.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<EvidenceVariableVersionAlgorithm>,
@@ -451,6 +453,7 @@ pub struct EvidenceVariable {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EvidenceVariable.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -868,6 +871,7 @@ pub struct EvidenceVariable {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/variable-handling|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/variable-handling")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EvidenceVariable.handling")]
     pub handling: Option<Code>,
     /// A grouping for ordinal or polychotomous variables
@@ -884,7 +888,7 @@ pub struct EvidenceVariable {
 }
 
 /// Choice of types for the value\[x\] field in EvidenceVariableCategory
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum EvidenceVariableCategoryValue {
     /// Variant accepting the CodeableConcept type.
@@ -1024,7 +1028,7 @@ pub struct EvidenceVariableCategory {
 }
 
 /// Choice of types for the instances\[x\] field in EvidenceVariableCharacteristic
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "instances")]
 pub enum EvidenceVariableCharacteristicInstances {
     /// Variant accepting the Quantity type.
@@ -1036,7 +1040,7 @@ pub enum EvidenceVariableCharacteristicInstances {
 }
 
 /// Choice of types for the duration\[x\] field in EvidenceVariableCharacteristic
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "duration")]
 pub enum EvidenceVariableCharacteristicDuration {
     /// Variant accepting the Quantity type.
@@ -1499,6 +1503,7 @@ pub struct EvidenceVariableCharacteristicDefinitionByCombination {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/characteristic-combination|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/characteristic-combination")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EvidenceVariable.characteristic.definitionByCombination.code")]
     pub code: Code,
     /// Provides the value of "n" when "at-least" or "at-most" codes are used
@@ -1526,7 +1531,7 @@ pub struct EvidenceVariableCharacteristicDefinitionByCombination {
 }
 
 /// Choice of types for the value\[x\] field in EvidenceVariableCharacteristicDefinitionByTypeAndValue
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum EvidenceVariableCharacteristicDefinitionByTypeAndValueValue {
     /// Variant accepting the CodeableConcept type.
@@ -1671,6 +1676,7 @@ pub struct EvidenceVariableCharacteristicDefinitionByTypeAndValue {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/usage-context-type
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/usage-context-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EvidenceVariable.characteristic.definitionByTypeAndValue.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -1687,6 +1693,7 @@ pub struct EvidenceVariableCharacteristicDefinitionByTypeAndValue {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/definition-method
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/definition-method")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EvidenceVariable.characteristic.definitionByTypeAndValue.method")]
     pub method: Option<Vec<CodeableConcept>>,
     /// Device used for determining characteristic
@@ -1729,12 +1736,13 @@ pub struct EvidenceVariableCharacteristicDefinitionByTypeAndValue {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/characteristic-offset
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/characteristic-offset")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EvidenceVariable.characteristic.definitionByTypeAndValue.offset")]
     pub offset: Option<CodeableConcept>,
 }
 
 /// Choice of types for the event\[x\] field in EvidenceVariableCharacteristicTimeFromEvent
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "event")]
 pub enum EvidenceVariableCharacteristicTimeFromEventEvent {
     /// Variant accepting the CodeableConcept type.
@@ -1887,6 +1895,7 @@ pub struct EvidenceVariableCharacteristicTimeFromEvent {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/evidence-variable-event
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/evidence-variable-event")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EvidenceVariable.characteristic.timeFromEvent.event[x]")]
     #[fhir_serde(flatten)]
     pub event: Option<EvidenceVariableCharacteristicTimeFromEventEvent>,

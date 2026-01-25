@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the onset\[x\] field in AllergyIntolerance
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "onset")]
 pub enum AllergyIntoleranceOnset {
     /// Variant accepting the DateTime type.
@@ -130,6 +130,7 @@ pub struct AllergyIntolerance {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AllergyIntolerance.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -319,6 +320,7 @@ pub struct AllergyIntolerance {
     /// - **Strength**: required
     /// - **Description**: The clinical status of the allergy or intolerance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/allergyintolerance-clinical|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/allergyintolerance-clinical")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AllergyIntolerance.clinicalStatus")]
     #[fhir_serde(rename = "clinicalStatus")]
     pub clinical_status: Option<CodeableConcept>,
@@ -349,6 +351,7 @@ pub struct AllergyIntolerance {
     /// - **Strength**: required
     /// - **Description**: Assertion about certainty associated with a propensity, or potential risk, of a reaction to the identified substance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/allergyintolerance-verification|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/allergyintolerance-verification")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AllergyIntolerance.verificationStatus")]
     #[fhir_serde(rename = "verificationStatus")]
     pub verification_status: Option<CodeableConcept>,
@@ -390,6 +393,7 @@ pub struct AllergyIntolerance {
     /// 
     /// ## Aliases
     /// Category, Class
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/allergy-intolerance-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AllergyIntolerance.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -425,6 +429,7 @@ pub struct AllergyIntolerance {
     /// 
     /// ## Aliases
     /// Category, Type, Reaction Type, Class
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/allergy-intolerance-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AllergyIntolerance.category")]
     pub category: Option<Vec<Code>>,
     /// low | high | unable-to-assess
@@ -464,6 +469,7 @@ pub struct AllergyIntolerance {
     /// 
     /// ## Aliases
     /// Severity, Seriousness, Contra-indication, Risk
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/allergy-intolerance-criticality")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AllergyIntolerance.criticality")]
     pub criticality: Option<Code>,
     /// Code that identifies the allergy or intolerance
@@ -524,6 +530,7 @@ pub struct AllergyIntolerance {
     /// 
     /// ## Aliases
     /// Code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/allergyintolerance-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AllergyIntolerance.code")]
     pub code: Option<CodeableConcept>,
     /// Who the allergy or intolerance is for
@@ -782,6 +789,7 @@ pub struct AllergyIntoleranceParticipant {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participation-role-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/participation-role-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AllergyIntolerance.participant.function")]
     pub function: Option<CodeableConcept>,
     /// Who or what participated in the activities related to the allergy or intolerance
@@ -937,6 +945,7 @@ pub struct AllergyIntoleranceReaction {
     /// - **Strength**: example
     /// - **Description**: Codes defining the type of the substance (including pharmaceutical products).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AllergyIntolerance.reaction.substance")]
     pub substance: Option<CodeableConcept>,
     /// Clinical symptoms/signs associated with the Event
@@ -965,6 +974,7 @@ pub struct AllergyIntoleranceReaction {
     /// 
     /// ## Aliases
     /// Symptoms, Signs
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinical-findings")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AllergyIntolerance.reaction.manifestation")]
     pub manifestation: Option<Vec<CodeableReference>>,
     /// Description of the event as a whole
@@ -1021,6 +1031,7 @@ pub struct AllergyIntoleranceReaction {
     /// - **Strength**: required
     /// - **Description**: Clinical assessment of the severity of a reaction event as a whole, potentially considering multiple different manifestations.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/reaction-event-severity|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/reaction-event-severity")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AllergyIntolerance.reaction.severity")]
     pub severity: Option<Code>,
     /// How the subject was exposed to the substance
@@ -1042,6 +1053,7 @@ pub struct AllergyIntoleranceReaction {
     /// - **Strength**: example
     /// - **Description**: A coded concept describing the route or physiological path of exposure to a substance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/route-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/route-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AllergyIntolerance.reaction.exposureRoute")]
     #[fhir_serde(rename = "exposureRoute")]
     pub exposure_route: Option<CodeableConcept>,

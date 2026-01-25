@@ -104,6 +104,7 @@ pub struct Transport {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Transport.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -380,6 +381,7 @@ pub struct Transport {
     /// - **Strength**: required
     /// - **Description**: Status of the transport.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/transport-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/transport-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Transport.status")]
     pub status: Option<Code>,
     /// Reason for current status
@@ -403,6 +405,7 @@ pub struct Transport {
     /// - **Strength**: example
     /// - **Description**: Codes to identify the reason for current status.  These will typically be specific to a particular workflow.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/transport-status-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/transport-status-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Transport.statusReason")]
     #[fhir_serde(rename = "statusReason")]
     pub status_reason: Option<CodeableConcept>,
@@ -431,6 +434,7 @@ pub struct Transport {
     /// - **Strength**: required
     /// - **Description**: Distinguishes whether the transport is a proposal, plan or full order.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/transport-intent|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/transport-intent")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Transport.intent")]
     pub intent: Code,
     /// routine | urgent | asap | stat
@@ -454,6 +458,7 @@ pub struct Transport {
     /// - **Strength**: required
     /// - **Description**: The priority of a transport (may affect service level applied to the transport).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-priority|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Transport.priority")]
     pub priority: Option<Code>,
     /// Transport Type
@@ -477,6 +482,7 @@ pub struct Transport {
     /// - **Strength**: example
     /// - **Description**: Codes to identify what the transport involves.  These will typically be specific to a particular workflow.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/transport-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/transport-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Transport.code")]
     pub code: Option<CodeableConcept>,
     /// Human-readable explanation of transport
@@ -650,6 +656,7 @@ pub struct Transport {
     /// - **Strength**: preferred
     /// - **Description**: The type(s) of transport performers allowed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/performer-role
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/performer-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Transport.performerType")]
     #[fhir_serde(rename = "performerType")]
     pub performer_type: Option<Vec<CodeableConcept>>,
@@ -858,7 +865,7 @@ pub struct Transport {
 }
 
 /// Choice of types for the value\[x\] field in TransportInput
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum TransportInputValue {
     /// Variant accepting the Base64Binary type.
@@ -1176,7 +1183,7 @@ pub struct TransportInput {
 }
 
 /// Choice of types for the value\[x\] field in TransportOutput
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum TransportOutputValue {
     /// Variant accepting the Base64Binary type.

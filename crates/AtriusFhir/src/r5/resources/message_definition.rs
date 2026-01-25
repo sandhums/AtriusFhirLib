@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in MessageDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum MessageDefinitionVersionAlgorithm {
     /// Variant accepting the String type.
@@ -14,7 +14,7 @@ pub enum MessageDefinitionVersionAlgorithm {
 }
 
 /// Choice of types for the event\[x\] field in MessageDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "event")]
 pub enum MessageDefinitionEvent {
     /// Variant accepting the Coding type.
@@ -130,6 +130,7 @@ pub struct MessageDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MessageDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -372,6 +373,7 @@ pub struct MessageDefinition {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MessageDefinition.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<MessageDefinitionVersionAlgorithm>,
@@ -459,6 +461,7 @@ pub struct MessageDefinition {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MessageDefinition.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -644,6 +647,7 @@ pub struct MessageDefinition {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MessageDefinition.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this message definition is defined
@@ -761,6 +765,7 @@ pub struct MessageDefinition {
     /// - **Strength**: example
     /// - **Description**: One of the message events defined as part of this version of FHIR.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/message-events
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/message-events")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MessageDefinition.event[x]")]
     #[fhir_serde(flatten)]
     pub event: Option<MessageDefinitionEvent>,
@@ -781,6 +786,7 @@ pub struct MessageDefinition {
     /// - **Strength**: required
     /// - **Description**: The impact of the content of a message.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/message-significance-category|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/message-significance-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MessageDefinition.category")]
     pub category: Option<Code>,
     /// Resource(s) that are the subject of the event
@@ -825,6 +831,7 @@ pub struct MessageDefinition {
     /// - **Strength**: required
     /// - **Description**: This enables the capability currently available through MSH-16 (Application Level acknowledgement) in HL7 Version 2 to declare at a message definition level whether a response is required or only upon error or success, or never.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/messageheader-response-request|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/messageheader-response-request")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MessageDefinition.responseRequired")]
     #[fhir_serde(rename = "responseRequired")]
     pub response_required: Option<Code>,
@@ -1124,6 +1131,7 @@ pub struct MessageDefinitionFocus {
     /// - **Strength**: required
     /// - **Description**: One of the resource types defined as part of this version of FHIR.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/resource-types|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MessageDefinition.focus.code")]
     pub code: Code,
     /// Profile that must be adhered to by focus

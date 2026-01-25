@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the deceased\[x\] field in Practitioner
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "deceased")]
 pub enum PractitionerDeceased {
     /// Variant accepting the Boolean type.
@@ -121,6 +121,7 @@ pub struct Practitioner {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Practitioner.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -372,6 +373,7 @@ pub struct Practitioner {
     /// - **Strength**: required
     /// - **Description**: The gender of a person used for administrative purposes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/administrative-gender|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/administrative-gender")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Practitioner.gender")]
     pub gender: Option<Code>,
     /// The date  on which the practitioner was born
@@ -638,6 +640,7 @@ pub struct PractitionerCommunication {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Practitioner.communication.language")]
     pub language: CodeableConcept,
     /// Language preference indicator
@@ -800,6 +803,7 @@ pub struct PractitionerQualification {
     /// - **Strength**: example
     /// - **Description**: Specific qualification the practitioner has to provide a service.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0360
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v2-0360")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Practitioner.qualification.code")]
     pub code: CodeableConcept,
     /// Period during which the qualification is valid

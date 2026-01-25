@@ -105,6 +105,7 @@ pub struct BiologicallyDerivedProduct {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BiologicallyDerivedProduct.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -250,6 +251,7 @@ pub struct BiologicallyDerivedProduct {
     /// - **Strength**: example
     /// - **Description**: Biologically Derived Product Category.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/product-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/product-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BiologicallyDerivedProduct.productCategory")]
     #[fhir_serde(rename = "productCategory")]
     pub product_category: Option<Coding>,
@@ -269,6 +271,7 @@ pub struct BiologicallyDerivedProduct {
     /// - **Strength**: example
     /// - **Description**: Biologically-derived Product Codes
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/biologicallyderived-productcodes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/biologicallyderived-productcodes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BiologicallyDerivedProduct.productCode")]
     #[fhir_serde(rename = "productCode")]
     pub product_code: Option<CodeableConcept>,
@@ -392,6 +395,7 @@ pub struct BiologicallyDerivedProduct {
     /// - **Strength**: example
     /// - **Description**: Biologically Derived Product Status.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/biologicallyderived-product-status
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/biologicallyderived-product-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BiologicallyDerivedProduct.productStatus")]
     #[fhir_serde(rename = "productStatus")]
     pub product_status: Option<Coding>,
@@ -451,7 +455,7 @@ pub struct BiologicallyDerivedProduct {
 }
 
 /// Choice of types for the collected\[x\] field in BiologicallyDerivedProductCollection
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "collected")]
 pub enum BiologicallyDerivedProductCollectionCollected {
     /// Variant accepting the DateTime type.
@@ -600,7 +604,7 @@ pub struct BiologicallyDerivedProductCollection {
 }
 
 /// Choice of types for the value\[x\] field in BiologicallyDerivedProductProperty
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum BiologicallyDerivedProductPropertyValue {
     /// Variant accepting the Boolean type.
@@ -755,6 +759,7 @@ pub struct BiologicallyDerivedProductProperty {
     /// - **Strength**: example
     /// - **Description**: Biologically Derived Product Property Type Codes
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/biologicallyderived-product-property-type-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/biologicallyderived-product-property-type-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BiologicallyDerivedProduct.property.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,

@@ -108,6 +108,7 @@ pub struct MeasureReport {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -287,6 +288,7 @@ pub struct MeasureReport {
     /// - **Strength**: required
     /// - **Description**: The status of the measure report (e.g. complete, pending, or error)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-report-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/measure-report-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.status")]
     pub status: Code,
     /// individual | subject-list | summary | data-exchange
@@ -320,6 +322,7 @@ pub struct MeasureReport {
     /// 
     /// ## Conditions
     /// Used when: mrp-1
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/measure-report-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -352,6 +355,7 @@ pub struct MeasureReport {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/submit-data-update-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/submit-data-update-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.dataUpdateType")]
     #[fhir_serde(rename = "dataUpdateType")]
     pub data_update_type: Option<Code>,
@@ -494,6 +498,7 @@ pub struct MeasureReport {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/measure-scoring
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/measure-scoring")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.scoring")]
     pub scoring: Option<CodeableConcept>,
     /// increase | decrease
@@ -526,6 +531,7 @@ pub struct MeasureReport {
     /// - **Strength**: required
     /// - **Description**: The improvement notation of the measure report (e.g. increase or decrease)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-improvement-notation|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/measure-improvement-notation")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.improvementNotation")]
     #[fhir_serde(rename = "improvementNotation")]
     pub improvement_notation: Option<CodeableConcept>,
@@ -587,7 +593,7 @@ pub struct MeasureReport {
 }
 
 /// Choice of types for the measureScore\[x\] field in MeasureReportGroup
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "measureScore")]
 pub enum MeasureReportGroupMeasureScore {
     /// Variant accepting the Quantity type.
@@ -743,6 +749,7 @@ pub struct MeasureReportGroup {
     /// - **Strength**: example
     /// - **Description**: Example of measure groups.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-group-example
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measure-group-example")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.group.code")]
     pub code: Option<CodeableConcept>,
     /// What individual(s) the report is for
@@ -935,6 +942,7 @@ pub struct MeasureReportGroupPopulation {
     /// - **Strength**: extensible
     /// - **Description**: The type of population (e.g. initial, numerator, denominator, etc.).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-population
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/measure-population")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.group.population.code")]
     pub code: Option<CodeableConcept>,
     /// Size of the population
@@ -1131,6 +1139,7 @@ pub struct MeasureReportGroupStratifier {
     /// - **Strength**: example
     /// - **Description**: Meaning of the stratifier.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-stratifier-example
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measure-stratifier-example")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.group.stratifier.code")]
     pub code: Option<CodeableConcept>,
     /// Stratum results, one for each unique value, or set of values, in the stratifier, or stratifier components
@@ -1152,7 +1161,7 @@ pub struct MeasureReportGroupStratifier {
 }
 
 /// Choice of types for the value\[x\] field in MeasureReportGroupStratifierStratum
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum MeasureReportGroupStratifierStratumValue {
     /// Variant accepting the CodeableConcept type.
@@ -1173,7 +1182,7 @@ pub enum MeasureReportGroupStratifierStratumValue {
 }
 
 /// Choice of types for the measureScore\[x\] field in MeasureReportGroupStratifierStratum
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "measureScore")]
 pub enum MeasureReportGroupStratifierStratumMeasureScore {
     /// Variant accepting the Quantity type.
@@ -1319,6 +1328,7 @@ pub struct MeasureReportGroupStratifierStratum {
     /// 
     /// ## Conditions
     /// Used when: mrp-2
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measurereport-stratifier-value-example")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.group.stratifier.stratum.value[x]")]
     #[fhir_serde(flatten)]
     pub value: Option<MeasureReportGroupStratifierStratumValue>,
@@ -1364,7 +1374,7 @@ pub struct MeasureReportGroupStratifierStratum {
 }
 
 /// Choice of types for the value\[x\] field in MeasureReportGroupStratifierStratumComponent
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum MeasureReportGroupStratifierStratumComponentValue {
     /// Variant accepting the CodeableConcept type.
@@ -1514,6 +1524,7 @@ pub struct MeasureReportGroupStratifierStratumComponent {
     /// - **Strength**: example
     /// - **Description**: Meaning of the stratifier.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-stratifier-example
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measure-stratifier-example")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.group.stratifier.stratum.component.code")]
     pub code: CodeableConcept,
     /// The stratum component value, e.g. male
@@ -1529,6 +1540,7 @@ pub struct MeasureReportGroupStratifierStratumComponent {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measurereport-stratifier-value-example
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measurereport-stratifier-value-example")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.group.stratifier.stratum.component.value[x]")]
     #[fhir_serde(flatten)]
     pub value: Option<MeasureReportGroupStratifierStratumComponentValue>,
@@ -1661,6 +1673,7 @@ pub struct MeasureReportGroupStratifierStratumPopulation {
     /// - **Strength**: extensible
     /// - **Description**: The type of population (e.g. initial, numerator, denominator, etc.).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-population
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/measure-population")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MeasureReport.group.stratifier.stratum.population.code")]
     pub code: Option<CodeableConcept>,
     /// Size of the population

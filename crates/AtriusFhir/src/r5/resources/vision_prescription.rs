@@ -105,6 +105,7 @@ pub struct VisionPrescription {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VisionPrescription.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -277,6 +278,7 @@ pub struct VisionPrescription {
     /// - **Strength**: required
     /// - **Description**: A code specifying the state of the resource instance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fm-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fm-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VisionPrescription.status")]
     pub status: Code,
     /// Response creation date
@@ -511,6 +513,7 @@ pub struct VisionPrescriptionLensSpecification {
     /// - **Strength**: example
     /// - **Description**: A coded concept describing the vision products.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/vision-product
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/vision-product")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VisionPrescription.lensSpecification.product")]
     pub product: CodeableConcept,
     /// right | left
@@ -537,6 +540,7 @@ pub struct VisionPrescriptionLensSpecification {
     /// - **Strength**: required
     /// - **Description**: A coded concept listing the eye codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/vision-eye-codes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/vision-eye-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VisionPrescription.lensSpecification.eye")]
     pub eye: Code,
     /// Power of the lens
@@ -850,6 +854,7 @@ pub struct VisionPrescriptionLensSpecificationPrism {
     /// - **Strength**: required
     /// - **Description**: A coded concept listing the base codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/vision-base-codes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/vision-base-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VisionPrescription.lensSpecification.prism.base")]
     pub base: Code,
 }

@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the occurrence\[x\] field in DeviceRequest
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurrence")]
 pub enum DeviceRequestOccurrence {
     /// Variant accepting the DateTime type.
@@ -123,6 +123,7 @@ pub struct DeviceRequest {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceRequest.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -386,6 +387,7 @@ pub struct DeviceRequest {
     /// - **Strength**: required
     /// - **Description**: Codes representing the status of the request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceRequest.status")]
     pub status: Option<Code>,
     /// proposal | plan | directive | order | original-order | reflex-order | filler-order | instance-order | option
@@ -406,6 +408,7 @@ pub struct DeviceRequest {
     /// - **Strength**: required
     /// - **Description**: The kind of diagnostic request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-intent|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-intent")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceRequest.intent")]
     pub intent: Code,
     /// routine | urgent | asap | stat
@@ -427,6 +430,7 @@ pub struct DeviceRequest {
     /// - **Strength**: required
     /// - **Description**: Identifies the level of importance to be assigned to actioning the request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-priority|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceRequest.priority")]
     pub priority: Option<Code>,
     /// True if the request is to stop or not to start using the device
@@ -470,6 +474,7 @@ pub struct DeviceRequest {
     /// - **Strength**: example
     /// - **Description**: Codes for devices that can be requested.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceRequest.code")]
     pub code: CodeableReference,
     /// Quantity of devices to supply
@@ -603,6 +608,7 @@ pub struct DeviceRequest {
     /// - **Strength**: example
     /// - **Description**: Diagnosis or problem codes justifying the reason for requesting the device.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceRequest.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// PRN status of request
@@ -699,7 +705,7 @@ pub struct DeviceRequest {
 }
 
 /// Choice of types for the value\[x\] field in DeviceRequestParameter
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum DeviceRequestParameterValue {
     /// Variant accepting the CodeableConcept type.

@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the timing\[x\] field in TriggerDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "timing")]
 pub enum TriggerDefinitionTiming {
     /// Variant accepting the Timing type.
@@ -97,6 +97,7 @@ pub struct TriggerDefinition {
     /// 
     /// ## Conditions
     /// Used when: trd-3
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/trigger-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TriggerDefinition.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,

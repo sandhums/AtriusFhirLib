@@ -84,6 +84,7 @@ pub struct RelatedArtifact {
     /// - **Strength**: required
     /// - **Description**: The type of relationship to the related artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/related-artifact-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/related-artifact-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RelatedArtifact.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -104,6 +105,7 @@ pub struct RelatedArtifact {
     /// - **Strength**: example
     /// - **Description**: Additional classifiers for the related artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/citation-artifact-classifier
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/citation-artifact-classifier")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RelatedArtifact.classifier")]
     pub classifier: Option<Vec<CodeableConcept>>,
     /// Short label
@@ -232,6 +234,7 @@ pub struct RelatedArtifact {
     /// - **Strength**: required
     /// - **Description**: Publication status of an artifact being referred to.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RelatedArtifact.publicationStatus")]
     #[fhir_serde(rename = "publicationStatus")]
     pub publication_status: Option<Code>,

@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in Measure
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum MeasureVersionAlgorithm {
     /// Variant accepting the String type.
@@ -14,7 +14,7 @@ pub enum MeasureVersionAlgorithm {
 }
 
 /// Choice of types for the subject\[x\] field in Measure
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "subject")]
 pub enum MeasureSubject {
     /// Variant accepting the CodeableConcept type.
@@ -126,6 +126,7 @@ pub struct Measure {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -374,6 +375,7 @@ pub struct Measure {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<MeasureVersionAlgorithm>,
@@ -457,6 +459,7 @@ pub struct Measure {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -508,6 +511,7 @@ pub struct Measure {
     /// - **Strength**: extensible
     /// - **Description**: The possible types of subjects for a measure (E.g. Patient, Practitioner, Organization, Location, etc.).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participant-resource-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/participant-resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.subject[x]")]
     #[fhir_serde(flatten)]
     pub subject: Option<MeasureSubject>,
@@ -551,6 +555,7 @@ pub struct Measure {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fhir-types|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fhir-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.basis")]
     pub basis: Option<Code>,
     /// Date last changed
@@ -709,6 +714,7 @@ pub struct Measure {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this measure is defined
@@ -900,6 +906,7 @@ pub struct Measure {
     /// - **Strength**: example
     /// - **Description**: High-level categorization of the definition, used for searching, sorting, and filtering.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/definition-topic
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/definition-topic")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.topic")]
     pub topic: Option<Vec<CodeableConcept>>,
     /// Who authored the content
@@ -1031,6 +1038,7 @@ pub struct Measure {
     /// - **Strength**: extensible
     /// - **Description**: The scoring type of the measure.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/measure-scoring
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/measure-scoring")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.scoring")]
     pub scoring: Option<CodeableConcept>,
     /// What units?
@@ -1062,6 +1070,7 @@ pub struct Measure {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-scoring-unit
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measure-scoring-unit")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.scoringUnit")]
     #[fhir_serde(rename = "scoringUnit")]
     pub scoring_unit: Option<CodeableConcept>,
@@ -1083,6 +1092,7 @@ pub struct Measure {
     /// - **Strength**: extensible
     /// - **Description**: The composite scoring method of the measure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/composite-measure-scoring
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/composite-measure-scoring")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.compositeScoring")]
     #[fhir_serde(rename = "compositeScoring")]
     pub composite_scoring: Option<CodeableConcept>,
@@ -1104,6 +1114,7 @@ pub struct Measure {
     /// - **Strength**: extensible
     /// - **Description**: The type of measure (includes codes from 2.16.840.1.113883.1.11.20368).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/measure-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -1220,6 +1231,7 @@ pub struct Measure {
     /// - **Strength**: required
     /// - **Description**: Observation values that indicate what change in a measurement value or score is indicative of an improvement in the measured item or scored issue.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-improvement-notation|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/measure-improvement-notation")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.improvementNotation")]
     #[fhir_serde(rename = "improvementNotation")]
     pub improvement_notation: Option<CodeableConcept>,
@@ -1303,7 +1315,7 @@ pub struct Measure {
 }
 
 /// Choice of types for the subject\[x\] field in MeasureGroup
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "subject")]
 pub enum MeasureGroupSubject {
     /// Variant accepting the CodeableConcept type.
@@ -1462,6 +1474,7 @@ pub struct MeasureGroup {
     /// - **Strength**: example
     /// - **Description**: Example of measure groups.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-group-example
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measure-group-example")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.group.code")]
     pub code: Option<CodeableConcept>,
     /// Summary description
@@ -1497,6 +1510,7 @@ pub struct MeasureGroup {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/measure-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.group.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -1525,6 +1539,7 @@ pub struct MeasureGroup {
     /// - **Strength**: extensible
     /// - **Description**: The possible types of subjects for a measure (E.g. Patient, Practitioner, Organization, Location, etc.).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participant-resource-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/participant-resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.group.subject[x]")]
     #[fhir_serde(flatten)]
     pub subject: Option<MeasureGroupSubject>,
@@ -1560,6 +1575,7 @@ pub struct MeasureGroup {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fhir-types|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fhir-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.group.basis")]
     pub basis: Option<Code>,
     /// proportion | ratio | continuous-variable | cohort
@@ -1585,6 +1601,7 @@ pub struct MeasureGroup {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/measure-scoring
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/measure-scoring")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.group.scoring")]
     pub scoring: Option<CodeableConcept>,
     /// What units?
@@ -1619,6 +1636,7 @@ pub struct MeasureGroup {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-scoring-unit
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measure-scoring-unit")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.group.scoringUnit")]
     #[fhir_serde(rename = "scoringUnit")]
     pub scoring_unit: Option<CodeableConcept>,
@@ -1678,6 +1696,7 @@ pub struct MeasureGroup {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-improvement-notation|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/measure-improvement-notation")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.group.improvementNotation")]
     #[fhir_serde(rename = "improvementNotation")]
     pub improvement_notation: Option<CodeableConcept>,
@@ -1864,6 +1883,7 @@ pub struct MeasureGroupPopulation {
     /// - **Strength**: extensible
     /// - **Description**: The type of population.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-population
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/measure-population")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.group.population.code")]
     pub code: Option<CodeableConcept>,
     /// The human readable description of this population criteria
@@ -1959,6 +1979,7 @@ pub struct MeasureGroupPopulation {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-aggregate-method
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/measure-aggregate-method")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.group.population.aggregateMethod")]
     #[fhir_serde(rename = "aggregateMethod")]
     pub aggregate_method: Option<CodeableConcept>,
@@ -2116,6 +2137,7 @@ pub struct MeasureGroupStratifier {
     /// 
     /// ## Conditions
     /// Used when: mea-1
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measure-stratifier-example")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.group.stratifier.code")]
     pub code: Option<CodeableConcept>,
     /// The human readable description of this stratifier
@@ -2342,6 +2364,7 @@ pub struct MeasureGroupStratifierComponent {
     /// - **Strength**: example
     /// - **Description**: Meaning of the stratifier.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-stratifier-example
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measure-stratifier-example")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.group.stratifier.component.code")]
     pub code: Option<CodeableConcept>,
     /// The human readable description of this stratifier component
@@ -2543,6 +2566,7 @@ pub struct MeasureSupplementalData {
     /// - **Strength**: example
     /// - **Description**: Meaning of the supplemental data.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-supplemental-data-example
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measure-supplemental-data-example")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.supplementalData.code")]
     pub code: Option<CodeableConcept>,
     /// supplemental-data | risk-adjustment-factor
@@ -2563,6 +2587,7 @@ pub struct MeasureSupplementalData {
     /// - **Strength**: extensible
     /// - **Description**: The intended usage for supplemental data elements in the measure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-data-usage
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/measure-data-usage")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.supplementalData.usage")]
     pub usage: Option<Vec<CodeableConcept>>,
     /// The human readable description of this supplemental data
@@ -2710,6 +2735,7 @@ pub struct MeasureTerm {
     /// - **Strength**: example
     /// - **Description**: Codeable representations of measure definition terms.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measure-definition-example
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measure-definition-example")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Measure.term.code")]
     pub code: Option<CodeableConcept>,
     /// Meaning of the term

@@ -104,6 +104,7 @@ pub struct PackagedProductDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PackagedProductDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -284,6 +285,7 @@ pub struct PackagedProductDefinition {
     /// - **Strength**: example
     /// - **Description**: A high level categorisation of a package.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/package-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/package-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PackagedProductDefinition.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -323,6 +325,7 @@ pub struct PackagedProductDefinition {
     /// - **Strength**: preferred
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PackagedProductDefinition.status")]
     pub status: Option<CodeableConcept>,
     /// The date at which the given status became applicable
@@ -616,6 +619,7 @@ pub struct PackagedProductDefinitionLegalStatusOfSupply {
     /// - **Strength**: example
     /// - **Description**: The prescription supply types appropriate to a medicinal product
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/legal-status-of-supply
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/legal-status-of-supply")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PackagedProductDefinition.legalStatusOfSupply.code")]
     pub code: Option<CodeableConcept>,
     /// The place where the legal status of supply applies
@@ -636,6 +640,7 @@ pub struct PackagedProductDefinitionLegalStatusOfSupply {
     /// - **Strength**: example
     /// - **Description**: Jurisdiction codes
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PackagedProductDefinition.legalStatusOfSupply.jurisdiction")]
     pub jurisdiction: Option<CodeableConcept>,
 }
@@ -777,6 +782,7 @@ pub struct PackagedProductDefinitionPackaging {
     /// - **Strength**: example
     /// - **Description**: A high level categorisation of a package.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/packaging-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/packaging-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PackagedProductDefinition.packaging.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -832,6 +838,7 @@ pub struct PackagedProductDefinitionPackaging {
     /// - **Strength**: example
     /// - **Description**: A material used in the construction of packages and their components.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/package-material
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/package-material")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PackagedProductDefinition.packaging.material")]
     pub material: Option<Vec<CodeableConcept>>,
     /// A possible alternate material for this part of the packaging, that is allowed to be used instead of the usual material
@@ -853,6 +860,7 @@ pub struct PackagedProductDefinitionPackaging {
     /// - **Strength**: example
     /// - **Description**: A material used in the construction of packages and their components.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/package-material
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/package-material")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PackagedProductDefinition.packaging.alternateMaterial")]
     #[fhir_serde(rename = "alternateMaterial")]
     pub alternate_material: Option<Vec<CodeableConcept>>,
@@ -1075,7 +1083,7 @@ pub struct PackagedProductDefinitionPackagingContainedItem {
 }
 
 /// Choice of types for the value\[x\] field in PackagedProductDefinitionPackagingProperty
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum PackagedProductDefinitionPackagingPropertyValue {
     /// Variant accepting the CodeableConcept type.
@@ -1215,6 +1223,7 @@ pub struct PackagedProductDefinitionPackagingProperty {
     /// - **Strength**: example
     /// - **Description**: This value set includes all observable entity codes from SNOMED CT - provided as an exemplar value set.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/product-characteristic-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/product-characteristic-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PackagedProductDefinition.packaging.property.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,

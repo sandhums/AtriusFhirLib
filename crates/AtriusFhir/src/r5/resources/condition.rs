@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the onset\[x\] field in Condition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "onset")]
 pub enum ConditionOnset {
     /// Variant accepting the DateTime type.
@@ -23,7 +23,7 @@ pub enum ConditionOnset {
 }
 
 /// Choice of types for the abatement\[x\] field in Condition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "abatement")]
 pub enum ConditionAbatement {
     /// Variant accepting the DateTime type.
@@ -150,6 +150,7 @@ pub struct Condition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Condition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -341,6 +342,7 @@ pub struct Condition {
     /// 
     /// ## Conditions
     /// Used when: con-3, con-2
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/condition-clinical")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Condition.clinicalStatus")]
     #[fhir_serde(rename = "clinicalStatus")]
     pub clinical_status: CodeableConcept,
@@ -372,6 +374,7 @@ pub struct Condition {
     /// - **Strength**: required
     /// - **Description**: The verification status to support or decline the clinical status of the condition or diagnosis.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-ver-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/condition-ver-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Condition.verificationStatus")]
     #[fhir_serde(rename = "verificationStatus")]
     pub verification_status: Option<CodeableConcept>,
@@ -396,6 +399,7 @@ pub struct Condition {
     /// 
     /// ## Conditions
     /// Used when: con-2
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/condition-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Condition.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Subjective severity of condition
@@ -416,6 +420,7 @@ pub struct Condition {
     /// - **Strength**: preferred
     /// - **Description**: A subjective assessment of the severity of the condition as evaluated by the clinician.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-severity
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/condition-severity")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Condition.severity")]
     pub severity: Option<CodeableConcept>,
     /// Identification of the condition, problem or diagnosis
@@ -441,6 +446,7 @@ pub struct Condition {
     /// 
     /// ## Aliases
     /// type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Condition.code")]
     pub code: Option<CodeableConcept>,
     /// Anatomical location, if relevant
@@ -468,6 +474,7 @@ pub struct Condition {
     /// - **Strength**: example
     /// - **Description**: SNOMED CT Body site concepts
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/body-site
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Condition.bodySite")]
     #[fhir_serde(rename = "bodySite")]
     pub body_site: Option<Vec<CodeableConcept>>,
@@ -662,6 +669,7 @@ pub struct Condition {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinical-findings
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinical-findings")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Condition.evidence")]
     pub evidence: Option<Vec<CodeableReference>>,
     /// Additional information about the Condition
@@ -798,6 +806,7 @@ pub struct ConditionParticipant {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participation-role-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/participation-role-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Condition.participant.function")]
     pub function: Option<CodeableConcept>,
     /// Who or what participated in the activities related to the condition
@@ -940,6 +949,7 @@ pub struct ConditionStage {
     /// 
     /// ## Conditions
     /// Used when: con-1
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-stage")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Condition.stage.summary")]
     pub summary: Option<CodeableConcept>,
     /// Formal record of assessment
@@ -971,6 +981,7 @@ pub struct ConditionStage {
     /// - **Strength**: example
     /// - **Description**: Codes describing the kind of condition staging (e.g. clinical or pathological).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-stage-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-stage-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Condition.stage.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,

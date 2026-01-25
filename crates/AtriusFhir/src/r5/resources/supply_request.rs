@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the occurrence\[x\] field in SupplyRequest
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurrence")]
 pub enum SupplyRequestOccurrence {
     /// Variant accepting the DateTime type.
@@ -122,6 +122,7 @@ pub struct SupplyRequest {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SupplyRequest.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -295,6 +296,7 @@ pub struct SupplyRequest {
     /// - **Strength**: required
     /// - **Description**: Status of the supply request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/supplyrequest-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/supplyrequest-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SupplyRequest.status")]
     pub status: Option<Code>,
     /// What other request is fulfilled by this supply request
@@ -333,6 +335,7 @@ pub struct SupplyRequest {
     /// 
     /// ## Aliases
     /// kind
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/supplyrequest-kind")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SupplyRequest.category")]
     pub category: Option<CodeableConcept>,
     /// routine | urgent | asap | stat
@@ -354,6 +357,7 @@ pub struct SupplyRequest {
     /// - **Strength**: required
     /// - **Description**: Identifies the level of importance to be assigned to actioning the request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-priority|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SupplyRequest.priority")]
     pub priority: Option<Code>,
     /// The patient for who the supply request is for
@@ -395,6 +399,7 @@ pub struct SupplyRequest {
     /// - **Strength**: example
     /// - **Description**: The item that was requested.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/supply-item
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/supply-item")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SupplyRequest.item")]
     pub item: CodeableReference,
     /// The requested amount of the item indicated
@@ -507,6 +512,7 @@ pub struct SupplyRequest {
     /// - **Strength**: example
     /// - **Description**: The reason why the supply item was requested.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/supplyrequest-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/supplyrequest-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SupplyRequest.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// The origin of the supply
@@ -536,7 +542,7 @@ pub struct SupplyRequest {
 }
 
 /// Choice of types for the value\[x\] field in SupplyRequestParameter
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum SupplyRequestParameterValue {
     /// Variant accepting the CodeableConcept type.

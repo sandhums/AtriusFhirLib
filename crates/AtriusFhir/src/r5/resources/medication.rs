@@ -107,6 +107,7 @@ pub struct Medication {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Medication.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -287,6 +288,7 @@ pub struct Medication {
     /// - **Strength**: example
     /// - **Description**: A coded concept that defines the type of a medication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Medication.code")]
     pub code: Option<CodeableConcept>,
     /// active | inactive | entered-in-error
@@ -318,6 +320,7 @@ pub struct Medication {
     /// - **Strength**: required
     /// - **Description**: A coded concept defining if the medication is in active use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/medication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Medication.status")]
     pub status: Option<Code>,
     /// Organization that has authorization to market medication
@@ -359,6 +362,7 @@ pub struct Medication {
     /// - **Strength**: example
     /// - **Description**: A coded concept defining the form of a medication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-form-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-form-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Medication.doseForm")]
     #[fhir_serde(rename = "doseForm")]
     pub dose_form: Option<CodeableConcept>,
@@ -549,7 +553,7 @@ pub struct MedicationBatch {
 }
 
 /// Choice of types for the strength\[x\] field in MedicationIngredient
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "strength")]
 pub enum MedicationIngredientStrength {
     /// Variant accepting the Ratio type.
@@ -689,6 +693,7 @@ pub struct MedicationIngredient {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Medication.ingredient.item")]
     pub item: CodeableReference,
     /// Active ingredient indicator
@@ -727,6 +732,7 @@ pub struct MedicationIngredient {
     /// - **Strength**: preferred
     /// - **Description**: A coded concpet defining the strength of an ingredient.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-ingredientstrength
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/medication-ingredientstrength")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Medication.ingredient.strength[x]")]
     #[fhir_serde(flatten)]
     pub strength: Option<MedicationIngredientStrength>,

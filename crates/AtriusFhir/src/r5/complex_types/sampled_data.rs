@@ -111,6 +111,7 @@ pub struct SampledData {
     /// - **Strength**: required
     /// - **Description**: Units of measure allowed for an element.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ucum-units|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/ucum-units")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SampledData.intervalUnit")]
     #[fhir_serde(rename = "intervalUnit")]
     pub interval_unit: Code,

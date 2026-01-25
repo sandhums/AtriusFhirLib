@@ -105,6 +105,7 @@ pub struct Location {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Location.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -273,6 +274,7 @@ pub struct Location {
     /// - **Strength**: required
     /// - **Description**: Indicates whether the location is still in use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/location-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/location-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Location.status")]
     pub status: Option<Code>,
     /// The operational status of the location (typically only for a bed/room)
@@ -295,6 +297,7 @@ pub struct Location {
     /// - **Strength**: preferred
     /// - **Description**: The operational status if the location (where typically a bed/room).
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0116
+    #[fhir_binding(strength="preferred", valueset="http://terminology.hl7.org/ValueSet/v2-0116")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Location.operationalStatus")]
     #[fhir_serde(rename = "operationalStatus")]
     pub operational_status: Option<Coding>,
@@ -384,6 +387,7 @@ pub struct Location {
     /// - **Strength**: required
     /// - **Description**: Indicates whether a resource instance represents a specific location or a class of locations.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/location-mode|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/location-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Location.mode")]
     pub mode: Option<Code>,
     /// Type of function performed
@@ -403,6 +407,7 @@ pub struct Location {
     /// - **Strength**: extensible
     /// - **Description**: Indicates the type of function performed at the location.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ServiceDeliveryLocationRoleType
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/v3-ServiceDeliveryLocationRoleType")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Location.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -473,6 +478,7 @@ pub struct Location {
     /// - **Strength**: example
     /// - **Description**: Physical form of the location.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/location-form
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/location-form")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Location.form")]
     pub form: Option<CodeableConcept>,
     /// The absolute geographic location
@@ -552,6 +558,7 @@ pub struct Location {
     /// - **Strength**: example
     /// - **Description**: A custom attribute that could be provided at a service (e.g. Wheelchair accessibiliy).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/location-characteristic
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/location-characteristic")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Location.characteristic")]
     pub characteristic: Option<Vec<CodeableConcept>>,
     /// What days/times during a week is this location usually open (including exceptions)

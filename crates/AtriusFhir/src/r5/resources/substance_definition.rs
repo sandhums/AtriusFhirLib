@@ -105,6 +105,7 @@ pub struct SubstanceDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -281,6 +282,7 @@ pub struct SubstanceDefinition {
     /// - **Strength**: preferred
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.status")]
     pub status: Option<CodeableConcept>,
     /// A categorization, high level e.g. polymer or nucleic acid, or food, chemical, biological, or lower e.g. polymer linear or branch chain, or type of impurity
@@ -316,6 +318,7 @@ pub struct SubstanceDefinition {
     /// - **Strength**: example
     /// - **Description**: Applicable domain for this product (e.g. human, veterinary).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-domain
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-domain")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.domain")]
     pub domain: Option<CodeableConcept>,
     /// The quality standard, established benchmark, to which substance complies (e.g. USP/NF, BP)
@@ -336,6 +339,7 @@ pub struct SubstanceDefinition {
     /// - **Strength**: example
     /// - **Description**: The quality standard, established benchmark, to which a substance complies
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-grade
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-grade")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.grade")]
     pub grade: Option<Vec<CodeableConcept>>,
     /// Textual description of the substance
@@ -721,6 +725,7 @@ pub struct SubstanceDefinitionCharacterization {
     /// - **Strength**: example
     /// - **Description**: The method used to elucidate the characterization of the drug substance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-structure-technique
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-structure-technique")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.characterization.technique")]
     pub technique: Option<CodeableConcept>,
     /// Describes the nature of the chemical entity and explains, for instance, whether this is a base or a salt form
@@ -740,6 +745,7 @@ pub struct SubstanceDefinitionCharacterization {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-form
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-form")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.characterization.form")]
     pub form: Option<CodeableConcept>,
     /// The description or justification in support of the interpretation of the data file
@@ -908,6 +914,7 @@ pub struct SubstanceDefinitionCode {
     /// - **Strength**: preferred
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.code.status")]
     pub status: Option<CodeableConcept>,
     /// The date at which the code status was changed
@@ -957,7 +964,7 @@ pub struct SubstanceDefinitionCode {
 }
 
 /// Choice of types for the amount\[x\] field in SubstanceDefinitionMoiety
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "amount")]
 pub enum SubstanceDefinitionMoietyAmount {
     /// Variant accepting the Quantity type.
@@ -1130,6 +1137,7 @@ pub struct SubstanceDefinitionMoiety {
     /// - **Strength**: example
     /// - **Description**: The optical rotation type of a substance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-stereochemistry
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-stereochemistry")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.moiety.stereochemistry")]
     pub stereochemistry: Option<CodeableConcept>,
     /// Optical activity type
@@ -1149,6 +1157,7 @@ pub struct SubstanceDefinitionMoiety {
     /// - **Strength**: example
     /// - **Description**: The optical rotation type of a substance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-optical-activity
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-optical-activity")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.moiety.opticalActivity")]
     #[fhir_serde(rename = "opticalActivity")]
     pub optical_activity: Option<CodeableConcept>,
@@ -1203,6 +1212,7 @@ pub struct SubstanceDefinitionMoiety {
     /// - **Strength**: example
     /// - **Description**: The relationship between two substance types.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-amount-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-amount-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.moiety.measurementType")]
     #[fhir_serde(rename = "measurementType")]
     pub measurement_type: Option<CodeableConcept>,
@@ -1329,6 +1339,7 @@ pub struct SubstanceDefinitionMolecularWeight {
     /// - **Strength**: example
     /// - **Description**: The method by which the substance weight was measured.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-weight-method
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-weight-method")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.molecularWeight.method")]
     pub method: Option<CodeableConcept>,
     /// Type of molecular weight e.g. exact, average, weight average
@@ -1349,6 +1360,7 @@ pub struct SubstanceDefinitionMolecularWeight {
     /// - **Strength**: example
     /// - **Description**: The type of substance weight measurement.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-weight-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-weight-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.molecularWeight.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1504,6 +1516,7 @@ pub struct SubstanceDefinitionName {
     /// - **Strength**: example
     /// - **Description**: The type of a name given to a substance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-name-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-name-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.name.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1524,6 +1537,7 @@ pub struct SubstanceDefinitionName {
     /// - **Strength**: preferred
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.name.status")]
     pub status: Option<CodeableConcept>,
     /// If this is the preferred name for this substance
@@ -1558,6 +1572,7 @@ pub struct SubstanceDefinitionName {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.name.language")]
     pub language: Option<Vec<CodeableConcept>>,
     /// The use context of this name e.g. as an active ingredient or as a food colour additive
@@ -1578,6 +1593,7 @@ pub struct SubstanceDefinitionName {
     /// - **Strength**: example
     /// - **Description**: The use context of a substance name for example if there is a different name when used as a drug active ingredient as opposed to a food colour additive.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-name-domain
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-name-domain")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.name.domain")]
     pub domain: Option<Vec<CodeableConcept>>,
     /// The jurisdiction where this name applies
@@ -1597,6 +1613,7 @@ pub struct SubstanceDefinitionName {
     /// - **Strength**: example
     /// - **Description**: Jurisdiction codes
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.name.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// A synonym of this particular name, by which the substance is also known
@@ -1776,6 +1793,7 @@ pub struct SubstanceDefinitionNameOfficial {
     /// - **Strength**: preferred
     /// - **Description**: An authority that officates substance names.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-name-authority
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/substance-name-authority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.name.official.authority")]
     pub authority: Option<CodeableConcept>,
     /// The status of the official name, for example 'draft', 'active'
@@ -1795,6 +1813,7 @@ pub struct SubstanceDefinitionNameOfficial {
     /// - **Strength**: preferred
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.name.official.status")]
     pub status: Option<CodeableConcept>,
     /// Date of official name change
@@ -1814,7 +1833,7 @@ pub struct SubstanceDefinitionNameOfficial {
 }
 
 /// Choice of types for the value\[x\] field in SubstanceDefinitionProperty
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum SubstanceDefinitionPropertyValue {
     /// Variant accepting the CodeableConcept type.
@@ -1954,6 +1973,7 @@ pub struct SubstanceDefinitionProperty {
     /// - **Strength**: example
     /// - **Description**: This value set includes all observable entity codes from SNOMED CT - provided as an exemplar value set.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/product-characteristic-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/product-characteristic-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.property.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -1975,7 +1995,7 @@ pub struct SubstanceDefinitionProperty {
 }
 
 /// Choice of types for the substanceDefinition\[x\] field in SubstanceDefinitionRelationship
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "substanceDefinition")]
 pub enum SubstanceDefinitionRelationshipSubstanceDefinition {
     /// Variant accepting the Reference type.
@@ -1987,7 +2007,7 @@ pub enum SubstanceDefinitionRelationshipSubstanceDefinition {
 }
 
 /// Choice of types for the amount\[x\] field in SubstanceDefinitionRelationship
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "amount")]
 pub enum SubstanceDefinitionRelationshipAmount {
     /// Variant accepting the Quantity type.
@@ -2138,6 +2158,7 @@ pub struct SubstanceDefinitionRelationship {
     /// - **Strength**: example
     /// - **Description**: The relationship between two substance types.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-relationship-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-relationship-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.relationship.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -2209,6 +2230,7 @@ pub struct SubstanceDefinitionRelationship {
     /// - **Strength**: example
     /// - **Description**: The relationship between two substance types.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-amount-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-amount-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.relationship.comparator")]
     pub comparator: Option<CodeableConcept>,
     /// Supporting literature
@@ -2347,6 +2369,7 @@ pub struct SubstanceDefinitionSourceMaterial {
     /// - **Strength**: example
     /// - **Description**: A classification that provides the origin of the substance raw material.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-source-material-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-source-material-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.sourceMaterial.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -2368,6 +2391,7 @@ pub struct SubstanceDefinitionSourceMaterial {
     /// - **Strength**: example
     /// - **Description**: The genus of an organism, typically referring to the Latin epithet of the genus element of the plant/animal scientific name.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-source-material-genus
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-source-material-genus")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.sourceMaterial.genus")]
     pub genus: Option<CodeableConcept>,
     /// The species of an organism e.g. the Latin epithet of the species of the plant/animal
@@ -2388,6 +2412,7 @@ pub struct SubstanceDefinitionSourceMaterial {
     /// - **Strength**: example
     /// - **Description**: A species of origin a substance raw material.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-source-material-species
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-source-material-species")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.sourceMaterial.species")]
     pub species: Option<CodeableConcept>,
     /// An anatomical origin of the source material within an organism
@@ -2407,6 +2432,7 @@ pub struct SubstanceDefinitionSourceMaterial {
     /// - **Strength**: example
     /// - **Description**: An anatomical origin of the source material within an organism.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-source-material-part
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-source-material-part")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.sourceMaterial.part")]
     pub part: Option<CodeableConcept>,
     /// The country or countries where the material is harvested
@@ -2426,6 +2452,7 @@ pub struct SubstanceDefinitionSourceMaterial {
     /// - **Strength**: required
     /// - **Description**: Jurisdiction codes
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/country|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/country")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.sourceMaterial.countryOfOrigin")]
     #[fhir_serde(rename = "countryOfOrigin")]
     pub country_of_origin: Option<Vec<CodeableConcept>>,
@@ -2550,6 +2577,7 @@ pub struct SubstanceDefinitionStructure {
     /// - **Strength**: example
     /// - **Description**: The optical rotation type of a substance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-stereochemistry
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-stereochemistry")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.structure.stereochemistry")]
     pub stereochemistry: Option<CodeableConcept>,
     /// Optical activity type
@@ -2569,6 +2597,7 @@ pub struct SubstanceDefinitionStructure {
     /// - **Strength**: example
     /// - **Description**: The optical rotation type of a substance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-optical-activity
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-optical-activity")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.structure.opticalActivity")]
     #[fhir_serde(rename = "opticalActivity")]
     pub optical_activity: Option<CodeableConcept>,
@@ -2638,6 +2667,7 @@ pub struct SubstanceDefinitionStructure {
     /// - **Strength**: example
     /// - **Description**: The method used to elucidate the structure of the drug substance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-structure-technique
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-structure-technique")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.structure.technique")]
     pub technique: Option<Vec<CodeableConcept>>,
     /// Source of information for the structure
@@ -2790,6 +2820,7 @@ pub struct SubstanceDefinitionStructureRepresentation {
     /// - **Strength**: example
     /// - **Description**: A format of a substance representation.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-representation-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-representation-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.structure.representation.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -2826,6 +2857,7 @@ pub struct SubstanceDefinitionStructureRepresentation {
     /// - **Strength**: example
     /// - **Description**: A format of a substance representation.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-representation-format
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-representation-format")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceDefinition.structure.representation.format")]
     pub format: Option<CodeableConcept>,
     /// An attachment with the structural representation e.g. a structure graphic or AnIML file

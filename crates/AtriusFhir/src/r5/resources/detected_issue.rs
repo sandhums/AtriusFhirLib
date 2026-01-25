@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the identified\[x\] field in DetectedIssue
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "identified")]
 pub enum DetectedIssueIdentified {
     /// Variant accepting the DateTime type.
@@ -120,6 +120,7 @@ pub struct DetectedIssue {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DetectedIssue.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -294,6 +295,7 @@ pub struct DetectedIssue {
     /// 
     /// ## Aliases
     /// status
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/detectedissue-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DetectedIssue.status")]
     pub status: Code,
     /// Type of detected issue, e.g. drug-drug, duplicate therapy, etc
@@ -319,6 +321,7 @@ pub struct DetectedIssue {
     /// - **Strength**: preferred
     /// - **Description**: Codes for high level detected issue categories.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/detectedissue-category
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/detectedissue-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DetectedIssue.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Specific type of detected issue, e.g. drug-drug, duplicate therapy, etc
@@ -341,6 +344,7 @@ pub struct DetectedIssue {
     /// 
     /// ## Aliases
     /// type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/detectedissue-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DetectedIssue.code")]
     pub code: Option<CodeableConcept>,
     /// high | moderate | low
@@ -364,6 +368,7 @@ pub struct DetectedIssue {
     /// 
     /// ## Aliases
     /// severity
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/detectedissue-severity")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DetectedIssue.severity")]
     pub severity: Option<Code>,
     /// Associated subject
@@ -635,6 +640,7 @@ pub struct DetectedIssueEvidence {
     /// - **Strength**: example
     /// - **Description**: Codes that describes the types of evidence for a detected issue.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/manifestation-or-symptom
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/manifestation-or-symptom")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DetectedIssue.evidence.code")]
     pub code: Option<Vec<CodeableConcept>>,
     /// Supporting information
@@ -772,6 +778,7 @@ pub struct DetectedIssueMitigation {
     /// - **Strength**: preferred
     /// - **Description**: Codes describing steps taken to resolve the issue or other circumstances that mitigate the risk associated with the issue; e.g. 'added concurrent therapy', 'prior therapy documented', etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/detectedissue-mitigation-action
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/detectedissue-mitigation-action")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DetectedIssue.mitigation.action")]
     pub action: CodeableConcept,
     /// Date committed

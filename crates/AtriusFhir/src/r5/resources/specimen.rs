@@ -104,6 +104,7 @@ pub struct Specimen {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Specimen.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -288,6 +289,7 @@ pub struct Specimen {
     /// - **Strength**: required
     /// - **Description**: Codes providing the status/availability of a specimen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/specimen-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/specimen-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Specimen.status")]
     pub status: Option<Code>,
     /// Kind of material that forms the specimen
@@ -312,6 +314,7 @@ pub struct Specimen {
     /// - **Strength**: example
     /// - **Description**: The type of the specimen.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0487
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v2-0487")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Specimen.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -401,6 +404,7 @@ pub struct Specimen {
     /// - **Strength**: required
     /// - **Description**: Codes for the combined status of a specimen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/specimen-combined|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/specimen-combined")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Specimen.combined")]
     pub combined: Option<Code>,
     /// The role the specimen serves
@@ -417,6 +421,7 @@ pub struct Specimen {
     /// - **Strength**: preferred
     /// - **Description**: Codes describing specimen role.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/specimen-role
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/specimen-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Specimen.role")]
     pub role: Option<Vec<CodeableConcept>>,
     /// The physical feature of a specimen
@@ -494,6 +499,7 @@ pub struct Specimen {
     /// - **Strength**: extensible
     /// - **Description**: Codes describing the state of the specimen.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0493
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/v2-0493")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Specimen.condition")]
     pub condition: Option<Vec<CodeableConcept>>,
     /// Comments
@@ -511,7 +517,7 @@ pub struct Specimen {
 }
 
 /// Choice of types for the collected\[x\] field in SpecimenCollection
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "collected")]
 pub enum SpecimenCollectionCollected {
     /// Variant accepting the DateTime type.
@@ -523,7 +529,7 @@ pub enum SpecimenCollectionCollected {
 }
 
 /// Choice of types for the fastingStatus\[x\] field in SpecimenCollection
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "fastingStatus")]
 pub enum SpecimenCollectionFastingStatus {
     /// Variant accepting the CodeableConcept type.
@@ -704,6 +710,7 @@ pub struct SpecimenCollection {
     /// - **Strength**: example
     /// - **Description**: The  technique that is used to perform the procedure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/specimen-collection-method
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/specimen-collection-method")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Specimen.collection.method")]
     pub method: Option<CodeableConcept>,
     /// Device used to perform collection
@@ -755,6 +762,7 @@ pub struct SpecimenCollection {
     /// - **Strength**: example
     /// - **Description**: SNOMED CT Body site concepts
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/body-site
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Specimen.collection.bodySite")]
     #[fhir_serde(rename = "bodySite")]
     pub body_site: Option<CodeableReference>,
@@ -786,6 +794,7 @@ pub struct SpecimenCollection {
     /// - **Strength**: extensible
     /// - **Description**: Codes describing the fasting status of the patient.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0916
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/v2-0916")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Specimen.collection.fastingStatus[x]")]
     #[fhir_serde(flatten)]
     pub fasting_status: Option<SpecimenCollectionFastingStatus>,
@@ -1047,6 +1056,7 @@ pub struct SpecimenFeature {
     /// - **Strength**: example
     /// - **Description**: SNOMED CT Body site concepts
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/body-site
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Specimen.feature.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -1064,7 +1074,7 @@ pub struct SpecimenFeature {
 }
 
 /// Choice of types for the time\[x\] field in SpecimenProcessing
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "time")]
 pub enum SpecimenProcessingTime {
     /// Variant accepting the DateTime type.
@@ -1200,6 +1210,7 @@ pub struct SpecimenProcessing {
     /// - **Strength**: example
     /// - **Description**: Type indicating the technique used to process the specimen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/specimen-processing-method
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/specimen-processing-method")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Specimen.processing.method")]
     pub method: Option<CodeableConcept>,
     /// Material used in the processing step

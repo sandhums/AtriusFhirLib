@@ -108,6 +108,7 @@ pub struct ResearchStudy {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -402,6 +403,7 @@ pub struct ResearchStudy {
     /// - **Strength**: required
     /// - **Description**: Codes that convey the current publication status of the research study resource.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.status")]
     pub status: Code,
     /// treatment | prevention | diagnostic | supportive-care | screening | health-services-research | basic-science | device-feasibility
@@ -422,6 +424,7 @@ pub struct ResearchStudy {
     /// - **Strength**: preferred
     /// - **Description**: Codes for the main intent of the study.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-study-prim-purp-type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/research-study-prim-purp-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.primaryPurposeType")]
     #[fhir_serde(rename = "primaryPurposeType")]
     pub primary_purpose_type: Option<CodeableConcept>,
@@ -443,6 +446,7 @@ pub struct ResearchStudy {
     /// - **Strength**: example
     /// - **Description**: Codes for the stage in the progression of a therapy from initial experimental use in humans in clinical trials to post-market evaluation.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-study-phase
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/research-study-phase")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.phase")]
     pub phase: Option<CodeableConcept>,
     /// Classifications of the study design characteristics
@@ -464,6 +468,7 @@ pub struct ResearchStudy {
     /// - **Strength**: preferred
     /// - **Description**: This is a set of terms for study design characteristics.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/study-design
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/study-design")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.studyDesign")]
     #[fhir_serde(rename = "studyDesign")]
     pub study_design: Option<Vec<CodeableConcept>>,
@@ -482,6 +487,7 @@ pub struct ResearchStudy {
     /// - **Strength**: example
     /// - **Description**: Common codes of research study focus
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-study-focus-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/research-study-focus-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.focus")]
     pub focus: Option<Vec<CodeableReference>>,
     /// Condition being studied
@@ -503,6 +509,7 @@ pub struct ResearchStudy {
     /// - **Strength**: example
     /// - **Description**: Identification of the condition or diagnosis.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.condition")]
     pub condition: Option<Vec<CodeableConcept>>,
     /// Used to search for the study
@@ -541,6 +548,7 @@ pub struct ResearchStudy {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.region")]
     pub region: Option<Vec<CodeableConcept>>,
     /// Brief text explaining the study
@@ -628,6 +636,7 @@ pub struct ResearchStudy {
     /// - **Strength**: example
     /// - **Description**: desc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-study-classifiers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/research-study-classifiers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.classifier")]
     pub classifier: Option<Vec<CodeableConcept>>,
     /// Sponsors, collaborators, and other parties
@@ -680,6 +689,7 @@ pub struct ResearchStudy {
     /// - **Strength**: example
     /// - **Description**: Codes for why the study ended prematurely.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-study-reason-stopped
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/research-study-reason-stopped")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.whyStopped")]
     #[fhir_serde(rename = "whyStopped")]
     pub why_stopped: Option<CodeableConcept>,
@@ -906,6 +916,7 @@ pub struct ResearchStudyAssociatedParty {
     /// - **Strength**: extensible
     /// - **Description**: desc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-study-party-role
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/research-study-party-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.associatedParty.role")]
     pub role: CodeableConcept,
     /// When active in the role
@@ -938,6 +949,7 @@ pub struct ResearchStudyAssociatedParty {
     /// - **Strength**: example
     /// - **Description**: A characterization or type of the entity.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-study-party-organization-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/research-study-party-organization-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.associatedParty.classifier")]
     pub classifier: Option<Vec<CodeableConcept>>,
     /// Individual or organization associated with study (use practitionerRole to specify their organisation)
@@ -1107,6 +1119,7 @@ pub struct ResearchStudyComparisonGroup {
     /// - **Strength**: extensible
     /// - **Description**: desc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-study-arm-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/research-study-arm-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.comparisonGroup.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1268,6 +1281,7 @@ pub struct ResearchStudyLabel {
     /// - **Strength**: extensible
     /// - **Description**: desc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/title-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/title-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.label.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1409,6 +1423,7 @@ pub struct ResearchStudyObjective {
     /// - **Strength**: preferred
     /// - **Description**: Codes for the kind of study objective.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-study-objective-type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/research-study-objective-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.objective.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1563,6 +1578,7 @@ pub struct ResearchStudyOutcomeMeasure {
     /// - **Strength**: preferred
     /// - **Description**: defn.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-study-objective-type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/research-study-objective-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.outcomeMeasure.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -1703,6 +1719,7 @@ pub struct ResearchStudyProgressStatus {
     /// - **Strength**: extensible
     /// - **Description**: defn.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-study-status
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/research-study-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchStudy.progressStatus.state")]
     pub state: CodeableConcept,
     /// Actual if true else anticipated

@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in SpecimenDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum SpecimenDefinitionVersionAlgorithm {
     /// Variant accepting the String type.
@@ -14,7 +14,7 @@ pub enum SpecimenDefinitionVersionAlgorithm {
 }
 
 /// Choice of types for the subject\[x\] field in SpecimenDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "subject")]
 pub enum SpecimenDefinitionSubject {
     /// Variant accepting the CodeableConcept type.
@@ -124,6 +124,7 @@ pub struct SpecimenDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -341,6 +342,7 @@ pub struct SpecimenDefinition {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<SpecimenDefinitionVersionAlgorithm>,
@@ -444,6 +446,7 @@ pub struct SpecimenDefinition {
     /// - **Strength**: required
     /// - **Description**: Codes identifying the status of a SpecimenDefinition resource.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.status")]
     pub status: Code,
     /// If this SpecimenDefinition is not for real usage
@@ -613,6 +616,7 @@ pub struct SpecimenDefinition {
     /// - **Strength**: extensible
     /// - **Description**: Codes for country, country subdivision and region for indicating where a resource is intended to be used.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this SpecimenDefinition is defined
@@ -755,6 +759,7 @@ pub struct SpecimenDefinition {
     /// - **Strength**: example
     /// - **Description**: The type of the specimen to be collected.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0487
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v2-0487")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.typeCollected")]
     #[fhir_serde(rename = "typeCollected")]
     pub type_collected: Option<CodeableConcept>,
@@ -775,6 +780,7 @@ pub struct SpecimenDefinition {
     /// - **Strength**: example
     /// - **Description**: SCT descendants of 703763000 |Precondition value (qualifier value)|
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/prepare-patient-prior-specimen-collection
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/prepare-patient-prior-specimen-collection")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.patientPreparation")]
     #[fhir_serde(rename = "patientPreparation")]
     pub patient_preparation: Option<Vec<CodeableConcept>>,
@@ -813,6 +819,7 @@ pub struct SpecimenDefinition {
     /// - **Strength**: example
     /// - **Description**: SCT actions and procedures for specimen collection
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/specimen-collection
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/specimen-collection")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.collection")]
     pub collection: Option<Vec<CodeableConcept>>,
     /// Specimen in container intended for testing by lab
@@ -957,6 +964,7 @@ pub struct SpecimenDefinitionTypeTested {
     /// - **Strength**: example
     /// - **Description**: The type of specimen conditioned in a container for lab testing.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0487
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v2-0487")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.typeTested.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -977,6 +985,7 @@ pub struct SpecimenDefinitionTypeTested {
     /// - **Strength**: required
     /// - **Description**: Degree of preference of a type of conditioned specimen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/specimen-contained-preference|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/specimen-contained-preference")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.typeTested.preference")]
     pub preference: Code,
     /// The specimen's container
@@ -1041,6 +1050,7 @@ pub struct SpecimenDefinitionTypeTested {
     /// - **Strength**: example
     /// - **Description**: Criterion for rejection of the specimen by laboratory.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/rejection-criteria
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/rejection-criteria")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.typeTested.rejectionCriterion")]
     #[fhir_serde(rename = "rejectionCriterion")]
     pub rejection_criterion: Option<Vec<CodeableConcept>>,
@@ -1071,13 +1081,14 @@ pub struct SpecimenDefinitionTypeTested {
     /// - **Strength**: example
     /// - **Description**: Codes specifying where the specimen will be tested.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/diagnostic-service-sections
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/diagnostic-service-sections")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.typeTested.testingDestination")]
     #[fhir_serde(rename = "testingDestination")]
     pub testing_destination: Option<Vec<CodeableConcept>>,
 }
 
 /// Choice of types for the minimumVolume\[x\] field in SpecimenDefinitionTypeTestedContainer
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "minimumVolume")]
 pub enum SpecimenDefinitionTypeTestedContainerMinimumVolume {
     /// Variant accepting the Quantity type.
@@ -1205,6 +1216,7 @@ pub struct SpecimenDefinitionTypeTestedContainer {
     /// - **Strength**: example
     /// - **Description**: SCT 32039001 |Glass|, 61088005 |Plastic|, 425620007 |Metal|
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/container-material
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/container-material")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.typeTested.container.material")]
     pub material: Option<CodeableConcept>,
     /// Kind of container associated with the kind of specimen
@@ -1221,6 +1233,7 @@ pub struct SpecimenDefinitionTypeTestedContainer {
     /// - **Strength**: example
     /// - **Description**: SCT descendants of 706041008 |Device for body fluid and tissue collection/transfer/processing (physical object)|
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/specimen-container-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/specimen-container-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.typeTested.container.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1241,6 +1254,7 @@ pub struct SpecimenDefinitionTypeTestedContainer {
     /// - **Strength**: example
     /// - **Description**: Color of the container cap.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/container-cap
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/container-cap")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.typeTested.container.cap")]
     pub cap: Option<CodeableConcept>,
     /// The description of the kind of container
@@ -1307,7 +1321,7 @@ pub struct SpecimenDefinitionTypeTestedContainer {
 }
 
 /// Choice of types for the additive\[x\] field in SpecimenDefinitionTypeTestedContainerAdditive
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "additive")]
 pub enum SpecimenDefinitionTypeTestedContainerAdditiveAdditive {
     /// Variant accepting the CodeableConcept type.
@@ -1434,6 +1448,7 @@ pub struct SpecimenDefinitionTypeTestedContainerAdditive {
     /// - **Strength**: example
     /// - **Description**: Substance added to specimen container.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0371
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v2-0371")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.typeTested.container.additive.additive[x]")]
     #[fhir_serde(flatten)]
     pub additive: Option<SpecimenDefinitionTypeTestedContainerAdditiveAdditive>,
@@ -1555,6 +1570,7 @@ pub struct SpecimenDefinitionTypeTestedHandling {
     /// - **Strength**: example
     /// - **Description**: Set of handling instructions prior testing of the specimen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/handling-condition
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/handling-condition")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SpecimenDefinition.typeTested.handling.temperatureQualifier")]
     #[fhir_serde(rename = "temperatureQualifier")]
     pub temperature_qualifier: Option<CodeableConcept>,

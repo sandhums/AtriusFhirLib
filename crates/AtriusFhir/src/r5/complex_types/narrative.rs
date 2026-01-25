@@ -70,6 +70,7 @@ pub struct Narrative {
     /// - **Strength**: required
     /// - **Description**: The status of a resource narrative.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/narrative-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/narrative-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Narrative.status")]
     pub status: Code,
     /// Limited xhtml content

@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in ObservationDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum ObservationDefinitionVersionAlgorithm {
     /// Variant accepting the String type.
@@ -118,6 +118,7 @@ pub struct ObservationDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -350,6 +351,7 @@ pub struct ObservationDefinition {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<ObservationDefinitionVersionAlgorithm>,
@@ -421,6 +423,7 @@ pub struct ObservationDefinition {
     /// - **Strength**: required
     /// - **Description**: Codes identifying the state of an ObservationDefinition.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.status")]
     pub status: Code,
     /// If for testing purposes, not real usage
@@ -592,6 +595,7 @@ pub struct ObservationDefinition {
     /// - **Strength**: extensible
     /// - **Description**: Codes for country, country subdivision and region for indicating where a resource is intended to be used.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this ObservationDefinition is defined
@@ -818,6 +822,7 @@ pub struct ObservationDefinition {
     /// 
     /// ## Aliases
     /// Class of observation
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/observation-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Type of observation
@@ -838,6 +843,7 @@ pub struct ObservationDefinition {
     /// - **Strength**: example
     /// - **Description**: Codes identifying names of simple observations.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/observation-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/observation-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.code")]
     pub code: CodeableConcept,
     /// Quantity | CodeableConcept | string | boolean | integer | Range | Ratio | SampledData | time | dateTime | Period
@@ -861,6 +867,7 @@ pub struct ObservationDefinition {
     /// 
     /// ## Conditions
     /// Used when: obd-0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/permitted-data-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.permittedDataType")]
     #[fhir_serde(rename = "permittedDataType")]
     pub permitted_data_type: Option<Vec<Code>>,
@@ -905,6 +912,7 @@ pub struct ObservationDefinition {
     /// - **Strength**: example
     /// - **Description**: SNOMED CT body structures.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/body-site
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.bodySite")]
     #[fhir_serde(rename = "bodySite")]
     pub body_site: Option<CodeableConcept>,
@@ -929,6 +937,7 @@ pub struct ObservationDefinition {
     /// - **Strength**: example
     /// - **Description**: Methods for simple observations.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/observation-methods
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/observation-methods")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.method")]
     pub method: Option<CodeableConcept>,
     /// Kind of specimen used by this type of observation
@@ -995,6 +1004,7 @@ pub struct ObservationDefinition {
     /// 
     /// ## Conditions
     /// Used when: obd-0
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/ucum-units")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.permittedUnit")]
     #[fhir_serde(rename = "permittedUnit")]
     pub permitted_unit: Option<Vec<Coding>>,
@@ -1168,6 +1178,7 @@ pub struct ObservationDefinitionComponent {
     /// - **Strength**: example
     /// - **Description**: Codes identifying names of simple observations.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/observation-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/observation-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.component.code")]
     pub code: CodeableConcept,
     /// Quantity | CodeableConcept | string | boolean | integer | Range | Ratio | SampledData | time | dateTime | Period
@@ -1191,6 +1202,7 @@ pub struct ObservationDefinitionComponent {
     /// 
     /// ## Conditions
     /// Used when: obd-1
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/permitted-data-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.component.permittedDataType")]
     #[fhir_serde(rename = "permittedDataType")]
     pub permitted_data_type: Option<Vec<Code>>,
@@ -1212,6 +1224,7 @@ pub struct ObservationDefinitionComponent {
     /// 
     /// ## Conditions
     /// Used when: obd-1
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/ucum-units")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.component.permittedUnit")]
     #[fhir_serde(rename = "permittedUnit")]
     pub permitted_unit: Option<Vec<Coding>>,
@@ -1345,6 +1358,7 @@ pub struct ObservationDefinitionQualifiedValue {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/referencerange-meaning
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/referencerange-meaning")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.qualifiedValue.context")]
     pub context: Option<CodeableConcept>,
     /// Targetted population for the set of qualified values
@@ -1363,6 +1377,7 @@ pub struct ObservationDefinitionQualifiedValue {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/referencerange-appliesto
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/referencerange-appliesto")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.qualifiedValue.appliesTo")]
     #[fhir_serde(rename = "appliesTo")]
     pub applies_to: Option<Vec<CodeableConcept>>,
@@ -1382,6 +1397,7 @@ pub struct ObservationDefinitionQualifiedValue {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/administrative-gender|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/administrative-gender")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.qualifiedValue.gender")]
     pub gender: Option<Code>,
     /// Applicable age range for the set of qualified values
@@ -1438,6 +1454,7 @@ pub struct ObservationDefinitionQualifiedValue {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/observation-range-category|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/observation-range-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ObservationDefinition.qualifiedValue.rangeCategory")]
     #[fhir_serde(rename = "rangeCategory")]
     pub range_category: Option<Code>,

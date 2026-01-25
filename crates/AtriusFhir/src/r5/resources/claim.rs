@@ -109,6 +109,7 @@ pub struct Claim {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -300,6 +301,7 @@ pub struct Claim {
     /// - **Strength**: required
     /// - **Description**: A code specifying the state of the resource instance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fm-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fm-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.status")]
     pub status: Code,
     /// Category or discipline
@@ -330,6 +332,7 @@ pub struct Claim {
     /// - **Strength**: extensible
     /// - **Description**: The type or discipline-style of the claim.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/claim-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -356,6 +359,7 @@ pub struct Claim {
     /// - **Strength**: example
     /// - **Description**: A more granular claim typecode.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-subtype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-subtype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.subType")]
     #[fhir_serde(rename = "subType")]
     pub sub_type: Option<CodeableConcept>,
@@ -390,6 +394,7 @@ pub struct Claim {
     /// - **Strength**: required
     /// - **Description**: The purpose of the Claim: predetermination, preauthorization, claim.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-use|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/claim-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Code,
@@ -537,6 +542,7 @@ pub struct Claim {
     /// - **Strength**: example
     /// - **Description**: The timeliness with which processing is required: stat, normal, deferred.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/process-priority
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/process-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.priority")]
     pub priority: Option<CodeableConcept>,
     /// For whom to reserve funds
@@ -566,6 +572,7 @@ pub struct Claim {
     /// 
     /// ## Aliases
     /// Fund pre-allocation
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/fundsreserve")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.fundsReserve")]
     #[fhir_serde(rename = "fundsReserve")]
     pub funds_reserve: Option<CodeableConcept>,
@@ -733,6 +740,7 @@ pub struct Claim {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-diagnosisrelatedgroup
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-diagnosisrelatedgroup")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.diagnosisRelatedGroup")]
     #[fhir_serde(rename = "diagnosisRelatedGroup")]
     pub diagnosis_related_group: Option<CodeableConcept>,
@@ -914,7 +922,7 @@ pub struct Claim {
 }
 
 /// Choice of types for the location\[x\] field in ClaimAccident
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "location")]
 pub enum ClaimAccidentLocation {
     /// Variant accepting the Address type.
@@ -1069,6 +1077,7 @@ pub struct ClaimAccident {
     /// - **Strength**: extensible
     /// - **Description**: Type of accident: work place, auto, etc.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ActIncidentCode
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/v3-ActIncidentCode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.accident.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1263,6 +1272,7 @@ pub struct ClaimCareTeam {
     /// - **Strength**: example
     /// - **Description**: The role codes for the care team members.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-careteamrole
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-careteamrole")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.careTeam.role")]
     pub role: Option<CodeableConcept>,
     /// Practitioner or provider specialization
@@ -1283,12 +1293,13 @@ pub struct ClaimCareTeam {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/provider-qualification
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/provider-qualification")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.careTeam.specialty")]
     pub specialty: Option<CodeableConcept>,
 }
 
 /// Choice of types for the diagnosis\[x\] field in ClaimDiagnosis
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "diagnosis")]
 pub enum ClaimDiagnosisDiagnosis {
     /// Variant accepting the CodeableConcept type.
@@ -1440,6 +1451,7 @@ pub struct ClaimDiagnosis {
     /// - **Strength**: example
     /// - **Description**: Example ICD10 Diagnostic codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/icd-10
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/icd-10")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.diagnosis.diagnosis[x]")]
     #[fhir_serde(flatten)]
     pub diagnosis: Option<ClaimDiagnosisDiagnosis>,
@@ -1464,6 +1476,7 @@ pub struct ClaimDiagnosis {
     /// - **Strength**: example
     /// - **Description**: The type of the diagnosis: admitting, principal, discharge.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-diagnosistype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-diagnosistype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.diagnosis.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -1485,13 +1498,14 @@ pub struct ClaimDiagnosis {
     /// - **Strength**: example
     /// - **Description**: Present on admission.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-diagnosis-on-admission
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-diagnosis-on-admission")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.diagnosis.onAdmission")]
     #[fhir_serde(rename = "onAdmission")]
     pub on_admission: Option<CodeableConcept>,
 }
 
 /// Choice of types for the when\[x\] field in ClaimEvent
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "when")]
 pub enum ClaimEventWhen {
     /// Variant accepting the DateTime type.
@@ -1615,6 +1629,7 @@ pub struct ClaimEvent {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/datestype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/datestype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.event.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -1901,7 +1916,7 @@ pub struct ClaimInsurance {
 }
 
 /// Choice of types for the serviced\[x\] field in ClaimItem
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "serviced")]
 pub enum ClaimItemServiced {
     /// Variant accepting the Date type.
@@ -1913,7 +1928,7 @@ pub enum ClaimItemServiced {
 }
 
 /// Choice of types for the location\[x\] field in ClaimItem
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "location")]
 pub enum ClaimItemLocation {
     /// Variant accepting the CodeableConcept type.
@@ -2143,6 +2158,7 @@ pub struct ClaimItem {
     /// - **Strength**: example
     /// - **Description**: Codes for the revenue or cost centers supplying the service and/or products.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-revenue-center
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-revenue-center")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.revenue")]
     pub revenue: Option<CodeableConcept>,
     /// Benefit classification
@@ -2168,6 +2184,7 @@ pub struct ClaimItem {
     /// - **Strength**: example
     /// - **Description**: Benefit categories such as: oral-basic, major, glasses.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-benefitcategory
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-benefitcategory")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.category")]
     pub category: Option<CodeableConcept>,
     /// Billing, service, product, or drug code
@@ -2201,6 +2218,7 @@ pub struct ClaimItem {
     /// 
     /// ## Aliases
     /// Drug Code, Bill Code, Service Code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.productOrService")]
     #[fhir_serde(rename = "productOrService")]
     pub product_or_service: Option<CodeableConcept>,
@@ -2224,6 +2242,7 @@ pub struct ClaimItem {
     /// 
     /// ## Aliases
     /// End of a range of Drug Code; Bill Code; Service Cod
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.productOrServiceEnd")]
     #[fhir_serde(rename = "productOrServiceEnd")]
     pub product_or_service_end: Option<CodeableConcept>,
@@ -2266,6 +2285,7 @@ pub struct ClaimItem {
     /// - **Strength**: example
     /// - **Description**: Item type or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or an appliance was lost or stolen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-modifiers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-modifiers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.modifier")]
     pub modifier: Option<Vec<CodeableConcept>>,
     /// Program the product or service is provided under
@@ -2290,6 +2310,7 @@ pub struct ClaimItem {
     /// - **Strength**: example
     /// - **Description**: Program specific reason codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-program-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-program-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.programCode")]
     #[fhir_serde(rename = "programCode")]
     pub program_code: Option<Vec<CodeableConcept>>,
@@ -2328,6 +2349,7 @@ pub struct ClaimItem {
     /// - **Strength**: example
     /// - **Description**: Place of service: pharmacy, school, prison, etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-place
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-place")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.location[x]")]
     #[fhir_serde(flatten)]
     pub location: Option<ClaimItemLocation>,
@@ -2618,6 +2640,7 @@ pub struct ClaimItemBodySite {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/tooth
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/tooth")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.bodySite.site")]
     pub site: Option<Vec<CodeableReference>>,
     /// Sub-location
@@ -2636,6 +2659,7 @@ pub struct ClaimItemBodySite {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/surface
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/surface")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.bodySite.subSite")]
     #[fhir_serde(rename = "subSite")]
     pub sub_site: Option<Vec<CodeableConcept>>,
@@ -2792,6 +2816,7 @@ pub struct ClaimItemDetail {
     /// - **Strength**: example
     /// - **Description**: Codes for the revenue or cost centers supplying the service and/or products.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-revenue-center
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-revenue-center")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.detail.revenue")]
     pub revenue: Option<CodeableConcept>,
     /// Benefit classification
@@ -2817,6 +2842,7 @@ pub struct ClaimItemDetail {
     /// - **Strength**: example
     /// - **Description**: Benefit categories such as: oral-basic, major, glasses.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-benefitcategory
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-benefitcategory")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.detail.category")]
     pub category: Option<CodeableConcept>,
     /// Billing, service, product, or drug code
@@ -2850,6 +2876,7 @@ pub struct ClaimItemDetail {
     /// 
     /// ## Aliases
     /// Drug Code, Bill Code, Service Code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.detail.productOrService")]
     #[fhir_serde(rename = "productOrService")]
     pub product_or_service: Option<CodeableConcept>,
@@ -2873,6 +2900,7 @@ pub struct ClaimItemDetail {
     /// 
     /// ## Aliases
     /// End of a range of Drug Code; Bill Code; Service Cod
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.detail.productOrServiceEnd")]
     #[fhir_serde(rename = "productOrServiceEnd")]
     pub product_or_service_end: Option<CodeableConcept>,
@@ -2900,6 +2928,7 @@ pub struct ClaimItemDetail {
     /// - **Strength**: example
     /// - **Description**: Item type or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or an appliance was lost or stolen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-modifiers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-modifiers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.detail.modifier")]
     pub modifier: Option<Vec<CodeableConcept>>,
     /// Program the product or service is provided under
@@ -2924,6 +2953,7 @@ pub struct ClaimItemDetail {
     /// - **Strength**: example
     /// - **Description**: Program specific reason codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-program-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-program-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.detail.programCode")]
     #[fhir_serde(rename = "programCode")]
     pub program_code: Option<Vec<CodeableConcept>>,
@@ -3216,6 +3246,7 @@ pub struct ClaimItemDetailSubDetail {
     /// - **Strength**: example
     /// - **Description**: Codes for the revenue or cost centers supplying the service and/or products.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-revenue-center
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-revenue-center")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.detail.subDetail.revenue")]
     pub revenue: Option<CodeableConcept>,
     /// Benefit classification
@@ -3241,6 +3272,7 @@ pub struct ClaimItemDetailSubDetail {
     /// - **Strength**: example
     /// - **Description**: Benefit categories such as: oral-basic, major, glasses.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-benefitcategory
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-benefitcategory")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.detail.subDetail.category")]
     pub category: Option<CodeableConcept>,
     /// Billing, service, product, or drug code
@@ -3271,6 +3303,7 @@ pub struct ClaimItemDetailSubDetail {
     /// - **Strength**: example
     /// - **Description**: Allowable service and product codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-uscls
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.detail.subDetail.productOrService")]
     #[fhir_serde(rename = "productOrService")]
     pub product_or_service: Option<CodeableConcept>,
@@ -3294,6 +3327,7 @@ pub struct ClaimItemDetailSubDetail {
     /// 
     /// ## Aliases
     /// End of a range of Drug Code; Bill Code; Service Cod
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.detail.subDetail.productOrServiceEnd")]
     #[fhir_serde(rename = "productOrServiceEnd")]
     pub product_or_service_end: Option<CodeableConcept>,
@@ -3321,6 +3355,7 @@ pub struct ClaimItemDetailSubDetail {
     /// - **Strength**: example
     /// - **Description**: Item type or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or an appliance was lost or stolen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-modifiers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-modifiers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.detail.subDetail.modifier")]
     pub modifier: Option<Vec<CodeableConcept>>,
     /// Program the product or service is provided under
@@ -3345,6 +3380,7 @@ pub struct ClaimItemDetailSubDetail {
     /// - **Strength**: example
     /// - **Description**: Program specific reason codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-program-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-program-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.item.detail.subDetail.programCode")]
     #[fhir_serde(rename = "programCode")]
     pub program_code: Option<Vec<CodeableConcept>>,
@@ -3597,6 +3633,7 @@ pub struct ClaimPayee {
     /// - **Strength**: example
     /// - **Description**: A code for the party to be reimbursed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/payeetype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/payeetype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.payee.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -3620,7 +3657,7 @@ pub struct ClaimPayee {
 }
 
 /// Choice of types for the procedure\[x\] field in ClaimProcedure
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "procedure")]
 pub enum ClaimProcedureProcedure {
     /// Variant accepting the CodeableConcept type.
@@ -3771,6 +3808,7 @@ pub struct ClaimProcedure {
     /// - **Strength**: example
     /// - **Description**: Example procedure type codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-procedure-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-procedure-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.procedure.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -3806,6 +3844,7 @@ pub struct ClaimProcedure {
     /// - **Strength**: example
     /// - **Description**: Example ICD10 Procedure codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/icd-10-procedures
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/icd-10-procedures")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.procedure.procedure[x]")]
     #[fhir_serde(flatten)]
     pub procedure: Option<ClaimProcedureProcedure>,
@@ -3968,6 +4007,7 @@ pub struct ClaimRelated {
     /// - **Strength**: example
     /// - **Description**: Relationship of this claim to a related Claim.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/related-claim-relationship
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/related-claim-relationship")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.related.relationship")]
     pub relationship: Option<CodeableConcept>,
     /// File or case reference
@@ -3993,7 +4033,7 @@ pub struct ClaimRelated {
 }
 
 /// Choice of types for the timing\[x\] field in ClaimSupportingInfo
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "timing")]
 pub enum ClaimSupportingInfoTiming {
     /// Variant accepting the Date type.
@@ -4005,7 +4045,7 @@ pub enum ClaimSupportingInfoTiming {
 }
 
 /// Choice of types for the value\[x\] field in ClaimSupportingInfo
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ClaimSupportingInfoValue {
     /// Variant accepting the Boolean type.
@@ -4179,6 +4219,7 @@ pub struct ClaimSupportingInfo {
     /// - **Strength**: example
     /// - **Description**: The valuset used for additional information category codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-informationcategory
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-informationcategory")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.supportingInfo.category")]
     pub category: CodeableConcept,
     /// Type of information
@@ -4200,6 +4241,7 @@ pub struct ClaimSupportingInfo {
     /// - **Strength**: example
     /// - **Description**: The valuset used for additional information codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-exception
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-exception")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.supportingInfo.code")]
     pub code: Option<CodeableConcept>,
     /// When it occurred
@@ -4257,6 +4299,7 @@ pub struct ClaimSupportingInfo {
     /// - **Strength**: example
     /// - **Description**: Reason codes for the missing teeth.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/missing-tooth-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/missing-tooth-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Claim.supportingInfo.reason")]
     pub reason: Option<CodeableConcept>,
 }

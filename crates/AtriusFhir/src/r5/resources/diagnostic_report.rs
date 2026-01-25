@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the effective\[x\] field in DiagnosticReport
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "effective")]
 pub enum DiagnosticReportEffective {
     /// Variant accepting the DateTime type.
@@ -127,6 +127,7 @@ pub struct DiagnosticReport {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DiagnosticReport.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -331,6 +332,7 @@ pub struct DiagnosticReport {
     /// - **Strength**: required
     /// - **Description**: The status of the diagnostic report.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/diagnostic-report-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/diagnostic-report-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DiagnosticReport.status")]
     pub status: Code,
     /// Service category
@@ -361,6 +363,7 @@ pub struct DiagnosticReport {
     /// 
     /// ## Aliases
     /// Department, Sub-department, Service, Discipline
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/diagnostic-service-sections")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DiagnosticReport.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Name/Code for this diagnostic report
@@ -383,6 +386,7 @@ pub struct DiagnosticReport {
     /// 
     /// ## Aliases
     /// Type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/report-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DiagnosticReport.code")]
     pub code: CodeableConcept,
     /// The subject of the report - usually, but not always, the patient
@@ -727,6 +731,7 @@ pub struct DiagnosticReport {
     /// - **Strength**: example
     /// - **Description**: SNOMED CT Clinical Findings
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinical-findings
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinical-findings")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DiagnosticReport.conclusionCode")]
     #[fhir_serde(rename = "conclusionCode")]
     pub conclusion_code: Option<Vec<CodeableConcept>>,
@@ -1019,6 +1024,7 @@ pub struct DiagnosticReportSupportingInfo {
     /// - **Strength**: example
     /// - **Description**: The code value for the role of the supporting information in the diagnostic report.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0936
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v2-0936")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DiagnosticReport.supportingInfo.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,

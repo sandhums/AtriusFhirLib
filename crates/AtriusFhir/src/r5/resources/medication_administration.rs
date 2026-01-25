@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the occurence\[x\] field in MedicationAdministration
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurence")]
 pub enum MedicationAdministrationOccurence {
     /// Variant accepting the DateTime type.
@@ -125,6 +125,7 @@ pub struct MedicationAdministration {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationAdministration.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -330,6 +331,7 @@ pub struct MedicationAdministration {
     /// - **Strength**: required
     /// - **Description**: A set of codes indicating the current status of a MedicationAdministration.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-admin-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/medication-admin-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationAdministration.status")]
     pub status: Code,
     /// Reason administration not performed
@@ -346,6 +348,7 @@ pub struct MedicationAdministration {
     /// - **Strength**: example
     /// - **Description**: A set of codes indicating the reason why the MedicationAdministration is negated.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/reason-medication-not-given-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/reason-medication-not-given-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationAdministration.statusReason")]
     #[fhir_serde(rename = "statusReason")]
     pub status_reason: Option<Vec<CodeableConcept>>,
@@ -364,6 +367,7 @@ pub struct MedicationAdministration {
     /// - **Strength**: example
     /// - **Description**: A coded concept describing where the medication administered is expected to occur.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-admin-location
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-admin-location")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationAdministration.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// What was administered
@@ -392,6 +396,7 @@ pub struct MedicationAdministration {
     /// - **Strength**: example
     /// - **Description**: Codes identifying substance or product that can be administered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationAdministration.medication")]
     pub medication: CodeableReference,
     /// Who received medication
@@ -493,6 +498,7 @@ pub struct MedicationAdministration {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/administration-subpotent-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/administration-subpotent-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationAdministration.subPotentReason")]
     #[fhir_serde(rename = "subPotentReason")]
     pub sub_potent_reason: Option<Vec<CodeableConcept>>,
@@ -529,6 +535,7 @@ pub struct MedicationAdministration {
     /// - **Strength**: example
     /// - **Description**: A set of codes indicating the reason why the MedicationAdministration was made.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/reason-medication-given-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/reason-medication-given-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationAdministration.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// Request administration performed against
@@ -611,7 +618,7 @@ pub struct MedicationAdministration {
 }
 
 /// Choice of types for the rate\[x\] field in MedicationAdministrationDosage
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "rate")]
 pub enum MedicationAdministrationDosageRate {
     /// Variant accepting the Ratio type.
@@ -767,6 +774,7 @@ pub struct MedicationAdministrationDosage {
     /// - **Strength**: example
     /// - **Description**: A coded concept describing the site location the medicine enters into or onto the body.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/approach-site-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/approach-site-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationAdministration.dosage.site")]
     pub site: Option<CodeableConcept>,
     /// Path of substance into body
@@ -785,6 +793,7 @@ pub struct MedicationAdministrationDosage {
     /// - **Strength**: example
     /// - **Description**: A coded concept describing the route or physiological path of administration of a therapeutic agent into or onto the body of a subject.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/route-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/route-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationAdministration.dosage.route")]
     pub route: Option<CodeableConcept>,
     /// How drug was administered
@@ -814,6 +823,7 @@ pub struct MedicationAdministrationDosage {
     /// - **Strength**: example
     /// - **Description**: A coded concept describing the technique by which the medicine is administered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/administration-method-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/administration-method-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationAdministration.dosage.method")]
     pub method: Option<CodeableConcept>,
     /// Amount of medication per dose
@@ -986,6 +996,7 @@ pub struct MedicationAdministrationPerformer {
     /// - **Strength**: example
     /// - **Description**: A code describing the role an individual played in administering the medication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/med-admin-perform-function
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/med-admin-perform-function")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationAdministration.performer.function")]
     pub function: Option<CodeableConcept>,
     /// Who or what performed the medication administration

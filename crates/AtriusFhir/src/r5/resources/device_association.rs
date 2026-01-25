@@ -104,6 +104,7 @@ pub struct DeviceAssociation {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceAssociation.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -294,6 +295,7 @@ pub struct DeviceAssociation {
     /// - **Strength**: required
     /// - **Description**: Describes the lifecycle of the association.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/deviceassociation-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/deviceassociation-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceAssociation.status")]
     pub status: CodeableConcept,
     /// The reasons given for the current association status
@@ -313,6 +315,7 @@ pub struct DeviceAssociation {
     /// - **Strength**: required
     /// - **Description**: Describes the reason for changing the status of the association.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/deviceassociation-status-reason|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/deviceassociation-status-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceAssociation.statusReason")]
     #[fhir_serde(rename = "statusReason")]
     pub status_reason: Option<Vec<CodeableConcept>>,
@@ -495,6 +498,7 @@ pub struct DeviceAssociationOperation {
     /// - **Strength**: example
     /// - **Description**: Describes the the status of the association operation.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/deviceassociation-operationstatus
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/deviceassociation-operationstatus")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceAssociation.operation.status")]
     pub status: CodeableConcept,
     /// The individual performing the action enabled by the device

@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the citeAs\[x\] field in ArtifactAssessment
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "citeAs")]
 pub enum ArtifactAssessmentCiteAs {
     /// Variant accepting the Reference type.
@@ -14,7 +14,7 @@ pub enum ArtifactAssessmentCiteAs {
 }
 
 /// Choice of types for the artifact\[x\] field in ArtifactAssessment
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "artifact")]
 pub enum ArtifactAssessmentArtifact {
     /// Variant accepting the Reference type.
@@ -134,6 +134,7 @@ pub struct ArtifactAssessment {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ArtifactAssessment.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -448,6 +449,7 @@ pub struct ArtifactAssessment {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/artifactassessment-workflow-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/artifactassessment-workflow-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ArtifactAssessment.workflowStatus")]
     #[fhir_serde(rename = "workflowStatus")]
     pub workflow_status: Option<Code>,
@@ -468,6 +470,7 @@ pub struct ArtifactAssessment {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/artifactassessment-disposition|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/artifactassessment-disposition")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ArtifactAssessment.disposition")]
     pub disposition: Option<Code>,
 }
@@ -584,6 +587,7 @@ pub struct ArtifactAssessmentContent {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/artifactassessment-information-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/artifactassessment-information-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ArtifactAssessment.content.informationType")]
     #[fhir_serde(rename = "informationType")]
     pub information_type: Option<Code>,
@@ -611,6 +615,7 @@ pub struct ArtifactAssessmentContent {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/certainty-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/certainty-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ArtifactAssessment.content.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -627,6 +632,7 @@ pub struct ArtifactAssessmentContent {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/certainty-rating
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/certainty-rating")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ArtifactAssessment.content.classifier")]
     pub classifier: Option<Vec<CodeableConcept>>,
     /// Quantitative rating

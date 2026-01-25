@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the occurred\[x\] field in Provenance
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurred")]
 pub enum ProvenanceOccurred {
     /// Variant accepting the Period type.
@@ -126,6 +126,7 @@ pub struct Provenance {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Provenance.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -370,6 +371,7 @@ pub struct Provenance {
     /// 
     /// ## Aliases
     /// PurposeOfEvent
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-PurposeOfUse")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Provenance.authorization")]
     pub authorization: Option<Vec<CodeableReference>>,
     /// Activity that occurred
@@ -388,6 +390,7 @@ pub struct Provenance {
     /// - **Strength**: example
     /// - **Description**: The activity that took place.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/provenance-activity-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/provenance-activity-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Provenance.activity")]
     pub activity: Option<CodeableConcept>,
     /// Workflow authorization within which this event occurred
@@ -649,6 +652,7 @@ pub struct ProvenanceAgent {
     /// - **Strength**: example
     /// - **Description**: The type of participation that a provenance agent played with respect to the activity.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participation-role-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/participation-role-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Provenance.agent.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -680,6 +684,7 @@ pub struct ProvenanceAgent {
     /// - **Strength**: example
     /// - **Description**: The role that a provenance agent played with respect to the activity.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/security-role-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/security-role-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Provenance.agent.role")]
     pub role: Option<Vec<CodeableConcept>>,
     /// The agent that participated in the event
@@ -836,6 +841,7 @@ pub struct ProvenanceEntity {
     /// - **Strength**: required
     /// - **Description**: How an entity was used in an activity.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/provenance-entity-role|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/provenance-entity-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Provenance.entity.role")]
     pub role: Code,
     /// Identity of entity

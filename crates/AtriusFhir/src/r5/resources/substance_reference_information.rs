@@ -104,6 +104,7 @@ pub struct SubstanceReferenceInformation {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubstanceReferenceInformation.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -589,7 +590,7 @@ pub struct SubstanceReferenceInformationGeneElement {
 }
 
 /// Choice of types for the amount\[x\] field in SubstanceReferenceInformationTarget
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "amount")]
 pub enum SubstanceReferenceInformationTargetAmount {
     /// Variant accepting the Quantity type.

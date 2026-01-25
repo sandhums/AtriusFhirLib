@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in ValueSet
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum ValueSetVersionAlgorithm {
     /// Variant accepting the String type.
@@ -116,6 +116,7 @@ pub struct ValueSet {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ValueSet.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -360,6 +361,7 @@ pub struct ValueSet {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ValueSet.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<ValueSetVersionAlgorithm>,
@@ -439,6 +441,7 @@ pub struct ValueSet {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ValueSet.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -613,6 +616,7 @@ pub struct ValueSet {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ValueSet.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Indicates whether or not any change to the content logical definition may occur
@@ -805,6 +809,7 @@ pub struct ValueSet {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/definition-topic
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/definition-topic")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ValueSet.topic")]
     pub topic: Option<Vec<CodeableConcept>>,
     /// Who authored the ValueSet
@@ -1713,6 +1718,7 @@ pub struct ValueSetComposeIncludeConceptDesignation {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ValueSet.compose.include.concept.designation.language")]
     pub language: Option<Code>,
     /// Types of uses of designations
@@ -1736,6 +1742,7 @@ pub struct ValueSetComposeIncludeConceptDesignation {
     /// 
     /// ## Conditions
     /// Used when: vsd-11
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/designation-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ValueSet.compose.include.concept.designation.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Option<Coding>,
@@ -1761,6 +1768,7 @@ pub struct ValueSetComposeIncludeConceptDesignation {
     /// 
     /// ## Conditions
     /// Used when: vsd-11
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/designation-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ValueSet.compose.include.concept.designation.additionalUse")]
     #[fhir_serde(rename = "additionalUse")]
     pub additional_use: Option<Vec<Coding>>,
@@ -1929,6 +1937,7 @@ pub struct ValueSetComposeIncludeFilter {
     /// - **Strength**: required
     /// - **Description**: The kind of operation to perform as a part of a property based filter.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/filter-operator|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/filter-operator")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ValueSet.compose.include.filter.op")]
     pub op: Code,
     /// Code from the system, or regex criteria, or boolean value for exists
@@ -2477,7 +2486,7 @@ pub struct ValueSetExpansionContains {
 }
 
 /// Choice of types for the value\[x\] field in ValueSetExpansionContainsProperty
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ValueSetExpansionContainsPropertyValue {
     /// Variant accepting the Code type.
@@ -2641,7 +2650,7 @@ pub struct ValueSetExpansionContainsProperty {
 }
 
 /// Choice of types for the value\[x\] field in ValueSetExpansionContainsPropertySubProperty
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ValueSetExpansionContainsPropertySubPropertyValue {
     /// Variant accepting the Code type.
@@ -2793,7 +2802,7 @@ pub struct ValueSetExpansionContainsPropertySubProperty {
 }
 
 /// Choice of types for the value\[x\] field in ValueSetExpansionParameter
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ValueSetExpansionParameterValue {
     /// Variant accepting the String type.

@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in EventDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum EventDefinitionVersionAlgorithm {
     /// Variant accepting the String type.
@@ -14,7 +14,7 @@ pub enum EventDefinitionVersionAlgorithm {
 }
 
 /// Choice of types for the subject\[x\] field in EventDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "subject")]
 pub enum EventDefinitionSubject {
     /// Variant accepting the CodeableConcept type.
@@ -126,6 +126,7 @@ pub struct EventDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EventDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -372,6 +373,7 @@ pub struct EventDefinition {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EventDefinition.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<EventDefinitionVersionAlgorithm>,
@@ -457,6 +459,7 @@ pub struct EventDefinition {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EventDefinition.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -502,6 +505,7 @@ pub struct EventDefinition {
     /// - **Strength**: extensible
     /// - **Description**: The possible types of subjects for an event (E.g. Patient, Practitioner, Organization, Location, etc.).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participant-resource-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/participant-resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EventDefinition.subject[x]")]
     #[fhir_serde(flatten)]
     pub subject: Option<EventDefinitionSubject>,
@@ -660,6 +664,7 @@ pub struct EventDefinition {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EventDefinition.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this event definition is defined
@@ -844,6 +849,7 @@ pub struct EventDefinition {
     /// - **Strength**: example
     /// - **Description**: High-level categorization of the definition, used for searching, sorting, and filtering.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/definition-topic
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/definition-topic")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EventDefinition.topic")]
     pub topic: Option<Vec<CodeableConcept>>,
     /// Who authored the content

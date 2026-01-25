@@ -106,6 +106,7 @@ pub struct ImmunizationEvaluation {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImmunizationEvaluation.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -267,6 +268,7 @@ pub struct ImmunizationEvaluation {
     /// - **Strength**: required
     /// - **Description**: The status of the evaluation being done.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-evaluation-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/immunization-evaluation-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImmunizationEvaluation.status")]
     pub status: Code,
     /// Who this evaluation is for
@@ -322,6 +324,7 @@ pub struct ImmunizationEvaluation {
     /// - **Strength**: example
     /// - **Description**: The vaccine preventable disease the dose is being evaluated against.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-target-disease
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-target-disease")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImmunizationEvaluation.targetDisease")]
     #[fhir_serde(rename = "targetDisease")]
     pub target_disease: CodeableConcept,
@@ -358,6 +361,7 @@ pub struct ImmunizationEvaluation {
     /// - **Strength**: example
     /// - **Description**: The status of the administered dose relative to the published recommendations for the target disease.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-evaluation-dose-status
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-evaluation-dose-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImmunizationEvaluation.doseStatus")]
     #[fhir_serde(rename = "doseStatus")]
     pub dose_status: CodeableConcept,
@@ -376,6 +380,7 @@ pub struct ImmunizationEvaluation {
     /// - **Strength**: example
     /// - **Description**: The reason the dose status was assigned.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-evaluation-dose-status-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-evaluation-dose-status-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImmunizationEvaluation.doseStatusReason")]
     #[fhir_serde(rename = "doseStatusReason")]
     pub dose_status_reason: Option<Vec<CodeableConcept>>,

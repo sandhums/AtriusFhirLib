@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in PlanDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum PlanDefinitionVersionAlgorithm {
     /// Variant accepting the String type.
@@ -14,7 +14,7 @@ pub enum PlanDefinitionVersionAlgorithm {
 }
 
 /// Choice of types for the subject\[x\] field in PlanDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "subject")]
 pub enum PlanDefinitionSubject {
     /// Variant accepting the CodeableConcept type.
@@ -29,7 +29,7 @@ pub enum PlanDefinitionSubject {
 }
 
 /// Choice of types for the asNeeded\[x\] field in PlanDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "asNeeded")]
 pub enum PlanDefinitionAsNeeded {
     /// Variant accepting the Boolean type.
@@ -146,6 +146,7 @@ pub struct PlanDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -396,6 +397,7 @@ pub struct PlanDefinition {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<PlanDefinitionVersionAlgorithm>,
@@ -473,6 +475,7 @@ pub struct PlanDefinition {
     /// - **Strength**: extensible
     /// - **Description**: The type of PlanDefinition.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/plan-definition-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/plan-definition-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -501,6 +504,7 @@ pub struct PlanDefinition {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -555,6 +559,7 @@ pub struct PlanDefinition {
     /// - **Strength**: extensible
     /// - **Description**: The possible types of subjects for a plan definition (E.g. Patient, Practitioner, Organization, Location, etc.).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participant-resource-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/participant-resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.subject[x]")]
     #[fhir_serde(flatten)]
     pub subject: Option<PlanDefinitionSubject>,
@@ -716,6 +721,7 @@ pub struct PlanDefinition {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this plan definition is defined
@@ -895,6 +901,7 @@ pub struct PlanDefinition {
     /// - **Strength**: example
     /// - **Description**: High-level categorization of the definition, used for searching, sorting, and filtering.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/definition-topic
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/definition-topic")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.topic")]
     pub topic: Option<Vec<CodeableConcept>>,
     /// Who authored the content
@@ -1068,13 +1075,14 @@ pub struct PlanDefinition {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying the pre-condition that should hold prior to performing a procedure.  For example "pain", "on flare-up", etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-as-needed-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-as-needed-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.asNeeded[x]")]
     #[fhir_serde(flatten)]
     pub as_needed: Option<PlanDefinitionAsNeeded>,
 }
 
 /// Choice of types for the subject\[x\] field in PlanDefinitionAction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "subject")]
 pub enum PlanDefinitionActionSubject {
     /// Variant accepting the CodeableConcept type.
@@ -1089,7 +1097,7 @@ pub enum PlanDefinitionActionSubject {
 }
 
 /// Choice of types for the timing\[x\] field in PlanDefinitionAction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "timing")]
 pub enum PlanDefinitionActionTiming {
     /// Variant accepting the Age type.
@@ -1107,7 +1115,7 @@ pub enum PlanDefinitionActionTiming {
 }
 
 /// Choice of types for the definition\[x\] field in PlanDefinitionAction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "definition")]
 pub enum PlanDefinitionActionDefinition {
     /// Variant accepting the Canonical type.
@@ -1312,6 +1320,7 @@ pub struct PlanDefinitionAction {
     /// - **Strength**: required
     /// - **Description**: Identifies the level of importance to be assigned to actioning the request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-priority|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.priority")]
     pub priority: Option<Code>,
     /// Code representing the meaning of the action or sub-actions
@@ -1331,6 +1340,7 @@ pub struct PlanDefinitionAction {
     /// - **Strength**: example
     /// - **Description**: Provides examples of actions to be performed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/action-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.code")]
     pub code: Option<CodeableConcept>,
     /// Why the action should be performed
@@ -1351,6 +1361,7 @@ pub struct PlanDefinitionAction {
     /// - **Strength**: example
     /// - **Description**: Provides examples of reasons for actions to be performed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-reason-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/action-reason-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.reason")]
     pub reason: Option<Vec<CodeableConcept>>,
     /// Supporting documentation for the intended performer of the action
@@ -1421,6 +1432,7 @@ pub struct PlanDefinitionAction {
     /// - **Strength**: extensible
     /// - **Description**: The possible types of subjects for a plan definition (E.g. Patient, Practitioner, Organization, Location, etc.).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participant-resource-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/participant-resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.subject[x]")]
     #[fhir_serde(flatten)]
     pub subject: Option<PlanDefinitionActionSubject>,
@@ -1577,6 +1589,7 @@ pub struct PlanDefinitionAction {
     /// - **Strength**: extensible
     /// - **Description**: The type of action to be performed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/action-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1597,6 +1610,7 @@ pub struct PlanDefinitionAction {
     /// - **Strength**: required
     /// - **Description**: Defines organization behavior of a group.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-grouping-behavior|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-grouping-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.groupingBehavior")]
     #[fhir_serde(rename = "groupingBehavior")]
     pub grouping_behavior: Option<Code>,
@@ -1617,6 +1631,7 @@ pub struct PlanDefinitionAction {
     /// - **Strength**: required
     /// - **Description**: Defines selection behavior of a group.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-selection-behavior|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-selection-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.selectionBehavior")]
     #[fhir_serde(rename = "selectionBehavior")]
     pub selection_behavior: Option<Code>,
@@ -1637,6 +1652,7 @@ pub struct PlanDefinitionAction {
     /// - **Strength**: required
     /// - **Description**: Defines expectations around whether an action or action group is required.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-required-behavior|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-required-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.requiredBehavior")]
     #[fhir_serde(rename = "requiredBehavior")]
     pub required_behavior: Option<Code>,
@@ -1657,6 +1673,7 @@ pub struct PlanDefinitionAction {
     /// - **Strength**: required
     /// - **Description**: Defines selection frequency behavior for an action or group.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-precheck-behavior|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-precheck-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.precheckBehavior")]
     #[fhir_serde(rename = "precheckBehavior")]
     pub precheck_behavior: Option<Code>,
@@ -1677,6 +1694,7 @@ pub struct PlanDefinitionAction {
     /// - **Strength**: required
     /// - **Description**: Defines behavior for an action or a group for how many times that item may be repeated.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-cardinality-behavior|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-cardinality-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.cardinalityBehavior")]
     #[fhir_serde(rename = "cardinalityBehavior")]
     pub cardinality_behavior: Option<Code>,
@@ -1885,6 +1903,7 @@ pub struct PlanDefinitionActionCondition {
     /// - **Strength**: required
     /// - **Description**: Defines the kinds of conditions that can appear on actions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-condition-kind|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-condition-kind")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.condition.kind")]
     pub kind: Code,
     /// Boolean-valued expression
@@ -2489,6 +2508,7 @@ pub struct PlanDefinitionActionParticipant {
     /// - **Strength**: required
     /// - **Description**: The type of participant in the activity.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-participant-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-participant-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.participant.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Code>,
@@ -2534,6 +2554,7 @@ pub struct PlanDefinitionActionParticipant {
     /// - **Strength**: example
     /// - **Description**: Defines roles played by participants for the action.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/action-participant-role
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/action-participant-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.participant.role")]
     pub role: Option<CodeableConcept>,
     /// E.g. Author, Reviewer, Witness, etc
@@ -2550,12 +2571,13 @@ pub struct PlanDefinitionActionParticipant {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-participant-function
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/action-participant-function")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.participant.function")]
     pub function: Option<CodeableConcept>,
 }
 
 /// Choice of types for the offset\[x\] field in PlanDefinitionActionRelatedAction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "offset")]
 pub enum PlanDefinitionActionRelatedActionOffset {
     /// Variant accepting the Duration type.
@@ -2703,6 +2725,7 @@ pub struct PlanDefinitionActionRelatedAction {
     /// - **Strength**: required
     /// - **Description**: Defines the types of relationships between actions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-relationship-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-relationship-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.relatedAction.relationship")]
     pub relationship: Code,
     /// before | before-start | before-end | concurrent | concurrent-with-start | concurrent-with-end | after | after-start | after-end
@@ -2719,6 +2742,7 @@ pub struct PlanDefinitionActionRelatedAction {
     /// - **Strength**: required
     /// - **Description**: Defines the types of relationships between actions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-relationship-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-relationship-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.action.relatedAction.endRelationship")]
     #[fhir_serde(rename = "endRelationship")]
     pub end_relationship: Option<Code>,
@@ -2986,6 +3010,7 @@ pub struct PlanDefinitionActorOption {
     /// - **Strength**: required
     /// - **Description**: The type of participant in the activity.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-participant-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-participant-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.actor.option.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Code>,
@@ -3030,6 +3055,7 @@ pub struct PlanDefinitionActorOption {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/action-participant-role
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/action-participant-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.actor.option.role")]
     pub role: Option<CodeableConcept>,
 }
@@ -3160,6 +3186,7 @@ pub struct PlanDefinitionGoal {
     /// - **Strength**: example
     /// - **Description**: Example codes for grouping goals for filtering or presentation.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/goal-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/goal-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.goal.category")]
     pub category: Option<CodeableConcept>,
     /// Code or text describing the goal
@@ -3181,6 +3208,7 @@ pub struct PlanDefinitionGoal {
     /// - **Strength**: example
     /// - **Description**: Describes goals that can be achieved.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinical-findings
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinical-findings")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.goal.description")]
     pub description: CodeableConcept,
     /// high-priority | medium-priority | low-priority
@@ -3198,6 +3226,7 @@ pub struct PlanDefinitionGoal {
     /// - **Strength**: preferred
     /// - **Description**: Indicates the level of importance associated with reaching or sustaining a goal.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/goal-priority
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/goal-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.goal.priority")]
     pub priority: Option<CodeableConcept>,
     /// When goal pursuit begins
@@ -3214,6 +3243,7 @@ pub struct PlanDefinitionGoal {
     /// - **Strength**: example
     /// - **Description**: Identifies the types of events that might trigger the start of a goal.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/goal-start-event
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/goal-start-event")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.goal.start")]
     pub start: Option<CodeableConcept>,
     /// What does the goal address
@@ -3231,6 +3261,7 @@ pub struct PlanDefinitionGoal {
     /// - **Strength**: example
     /// - **Description**: Identifies problems, conditions, issues, or concerns that goals may address.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.goal.addresses")]
     pub addresses: Option<Vec<CodeableConcept>>,
     /// Supporting documentation for the goal
@@ -3260,7 +3291,7 @@ pub struct PlanDefinitionGoal {
 }
 
 /// Choice of types for the detail\[x\] field in PlanDefinitionGoalTarget
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "detail")]
 pub enum PlanDefinitionGoalTargetDetail {
     /// Variant accepting the Quantity type.
@@ -3401,6 +3432,7 @@ pub struct PlanDefinitionGoalTarget {
     /// - **Strength**: example
     /// - **Description**: Identifies types of parameters that can be tracked to determine goal achievement.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/observation-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/observation-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PlanDefinition.goal.target.measure")]
     pub measure: Option<CodeableConcept>,
     /// The target value to be achieved

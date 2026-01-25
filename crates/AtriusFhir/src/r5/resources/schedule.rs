@@ -104,6 +104,7 @@ pub struct Schedule {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Schedule.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -287,6 +288,7 @@ pub struct Schedule {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Schedule.serviceCategory")]
     #[fhir_serde(rename = "serviceCategory")]
     pub service_category: Option<Vec<CodeableConcept>>,
@@ -306,6 +308,7 @@ pub struct Schedule {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Schedule.serviceType")]
     #[fhir_serde(rename = "serviceType")]
     pub service_type: Option<Vec<CodeableReference>>,
@@ -327,6 +330,7 @@ pub struct Schedule {
     /// - **Strength**: preferred
     /// - **Description**: Additional details about where the content was created (e.g. clinical specialty).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/c80-practice-codes
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/c80-practice-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Schedule.specialty")]
     pub specialty: Option<Vec<CodeableConcept>>,
     /// Human-readable label

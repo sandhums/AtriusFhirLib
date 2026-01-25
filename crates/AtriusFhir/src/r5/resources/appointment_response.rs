@@ -106,6 +106,7 @@ pub struct AppointmentResponse {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AppointmentResponse.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -343,6 +344,7 @@ pub struct AppointmentResponse {
     /// 
     /// ## Conditions
     /// Used when: apr-1
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/encounter-participant-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AppointmentResponse.participantType")]
     #[fhir_serde(rename = "participantType")]
     pub participant_type: Option<Vec<CodeableConcept>>,
@@ -390,6 +392,7 @@ pub struct AppointmentResponse {
     /// - **Strength**: required
     /// - **Description**: The Participation status of an appointment.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/appointmentresponse-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/appointmentresponse-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AppointmentResponse.participantStatus")]
     #[fhir_serde(rename = "participantStatus")]
     pub participant_status: Code,

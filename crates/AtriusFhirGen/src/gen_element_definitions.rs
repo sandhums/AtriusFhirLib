@@ -4,6 +4,31 @@ use crate::format_helpers::{capitalize_first_letter, make_rust_safe};
 use crate::gen_helpers::{extract_content_reference_id, generate_type_name};
 use crate::generate_struct_element_doc::generate_element_documentation;
 
+fn format_binding_attribute(element: &ElementDefinition) -> Option<String> {
+    // We rely on ElementDefinition.binding being present when a binding exists.
+    // The binding contains the strength and the canonical ValueSet URL (often with a |version suffix).
+    let binding = element.binding.as_ref()?;
+
+    // Strength is typically: required | extensible | preferred | example
+
+    let strength = binding.strength.as_str();
+
+
+    // Canonical ValueSet URL; may include a |version suffix.
+    let raw_vs = binding.value_set.as_deref().unwrap_or("");
+    if raw_vs.is_empty() {
+        return None;
+    }
+
+    // Strip version suffix for stable lookups: canonical|x.y.z => canonical
+    let vs = raw_vs.split('|').next().unwrap_or(raw_vs);
+
+    Some(format!(
+        "#[fhir_binding(strength=\"{}\", valueset=\"{}\")]",
+        strength, vs
+    ))
+}
+
 /// Processes ElementDefinitions to generate Rust struct and enum definitions.
 ///
 /// This function groups related ElementDefinitions by their parent path and generates
@@ -96,7 +121,7 @@ pub fn process_elements(
             ));
 
             // Generate enum derives - Remove Eq to prevent MIR optimization cycles
-            let enum_derives = ["Debug", "Clone", "PartialEq", "FhirSerde", "FhirPath"];
+            let enum_derives = ["Debug", "Clone", "PartialEq", "FhirSerde", "FhirPath", "FhirValidate"];
             output.push_str(&format!("#[derive({})]\n", enum_derives.join(", ")));
 
             // Add choice element attribute to mark this as a choice type
@@ -391,6 +416,14 @@ pub fn generate_element_definition(
                 }
             }
         }
+        // New - Emit machine-readable binding metadata (strength + ValueSet URL)
+        // so the validation layer can enforce ValueSet bindings uniformly.
+        if let Some(binding_attr) = format_binding_attribute(element) {
+            output.push_str("    ");
+            output.push_str(&binding_attr);
+            output.push('\n');
+        }
+
         // New - Emit executable constraint attributes (in addition to doc-only constraints).
         if let Some(constraints) = &element.constraint {
             let attrs = format_constraint_attributes(constraints, &element.path);

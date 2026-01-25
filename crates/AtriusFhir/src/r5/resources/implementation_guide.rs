@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in ImplementationGuide
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum ImplementationGuideVersionAlgorithm {
     /// Variant accepting the String type.
@@ -120,6 +120,7 @@ pub struct ImplementationGuide {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImplementationGuide.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -365,6 +366,7 @@ pub struct ImplementationGuide {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImplementationGuide.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<ImplementationGuideVersionAlgorithm>,
@@ -438,6 +440,7 @@ pub struct ImplementationGuide {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImplementationGuide.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -621,6 +624,7 @@ pub struct ImplementationGuide {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImplementationGuide.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this implementation guide is defined
@@ -728,6 +732,7 @@ pub struct ImplementationGuide {
     /// - **Strength**: required
     /// - **Description**: The license that applies to an Implementation Guide (using an SPDX license Identifiers, or 'not-open-source'). The binding is required but new SPDX license Identifiers are allowed to be used (https://spdx.org/licenses/).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/spdx-license|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/spdx-license")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImplementationGuide.license")]
     pub license: Option<Code>,
     /// FHIR Version(s) this Implementation Guide targets
@@ -762,6 +767,7 @@ pub struct ImplementationGuide {
     /// 
     /// ## Conditions
     /// Used when: ig-2
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/FHIR-version")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImplementationGuide.fhirVersion")]
     #[fhir_serde(rename = "fhirVersion")]
     pub fhir_version: Option<Vec<Code>>,
@@ -1164,7 +1170,7 @@ pub struct ImplementationGuideDefinitionGrouping {
 }
 
 /// Choice of types for the source\[x\] field in ImplementationGuideDefinitionPage
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "source")]
 pub enum ImplementationGuideDefinitionPageSource {
     /// Variant accepting the Url type.
@@ -1352,6 +1358,7 @@ pub struct ImplementationGuideDefinitionPage {
     /// 
     /// ## Conditions
     /// Used when: ig-3
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/guide-page-generation")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImplementationGuide.definition.page.generation")]
     pub generation: Code,
     /// Nested Pages / Sections
@@ -1489,6 +1496,7 @@ pub struct ImplementationGuideDefinitionParameter {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/guide-parameter-code
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/guide-parameter-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImplementationGuide.definition.parameter.code")]
     pub code: Coding,
     /// Value for named type
@@ -1655,6 +1663,7 @@ pub struct ImplementationGuideDefinitionResource {
     /// 
     /// ## Conditions
     /// Used when: ig-2
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/FHIR-version")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImplementationGuide.definition.resource.fhirVersion")]
     #[fhir_serde(rename = "fhirVersion")]
     pub fhir_version: Option<Vec<Code>>,
@@ -2175,6 +2184,7 @@ pub struct ImplementationGuideGlobal {
     /// - **Strength**: required
     /// - **Description**: One of the resource types defined as part of this version of FHIR.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/resource-types|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImplementationGuide.global.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,

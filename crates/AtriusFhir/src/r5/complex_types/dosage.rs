@@ -179,6 +179,7 @@ pub struct Dosage {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying additional instructions such as "take with water" or "avoid operating heavy machinery".
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/additional-instruction-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/additional-instruction-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Dosage.additionalInstruction")]
     #[fhir_serde(rename = "additionalInstruction")]
     pub additional_instruction: Option<Vec<CodeableConcept>>,
@@ -275,6 +276,7 @@ pub struct Dosage {
     /// 
     /// ## Conditions
     /// Used when: dos-1
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-as-needed-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Dosage.asNeededFor")]
     #[fhir_serde(rename = "asNeededFor")]
     pub as_needed_for: Option<Vec<CodeableConcept>>,
@@ -306,6 +308,7 @@ pub struct Dosage {
     /// - **Strength**: example
     /// - **Description**: A coded concept describing the site location the medicine enters into or onto the body.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/approach-site-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/approach-site-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Dosage.site")]
     pub site: Option<CodeableConcept>,
     /// How drug should enter body
@@ -329,6 +332,7 @@ pub struct Dosage {
     /// - **Strength**: example
     /// - **Description**: A coded concept describing the route or physiological path of administration of a therapeutic agent into or onto the body of a subject.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/route-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/route-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Dosage.route")]
     pub route: Option<CodeableConcept>,
     /// Technique for administering medication
@@ -357,6 +361,7 @@ pub struct Dosage {
     /// - **Strength**: example
     /// - **Description**: A coded concept describing the technique by which the medicine is administered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/administration-method-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/administration-method-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Dosage.method")]
     pub method: Option<CodeableConcept>,
     /// Amount of medication administered, to be administered or typical amount to be administered
@@ -446,7 +451,7 @@ pub struct Dosage {
 }
 
 /// Choice of types for the dose\[x\] field in DosageDoseAndRate
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "dose")]
 pub enum DosageDoseAndRateDose {
     /// Variant accepting the Range type.
@@ -458,7 +463,7 @@ pub enum DosageDoseAndRateDose {
 }
 
 /// Choice of types for the rate\[x\] field in DosageDoseAndRate
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "rate")]
 pub enum DosageDoseAndRateRate {
     /// Variant accepting the Ratio type.
@@ -547,6 +552,7 @@ pub struct DosageDoseAndRate {
     /// - **Strength**: example
     /// - **Description**: The kind of dose or rate specified.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/dose-rate-type
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/dose-rate-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Dosage.doseAndRate.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,

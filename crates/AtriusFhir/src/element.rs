@@ -570,3 +570,13 @@ where
         EvaluationResult::Empty
     }
 }
+
+impl<V, E> atrius_fhirpath_support::FhirValidate for Element<V, E>
+where
+    V: IntoEvaluationResult + Clone + 'static,
+    E: IntoEvaluationResult + Clone,
+{
+    fn invariants() -> &'static [atrius_fhirpath_support::Invariant] {
+        &[]
+    }
+}

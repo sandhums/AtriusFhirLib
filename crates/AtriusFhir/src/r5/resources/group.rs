@@ -107,6 +107,7 @@ pub struct Group {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Group.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -314,6 +315,7 @@ pub struct Group {
     /// - **Strength**: required
     /// - **Description**: Types of resources that are part of group.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/group-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/group-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Group.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -350,6 +352,7 @@ pub struct Group {
     /// - **Strength**: required
     /// - **Description**: The basis for membership in a group
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/group-membership-basis|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/group-membership-basis")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Group.membership")]
     pub membership: Code,
     /// Kind of Group members
@@ -483,7 +486,7 @@ pub struct Group {
 }
 
 /// Choice of types for the value\[x\] field in GroupCharacteristic
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum GroupCharacteristicValue {
     /// Variant accepting the CodeableConcept type.

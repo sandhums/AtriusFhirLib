@@ -104,6 +104,7 @@ pub struct GenomicStudy {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="GenomicStudy.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -267,6 +268,7 @@ pub struct GenomicStudy {
     /// - **Strength**: required
     /// - **Description**: The status of the GenomicStudy.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/genomicstudy-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/genomicstudy-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="GenomicStudy.status")]
     pub status: Code,
     /// The type of the study (e.g., Familial variant segregation, Functional variation detection, or Gene expression profiling)
@@ -287,6 +289,7 @@ pub struct GenomicStudy {
     /// - **Strength**: example
     /// - **Description**: The type relevant to GenomicStudy.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/genomicstudy-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/genomicstudy-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="GenomicStudy.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -569,6 +572,7 @@ pub struct GenomicStudyAnalysis {
     /// - **Strength**: example
     /// - **Description**: The method type of the GenomicStudy analysis.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/genomicstudy-methodtype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/genomicstudy-methodtype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="GenomicStudy.analysis.methodType")]
     #[fhir_serde(rename = "methodType")]
     pub method_type: Option<Vec<CodeableConcept>>,
@@ -587,6 +591,7 @@ pub struct GenomicStudyAnalysis {
     /// - **Strength**: example
     /// - **Description**: The change type relevant to GenomicStudy analysis.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/genomicstudy-changetype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/genomicstudy-changetype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="GenomicStudy.analysis.changeType")]
     #[fhir_serde(rename = "changeType")]
     pub change_type: Option<Vec<CodeableConcept>>,
@@ -604,6 +609,7 @@ pub struct GenomicStudyAnalysis {
     /// - **Strength**: extensible
     /// - **Description**: Human reference sequence NCBI build ID
     /// - **ValueSet**: http://loinc.org/vs/LL1040-6
+    #[fhir_binding(strength="extensible", valueset="http://loinc.org/vs/LL1040-6")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="GenomicStudy.analysis.genomeBuild")]
     #[fhir_serde(rename = "genomeBuild")]
     pub genome_build: Option<CodeableConcept>,
@@ -912,7 +918,7 @@ pub struct GenomicStudyAnalysisDevice {
 }
 
 /// Choice of types for the generatedBy\[x\] field in GenomicStudyAnalysisInput
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "generatedBy")]
 pub enum GenomicStudyAnalysisInputGeneratedBy {
     /// Variant accepting the Identifier type.
@@ -1051,6 +1057,7 @@ pub struct GenomicStudyAnalysisInput {
     /// - **Strength**: example
     /// - **Description**: The data format of the data file.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/genomicstudy-dataformat
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/genomicstudy-dataformat")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="GenomicStudy.analysis.input.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1198,6 +1205,7 @@ pub struct GenomicStudyAnalysisOutput {
     /// - **Strength**: example
     /// - **Description**: The data format of the data file.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/genomicstudy-dataformat
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/genomicstudy-dataformat")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="GenomicStudy.analysis.output.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,

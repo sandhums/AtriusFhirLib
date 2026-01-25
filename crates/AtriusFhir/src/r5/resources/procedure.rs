@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the occurrence\[x\] field in Procedure
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurrence")]
 pub enum ProcedureOccurrence {
     /// Variant accepting the DateTime type.
@@ -26,7 +26,7 @@ pub enum ProcedureOccurrence {
 }
 
 /// Choice of types for the reported\[x\] field in Procedure
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "reported")]
 pub enum ProcedureReported {
     /// Variant accepting the Boolean type.
@@ -146,6 +146,7 @@ pub struct Procedure {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -414,6 +415,7 @@ pub struct Procedure {
     /// - **Strength**: required
     /// - **Description**: A code specifying the state of the procedure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/event-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/event-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.status")]
     pub status: Code,
     /// Reason for current status
@@ -441,6 +443,7 @@ pub struct Procedure {
     /// 
     /// ## Aliases
     /// Suspended Reason, Cancelled Reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/procedure-not-performed-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.statusReason")]
     #[fhir_serde(rename = "statusReason")]
     pub status_reason: Option<CodeableConcept>,
@@ -462,6 +465,7 @@ pub struct Procedure {
     /// - **Strength**: example
     /// - **Description**: A code that classifies a procedure for searching, sorting and display purposes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/procedure-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/procedure-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Identification of the procedure
@@ -488,6 +492,7 @@ pub struct Procedure {
     /// 
     /// ## Aliases
     /// type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/procedure-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.code")]
     pub code: Option<CodeableConcept>,
     /// Individual or entity the procedure was performed on
@@ -701,6 +706,7 @@ pub struct Procedure {
     /// - **Strength**: example
     /// - **Description**: A code that identifies the reason a procedure is  required.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/procedure-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/procedure-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// Target body sites
@@ -726,6 +732,7 @@ pub struct Procedure {
     /// - **Strength**: example
     /// - **Description**: SNOMED CT Body site concepts
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/body-site
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.bodySite")]
     #[fhir_serde(rename = "bodySite")]
     pub body_site: Option<Vec<CodeableConcept>>,
@@ -751,6 +758,7 @@ pub struct Procedure {
     /// - **Strength**: example
     /// - **Description**: An outcome of a procedure - whether it was resolved or otherwise.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/procedure-outcome
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/procedure-outcome")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.outcome")]
     pub outcome: Option<CodeableConcept>,
     /// Any report resulting from the procedure
@@ -790,6 +798,7 @@ pub struct Procedure {
     /// - **Strength**: example
     /// - **Description**: Codes describing complications that resulted from a procedure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.complication")]
     pub complication: Option<Vec<CodeableReference>>,
     /// Instructions for follow up
@@ -808,6 +817,7 @@ pub struct Procedure {
     /// - **Strength**: example
     /// - **Description**: Specific follow up required for a procedure e.g. removal of sutures.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/procedure-followup
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/procedure-followup")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.followUp")]
     #[fhir_serde(rename = "followUp")]
     pub follow_up: Option<Vec<CodeableConcept>>,
@@ -858,6 +868,7 @@ pub struct Procedure {
     /// - **Strength**: example
     /// - **Description**: Codes describing items used during a procedure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.used")]
     pub used: Option<Vec<CodeableReference>>,
     /// Extra information relevant to the procedure
@@ -993,6 +1004,7 @@ pub struct ProcedureFocalDevice {
     /// - **Strength**: preferred
     /// - **Description**: A kind of change that happened to the device during the procedure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-action
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/device-action")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.focalDevice.action")]
     pub action: Option<CodeableConcept>,
     /// Device that was changed
@@ -1134,6 +1146,7 @@ pub struct ProcedurePerformer {
     /// - **Strength**: example
     /// - **Description**: A code that identifies the role of a performer of the procedure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/performer-role
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/performer-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Procedure.performer.function")]
     pub function: Option<CodeableConcept>,
     /// Who performed the procedure

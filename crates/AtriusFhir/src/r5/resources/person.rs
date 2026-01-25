@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the deceased\[x\] field in Person
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "deceased")]
 pub enum PersonDeceased {
     /// Variant accepting the Boolean type.
@@ -121,6 +121,7 @@ pub struct Person {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Person.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -360,6 +361,7 @@ pub struct Person {
     /// - **Strength**: required
     /// - **Description**: The gender of a person used for administrative purposes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/administrative-gender|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/administrative-gender")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Person.gender")]
     pub gender: Option<Code>,
     /// The date on which the person was born
@@ -445,6 +447,7 @@ pub struct Person {
     /// - **Strength**: extensible
     /// - **Description**: The domestic partnership status of a person.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/marital-status
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/marital-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Person.maritalStatus")]
     #[fhir_serde(rename = "maritalStatus")]
     pub marital_status: Option<CodeableConcept>,
@@ -667,6 +670,7 @@ pub struct PersonCommunication {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Person.communication.language")]
     pub language: CodeableConcept,
     /// Language preference indicator
@@ -816,6 +820,7 @@ pub struct PersonLink {
     /// - **Strength**: required
     /// - **Description**: The level of confidence that this link represents the same actual person, based on NIST Authentication Levels.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/identity-assuranceLevel|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/identity-assuranceLevel")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Person.link.assurance")]
     pub assurance: Option<Code>,
 }

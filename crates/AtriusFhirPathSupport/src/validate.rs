@@ -1,5 +1,5 @@
 // crates/fhirpath-support/src/validation.rs
-use crate::evaluation_result::{EvaluationResult};
+use crate::evaluation_result::EvaluationResult;
 use crate::evaluation_error::EvaluationError;
 use crate::traits::IntoEvaluationResult;
 
@@ -28,12 +28,52 @@ pub struct Invariant {
     pub path: &'static str,
 }
 
-/// Something that can evaluate a boolean FHIRPath expression over a focus node.
+/// Engine interface used by generated validation code.
+///
+/// This trait has two responsibilities:
+/// 1) Evaluate FHIRPath boolean expressions (invariants)
+/// 2) Optionally validate ValueSet membership via an external terminology service
+///
+/// The derive macro `#[derive(FhirValidate)]` generates validation code that:
+/// - always checks invariants via [`eval_bool`]
+/// - checks ValueSet bindings via generated membership functions first
+/// - may fall back to [`validate_code_in_valueset`] when a ValueSet is not fully enumerable locally
+///
+/// Implementations can be pure/in-memory (no terminology) or can wire a remote server
+/// (e.g., HAPI/Snowstorm) to answer `$validate-code`.
 pub trait FhirPathEngine {
     fn eval_bool(&self, focus: &EvaluationResult, expr: &str) -> Result<bool, EvaluationError>;
+    /// Validate `system|code` membership in a ValueSet using an external terminology service.
+    ///
+    /// This is used as a fallback when local (generated) membership checks are not enough.
+    ///
+    /// ## Parameters
+    /// - `valueset_url`: canonical URL of the ValueSet (e.g. `http://hl7.org/fhir/ValueSet/marital-status`)
+    /// - `system`: code system canonical URL (e.g. `http://terminology.hl7.org/CodeSystem/v3-MaritalStatus`)
+    /// - `code`: the code value (e.g. `M`)
+    ///
+    /// ## Return semantics (tri-state)
+    /// - `Some(true)` => confirmed member of the ValueSet
+    /// - `Some(false)` => confirmed NOT a member
+    /// - `None` => unknown (no terminology configured, network error, server error, etc.)
+    ///
+    /// The 'derive' macro decides how to degrade on `None` (typically a Warning:
+    /// "could not be verified (terminology unavailable)").
+    fn validate_code_in_valueset(&self, valueset_url: &str, system: &str, code: &str) -> Option<bool> {
+        let _ = (valueset_url, system, code);
+        None
+    }
 }
 
-/// Types that can validate themselves using generated invariants.
+/// Types that can validate themselves using generated invariants (and, via macro expansion, bindings).
+///
+/// Notes:
+/// - The default implementation of [`validate_with_engine`] only checks *type-level* invariants.
+/// - Field-level invariants and ValueSet bindings are injected by the derive macro
+///   `#[derive(FhirValidate)]` in `atrius-macros`.
+///
+/// In other words: if you are looking for binding logic, it is in the macro output,
+/// not in this default method body.
 pub trait FhirValidate: IntoEvaluationResult {
     fn invariants() -> &'static [Invariant];
 
@@ -64,5 +104,25 @@ pub trait FhirValidate: IntoEvaluationResult {
         }
 
         issues
+    }
+}
+/// Convenience impl so macro-generated validation can recurse into borrowed values (`&T`).
+///
+/// The 'derive' macro traverses fields using `.as_ref()`, `.iter()`, etc., which naturally yields
+/// references (`&T`). Without this impl, recursive calls like:
+/// `FhirValidate::validate_with_engine(value, engine)`
+/// would fail when `value` is a reference.
+///
+/// This impl simply delegates to the underlying `T`.
+impl<T> FhirValidate for &T
+where
+    T: FhirValidate + ?Sized,
+{
+    fn invariants() -> &'static [Invariant] {
+        T::invariants()
+    }
+
+    fn validate_with_engine(&self, engine: &dyn FhirPathEngine) -> Vec<ValidationIssue> {
+        (*self).validate_with_engine(engine)
     }
 }

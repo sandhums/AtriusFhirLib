@@ -106,6 +106,7 @@ pub struct CarePlan {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CarePlan.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -403,6 +404,7 @@ pub struct CarePlan {
     /// - **Strength**: required
     /// - **Description**: Indicates whether the plan is currently being acted upon, represents future intentions or is now a historical record.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CarePlan.status")]
     pub status: Code,
     /// proposal | plan | order | option | directive
@@ -436,6 +438,7 @@ pub struct CarePlan {
     /// - **Strength**: required
     /// - **Description**: Codes indicating the degree of authority/intentionality associated with a care plan.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/care-plan-intent|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/care-plan-intent")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CarePlan.intent")]
     pub intent: Code,
     /// Type of plan
@@ -466,6 +469,7 @@ pub struct CarePlan {
     /// - **Strength**: example
     /// - **Description**: Identifies what "kind" of plan this is to support differentiation between multiple co-existing plans; e.g. "Home health", "psychiatric", "asthma", "disease management", etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/care-plan-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/care-plan-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CarePlan.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Human-friendly name for the care plan
@@ -667,6 +671,7 @@ pub struct CarePlan {
     /// - **Strength**: example
     /// - **Description**: Codes that describe the health issues this plan addresses.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinical-findings
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinical-findings")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CarePlan.addresses")]
     pub addresses: Option<Vec<CodeableReference>>,
     /// Information considered as part of plan
@@ -880,6 +885,7 @@ pub struct CarePlanActivity {
     /// - **Strength**: example
     /// - **Description**: Identifies the results of the activity.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/care-plan-activity-performed
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/care-plan-activity-performed")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CarePlan.activity.performedActivity")]
     #[fhir_serde(rename = "performedActivity")]
     pub performed_activity: Option<Vec<CodeableReference>>,

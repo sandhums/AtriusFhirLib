@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in Evidence
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum EvidenceVersionAlgorithm {
     /// Variant accepting the String type.
@@ -14,7 +14,7 @@ pub enum EvidenceVersionAlgorithm {
 }
 
 /// Choice of types for the citeAs\[x\] field in Evidence
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "citeAs")]
 pub enum EvidenceCiteAs {
     /// Variant accepting the Reference type.
@@ -128,6 +128,7 @@ pub struct Evidence {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -361,6 +362,7 @@ pub struct Evidence {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<EvidenceVersionAlgorithm>,
@@ -434,6 +436,7 @@ pub struct Evidence {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -828,6 +831,7 @@ pub struct Evidence {
     /// - **Strength**: extensible
     /// - **Description**: Types of combining results from a body of evidence (e.g. summary data meta-analysis).
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/synthesis-type
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/synthesis-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.synthesisType")]
     #[fhir_serde(rename = "synthesisType")]
     pub synthesis_type: Option<CodeableConcept>,
@@ -846,6 +850,7 @@ pub struct Evidence {
     /// - **Strength**: extensible
     /// - **Description**: This is a set of terms for study design characteristics.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/study-design
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/study-design")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.studyDesign")]
     #[fhir_serde(rename = "studyDesign")]
     pub study_design: Option<Vec<CodeableConcept>>,
@@ -1010,6 +1015,7 @@ pub struct EvidenceCertainty {
     /// - **Strength**: extensible
     /// - **Description**: The aspect of quality, confidence, or certainty.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/certainty-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/certainty-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.certainty.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1027,6 +1033,7 @@ pub struct EvidenceCertainty {
     /// - **Strength**: extensible
     /// - **Description**: The assessment of quality, confidence, or certainty.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/certainty-rating
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/certainty-rating")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.certainty.rating")]
     pub rating: Option<CodeableConcept>,
     /// Individual or group who did the rating
@@ -1187,6 +1194,7 @@ pub struct EvidenceStatistic {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/statistic-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/statistic-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.statistic.statisticType")]
     #[fhir_serde(rename = "statisticType")]
     pub statistic_type: Option<CodeableConcept>,
@@ -1435,6 +1443,7 @@ pub struct EvidenceStatisticAttributeEstimate {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/attribute-estimate-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/attribute-estimate-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.statistic.attributeEstimate.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1606,6 +1615,7 @@ pub struct EvidenceStatisticModelCharacteristic {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/statistic-model-code
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/statistic-model-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.statistic.modelCharacteristic.code")]
     pub code: CodeableConcept,
     /// Numerical value to complete model specification
@@ -1769,6 +1779,7 @@ pub struct EvidenceStatisticModelCharacteristicVariable {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/variable-handling|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/variable-handling")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.statistic.modelCharacteristic.variable.handling")]
     pub handling: Option<Code>,
     /// Description for grouping of ordinal or polychotomous variables
@@ -2107,6 +2118,7 @@ pub struct EvidenceVariableDefinition {
     /// - **Strength**: extensible
     /// - **Description**: The role that the assertion variable plays.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/variable-role
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/variable-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.variableDefinition.variableRole")]
     #[fhir_serde(rename = "variableRole")]
     pub variable_role: CodeableConcept,
@@ -2149,6 +2161,7 @@ pub struct EvidenceVariableDefinition {
     /// - **Strength**: extensible
     /// - **Description**: The quality of how direct the match is.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/directness
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/directness")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Evidence.variableDefinition.directnessMatch")]
     #[fhir_serde(rename = "directnessMatch")]
     pub directness_match: Option<CodeableConcept>,

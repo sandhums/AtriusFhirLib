@@ -105,6 +105,7 @@ pub struct VerificationResult {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VerificationResult.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -283,6 +284,7 @@ pub struct VerificationResult {
     /// - **Strength**: preferred
     /// - **Description**: The frequency with which the target must be validated.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/verificationresult-need
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/verificationresult-need")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VerificationResult.need")]
     pub need: Option<CodeableConcept>,
     /// attested | validated | in-process | req-revalid | val-fail | reval-fail | entered-in-error
@@ -303,6 +305,7 @@ pub struct VerificationResult {
     /// - **Strength**: required
     /// - **Description**: The validation status of the target.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/verificationresult-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/verificationresult-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VerificationResult.status")]
     pub status: Code,
     /// When the validation status was updated
@@ -338,6 +341,7 @@ pub struct VerificationResult {
     /// - **Strength**: preferred
     /// - **Description**: What the target is validated against.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/verificationresult-validation-type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/verificationresult-validation-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VerificationResult.validationType")]
     #[fhir_serde(rename = "validationType")]
     pub validation_type: Option<CodeableConcept>,
@@ -359,6 +363,7 @@ pub struct VerificationResult {
     /// - **Strength**: example
     /// - **Description**: The primary process by which the target is validated.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/verificationresult-validation-process
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/verificationresult-validation-process")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VerificationResult.validationProcess")]
     #[fhir_serde(rename = "validationProcess")]
     pub validation_process: Option<Vec<CodeableConcept>>,
@@ -414,6 +419,7 @@ pub struct VerificationResult {
     /// - **Strength**: preferred
     /// - **Description**: The result if validation fails.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/verificationresult-failure-action
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/verificationresult-failure-action")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VerificationResult.failureAction")]
     #[fhir_serde(rename = "failureAction")]
     pub failure_action: Option<CodeableConcept>,
@@ -599,6 +605,7 @@ pub struct VerificationResultAttestation {
     /// - **Strength**: example
     /// - **Description**: Method for communicating with the data source (manual; API; Push).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/verificationresult-communication-method
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/verificationresult-communication-method")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VerificationResult.attestation.communicationMethod")]
     #[fhir_serde(rename = "communicationMethod")]
     pub communication_method: Option<CodeableConcept>,
@@ -798,6 +805,7 @@ pub struct VerificationResultPrimarySource {
     /// - **Strength**: example
     /// - **Description**: Type of the validation primary source.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/verificationresult-primary-source-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/verificationresult-primary-source-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VerificationResult.primarySource.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -818,6 +826,7 @@ pub struct VerificationResultPrimarySource {
     /// - **Strength**: example
     /// - **Description**: Method for communicating with the data source (manual; API; Push).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/verificationresult-communication-method
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/verificationresult-communication-method")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VerificationResult.primarySource.communicationMethod")]
     #[fhir_serde(rename = "communicationMethod")]
     pub communication_method: Option<Vec<CodeableConcept>>,
@@ -836,6 +845,7 @@ pub struct VerificationResultPrimarySource {
     /// - **Strength**: preferred
     /// - **Description**: Status of the validation of the target against the primary source.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/verificationresult-validation-status
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/verificationresult-validation-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VerificationResult.primarySource.validationStatus")]
     #[fhir_serde(rename = "validationStatus")]
     pub validation_status: Option<CodeableConcept>,
@@ -868,6 +878,7 @@ pub struct VerificationResultPrimarySource {
     /// - **Strength**: preferred
     /// - **Description**: Ability of the primary source to push updates/alerts.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/verificationresult-can-push-updates
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/verificationresult-can-push-updates")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VerificationResult.primarySource.canPushUpdates")]
     #[fhir_serde(rename = "canPushUpdates")]
     pub can_push_updates: Option<CodeableConcept>,
@@ -886,6 +897,7 @@ pub struct VerificationResultPrimarySource {
     /// - **Strength**: preferred
     /// - **Description**: Type of alerts/updates the primary source can send.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/verificationresult-push-type-available
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/verificationresult-push-type-available")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VerificationResult.primarySource.pushTypeAvailable")]
     #[fhir_serde(rename = "pushTypeAvailable")]
     pub push_type_available: Option<Vec<CodeableConcept>>,

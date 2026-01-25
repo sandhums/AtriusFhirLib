@@ -106,6 +106,7 @@ pub struct ClinicalUseDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -268,6 +269,7 @@ pub struct ClinicalUseDefinition {
     /// - **Strength**: required
     /// - **Description**: Overall defining type of this clinical use definition.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinical-use-definition-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/clinical-use-definition-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -290,6 +292,7 @@ pub struct ClinicalUseDefinition {
     /// - **Strength**: preferred
     /// - **Description**: A categorisation for a clinical use information item.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinical-use-definition-category
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/clinical-use-definition-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// The medication, product, substance, device, procedure etc. for which this is an indication
@@ -324,6 +327,7 @@ pub struct ClinicalUseDefinition {
     /// - **Strength**: preferred
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.status")]
     pub status: Option<CodeableConcept>,
     /// Specifics for when this is a contraindication
@@ -568,6 +572,7 @@ pub struct ClinicalUseDefinitionContraindication {
     /// - **Strength**: example
     /// - **Description**: A symptom, disease or procedure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/disease-symptom-procedure
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/disease-symptom-procedure")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.contraindication.diseaseSymptomProcedure")]
     #[fhir_serde(rename = "diseaseSymptomProcedure")]
     pub disease_symptom_procedure: Option<CodeableReference>,
@@ -589,6 +594,7 @@ pub struct ClinicalUseDefinitionContraindication {
     /// - **Strength**: example
     /// - **Description**: The status of a disease or symptom.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/disease-status
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/disease-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.contraindication.diseaseStatus")]
     #[fhir_serde(rename = "diseaseStatus")]
     pub disease_status: Option<CodeableReference>,
@@ -609,6 +615,7 @@ pub struct ClinicalUseDefinitionContraindication {
     /// - **Strength**: example
     /// - **Description**: A symptom, disease or procedure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/disease-symptom-procedure
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/disease-symptom-procedure")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.contraindication.comorbidity")]
     pub comorbidity: Option<Vec<CodeableReference>>,
     /// The indication which this is a contraidication for
@@ -780,6 +787,7 @@ pub struct ClinicalUseDefinitionContraindicationOtherTherapy {
     /// - **Strength**: preferred
     /// - **Description**: Classification of relationship between a therapy and a contraindication or an indication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/therapy-relationship-type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/therapy-relationship-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.contraindication.otherTherapy.relationshipType")]
     #[fhir_serde(rename = "relationshipType")]
     pub relationship_type: CodeableConcept,
@@ -802,12 +810,13 @@ pub struct ClinicalUseDefinitionContraindicationOtherTherapy {
     /// - **Strength**: example
     /// - **Description**: A therapy.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/therapy
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/therapy")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.contraindication.otherTherapy.treatment")]
     pub treatment: CodeableReference,
 }
 
 /// Choice of types for the duration\[x\] field in ClinicalUseDefinitionIndication
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "duration")]
 pub enum ClinicalUseDefinitionIndicationDuration {
     /// Variant accepting the Range type.
@@ -941,6 +950,7 @@ pub struct ClinicalUseDefinitionIndication {
     /// - **Strength**: example
     /// - **Description**: A symptom, disease or procedure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/disease-symptom-procedure
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/disease-symptom-procedure")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.indication.diseaseSymptomProcedure")]
     #[fhir_serde(rename = "diseaseSymptomProcedure")]
     pub disease_symptom_procedure: Option<CodeableReference>,
@@ -962,6 +972,7 @@ pub struct ClinicalUseDefinitionIndication {
     /// - **Strength**: example
     /// - **Description**: The status of a disease or symptom.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/disease-status
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/disease-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.indication.diseaseStatus")]
     #[fhir_serde(rename = "diseaseStatus")]
     pub disease_status: Option<CodeableReference>,
@@ -983,6 +994,7 @@ pub struct ClinicalUseDefinitionIndication {
     /// - **Strength**: example
     /// - **Description**: A symptom, disease or procedure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/disease-symptom-procedure
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/disease-symptom-procedure")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.indication.comorbidity")]
     pub comorbidity: Option<Vec<CodeableReference>>,
     /// The intended effect, aim or strategy to be achieved
@@ -1002,6 +1014,7 @@ pub struct ClinicalUseDefinitionIndication {
     /// - **Strength**: preferred
     /// - **Description**: The overall intended use of a product.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/product-intended-use
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/product-intended-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.indication.intendedEffect")]
     #[fhir_serde(rename = "intendedEffect")]
     pub intended_effect: Option<CodeableReference>,
@@ -1211,6 +1224,7 @@ pub struct ClinicalUseDefinitionInteraction {
     /// - **Strength**: example
     /// - **Description**: A categorisation for an interaction between two substances.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/interaction-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/interaction-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.interaction.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1232,6 +1246,7 @@ pub struct ClinicalUseDefinitionInteraction {
     /// - **Strength**: example
     /// - **Description**: A interaction effect of clinical use of a medication or other substance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/interaction-effect
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/interaction-effect")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.interaction.effect")]
     pub effect: Option<CodeableReference>,
     /// The incidence of the interaction, e.g. theoretical, observed
@@ -1251,6 +1266,7 @@ pub struct ClinicalUseDefinitionInteraction {
     /// - **Strength**: example
     /// - **Description**: A categorisation for incidence of occurence of an interaction.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/interaction-incidence
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/interaction-incidence")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.interaction.incidence")]
     pub incidence: Option<CodeableConcept>,
     /// Actions for managing the interaction
@@ -1270,12 +1286,13 @@ pub struct ClinicalUseDefinitionInteraction {
     /// - **Strength**: example
     /// - **Description**: A type of management for an interaction of a medication or other substance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/interaction-management
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/interaction-management")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.interaction.management")]
     pub management: Option<Vec<CodeableConcept>>,
 }
 
 /// Choice of types for the item\[x\] field in ClinicalUseDefinitionInteractionInteractant
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "item")]
 pub enum ClinicalUseDefinitionInteractionInteractantItem {
     /// Variant accepting the Reference type.
@@ -1408,6 +1425,7 @@ pub struct ClinicalUseDefinitionInteractionInteractant {
     /// - **Strength**: example
     /// - **Description**: An interactant - a substance that may have a clinically significant effect on another.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/interactant
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/interactant")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.interaction.interactant.item[x]")]
     #[fhir_serde(flatten)]
     pub item: Option<ClinicalUseDefinitionInteractionInteractantItem>,
@@ -1536,6 +1554,7 @@ pub struct ClinicalUseDefinitionUndesirableEffect {
     /// - **Strength**: example
     /// - **Description**: An undesirable effect of clinical use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/undesirable-effect-symptom
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/undesirable-effect-symptom")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.undesirableEffect.symptomConditionEffect")]
     #[fhir_serde(rename = "symptomConditionEffect")]
     pub symptom_condition_effect: Option<CodeableReference>,
@@ -1556,6 +1575,7 @@ pub struct ClinicalUseDefinitionUndesirableEffect {
     /// - **Strength**: example
     /// - **Description**: A categorisation for an undesirable effect.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/undesirable-effect-classification
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/undesirable-effect-classification")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.undesirableEffect.classification")]
     pub classification: Option<CodeableConcept>,
     /// How often the effect is seen
@@ -1575,6 +1595,7 @@ pub struct ClinicalUseDefinitionUndesirableEffect {
     /// - **Strength**: example
     /// - **Description**: A categorisation for a frequency of occurence of an undesirable effect.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/undesirable-effect-frequency
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/undesirable-effect-frequency")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.undesirableEffect.frequencyOfOccurrence")]
     #[fhir_serde(rename = "frequencyOfOccurrence")]
     pub frequency_of_occurrence: Option<CodeableConcept>,
@@ -1719,6 +1740,7 @@ pub struct ClinicalUseDefinitionWarning {
     /// - **Strength**: example
     /// - **Description**: Classification of warning type.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/warning-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/warning-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalUseDefinition.warning.code")]
     pub code: Option<CodeableConcept>,
 }

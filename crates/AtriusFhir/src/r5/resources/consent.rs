@@ -107,6 +107,7 @@ pub struct Consent {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -279,6 +280,7 @@ pub struct Consent {
     /// - **Strength**: required
     /// - **Description**: Indicates the state of the consent.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-state-codes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/consent-state-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.status")]
     pub status: Code,
     /// Classification of the consent statement - for indexing/retrieval
@@ -299,6 +301,7 @@ pub struct Consent {
     /// - **Strength**: example
     /// - **Description**: A classification of the type of consents found in a consent statement.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/consent-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Who the consent applies to
@@ -468,6 +471,7 @@ pub struct Consent {
     /// - **Strength**: example
     /// - **Description**: Regulatory policy examples
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-policy
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/consent-policy")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.regulatoryBasis")]
     #[fhir_serde(rename = "regulatoryBasis")]
     pub regulatory_basis: Option<Vec<CodeableConcept>>,
@@ -532,6 +536,7 @@ pub struct Consent {
     /// - **Strength**: required
     /// - **Description**: Sets the base decision for Consent to be either permit or deny, with provisions assumed to be a negation of the previous level.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-provision-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/consent-provision-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.decision")]
     pub decision: Option<Code>,
     /// Constraints to the base Consent.policyRule/Consent.policy
@@ -842,6 +847,7 @@ pub struct ConsentProvision {
     /// - **Strength**: example
     /// - **Description**: Detailed codes for the consent action.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-action
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/consent-action")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.provision.action")]
     pub action: Option<Vec<CodeableConcept>>,
     /// Security Labels that define affected resources
@@ -869,6 +875,7 @@ pub struct ConsentProvision {
     /// - **Strength**: example
     /// - **Description**: Example Security Labels from the Healthcare Privacy and Security Classification System.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/security-label-examples
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/security-label-examples")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.provision.securityLabel")]
     #[fhir_serde(rename = "securityLabel")]
     pub security_label: Option<Vec<Coding>>,
@@ -894,6 +901,7 @@ pub struct ConsentProvision {
     /// - **Strength**: extensible
     /// - **Description**: What purposes of use are controlled by this exception. If more than one label is specified, operations must have all the specified labels.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-PurposeOfUse
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/v3-PurposeOfUse")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.provision.purpose")]
     pub purpose: Option<Vec<Coding>>,
     /// e.g. Resource Type, Profile, CDA, etc
@@ -919,6 +927,7 @@ pub struct ConsentProvision {
     /// - **Strength**: preferred
     /// - **Description**: The document type a consent provision covers.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-content-class
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/consent-content-class")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.provision.documentType")]
     #[fhir_serde(rename = "documentType")]
     pub document_type: Option<Vec<Coding>>,
@@ -946,6 +955,7 @@ pub struct ConsentProvision {
     /// - **Strength**: extensible
     /// - **Description**: The resource types a consent provision covers.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/resource-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.provision.resourceType")]
     #[fhir_serde(rename = "resourceType")]
     pub resource_type: Option<Vec<Coding>>,
@@ -966,6 +976,7 @@ pub struct ConsentProvision {
     /// - **Strength**: example
     /// - **Description**: If this code is found in an instance, then the exception applies.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-content-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/consent-content-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.provision.code")]
     pub code: Option<Vec<CodeableConcept>>,
     /// Timeframe for data controlled by this provision
@@ -1152,6 +1163,7 @@ pub struct ConsentProvisionActor {
     /// - **Strength**: extensible
     /// - **Description**: How an actor is involved in the consent considerations.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participation-role-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/participation-role-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.provision.actor.role")]
     pub role: Option<CodeableConcept>,
     /// Resource for the actor (or group, by role)
@@ -1290,6 +1302,7 @@ pub struct ConsentProvisionData {
     /// - **Strength**: required
     /// - **Description**: How a resource reference is interpreted when testing consent restrictions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-data-meaning|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/consent-data-meaning")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.provision.data.meaning")]
     pub meaning: Code,
     /// The actual data reference
@@ -1446,6 +1459,7 @@ pub struct ConsentVerification {
     /// - **Strength**: example
     /// - **Description**: Types of Verification/Validation.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-verification
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/consent-verification")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Consent.verification.verificationType")]
     #[fhir_serde(rename = "verificationType")]
     pub verification_type: Option<CodeableConcept>,

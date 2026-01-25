@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the value\[x\] field in UsageContext
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum UsageContextValue {
     /// Variant accepting the CodeableConcept type.
@@ -96,6 +96,7 @@ pub struct UsageContext {
     /// - **Strength**: extensible
     /// - **Description**: A code that specifies a type of context being specified by a usage context.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/usage-context-type
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/usage-context-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="UsageContext.code")]
     pub code: Coding,
     /// Value that defines the context
@@ -116,6 +117,7 @@ pub struct UsageContext {
     /// - **Strength**: example
     /// - **Description**: A code that defines the specific value for the context being specified.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/use-context
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/use-context")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="UsageContext.value[x]")]
     #[fhir_serde(flatten)]
     pub value: Option<UsageContextValue>,

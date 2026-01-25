@@ -106,6 +106,7 @@ pub struct BodyStructure {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BodyStructure.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -298,6 +299,7 @@ pub struct BodyStructure {
     /// - **Strength**: example
     /// - **Description**: Codes describing anatomic morphology.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/bodystructure-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/bodystructure-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BodyStructure.morphology")]
     pub morphology: Option<CodeableConcept>,
     /// Included anatomic location(s)
@@ -488,6 +490,7 @@ pub struct BodyStructureIncludedStructure {
     /// - **Strength**: example
     /// - **Description**: SNOMED CT Body site concepts
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/body-site
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BodyStructure.includedStructure.structure")]
     pub structure: CodeableConcept,
     /// Code that represents the included structure laterality
@@ -504,6 +507,7 @@ pub struct BodyStructureIncludedStructure {
     /// - **Strength**: example
     /// - **Description**: Concepts modifying the anatomic location.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/bodystructure-relative-location
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/bodystructure-relative-location")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BodyStructure.includedStructure.laterality")]
     pub laterality: Option<CodeableConcept>,
     /// Landmark relative location
@@ -547,6 +551,7 @@ pub struct BodyStructureIncludedStructure {
     /// - **Strength**: example
     /// - **Description**: Concepts modifying the anatomic location.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/bodystructure-relative-location
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/bodystructure-relative-location")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BodyStructure.includedStructure.qualifier")]
     pub qualifier: Option<Vec<CodeableConcept>>,
 }
@@ -666,6 +671,7 @@ pub struct BodyStructureIncludedStructureBodyLandmarkOrientation {
     /// - **Strength**: example
     /// - **Description**: Select SNOMED code system values. Values used in a podiatry setting to decsribe landmarks on the body.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/body-site
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BodyStructure.includedStructure.bodyLandmarkOrientation.landmarkDescription")]
     #[fhir_serde(rename = "landmarkDescription")]
     pub landmark_description: Option<Vec<CodeableConcept>>,
@@ -684,6 +690,7 @@ pub struct BodyStructureIncludedStructureBodyLandmarkOrientation {
     /// - **Strength**: example
     /// - **Description**: Select SNOMED CT codes. A set of codes that describe a things orientation based on a hourly positions of a clock face.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/bodystructure-bodylandmarkorientation-clockface-position
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/bodystructure-bodylandmarkorientation-clockface-position")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BodyStructure.includedStructure.bodyLandmarkOrientation.clockFacePosition")]
     #[fhir_serde(rename = "clockFacePosition")]
     pub clock_face_position: Option<Vec<CodeableConcept>>,
@@ -716,6 +723,7 @@ pub struct BodyStructureIncludedStructureBodyLandmarkOrientation {
     /// - **Strength**: preferred
     /// - **Description**: Select SNOMED code system values. The surface area a body location is in relation to a landmark.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/bodystructure-relative-location
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/bodystructure-relative-location")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BodyStructure.includedStructure.bodyLandmarkOrientation.surfaceOrientation")]
     #[fhir_serde(rename = "surfaceOrientation")]
     pub surface_orientation: Option<Vec<CodeableConcept>>,
@@ -835,6 +843,7 @@ pub struct BodyStructureIncludedStructureBodyLandmarkOrientationDistanceFromLand
     /// - **Strength**: example
     /// - **Description**: Codes to identify medical devices.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BodyStructure.includedStructure.bodyLandmarkOrientation.distanceFromLandmark.device")]
     pub device: Option<Vec<CodeableReference>>,
     /// Measured distance from body landmark

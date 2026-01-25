@@ -106,6 +106,7 @@ pub struct Task {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Task.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -389,6 +390,7 @@ pub struct Task {
     /// - **Strength**: required
     /// - **Description**: The current status of the task.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/task-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/task-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Task.status")]
     pub status: Code,
     /// Reason for current status
@@ -412,6 +414,7 @@ pub struct Task {
     /// - **Strength**: example
     /// - **Description**: Codes to identify the reason for current status.  These will typically be specific to a particular workflow.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/task-status-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/task-status-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Task.statusReason")]
     #[fhir_serde(rename = "statusReason")]
     pub status_reason: Option<CodeableReference>,
@@ -462,6 +465,7 @@ pub struct Task {
     /// - **Strength**: required
     /// - **Description**: Distinguishes whether the task is a proposal, plan or full order.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/task-intent|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/task-intent")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Task.intent")]
     pub intent: Code,
     /// routine | urgent | asap | stat
@@ -485,6 +489,7 @@ pub struct Task {
     /// - **Strength**: required
     /// - **Description**: The priority of a task (may affect service level applied to the task).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-priority|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Task.priority")]
     pub priority: Option<Code>,
     /// True if Task is prohibiting action
@@ -553,6 +558,7 @@ pub struct Task {
     /// 
     /// ## Conditions
     /// Used when: tsk-1
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/task-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Task.code")]
     pub code: Option<CodeableConcept>,
     /// Human-readable explanation of task
@@ -757,6 +763,7 @@ pub struct Task {
     /// - **Strength**: preferred
     /// - **Description**: The type(s) of task performers allowed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/performer-role
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/performer-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Task.requestedPerformer")]
     #[fhir_serde(rename = "requestedPerformer")]
     pub requested_performer: Option<Vec<CodeableReference>>,
@@ -955,7 +962,7 @@ pub struct Task {
 }
 
 /// Choice of types for the value\[x\] field in TaskInput
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum TaskInputValue {
     /// Variant accepting the Base64Binary type.
@@ -1273,7 +1280,7 @@ pub struct TaskInput {
 }
 
 /// Choice of types for the value\[x\] field in TaskOutput
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum TaskOutputValue {
     /// Variant accepting the Base64Binary type.

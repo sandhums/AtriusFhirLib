@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in ExampleScenario
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum ExampleScenarioVersionAlgorithm {
     /// Variant accepting the String type.
@@ -121,6 +121,7 @@ pub struct ExampleScenario {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExampleScenario.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -367,6 +368,7 @@ pub struct ExampleScenario {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExampleScenario.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<ExampleScenarioVersionAlgorithm>,
@@ -437,6 +439,7 @@ pub struct ExampleScenario {
     /// 
     /// ## Conditions
     /// Used when: exs-3, exs-4, exs-5
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExampleScenario.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -619,6 +622,7 @@ pub struct ExampleScenario {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExampleScenario.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// The purpose of the example, e.g. to illustrate a scenario
@@ -902,6 +906,7 @@ pub struct ExampleScenarioActor {
     /// - **Strength**: required
     /// - **Description**: The type of actor - system or human.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/examplescenario-actor-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/examplescenario-actor-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExampleScenario.actor.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -933,7 +938,7 @@ pub struct ExampleScenarioActor {
 }
 
 /// Choice of types for the structureProfile\[x\] field in ExampleScenarioInstance
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "structureProfile")]
 pub enum ExampleScenarioInstanceStructureProfile {
     /// Variant accepting the Canonical type.
@@ -1097,6 +1102,7 @@ pub struct ExampleScenarioInstance {
     /// 
     /// ## Conditions
     /// Used when: exs-1
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/examplescenario-instance-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExampleScenario.instance.structureType")]
     #[fhir_serde(rename = "structureType")]
     pub structure_type: Coding,
@@ -2184,6 +2190,7 @@ pub struct ExampleScenarioProcessStepOperation {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/testscript-operation-codes
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/testscript-operation-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExampleScenario.process.step.operation.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Coding>,

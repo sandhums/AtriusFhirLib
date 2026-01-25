@@ -106,6 +106,7 @@ pub struct NutritionOrder {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -368,6 +369,7 @@ pub struct NutritionOrder {
     /// - **Strength**: required
     /// - **Description**: Codes identifying the lifecycle stage of the nutrition order.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.status")]
     pub status: Code,
     /// proposal | plan | directive | order | original-order | reflex-order | filler-order | instance-order | option
@@ -403,6 +405,7 @@ pub struct NutritionOrder {
     /// 
     /// ## Aliases
     /// category
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-intent")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.intent")]
     pub intent: Code,
     /// routine | urgent | asap | stat
@@ -420,6 +423,7 @@ pub struct NutritionOrder {
     /// - **Strength**: required
     /// - **Description**: Identifies the level of importance to be assigned to actioning the request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-priority|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.priority")]
     pub priority: Option<Code>,
     /// Who requires the diet, formula or nutritional supplement
@@ -543,6 +547,7 @@ pub struct NutritionOrder {
     /// - **Strength**: example
     /// - **Description**: Medical, cultural or ethical food preferences to help with catering requirements.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-diet
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/encounter-diet")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.foodPreferenceModifier")]
     #[fhir_serde(rename = "foodPreferenceModifier")]
     pub food_preference_modifier: Option<Vec<CodeableConcept>>,
@@ -574,6 +579,7 @@ pub struct NutritionOrder {
     /// - **Strength**: example
     /// - **Description**: Codes used to indicate the type of food that should NOT be given to the patient.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/food-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/food-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.excludeFoodModifier")]
     #[fhir_serde(rename = "excludeFoodModifier")]
     pub exclude_food_modifier: Option<Vec<CodeableConcept>>,
@@ -778,6 +784,7 @@ pub struct NutritionOrderEnteralFormula {
     /// - **Strength**: example
     /// - **Description**: Codes for type of enteral formula to be administered to patient.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/entformula-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/entformula-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.enteralFormula.baseFormulaType")]
     #[fhir_serde(rename = "baseFormulaType")]
     pub base_formula_type: Option<CodeableReference>,
@@ -850,6 +857,7 @@ pub struct NutritionOrderEnteralFormula {
     /// - **Strength**: extensible
     /// - **Description**: Codes specifying the route of administration of enteral formula.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/enteral-route
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/enteral-route")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.enteralFormula.routeOfAdministration")]
     #[fhir_serde(rename = "routeOfAdministration")]
     pub route_of_administration: Option<CodeableConcept>,
@@ -1021,6 +1029,7 @@ pub struct NutritionOrderEnteralFormulaAdditive {
     /// - **Strength**: example
     /// - **Description**: Codes for the type of modular component such as protein, carbohydrate or fiber to be provided in addition to or mixed with the base formula.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/entformula-additive
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/entformula-additive")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.enteralFormula.additive.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableReference>,
@@ -1052,7 +1061,7 @@ pub struct NutritionOrderEnteralFormulaAdditive {
 }
 
 /// Choice of types for the rate\[x\] field in NutritionOrderEnteralFormulaAdministration
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "rate")]
 pub enum NutritionOrderEnteralFormulaAdministrationRate {
     /// Variant accepting the Quantity type.
@@ -1356,6 +1365,7 @@ pub struct NutritionOrderEnteralFormulaAdministrationSchedule {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying the precondition that should be met or evaluated prior to       consuming an enteral formula.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-as-needed-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-as-needed-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.enteralFormula.administration.schedule.asNeededFor")]
     #[fhir_serde(rename = "asNeededFor")]
     pub as_needed_for: Option<CodeableConcept>,
@@ -1481,6 +1491,7 @@ pub struct NutritionOrderOralDiet {
     /// - **Strength**: example
     /// - **Description**: Codes used to indicate the type of diet being ordered for a patient.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/diet-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/diet-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.oralDiet.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -1534,6 +1545,7 @@ pub struct NutritionOrderOralDiet {
     /// - **Strength**: example
     /// - **Description**: Codes used to represent the consistency of fluids and liquids provided to the patient.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consistency-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/consistency-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.oralDiet.fluidConsistencyType")]
     #[fhir_serde(rename = "fluidConsistencyType")]
     pub fluid_consistency_type: Option<Vec<CodeableConcept>>,
@@ -1672,6 +1684,7 @@ pub struct NutritionOrderOralDietNutrient {
     /// - **Strength**: example
     /// - **Description**: Codes for types of nutrients that are being modified such as carbohydrate or sodium.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/nutrient-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/nutrient-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.oralDiet.nutrient.modifier")]
     pub modifier: Option<CodeableConcept>,
     /// Quantity of the specified nutrient
@@ -1830,6 +1843,7 @@ pub struct NutritionOrderOralDietSchedule {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying the precondition that should be met or evaluated prior to       consuming a nutrition product.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-as-needed-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-as-needed-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.oralDiet.schedule.asNeededFor")]
     #[fhir_serde(rename = "asNeededFor")]
     pub as_needed_for: Option<CodeableConcept>,
@@ -1953,6 +1967,7 @@ pub struct NutritionOrderOralDietTexture {
     /// - **Strength**: example
     /// - **Description**: Codes for food consistency types or texture modifications to apply to foods.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/texture-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/texture-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.oralDiet.texture.modifier")]
     pub modifier: Option<CodeableConcept>,
     /// Concepts that are used to identify an entity that is ingested for nutritional purposes
@@ -1973,6 +1988,7 @@ pub struct NutritionOrderOralDietTexture {
     /// - **Strength**: example
     /// - **Description**: Codes for types of foods that are texture-modified.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/modified-foodtype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/modified-foodtype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.oralDiet.texture.foodType")]
     #[fhir_serde(rename = "foodType")]
     pub food_type: Option<CodeableConcept>,
@@ -2099,6 +2115,7 @@ pub struct NutritionOrderSupplement {
     /// - **Strength**: example
     /// - **Description**: Codes for nutritional supplements to be provided to the patient.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/supplement-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/supplement-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.supplement.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableReference>,
@@ -2301,6 +2318,7 @@ pub struct NutritionOrderSupplementSchedule {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying the precondition that should be met or evaluated prior to       consuming a supplement.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-as-needed-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-as-needed-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionOrder.supplement.schedule.asNeededFor")]
     #[fhir_serde(rename = "asNeededFor")]
     pub as_needed_for: Option<CodeableConcept>,

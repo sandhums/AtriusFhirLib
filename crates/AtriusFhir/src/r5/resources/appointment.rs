@@ -112,6 +112,7 @@ pub struct Appointment {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -291,6 +292,7 @@ pub struct Appointment {
     /// 
     /// ## Conditions
     /// Used when: app-4, app-3, app-7
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/appointmentstatus")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.status")]
     pub status: Code,
     /// The coded reason for the appointment being cancelled
@@ -314,6 +316,7 @@ pub struct Appointment {
     /// 
     /// ## Conditions
     /// Used when: app-4
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/appointment-cancellation-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.cancellationReason")]
     #[fhir_serde(rename = "cancellationReason")]
     pub cancellation_reason: Option<CodeableConcept>,
@@ -336,6 +339,7 @@ pub struct Appointment {
     /// - **Strength**: preferred
     /// - **Description**: Classification of the encounter.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/EncounterClass
+    #[fhir_binding(strength="preferred", valueset="http://terminology.hl7.org/ValueSet/EncounterClass")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.class")]
     pub class: Option<Vec<CodeableConcept>>,
     /// A broad categorization of the service that is to be performed during this appointment
@@ -355,6 +359,7 @@ pub struct Appointment {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.serviceCategory")]
     #[fhir_serde(rename = "serviceCategory")]
     pub service_category: Option<Vec<CodeableConcept>>,
@@ -379,6 +384,7 @@ pub struct Appointment {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.serviceType")]
     #[fhir_serde(rename = "serviceType")]
     pub service_type: Option<Vec<CodeableReference>>,
@@ -399,6 +405,7 @@ pub struct Appointment {
     /// ## Binding
     /// - **Strength**: preferred
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/c80-practice-codes
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/c80-practice-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.specialty")]
     pub specialty: Option<Vec<CodeableConcept>>,
     /// The style of appointment or patient that has been booked in the slot (not service type)
@@ -418,6 +425,7 @@ pub struct Appointment {
     /// ## Binding
     /// - **Strength**: preferred
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0276
+    #[fhir_binding(strength="preferred", valueset="http://terminology.hl7.org/ValueSet/v2-0276")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.appointmentType")]
     #[fhir_serde(rename = "appointmentType")]
     pub appointment_type: Option<CodeableConcept>,
@@ -443,6 +451,7 @@ pub struct Appointment {
     /// - **Strength**: preferred
     /// - **Description**: The Reason for the appointment to take place.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-reason
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/encounter-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// Used to make informed decisions if needing to re-prioritize
@@ -467,6 +476,7 @@ pub struct Appointment {
     /// - **Strength**: example
     /// - **Description**: Indicates the urgency of the appointment.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ActPriority
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-ActPriority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.priority")]
     pub priority: Option<CodeableConcept>,
     /// Shown on a subject line in a meeting request, or appointment list
@@ -991,6 +1001,7 @@ pub struct AppointmentParticipant {
     /// 
     /// ## Conditions
     /// Used when: app-1
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/encounter-participant-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.participant.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -1067,6 +1078,7 @@ pub struct AppointmentParticipant {
     /// - **Strength**: required
     /// - **Description**: The Participation status of an appointment.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participationstatus|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/participationstatus")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.participant.status")]
     pub status: Code,
 }
@@ -1188,6 +1200,7 @@ pub struct AppointmentRecurrenceTemplate {
     /// - **Strength**: required
     /// - **Description**: IANA Timezones (BCP 175)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/timezones|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/timezones")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.recurrenceTemplate.timezone")]
     pub timezone: Option<CodeableConcept>,
     /// The frequency of the recurrence
@@ -1204,6 +1217,7 @@ pub struct AppointmentRecurrenceTemplate {
     /// - **Strength**: preferred
     /// - **Description**: IANA Timezones (BCP 175)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/appointment-recurrrence-type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/appointment-recurrrence-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.recurrenceTemplate.recurrenceType")]
     #[fhir_serde(rename = "recurrenceType")]
     pub recurrence_type: CodeableConcept,
@@ -1444,6 +1458,7 @@ pub struct AppointmentRecurrenceTemplateMonthlyTemplate {
     /// - **Strength**: required
     /// - **Description**: The set of weeks in a month.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/week-of-month|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/week-of-month")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.recurrenceTemplate.monthlyTemplate.nthWeekOfMonth")]
     #[fhir_serde(rename = "nthWeekOfMonth")]
     pub nth_week_of_month: Option<Coding>,
@@ -1466,6 +1481,7 @@ pub struct AppointmentRecurrenceTemplateMonthlyTemplate {
     /// - **Strength**: required
     /// - **Description**: The days of the week.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/days-of-week|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/days-of-week")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Appointment.recurrenceTemplate.monthlyTemplate.dayOfWeek")]
     #[fhir_serde(rename = "dayOfWeek")]
     pub day_of_week: Option<Coding>,

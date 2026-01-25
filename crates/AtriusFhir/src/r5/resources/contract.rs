@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the topic\[x\] field in Contract
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "topic")]
 pub enum ContractTopic {
     /// Variant accepting the CodeableConcept type.
@@ -14,7 +14,7 @@ pub enum ContractTopic {
 }
 
 /// Choice of types for the legallyBinding\[x\] field in Contract
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "legallyBinding")]
 pub enum ContractLegallyBinding {
     /// Variant accepting the Attachment type.
@@ -130,6 +130,7 @@ pub struct Contract {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -359,6 +360,7 @@ pub struct Contract {
     /// - **Strength**: required
     /// - **Description**: A code specifying the state of the resource instance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/contract-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.status")]
     pub status: Option<Code>,
     /// Negotiation status
@@ -383,6 +385,7 @@ pub struct Contract {
     /// - **Strength**: extensible
     /// - **Description**: Detailed codes for the legal state of a contract.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-legalstate
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/contract-legalstate")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.legalState")]
     #[fhir_serde(rename = "legalState")]
     pub legal_state: Option<CodeableConcept>,
@@ -452,6 +455,7 @@ pub struct Contract {
     /// - **Strength**: example
     /// - **Description**: This is an example set of Content Derivative type codes, which represent the minimal content derived from the basal information source.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-content-derivative
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-content-derivative")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.contentDerivative")]
     #[fhir_serde(rename = "contentDerivative")]
     pub content_derivative: Option<CodeableConcept>,
@@ -505,6 +509,7 @@ pub struct Contract {
     /// - **Strength**: example
     /// - **Description**: Codes for the Cessation of Contracts.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-expiration-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-expiration-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.expirationType")]
     #[fhir_serde(rename = "expirationType")]
     pub expiration_type: Option<CodeableConcept>,
@@ -686,6 +691,7 @@ pub struct Contract {
     /// - **Strength**: example
     /// - **Description**: Codes for the range of legal concerns.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-scope
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-scope")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.scope")]
     pub scope: Option<CodeableConcept>,
     /// Focus of contract interest
@@ -741,6 +747,7 @@ pub struct Contract {
     /// - **Strength**: example
     /// - **Description**: List of overall contract codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -763,6 +770,7 @@ pub struct Contract {
     /// - **Strength**: example
     /// - **Description**: Detailed codes within the above.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-subtype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-subtype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.subType")]
     #[fhir_serde(rename = "subType")]
     pub sub_type: Option<Vec<CodeableConcept>>,
@@ -1030,6 +1038,7 @@ pub struct ContractContentDefinition {
     /// - **Strength**: example
     /// - **Description**: Detailed codes for the definition of contracts.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-definition-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-definition-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.contentDefinition.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -1047,6 +1056,7 @@ pub struct ContractContentDefinition {
     /// - **Strength**: example
     /// - **Description**: Detailed codes for the additional definition of contracts.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-definition-subtype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-definition-subtype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.contentDefinition.subType")]
     #[fhir_serde(rename = "subType")]
     pub sub_type: Option<CodeableConcept>,
@@ -1090,6 +1100,7 @@ pub struct ContractContentDefinition {
     /// - **Strength**: required
     /// - **Description**: Status of the publication of contract content.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-publicationstatus|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/contract-publicationstatus")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.contentDefinition.publicationStatus")]
     #[fhir_serde(rename = "publicationStatus")]
     pub publication_status: Code,
@@ -1109,7 +1120,7 @@ pub struct ContractContentDefinition {
 }
 
 /// Choice of types for the content\[x\] field in ContractFriendly
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "content")]
 pub enum ContractFriendlyContent {
     /// Variant accepting the Attachment type.
@@ -1242,7 +1253,7 @@ pub struct ContractFriendly {
 }
 
 /// Choice of types for the content\[x\] field in ContractLegal
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "content")]
 pub enum ContractLegalContent {
     /// Variant accepting the Attachment type.
@@ -1368,7 +1379,7 @@ pub struct ContractLegal {
 }
 
 /// Choice of types for the content\[x\] field in ContractRule
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "content")]
 pub enum ContractRuleContent {
     /// Variant accepting the Attachment type.
@@ -1631,6 +1642,7 @@ pub struct ContractSigner {
     /// - **Strength**: preferred
     /// - **Description**: List of parties who may be signing.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-signer-type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/contract-signer-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.signer.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Coding,
@@ -1659,7 +1671,7 @@ pub struct ContractSigner {
 }
 
 /// Choice of types for the topic\[x\] field in ContractTerm
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "topic")]
 pub enum ContractTermTopic {
     /// Variant accepting the CodeableConcept type.
@@ -1842,6 +1854,7 @@ pub struct ContractTerm {
     /// - **Strength**: example
     /// - **Description**: Detailed codes for the types of contract provisions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-term-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-term-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1859,6 +1872,7 @@ pub struct ContractTerm {
     /// - **Strength**: example
     /// - **Description**: Detailed codes for the subtypes of contract provisions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-term-subtype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-term-subtype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.subType")]
     #[fhir_serde(rename = "subType")]
     pub sub_type: Option<CodeableConcept>,
@@ -1972,7 +1986,7 @@ pub struct ContractTerm {
 }
 
 /// Choice of types for the occurrence\[x\] field in ContractTermAction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurrence")]
 pub enum ContractTermActionOccurrence {
     /// Variant accepting the DateTime type.
@@ -2128,6 +2142,7 @@ pub struct ContractTermAction {
     /// - **Strength**: example
     /// - **Description**: Detailed codes for the contract action.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-action
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-action")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.action.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -2156,6 +2171,7 @@ pub struct ContractTermAction {
     /// - **Strength**: example
     /// - **Description**: Detailed codes for the contract action reason.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-PurposeOfUse
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-PurposeOfUse")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.action.intent")]
     pub intent: CodeableConcept,
     /// Pointer to specific item
@@ -2185,6 +2201,7 @@ pub struct ContractTermAction {
     /// - **Strength**: example
     /// - **Description**: Codes for the status of a term action.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-actionstatus
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-actionstatus")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.action.status")]
     pub status: CodeableConcept,
     /// Episode associated with action
@@ -2262,6 +2279,7 @@ pub struct ContractTermAction {
     /// - **Strength**: example
     /// - **Description**: Codes for the types of action performer.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participation-role-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/participation-role-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.action.performerType")]
     #[fhir_serde(rename = "performerType")]
     pub performer_type: Option<Vec<CodeableConcept>>,
@@ -2280,6 +2298,7 @@ pub struct ContractTermAction {
     /// - **Strength**: example
     /// - **Description**: Codes for the role of the action performer.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/security-role-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/security-role-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.action.performerRole")]
     #[fhir_serde(rename = "performerRole")]
     pub performer_role: Option<CodeableConcept>,
@@ -2323,6 +2342,7 @@ pub struct ContractTermAction {
     /// - **Strength**: example
     /// - **Description**: Detailed codes for the contract action reason.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-PurposeOfUse
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-PurposeOfUse")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.action.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// Pointer to specific item
@@ -2488,6 +2508,7 @@ pub struct ContractTermActionSubject {
     /// - **Strength**: example
     /// - **Description**: Detailed codes for the contract actor role.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-actorrole
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-actorrole")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.action.subject.role")]
     pub role: Option<CodeableConcept>,
 }
@@ -2605,6 +2626,7 @@ pub struct ContractTermAsset {
     /// - **Strength**: example
     /// - **Description**: Codes for scoping an asset.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-assetscope
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-assetscope")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.asset.scope")]
     pub scope: Option<CodeableConcept>,
     /// Asset category
@@ -2621,6 +2643,7 @@ pub struct ContractTermAsset {
     /// - **Strength**: example
     /// - **Description**: Condes for the type of an asset.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-assettype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-assettype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.asset.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -2650,6 +2673,7 @@ pub struct ContractTermAsset {
     /// - **Strength**: example
     /// - **Description**: Condes for the sub-type of an asset.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-assetsubtype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-assetsubtype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.asset.subtype")]
     pub subtype: Option<Vec<CodeableConcept>>,
     /// Kinship of the asset
@@ -2668,6 +2692,7 @@ pub struct ContractTermAsset {
     /// - **Strength**: extensible
     /// - **Description**: The class (type) of information a consent rule covers.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-content-class
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/consent-content-class")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.asset.relationship")]
     pub relationship: Option<Coding>,
     /// Circumstance of the asset
@@ -2707,6 +2732,7 @@ pub struct ContractTermAsset {
     /// - **Strength**: example
     /// - **Description**: Codes for asset availability.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/asset-availability
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/asset-availability")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.asset.periodType")]
     #[fhir_serde(rename = "periodType")]
     pub period_type: Option<Vec<CodeableConcept>>,
@@ -2922,6 +2948,7 @@ pub struct ContractTermAssetContext {
     /// - **Strength**: example
     /// - **Description**: Codes for the context of the asset.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-assetcontext
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-assetcontext")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.asset.context.code")]
     pub code: Option<Vec<CodeableConcept>>,
     /// Context description
@@ -2938,7 +2965,7 @@ pub struct ContractTermAssetContext {
 }
 
 /// Choice of types for the entity\[x\] field in ContractTermAssetValuedItem
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "entity")]
 pub enum ContractTermAssetValuedItemEntity {
     /// Variant accepting the CodeableConcept type.
@@ -3428,6 +3455,7 @@ pub struct ContractTermOffer {
     /// - **Strength**: example
     /// - **Description**: Detailed codes for the types of contract provisions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-term-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-term-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.offer.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -3451,6 +3479,7 @@ pub struct ContractTermOffer {
     /// - **Strength**: extensible
     /// - **Description**: The type of decision made by a grantor with respect to an offer made by a grantee.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ActConsentDirective
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/v3-ActConsentDirective")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.offer.decision")]
     pub decision: Option<CodeableConcept>,
     /// How decision is conveyed
@@ -3467,6 +3496,7 @@ pub struct ContractTermOffer {
     /// - **Strength**: example
     /// - **Description**: Codes for conveying a decision.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-decision-mode
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-decision-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.offer.decisionMode")]
     #[fhir_serde(rename = "decisionMode")]
     pub decision_mode: Option<Vec<CodeableConcept>>,
@@ -3520,7 +3550,7 @@ pub struct ContractTermOffer {
 }
 
 /// Choice of types for the value\[x\] field in ContractTermOfferAnswer
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ContractTermOfferAnswerValue {
     /// Variant accepting the Boolean type.
@@ -3802,6 +3832,7 @@ pub struct ContractTermOfferParty {
     /// - **Strength**: example
     /// - **Description**: Codes for offer participant roles.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-party-role
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-party-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.offer.party.role")]
     pub role: CodeableConcept,
 }
@@ -3957,6 +3988,7 @@ pub struct ContractTermSecurityLabel {
     /// - **Strength**: example
     /// - **Description**: Codes for confidentiality protection.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-security-classification
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-security-classification")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.securityLabel.classification")]
     pub classification: Coding,
     /// Applicable Policy
@@ -3974,6 +4006,7 @@ pub struct ContractTermSecurityLabel {
     /// - **Strength**: example
     /// - **Description**: Codes for policy category.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-security-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-security-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.securityLabel.category")]
     pub category: Option<Vec<Coding>>,
     /// Handling Instructions
@@ -3991,6 +4024,7 @@ pub struct ContractTermSecurityLabel {
     /// - **Strength**: example
     /// - **Description**: Codes for handling instructions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contract-security-control
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/contract-security-control")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contract.term.securityLabel.control")]
     pub control: Option<Vec<Coding>>,
 }

@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the occurred\[x\] field in AuditEvent
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurred")]
 pub enum AuditEventOccurred {
     /// Variant accepting the Period type.
@@ -118,6 +118,7 @@ pub struct AuditEvent {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -272,6 +273,7 @@ pub struct AuditEvent {
     /// 
     /// ## Aliases
     /// type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/audit-event-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Specific type of event
@@ -298,6 +300,7 @@ pub struct AuditEvent {
     /// 
     /// ## Aliases
     /// subtype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/audit-event-sub-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.code")]
     pub code: CodeableConcept,
     /// Type of action performed during the event
@@ -322,6 +325,7 @@ pub struct AuditEvent {
     /// - **Strength**: required
     /// - **Description**: DICOM Audit Event Action
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/audit-event-action|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/audit-event-action")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.action")]
     pub action: Option<Code>,
     /// emergency | alert | critical | error | warning | notice | informational | debug
@@ -345,6 +349,7 @@ pub struct AuditEvent {
     /// - **Strength**: required
     /// - **Description**: This is in the SysLog header, PRI. http://tools.ietf.org/html/rfc5424#appendix-A.3
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/audit-event-severity|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/audit-event-severity")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.severity")]
     pub severity: Option<Code>,
     /// When the activity occurred
@@ -443,6 +448,7 @@ pub struct AuditEvent {
     /// 
     /// ## Aliases
     /// PurposeOfEvent
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-PurposeOfUse")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.authorization")]
     pub authorization: Option<Vec<CodeableConcept>>,
     /// Workflow authorization within which this event occurred
@@ -577,7 +583,7 @@ pub struct AuditEvent {
 }
 
 /// Choice of types for the network\[x\] field in AuditEventAgent
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "network")]
 pub enum AuditEventAgentNetwork {
     /// Variant accepting the Reference type.
@@ -742,6 +748,7 @@ pub struct AuditEventAgent {
     /// - **Strength**: preferred
     /// - **Description**: The Participation type of the agent to the event.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participation-role-type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/participation-role-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.agent.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -773,6 +780,7 @@ pub struct AuditEventAgent {
     /// - **Strength**: example
     /// - **Description**: What security role enabled the agent to participate in the event.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/security-role-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/security-role-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.agent.role")]
     pub role: Option<Vec<CodeableConcept>>,
     /// Identifier of who
@@ -920,6 +928,7 @@ pub struct AuditEventAgent {
     /// 
     /// ## Aliases
     /// PurposeOfUse
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-PurposeOfUse")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.agent.authorization")]
     pub authorization: Option<Vec<CodeableConcept>>,
 }
@@ -1074,6 +1083,7 @@ pub struct AuditEventEntity {
     /// - **Strength**: example
     /// - **Description**: DICOM Audit Event Entity Role
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/object-role
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/object-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.entity.role")]
     pub role: Option<CodeableConcept>,
     /// Security labels on the entity
@@ -1097,6 +1107,7 @@ pub struct AuditEventEntity {
     /// - **Strength**: example
     /// - **Description**: Example Security Labels from the Healthcare Privacy and Security Classification System.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/security-label-examples
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/security-label-examples")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.entity.securityLabel")]
     #[fhir_serde(rename = "securityLabel")]
     pub security_label: Option<Vec<CodeableConcept>>,
@@ -1179,7 +1190,7 @@ pub struct AuditEventEntity {
 }
 
 /// Choice of types for the value\[x\] field in AuditEventEntityDetail
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum AuditEventEntityDetailValue {
     /// Variant accepting the Quantity type.
@@ -1335,6 +1346,7 @@ pub struct AuditEventEntityDetail {
     /// - **Strength**: example
     /// - **Description**: Additional detail about an entity used in an event.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/audit-event-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/audit-event-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.entity.detail.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -1493,6 +1505,7 @@ pub struct AuditEventOutcome {
     /// - **Strength**: preferred
     /// - **Description**: DICOM Audit Event Outcome
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/audit-event-outcome
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/audit-event-outcome")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.outcome.code")]
     pub code: Coding,
     /// Additional outcome detail
@@ -1517,6 +1530,7 @@ pub struct AuditEventOutcome {
     /// - **Strength**: example
     /// - **Description**: A code that provides details as the exact issue.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/audit-event-outcome-detail
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/audit-event-outcome-detail")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.outcome.detail")]
     pub detail: Option<Vec<CodeableConcept>>,
 }
@@ -1689,6 +1703,7 @@ pub struct AuditEventSource {
     /// - **Strength**: preferred
     /// - **Description**: Code specifying the type of system that detected and recorded the event. Use of these codes is not required but is encouraged to maintain translation with DICOM AuditMessage schema.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/security-source-type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/security-source-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AuditEvent.source.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,

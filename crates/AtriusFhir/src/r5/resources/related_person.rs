@@ -109,6 +109,7 @@ pub struct RelatedPerson {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RelatedPerson.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -331,6 +332,7 @@ pub struct RelatedPerson {
     /// - **Strength**: preferred
     /// - **Description**: The nature of the relationship between a patient and the related person.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/relatedperson-relationshiptype
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/relatedperson-relationshiptype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RelatedPerson.relationship")]
     pub relationship: Option<Vec<CodeableConcept>>,
     /// A name associated with the person
@@ -395,6 +397,7 @@ pub struct RelatedPerson {
     /// - **Strength**: required
     /// - **Description**: The gender of a person used for administrative purposes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/administrative-gender|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/administrative-gender")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RelatedPerson.gender")]
     pub gender: Option<Code>,
     /// The date on which the related person was born
@@ -628,6 +631,7 @@ pub struct RelatedPersonCommunication {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RelatedPerson.communication.language")]
     pub language: CodeableConcept,
     /// Language preference indicator

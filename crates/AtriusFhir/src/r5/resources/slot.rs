@@ -104,6 +104,7 @@ pub struct Slot {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Slot.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -266,6 +267,7 @@ pub struct Slot {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Slot.serviceCategory")]
     #[fhir_serde(rename = "serviceCategory")]
     pub service_category: Option<Vec<CodeableConcept>>,
@@ -288,6 +290,7 @@ pub struct Slot {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Slot.serviceType")]
     #[fhir_serde(rename = "serviceType")]
     pub service_type: Option<Vec<CodeableReference>>,
@@ -309,6 +312,7 @@ pub struct Slot {
     /// - **Strength**: preferred
     /// - **Description**: Additional details about where the content was created (e.g. clinical specialty).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/c80-practice-codes
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/c80-practice-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Slot.specialty")]
     pub specialty: Option<Vec<CodeableConcept>>,
     /// The style of appointment or patient that may be booked in the slot (not service type)
@@ -332,6 +336,7 @@ pub struct Slot {
     /// ## Binding
     /// - **Strength**: preferred
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0276
+    #[fhir_binding(strength="preferred", valueset="http://terminology.hl7.org/ValueSet/v2-0276")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Slot.appointmentType")]
     #[fhir_serde(rename = "appointmentType")]
     pub appointment_type: Option<Vec<CodeableConcept>>,
@@ -367,6 +372,7 @@ pub struct Slot {
     /// - **Strength**: required
     /// - **Description**: The free/busy status of the slot.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/slotstatus|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/slotstatus")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Slot.status")]
     pub status: Code,
     /// Date/Time that the slot is to begin

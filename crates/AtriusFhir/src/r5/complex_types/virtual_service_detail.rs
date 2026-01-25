@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the address\[x\] field in VirtualServiceDetail
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "address")]
 pub enum VirtualServiceDetailAddress {
     /// Variant accepting the Url type.
@@ -97,6 +97,7 @@ pub struct VirtualServiceDetail {
     /// - **Strength**: example
     /// - **Description**: The purpose for which an extended contact detail should be used.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/virtual-service-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/virtual-service-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="VirtualServiceDetail.channelType")]
     #[fhir_serde(rename = "channelType")]
     pub channel_type: Option<Coding>,

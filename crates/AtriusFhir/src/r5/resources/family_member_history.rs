@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the born\[x\] field in FamilyMemberHistory
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "born")]
 pub enum FamilyMemberHistoryBorn {
     /// Variant accepting the Period type.
@@ -17,7 +17,7 @@ pub enum FamilyMemberHistoryBorn {
 }
 
 /// Choice of types for the age\[x\] field in FamilyMemberHistory
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "age")]
 pub enum FamilyMemberHistoryAge {
     /// Variant accepting the Age type.
@@ -32,7 +32,7 @@ pub enum FamilyMemberHistoryAge {
 }
 
 /// Choice of types for the deceased\[x\] field in FamilyMemberHistory
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "deceased")]
 pub enum FamilyMemberHistoryDeceased {
     /// Variant accepting the Boolean type.
@@ -160,6 +160,7 @@ pub struct FamilyMemberHistory {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FamilyMemberHistory.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -381,6 +382,7 @@ pub struct FamilyMemberHistory {
     /// - **Strength**: required
     /// - **Description**: A code that identifies the status of the family history record.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/history-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/history-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FamilyMemberHistory.status")]
     pub status: Code,
     /// subject-unknown | withheld | unable-to-obtain | deferred
@@ -404,6 +406,7 @@ pub struct FamilyMemberHistory {
     /// - **Strength**: example
     /// - **Description**: Codes describing the reason why a family member's history is not available.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/history-absent-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/history-absent-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FamilyMemberHistory.dataAbsentReason")]
     #[fhir_serde(rename = "dataAbsentReason")]
     pub data_absent_reason: Option<CodeableConcept>,
@@ -500,6 +503,7 @@ pub struct FamilyMemberHistory {
     /// - **Strength**: example
     /// - **Description**: The nature of the relationship between the patient and the related person being described in the family member history.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-FamilyMember
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-FamilyMember")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FamilyMemberHistory.relationship")]
     pub relationship: CodeableConcept,
     /// male | female | other | unknown
@@ -533,6 +537,7 @@ pub struct FamilyMemberHistory {
     /// - **Strength**: extensible
     /// - **Description**: Codes describing the sex assigned at birth as documented on the birth registration.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/administrative-gender
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/administrative-gender")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FamilyMemberHistory.sex")]
     pub sex: Option<CodeableConcept>,
     /// (approximate) date of birth
@@ -646,6 +651,7 @@ pub struct FamilyMemberHistory {
     /// - **Strength**: example
     /// - **Description**: Codes indicating why the family member history was done.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinical-findings
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinical-findings")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FamilyMemberHistory.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// General note about related person
@@ -692,7 +698,7 @@ pub struct FamilyMemberHistory {
 }
 
 /// Choice of types for the onset\[x\] field in FamilyMemberHistoryCondition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "onset")]
 pub enum FamilyMemberHistoryConditionOnset {
     /// Variant accepting the Age type.
@@ -828,6 +834,7 @@ pub struct FamilyMemberHistoryCondition {
     /// - **Strength**: example
     /// - **Description**: Identification of the Condition or diagnosis.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FamilyMemberHistory.condition.code")]
     pub code: CodeableConcept,
     /// deceased | permanent disability | etc
@@ -845,6 +852,7 @@ pub struct FamilyMemberHistoryCondition {
     /// - **Strength**: example
     /// - **Description**: The result of the condition for the patient; e.g. death, permanent disability, temporary disability, etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-outcome
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-outcome")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FamilyMemberHistory.condition.outcome")]
     pub outcome: Option<CodeableConcept>,
     /// Whether the condition contributed to the cause of death
@@ -1011,6 +1019,7 @@ pub struct FamilyMemberHistoryParticipant {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participation-role-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/participation-role-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FamilyMemberHistory.participant.function")]
     pub function: Option<CodeableConcept>,
     /// Who or what participated in the activities related to the family member history
@@ -1031,7 +1040,7 @@ pub struct FamilyMemberHistoryParticipant {
 }
 
 /// Choice of types for the performed\[x\] field in FamilyMemberHistoryProcedure
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "performed")]
 pub enum FamilyMemberHistoryProcedurePerformed {
     /// Variant accepting the Age type.
@@ -1170,6 +1179,7 @@ pub struct FamilyMemberHistoryProcedure {
     /// - **Strength**: example
     /// - **Description**: A code to identify a specific procedure.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/procedure-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/procedure-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FamilyMemberHistory.procedure.code")]
     pub code: CodeableConcept,
     /// What happened following the procedure
@@ -1187,6 +1197,7 @@ pub struct FamilyMemberHistoryProcedure {
     /// - **Strength**: example
     /// - **Description**: The result of the procedure; e.g. death, permanent disability, temporary disability, etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinical-findings
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinical-findings")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FamilyMemberHistory.procedure.outcome")]
     pub outcome: Option<CodeableConcept>,
     /// Whether the procedure contributed to the cause of death

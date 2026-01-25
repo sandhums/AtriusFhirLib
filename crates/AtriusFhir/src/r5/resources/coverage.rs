@@ -108,6 +108,7 @@ pub struct Coverage {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Coverage.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -290,6 +291,7 @@ pub struct Coverage {
     /// - **Strength**: required
     /// - **Description**: A code specifying the state of the resource instance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fm-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fm-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Coverage.status")]
     pub status: Code,
     /// insurance | self-pay | other
@@ -311,6 +313,7 @@ pub struct Coverage {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/coverage-kind|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/coverage-kind")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Coverage.kind")]
     pub kind: Code,
     /// Self-pay parties and responsibility
@@ -348,6 +351,7 @@ pub struct Coverage {
     /// - **Strength**: preferred
     /// - **Description**: The type of insurance: public health, worker compensation; private accident, auto, private health, etc.) or a direct payment by an individual or organization.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/coverage-type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/coverage-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Coverage.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -480,6 +484,7 @@ pub struct Coverage {
     /// - **Strength**: extensible
     /// - **Description**: The relationship between the Subscriber and the Beneficiary (insured/covered party/patient).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/subscriber-relationship
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/subscriber-relationship")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Coverage.relationship")]
     pub relationship: Option<CodeableConcept>,
     /// Coverage start and end dates
@@ -792,6 +797,7 @@ pub struct CoverageClass {
     /// - **Strength**: extensible
     /// - **Description**: The policy classifications, e.g. Group, Plan, Class, etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/coverage-class
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/coverage-class")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Coverage.class.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -836,7 +842,7 @@ pub struct CoverageClass {
 }
 
 /// Choice of types for the value\[x\] field in CoverageCostToBeneficiary
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum CoverageCostToBeneficiaryValue {
     /// Variant accepting the Quantity type.
@@ -982,6 +988,7 @@ pub struct CoverageCostToBeneficiary {
     /// - **Strength**: extensible
     /// - **Description**: The types of services to which patient copayments are specified.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/coverage-copay-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/coverage-copay-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Coverage.costToBeneficiary.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1006,6 +1013,7 @@ pub struct CoverageCostToBeneficiary {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-benefitcategory
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-benefitcategory")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Coverage.costToBeneficiary.category")]
     pub category: Option<CodeableConcept>,
     /// In or out of network
@@ -1026,6 +1034,7 @@ pub struct CoverageCostToBeneficiary {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/benefit-network
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/benefit-network")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Coverage.costToBeneficiary.network")]
     pub network: Option<CodeableConcept>,
     /// Individual or family
@@ -1044,6 +1053,7 @@ pub struct CoverageCostToBeneficiary {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/benefit-unit
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/benefit-unit")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Coverage.costToBeneficiary.unit")]
     pub unit: Option<CodeableConcept>,
     /// Annual or lifetime
@@ -1063,6 +1073,7 @@ pub struct CoverageCostToBeneficiary {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/benefit-term
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/benefit-term")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Coverage.costToBeneficiary.term")]
     pub term: Option<CodeableConcept>,
     /// The amount or percentage due from the beneficiary
@@ -1227,6 +1238,7 @@ pub struct CoverageCostToBeneficiaryException {
     /// - **Strength**: example
     /// - **Description**: The types of exceptions from the part or full value of financial obligations such as copays.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/coverage-financial-exception
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/coverage-financial-exception")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Coverage.costToBeneficiary.exception.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,

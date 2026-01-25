@@ -114,6 +114,7 @@ pub struct DocumentReference {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -339,6 +340,7 @@ pub struct DocumentReference {
     /// - **Strength**: required
     /// - **Description**: The status of the document reference.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/document-reference-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/document-reference-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.status")]
     pub status: Code,
     /// registered | partial | preliminary | final | amended | corrected | appended | cancelled | entered-in-error | deprecated | unknown
@@ -361,6 +363,7 @@ pub struct DocumentReference {
     /// - **Strength**: required
     /// - **Description**: Status of the underlying document.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/composition-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/composition-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.docStatus")]
     #[fhir_serde(rename = "docStatus")]
     pub doc_status: Option<Code>,
@@ -382,6 +385,7 @@ pub struct DocumentReference {
     /// - **Strength**: extensible
     /// - **Description**: Type of acquired data in the instance.
     /// - **ValueSet**: http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html
+    #[fhir_binding(strength="extensible", valueset="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.modality")]
     pub modality: Option<Vec<CodeableConcept>>,
     /// Kind of document (LOINC if possible)
@@ -408,6 +412,7 @@ pub struct DocumentReference {
     /// - **Strength**: preferred
     /// - **Description**: Precise type of clinical document.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/doc-typecodes
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/doc-typecodes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -438,6 +443,7 @@ pub struct DocumentReference {
     /// 
     /// ## Aliases
     /// class, classCode
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/referenced-item-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Who/what is the subject of the document
@@ -496,6 +502,7 @@ pub struct DocumentReference {
     /// - **Strength**: example
     /// - **Description**: This list of codes represents the main clinical acts being documented.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ActCode
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-ActCode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.event")]
     pub event: Option<Vec<CodeableReference>>,
     /// Body part included
@@ -515,6 +522,7 @@ pub struct DocumentReference {
     /// - **Strength**: example
     /// - **Description**: SNOMED CT Body site concepts
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/body-site
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.bodySite")]
     #[fhir_serde(rename = "bodySite")]
     pub body_site: Option<Vec<CodeableReference>>,
@@ -535,6 +543,7 @@ pub struct DocumentReference {
     /// 
     /// ## Conditions
     /// Used when: docRef-1
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/c80-facilitycodes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.facilityType")]
     #[fhir_serde(rename = "facilityType")]
     pub facility_type: Option<CodeableConcept>,
@@ -566,6 +575,7 @@ pub struct DocumentReference {
     /// 
     /// ## Conditions
     /// Used when: docRef-2
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/c80-practice-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.practiceSetting")]
     #[fhir_serde(rename = "practiceSetting")]
     pub practice_setting: Option<CodeableConcept>,
@@ -745,6 +755,7 @@ pub struct DocumentReference {
     /// - **Strength**: example
     /// - **Description**: Example Security Labels from the Healthcare Privacy and Security Classification System.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/security-label-examples
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/security-label-examples")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.securityLabel")]
     #[fhir_serde(rename = "securityLabel")]
     pub security_label: Option<Vec<CodeableConcept>>,
@@ -897,6 +908,7 @@ pub struct DocumentReferenceAttester {
     /// - **Strength**: preferred
     /// - **Description**: The way in which a person authenticated a document.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/composition-attestation-mode
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/composition-attestation-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.attester.mode")]
     pub mode: CodeableConcept,
     /// When the document was attested
@@ -1088,7 +1100,7 @@ pub struct DocumentReferenceContent {
 }
 
 /// Choice of types for the value\[x\] field in DocumentReferenceContentProfile
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum DocumentReferenceContentProfileValue {
     /// Variant accepting the Coding type.
@@ -1234,6 +1246,7 @@ pub struct DocumentReferenceContentProfile {
     /// - **Strength**: preferred
     /// - **Description**: Document Format Codes.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-HL7FormatCodes
+    #[fhir_binding(strength="preferred", valueset="http://terminology.hl7.org/ValueSet/v3-HL7FormatCodes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.content.profile.value[x]")]
     #[fhir_serde(flatten)]
     pub value: Option<DocumentReferenceContentProfileValue>,
@@ -1367,6 +1380,7 @@ pub struct DocumentReferenceRelatesTo {
     /// - **Strength**: extensible
     /// - **Description**: The type of relationship between the documents.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/document-relationship-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/document-relationship-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DocumentReference.relatesTo.code")]
     pub code: CodeableConcept,
     /// Target of the relationship

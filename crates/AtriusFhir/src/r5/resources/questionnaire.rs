@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in Questionnaire
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum QuestionnaireVersionAlgorithm {
     /// Variant accepting the String type.
@@ -120,6 +120,7 @@ pub struct Questionnaire {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -371,6 +372,7 @@ pub struct Questionnaire {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<QuestionnaireVersionAlgorithm>,
@@ -480,6 +482,7 @@ pub struct Questionnaire {
     /// 
     /// ## Conditions
     /// Used when: que-1a
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -531,6 +534,7 @@ pub struct Questionnaire {
     /// - **Strength**: required
     /// - **Description**: One of the resource types defined as part of this version of FHIR.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/resource-types|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.subjectType")]
     #[fhir_serde(rename = "subjectType")]
     pub subject_type: Option<Vec<Code>>,
@@ -692,6 +696,7 @@ pub struct Questionnaire {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this questionnaire is defined
@@ -851,6 +856,7 @@ pub struct Questionnaire {
     /// - **Strength**: example
     /// - **Description**: Codes for questionnaires, groups and individual questions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/questionnaire-questions
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/questionnaire-questions")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.code")]
     pub code: Option<Vec<Coding>>,
     /// Questions and sections within the Questionnaire
@@ -1151,6 +1157,7 @@ pub struct QuestionnaireItem {
     /// 
     /// ## Conditions
     /// Used when: que-3
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/questionnaire-questions")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.item.code")]
     pub code: Option<Vec<Coding>>,
     /// E.g. "1(a)", "2.5.3"
@@ -1226,6 +1233,7 @@ pub struct QuestionnaireItem {
     /// 
     /// ## Conditions
     /// Used when: que-9, que-8, que-6, que-5, que-3, que-10, que-1a, que-1b, que-1c
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/item-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.item.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -1304,6 +1312,7 @@ pub struct QuestionnaireItem {
     /// 
     /// ## Conditions
     /// Used when: que-12
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/questionnaire-enable-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.item.enableBehavior")]
     #[fhir_serde(rename = "enableBehavior")]
     pub enable_behavior: Option<Code>,
@@ -1326,6 +1335,7 @@ pub struct QuestionnaireItem {
     /// - **Strength**: required
     /// - **Description**: Defines how disabled elements should be rendered
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/questionnaire-disabled-display|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/questionnaire-disabled-display")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.item.disabledDisplay")]
     #[fhir_serde(rename = "disabledDisplay")]
     pub disabled_display: Option<Code>,
@@ -1481,6 +1491,7 @@ pub struct QuestionnaireItem {
     /// 
     /// ## Conditions
     /// Used when: que-10, que-14
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/questionnaire-answer-constraint")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.item.answerConstraint")]
     #[fhir_serde(rename = "answerConstraint")]
     pub answer_constraint: Option<Code>,
@@ -1573,7 +1584,7 @@ pub struct QuestionnaireItem {
 }
 
 /// Choice of types for the value\[x\] field in QuestionnaireItemAnswerOption
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum QuestionnaireItemAnswerOptionValue {
     /// Variant accepting the Integer type.
@@ -1721,6 +1732,7 @@ pub struct QuestionnaireItemAnswerOption {
     /// - **Strength**: example
     /// - **Description**: Allowed values to answer questions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/questionnaire-answers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/questionnaire-answers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.item.answerOption.value[x]")]
     #[fhir_serde(flatten)]
     pub value: Option<QuestionnaireItemAnswerOptionValue>,
@@ -1743,7 +1755,7 @@ pub struct QuestionnaireItemAnswerOption {
 }
 
 /// Choice of types for the answer\[x\] field in QuestionnaireItemEnableWhen
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "answer")]
 pub enum QuestionnaireItemEnableWhenAnswer {
     /// Variant accepting the Boolean type.
@@ -1958,6 +1970,7 @@ pub struct QuestionnaireItemEnableWhen {
     /// 
     /// ## Conditions
     /// Used when: que-7
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/questionnaire-enable-operator")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.item.enableWhen.operator")]
     pub operator: Code,
     /// Value for question comparison based on operator
@@ -1981,13 +1994,14 @@ pub struct QuestionnaireItemEnableWhen {
     /// 
     /// ## Conditions
     /// Used when: que-7
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/questionnaire-answers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.item.enableWhen.answer[x]")]
     #[fhir_serde(flatten)]
     pub answer: Option<QuestionnaireItemEnableWhenAnswer>,
 }
 
 /// Choice of types for the value\[x\] field in QuestionnaireItemInitial
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum QuestionnaireItemInitialValue {
     /// Variant accepting the Boolean type.
@@ -2160,6 +2174,7 @@ pub struct QuestionnaireItemInitial {
     /// - **Strength**: example
     /// - **Description**: Allowed values to answer questions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/questionnaire-answers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/questionnaire-answers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Questionnaire.item.initial.value[x]")]
     #[fhir_serde(flatten)]
     pub value: Option<QuestionnaireItemInitialValue>,

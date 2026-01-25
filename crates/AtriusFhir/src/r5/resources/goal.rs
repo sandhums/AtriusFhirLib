@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the start\[x\] field in Goal
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "start")]
 pub enum GoalStart {
     /// Variant accepting the Date type.
@@ -120,6 +120,7 @@ pub struct Goal {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Goal.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -302,6 +303,7 @@ pub struct Goal {
     /// - **Strength**: required
     /// - **Description**: Codes that reflect the current state of a goal and whether the goal is still being targeted.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/goal-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/goal-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Goal.lifecycleStatus")]
     #[fhir_serde(rename = "lifecycleStatus")]
     pub lifecycle_status: Code,
@@ -323,6 +325,7 @@ pub struct Goal {
     /// - **Strength**: preferred
     /// - **Description**: Indicates the progression, or lack thereof, towards the goal against the target.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/goal-achievement
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/goal-achievement")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Goal.achievementStatus")]
     #[fhir_serde(rename = "achievementStatus")]
     pub achievement_status: Option<CodeableConcept>,
@@ -346,6 +349,7 @@ pub struct Goal {
     /// - **Strength**: example
     /// - **Description**: Codes for grouping and sorting goals.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/goal-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/goal-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Goal.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// After meeting the goal, ongoing activity is needed to sustain the goal objective
@@ -399,6 +403,7 @@ pub struct Goal {
     /// - **Strength**: preferred
     /// - **Description**: The level of importance associated with a goal.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/goal-priority
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/goal-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Goal.priority")]
     pub priority: Option<CodeableConcept>,
     /// Code or text describing goal
@@ -427,6 +432,7 @@ pub struct Goal {
     /// - **Strength**: example
     /// - **Description**: Codes providing the details of a particular goal.  This will generally be system or implementation guide-specific.  In many systems, only the text element will be used.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinical-findings
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinical-findings")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Goal.description")]
     pub description: CodeableConcept,
     /// Who this goal is intended for
@@ -468,6 +474,7 @@ pub struct Goal {
     /// - **Strength**: example
     /// - **Description**: Codes describing events that can trigger the initiation of a goal.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/goal-start-event
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/goal-start-event")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Goal.start[x]")]
     #[fhir_serde(flatten)]
     pub start: Option<GoalStart>,
@@ -608,12 +615,13 @@ pub struct Goal {
     /// - **Strength**: example
     /// - **Description**: The result of the goal; e.g. "25% increase in shoulder mobility", "Anxiety reduced to moderate levels".  "15 kg weight loss sustained over 6 months".
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinical-findings
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinical-findings")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Goal.outcome")]
     pub outcome: Option<Vec<CodeableReference>>,
 }
 
 /// Choice of types for the detail\[x\] field in GoalTarget
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "detail")]
 pub enum GoalTargetDetail {
     /// Variant accepting the Quantity type.
@@ -640,7 +648,7 @@ pub enum GoalTargetDetail {
 }
 
 /// Choice of types for the due\[x\] field in GoalTarget
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "due")]
 pub enum GoalTargetDue {
     /// Variant accepting the Date type.
@@ -784,6 +792,7 @@ pub struct GoalTarget {
     /// 
     /// ## Conditions
     /// Used when: gol-1
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/observation-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Goal.target.measure")]
     pub measure: Option<CodeableConcept>,
     /// The target value to be achieved

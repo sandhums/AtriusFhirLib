@@ -139,7 +139,7 @@ use crate::element::Element;
 pub mod primitives;
 pub mod complex_types;
 pub mod resources;
-
+pub mod terminology;
 pub use primitives::*;
 pub use complex_types::*;
 pub use resources::*;

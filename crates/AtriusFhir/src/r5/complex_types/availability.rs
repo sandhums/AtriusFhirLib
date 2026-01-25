@@ -175,6 +175,7 @@ pub struct AvailabilityAvailableTime {
     /// - **Strength**: required
     /// - **Description**: The purpose for which an extended contact detail should be used.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/days-of-week|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/days-of-week")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Availability.availableTime.daysOfWeek")]
     #[fhir_serde(rename = "daysOfWeek")]
     pub days_of_week: Option<Vec<Code>>,

@@ -108,6 +108,7 @@ pub struct MedicationRequest {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -339,6 +340,7 @@ pub struct MedicationRequest {
     /// - **Strength**: required
     /// - **Description**: A coded concept specifying the state of the prescribing event. Describes the lifecycle of the prescription.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicationrequest-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/medicationrequest-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.status")]
     pub status: Code,
     /// Reason for current status
@@ -360,6 +362,7 @@ pub struct MedicationRequest {
     /// - **Strength**: example
     /// - **Description**: Identifies the reasons for a given status.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicationrequest-status-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicationrequest-status-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.statusReason")]
     #[fhir_serde(rename = "statusReason")]
     pub status_reason: Option<CodeableConcept>,
@@ -406,6 +409,7 @@ pub struct MedicationRequest {
     /// - **Strength**: required
     /// - **Description**: The kind of medication order.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicationrequest-intent|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/medicationrequest-intent")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.intent")]
     pub intent: Code,
     /// Grouping or category of medication request
@@ -431,6 +435,7 @@ pub struct MedicationRequest {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying where the medication is to be consumed or administered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicationrequest-admin-location
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicationrequest-admin-location")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// routine | urgent | asap | stat
@@ -451,6 +456,7 @@ pub struct MedicationRequest {
     /// - **Strength**: required
     /// - **Description**: Identifies the level of importance to be assigned to actioning the request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-priority|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.priority")]
     pub priority: Option<Code>,
     /// True if patient is to stop taking or not to start taking the medication
@@ -504,6 +510,7 @@ pub struct MedicationRequest {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying substance or product that can be ordered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.medication")]
     pub medication: CodeableReference,
     /// Individual or group for whom the medication has been requested
@@ -649,6 +656,7 @@ pub struct MedicationRequest {
     /// - **Strength**: extensible
     /// - **Description**: Identifies the type of individual that is desired to administer the medication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-intended-performer-role
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/medication-intended-performer-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.performerType")]
     #[fhir_serde(rename = "performerType")]
     pub performer_type: Option<CodeableConcept>,
@@ -710,6 +718,7 @@ pub struct MedicationRequest {
     /// - **Strength**: example
     /// - **Description**: A coded concept indicating why the medication was ordered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// Overall pattern of medication administration
@@ -730,6 +739,7 @@ pub struct MedicationRequest {
     /// - **Strength**: extensible
     /// - **Description**: Identifies the overall pattern of medication administratio.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicationrequest-course-of-therapy
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/medicationrequest-course-of-therapy")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.courseOfTherapyType")]
     #[fhir_serde(rename = "courseOfTherapyType")]
     pub course_of_therapy_type: Option<CodeableConcept>,
@@ -1144,6 +1154,7 @@ pub struct MedicationRequestDispenseRequest {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-dose-aid
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-dose-aid")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.dispenseRequest.doseAdministrationAid")]
     #[fhir_serde(rename = "doseAdministrationAid")]
     pub dose_administration_aid: Option<CodeableConcept>,
@@ -1277,7 +1288,7 @@ pub struct MedicationRequestDispenseRequestInitialFill {
 }
 
 /// Choice of types for the allowed\[x\] field in MedicationRequestSubstitution
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "allowed")]
 pub enum MedicationRequestSubstitutionAllowed {
     /// Variant accepting the Boolean type.
@@ -1410,6 +1421,7 @@ pub struct MedicationRequestSubstitution {
     /// - **Strength**: preferred
     /// - **Description**: Identifies the type of substitution allowed.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ActSubstanceAdminSubstitutionCode
+    #[fhir_binding(strength="preferred", valueset="http://terminology.hl7.org/ValueSet/v3-ActSubstanceAdminSubstitutionCode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.substitution.allowed[x]")]
     #[fhir_serde(flatten)]
     pub allowed: Option<MedicationRequestSubstitutionAllowed>,
@@ -1428,6 +1440,7 @@ pub struct MedicationRequestSubstitution {
     /// - **Strength**: example
     /// - **Description**: SubstanceAdminSubstitutionReason
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-SubstanceAdminSubstitutionReason
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-SubstanceAdminSubstitutionReason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationRequest.substitution.reason")]
     pub reason: Option<CodeableConcept>,
 }

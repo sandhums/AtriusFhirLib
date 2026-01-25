@@ -104,6 +104,7 @@ pub struct InventoryReport {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="InventoryReport.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -268,6 +269,7 @@ pub struct InventoryReport {
     /// - **Strength**: required
     /// - **Description**: The status of the InventoryReport.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/inventoryreport-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/inventoryreport-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="InventoryReport.status")]
     pub status: Code,
     /// snapshot | difference
@@ -289,6 +291,7 @@ pub struct InventoryReport {
     /// - **Strength**: required
     /// - **Description**: The type of count.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/inventoryreport-counttype|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/inventoryreport-counttype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="InventoryReport.countType")]
     #[fhir_serde(rename = "countType")]
     pub count_type: Code,

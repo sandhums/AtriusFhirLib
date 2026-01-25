@@ -104,6 +104,7 @@ pub struct TestReport {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestReport.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -292,6 +293,7 @@ pub struct TestReport {
     /// - **Strength**: required
     /// - **Description**: The current status of the test script execution.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/report-status-codes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/report-status-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestReport.status")]
     pub status: Code,
     /// Canonical URL to the  version-specific TestScript that was executed to produce this TestReport
@@ -332,6 +334,7 @@ pub struct TestReport {
     /// - **Strength**: required
     /// - **Description**: The overall execution result of the TestScript.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/report-result-codes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/report-result-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestReport.result")]
     pub result: Code,
     /// The final score (percentage of tests passed) resulting from the execution of the TestScript
@@ -551,6 +554,7 @@ pub struct TestReportParticipant {
     /// - **Strength**: required
     /// - **Description**: The type of participant.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/report-participant-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/report-participant-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestReport.participant.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -950,6 +954,7 @@ pub struct TestReportSetupActionAssert {
     /// - **Strength**: required
     /// - **Description**: The result of the execution of an individual action.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/report-action-result-codes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/report-action-result-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestReport.setup.action.assert.result")]
     pub result: Code,
     /// A message associated with the result
@@ -995,7 +1000,7 @@ pub struct TestReportSetupActionAssert {
 }
 
 /// Choice of types for the link\[x\] field in TestReportSetupActionAssertRequirement
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "link")]
 pub enum TestReportSetupActionAssertRequirementLink {
     /// Variant accepting the Uri type.
@@ -1244,6 +1249,7 @@ pub struct TestReportSetupActionOperation {
     /// - **Strength**: required
     /// - **Description**: The result of the execution of an individual action.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/report-action-result-codes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/report-action-result-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestReport.setup.action.operation.result")]
     pub result: Code,
     /// A message associated with the result

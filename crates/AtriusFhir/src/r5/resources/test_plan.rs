@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in TestPlan
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum TestPlanVersionAlgorithm {
     /// Variant accepting the String type.
@@ -113,6 +113,7 @@ pub struct TestPlan {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestPlan.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -360,6 +361,7 @@ pub struct TestPlan {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestPlan.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<TestPlanVersionAlgorithm>,
@@ -428,6 +430,7 @@ pub struct TestPlan {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestPlan.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -608,6 +611,7 @@ pub struct TestPlan {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestPlan.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this test plan is defined
@@ -686,6 +690,7 @@ pub struct TestPlan {
     /// - **Strength**: example
     /// - **Description**: The high-level category for this plan.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/testscript-scope-phase-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/testscript-scope-phase-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestPlan.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// What is being tested with this Test Plan - a conformance resource, or narrative criteria, or an external reference
@@ -1314,7 +1319,7 @@ pub struct TestPlanTestCaseDependency {
 }
 
 /// Choice of types for the source\[x\] field in TestPlanTestCaseTestData
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "source")]
 pub enum TestPlanTestCaseTestDataSource {
     /// Variant accepting the String type.
@@ -1588,7 +1593,7 @@ pub struct TestPlanTestCaseTestRun {
 }
 
 /// Choice of types for the source\[x\] field in TestPlanTestCaseTestRunScript
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "source")]
 pub enum TestPlanTestCaseTestRunScriptSource {
     /// Variant accepting the String type.

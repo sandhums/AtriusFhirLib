@@ -105,6 +105,7 @@ pub struct InsurancePlan {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="InsurancePlan.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -277,6 +278,7 @@ pub struct InsurancePlan {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="InsurancePlan.status")]
     pub status: Option<Code>,
     /// Kind of product
@@ -296,6 +298,7 @@ pub struct InsurancePlan {
     /// - **Strength**: example
     /// - **Description**: Used to categorize the product/plan.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/insuranceplan-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/insuranceplan-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="InsurancePlan.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -1590,6 +1593,7 @@ pub struct InsurancePlanPlanSpecificCostBenefitCost {
     /// - **Strength**: required
     /// - **Description**: Whether the cost applies to in-network or out-of-network providers.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/insuranceplan-applicability|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/insuranceplan-applicability")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="InsurancePlan.plan.specificCost.benefit.cost.applicability")]
     pub applicability: Option<CodeableConcept>,
     /// Additional information about the cost

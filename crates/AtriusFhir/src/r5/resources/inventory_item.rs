@@ -105,6 +105,7 @@ pub struct InventoryItem {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="InventoryItem.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -267,6 +268,7 @@ pub struct InventoryItem {
     /// - **Strength**: required
     /// - **Description**: Status of the inventory item.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/inventoryitem-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/inventoryitem-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="InventoryItem.status")]
     pub status: Code,
     /// Category or class of the item
@@ -580,7 +582,7 @@ pub struct InventoryItemAssociation {
 }
 
 /// Choice of types for the value\[x\] field in InventoryItemCharacteristic
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum InventoryItemCharacteristicValue {
     /// Variant accepting the String type.
@@ -871,6 +873,7 @@ pub struct InventoryItemDescription {
     /// - **Strength**: required
     /// - **Description**: Description languages.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="InventoryItem.description.language")]
     pub language: Option<Code>,
     /// Textual description of the item
@@ -1163,6 +1166,7 @@ pub struct InventoryItemName {
     /// - **Strength**: preferred
     /// - **Description**: Name types.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/inventoryitem-nametype
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/inventoryitem-nametype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="InventoryItem.name.nameType")]
     #[fhir_serde(rename = "nameType")]
     pub name_type: Coding,
@@ -1183,6 +1187,7 @@ pub struct InventoryItemName {
     /// - **Strength**: required
     /// - **Description**: Name languages.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="InventoryItem.name.language")]
     pub language: Code,
     /// The name or designation of the item

@@ -79,6 +79,7 @@ pub struct ContactPoint {
     /// 
     /// ## Conditions
     /// Used when: cpt-2
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/contact-point-system")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ContactPoint.system")]
     pub system: Option<Code>,
     /// The actual contact point details
@@ -132,6 +133,7 @@ pub struct ContactPoint {
     /// - **Strength**: required
     /// - **Description**: Use of contact point.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contact-point-use|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/contact-point-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ContactPoint.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Option<Code>,

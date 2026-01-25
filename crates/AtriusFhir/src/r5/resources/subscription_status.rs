@@ -107,6 +107,7 @@ pub struct SubscriptionStatus {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionStatus.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -259,6 +260,7 @@ pub struct SubscriptionStatus {
     /// 
     /// ## Conditions
     /// Used when: sst-2
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/subscription-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionStatus.status")]
     pub status: Option<Code>,
     /// handshake | heartbeat | event-notification | query-status | query-event
@@ -282,6 +284,7 @@ pub struct SubscriptionStatus {
     /// 
     /// ## Conditions
     /// Used when: sst-1, sst-2
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/subscription-notification-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionStatus.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -372,6 +375,7 @@ pub struct SubscriptionStatus {
     /// - **Strength**: example
     /// - **Description**: Codes to represent subscription error details.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/subscription-error
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/subscription-error")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionStatus.error")]
     pub error: Option<Vec<CodeableConcept>>,
 }

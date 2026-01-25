@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the occurrence\[x\] field in AdverseEvent
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurrence")]
 pub enum AdverseEventOccurrence {
     /// Variant accepting the DateTime type.
@@ -132,6 +132,7 @@ pub struct AdverseEvent {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -314,6 +315,7 @@ pub struct AdverseEvent {
     /// - **Strength**: required
     /// - **Description**: Codes identifying the lifecycle stage of an event.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/adverse-event-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.status")]
     pub status: Code,
     /// actual | potential
@@ -343,6 +345,7 @@ pub struct AdverseEvent {
     /// - **Strength**: required
     /// - **Description**: Overall nature of the adverse event, e.g. real or potential.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-actuality|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/adverse-event-actuality")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.actuality")]
     pub actuality: Code,
     /// wrong-patient | procedure-mishap | medication-mishap | device | unsafe-physical-environment | hospital-aquired-infection | wrong-body-site
@@ -362,6 +365,7 @@ pub struct AdverseEvent {
     /// - **Strength**: example
     /// - **Description**: Overall categorization of the event, e.g. product-related or situational.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adverse-event-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Event or incident that occurred or was averted
@@ -382,6 +386,7 @@ pub struct AdverseEvent {
     /// - **Strength**: example
     /// - **Description**: Detailed type of event.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adverse-event-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.code")]
     pub code: Option<CodeableConcept>,
     /// Subject impacted by event
@@ -545,6 +550,7 @@ pub struct AdverseEvent {
     /// - **Strength**: example
     /// - **Description**: Overall seriousness of this event for the patient.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-seriousness
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adverse-event-seriousness")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.seriousness")]
     pub seriousness: Option<CodeableConcept>,
     /// Type of outcome from the adverse event
@@ -565,6 +571,7 @@ pub struct AdverseEvent {
     /// - **Strength**: example
     /// - **Description**: Codes describing the type of outcome from the adverse event.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-outcome
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adverse-event-outcome")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.outcome")]
     pub outcome: Option<Vec<CodeableConcept>>,
     /// Who recorded the adverse event
@@ -720,7 +727,7 @@ pub struct AdverseEvent {
 }
 
 /// Choice of types for the item\[x\] field in AdverseEventContributingFactor
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "item")]
 pub enum AdverseEventContributingFactorItem {
     /// Variant accepting the Reference type.
@@ -853,13 +860,14 @@ pub struct AdverseEventContributingFactor {
     /// - **Strength**: example
     /// - **Description**: Codes describing the contributing factors suspected to have increased the probability or severity of the adverse event.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-contributing-factor
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adverse-event-contributing-factor")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.contributingFactor.item[x]")]
     #[fhir_serde(flatten)]
     pub item: Option<AdverseEventContributingFactorItem>,
 }
 
 /// Choice of types for the item\[x\] field in AdverseEventMitigatingAction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "item")]
 pub enum AdverseEventMitigatingActionItem {
     /// Variant accepting the Reference type.
@@ -992,6 +1000,7 @@ pub struct AdverseEventMitigatingAction {
     /// - **Strength**: example
     /// - **Description**: Codes describing the ameliorating actions taken after the adverse event occured in order to reduce the extent of harm.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-mitigating-action
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adverse-event-mitigating-action")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.mitigatingAction.item[x]")]
     #[fhir_serde(flatten)]
     pub item: Option<AdverseEventMitigatingActionItem>,
@@ -1118,6 +1127,7 @@ pub struct AdverseEventParticipant {
     /// - **Strength**: example
     /// - **Description**: Codes describing the type of involvement of the actor in the adverse event.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-participant-function
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adverse-event-participant-function")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.participant.function")]
     pub function: Option<CodeableConcept>,
     /// Who was involved in the adverse event or the potential adverse event
@@ -1142,7 +1152,7 @@ pub struct AdverseEventParticipant {
 }
 
 /// Choice of types for the item\[x\] field in AdverseEventPreventiveAction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "item")]
 pub enum AdverseEventPreventiveActionItem {
     /// Variant accepting the Reference type.
@@ -1273,13 +1283,14 @@ pub struct AdverseEventPreventiveAction {
     /// - **Strength**: example
     /// - **Description**: Codes describing the preventive actions that contributed to avoiding the adverse event.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-preventive-action
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adverse-event-preventive-action")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.preventiveAction.item[x]")]
     #[fhir_serde(flatten)]
     pub item: Option<AdverseEventPreventiveActionItem>,
 }
 
 /// Choice of types for the item\[x\] field in AdverseEventSupportingInfo
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "item")]
 pub enum AdverseEventSupportingInfoItem {
     /// Variant accepting the Reference type.
@@ -1418,13 +1429,14 @@ pub struct AdverseEventSupportingInfo {
     /// - **Strength**: example
     /// - **Description**: Codes describing the supporting information relevant to the event.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-supporting-info
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adverse-event-supporting-info")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.supportingInfo.item[x]")]
     #[fhir_serde(flatten)]
     pub item: Option<AdverseEventSupportingInfoItem>,
 }
 
 /// Choice of types for the instance\[x\] field in AdverseEventSuspectEntity
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "instance")]
 pub enum AdverseEventSuspectEntityInstance {
     /// Variant accepting the CodeableConcept type.
@@ -1694,6 +1706,7 @@ pub struct AdverseEventSuspectEntityCausality {
     /// - **Strength**: example
     /// - **Description**: TODO.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-causality-method
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adverse-event-causality-method")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.suspectEntity.causality.assessmentMethod")]
     #[fhir_serde(rename = "assessmentMethod")]
     pub assessment_method: Option<CodeableConcept>,
@@ -1715,6 +1728,7 @@ pub struct AdverseEventSuspectEntityCausality {
     /// - **Strength**: example
     /// - **Description**: Codes for the assessment of whether the entity caused the event.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adverse-event-causality-assess
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adverse-event-causality-assess")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdverseEvent.suspectEntity.causality.entityRelatedness")]
     #[fhir_serde(rename = "entityRelatedness")]
     pub entity_relatedness: Option<CodeableConcept>,

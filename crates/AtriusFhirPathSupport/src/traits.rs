@@ -216,6 +216,15 @@ where
     }
 }
 
+// New
+impl<T> IntoEvaluationResult for &T
+where
+    T: IntoEvaluationResult + ?Sized,
+{
+    fn to_evaluation_result(&self) -> EvaluationResult {
+        (*self).to_evaluation_result()
+    }
+}
 /// Convenience function for converting values to evaluation results.
 ///
 /// This function provides a unified interface for conversion that can be used

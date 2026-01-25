@@ -109,6 +109,7 @@ pub struct QuestionnaireResponse {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="QuestionnaireResponse.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -376,6 +377,7 @@ pub struct QuestionnaireResponse {
     /// - **Strength**: required
     /// - **Description**: Lifecycle status of the questionnaire response.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/questionnaire-answers-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/questionnaire-answers-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="QuestionnaireResponse.status")]
     pub status: Code,
     /// The subject of the questions
@@ -770,7 +772,7 @@ pub struct QuestionnaireResponseItem {
 }
 
 /// Choice of types for the value\[x\] field in QuestionnaireResponseItemAnswer
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum QuestionnaireResponseItemAnswerValue {
     /// Variant accepting the Boolean type.
@@ -960,6 +962,7 @@ pub struct QuestionnaireResponseItemAnswer {
     /// 
     /// ## Conditions
     /// Used when: qrs-2
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/questionnaire-answers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="QuestionnaireResponse.item.answer.value[x]")]
     #[fhir_serde(flatten)]
     pub value: Option<QuestionnaireResponseItemAnswerValue>,

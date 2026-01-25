@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the occurrence\[x\] field in Immunization
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurrence")]
 pub enum ImmunizationOccurrence {
     /// Variant accepting the DateTime type.
@@ -118,6 +118,7 @@ pub struct Immunization {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -302,6 +303,7 @@ pub struct Immunization {
     /// - **Strength**: required
     /// - **Description**: x
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/immunization-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.status")]
     pub status: Code,
     /// Reason for current status
@@ -322,6 +324,7 @@ pub struct Immunization {
     /// - **Strength**: example
     /// - **Description**: x
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-status-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-status-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.statusReason")]
     #[fhir_serde(rename = "statusReason")]
     pub status_reason: Option<CodeableConcept>,
@@ -353,6 +356,7 @@ pub struct Immunization {
     /// - **Strength**: example
     /// - **Description**: x
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/vaccine-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/vaccine-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.vaccineCode")]
     #[fhir_serde(rename = "vaccineCode")]
     pub vaccine_code: CodeableConcept,
@@ -519,6 +523,7 @@ pub struct Immunization {
     /// - **Strength**: example
     /// - **Description**: x
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-origin
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-origin")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.informationSource")]
     #[fhir_serde(rename = "informationSource")]
     pub information_source: Option<CodeableReference>,
@@ -547,6 +552,7 @@ pub struct Immunization {
     /// - **Strength**: example
     /// - **Description**: x
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-site
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.site")]
     pub site: Option<CodeableConcept>,
     /// How vaccine entered body
@@ -563,6 +569,7 @@ pub struct Immunization {
     /// - **Strength**: example
     /// - **Description**: x
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-route
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-route")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.route")]
     pub route: Option<CodeableConcept>,
     /// Amount of vaccine administered
@@ -622,6 +629,7 @@ pub struct Immunization {
     /// - **Strength**: example
     /// - **Description**: x
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// Dose potency
@@ -664,6 +672,7 @@ pub struct Immunization {
     /// - **Strength**: example
     /// - **Description**: The reason why a dose is considered to be subpotent.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-subpotent-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-subpotent-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.subpotentReason")]
     #[fhir_serde(rename = "subpotentReason")]
     pub subpotent_reason: Option<Vec<CodeableConcept>>,
@@ -696,6 +705,7 @@ pub struct Immunization {
     /// - **Strength**: example
     /// - **Description**: x
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-funding-source
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-funding-source")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.fundingSource")]
     #[fhir_serde(rename = "fundingSource")]
     pub funding_source: Option<CodeableConcept>,
@@ -852,6 +862,7 @@ pub struct ImmunizationPerformer {
     /// - **Strength**: extensible
     /// - **Description**: x
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-function
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/immunization-function")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.performer.function")]
     pub function: Option<CodeableConcept>,
     /// Individual or organization who was performing
@@ -987,6 +998,7 @@ pub struct ImmunizationProgramEligibility {
     /// - **Strength**: example
     /// - **Description**: x
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-vaccine-funding-program
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-vaccine-funding-program")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.programEligibility.program")]
     pub program: CodeableConcept,
     /// The patient's eligibility status for the program
@@ -1003,6 +1015,7 @@ pub struct ImmunizationProgramEligibility {
     /// - **Strength**: example
     /// - **Description**: x
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-program-eligibility
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-program-eligibility")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.programEligibility.programStatus")]
     #[fhir_serde(rename = "programStatus")]
     pub program_status: CodeableConcept,
@@ -1146,6 +1159,7 @@ pub struct ImmunizationProtocolApplied {
     /// - **Strength**: example
     /// - **Description**: x
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-target-disease
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-target-disease")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Immunization.protocolApplied.targetDisease")]
     #[fhir_serde(rename = "targetDisease")]
     pub target_disease: Option<Vec<CodeableConcept>>,

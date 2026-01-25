@@ -107,6 +107,7 @@ pub struct Communication {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Communication.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -385,6 +386,7 @@ pub struct Communication {
     /// - **Strength**: required
     /// - **Description**: The status of the communication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/event-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/event-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Communication.status")]
     pub status: Code,
     /// Reason for current status
@@ -412,6 +414,7 @@ pub struct Communication {
     /// 
     /// ## Aliases
     /// Suspended Reason, Cancelled Reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/communication-not-done-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Communication.statusReason")]
     #[fhir_serde(rename = "statusReason")]
     pub status_reason: Option<CodeableConcept>,
@@ -434,6 +437,7 @@ pub struct Communication {
     /// - **Strength**: example
     /// - **Description**: Codes for general categories of communications such as alerts, instructions, etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/communication-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/communication-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Communication.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// routine | urgent | asap | stat
@@ -459,6 +463,7 @@ pub struct Communication {
     /// - **Strength**: required
     /// - **Description**: Codes indicating the relative importance of a communication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-priority|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Communication.priority")]
     pub priority: Option<Code>,
     /// A channel of communication
@@ -475,6 +480,7 @@ pub struct Communication {
     /// - **Strength**: example
     /// - **Description**: Codes for communication mediums such as phone, fax, email, in person, etc.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ParticipationMode
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-ParticipationMode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Communication.medium")]
     pub medium: Option<Vec<CodeableConcept>>,
     /// Focus of message
@@ -511,6 +517,7 @@ pub struct Communication {
     /// - **Strength**: example
     /// - **Description**: Codes describing the purpose or content of the communication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/communication-topic
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/communication-topic")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Communication.topic")]
     pub topic: Option<CodeableConcept>,
     /// Resources that pertain to this communication
@@ -622,6 +629,7 @@ pub struct Communication {
     /// - **Strength**: example
     /// - **Description**: Codes for describing reasons for the occurrence of a communication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinical-findings
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinical-findings")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Communication.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// Message payload
@@ -650,7 +658,7 @@ pub struct Communication {
 }
 
 /// Choice of types for the content\[x\] field in CommunicationPayload
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "content")]
 pub enum CommunicationPayloadContent {
     /// Variant accepting the Attachment type.

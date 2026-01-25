@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in CapabilityStatement
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum CapabilityStatementVersionAlgorithm {
     /// Variant accepting the String type.
@@ -124,6 +124,7 @@ pub struct CapabilityStatement {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -366,6 +367,7 @@ pub struct CapabilityStatement {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<CapabilityStatementVersionAlgorithm>,
@@ -440,6 +442,7 @@ pub struct CapabilityStatement {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -629,6 +632,7 @@ pub struct CapabilityStatement {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this capability statement is defined
@@ -720,6 +724,7 @@ pub struct CapabilityStatement {
     /// 
     /// ## Conditions
     /// Used when: cpb-16, cpb-15, cpb-3, cpb-14
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/capability-statement-kind")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.kind")]
     pub kind: Code,
     /// Canonical URL of another capability statement this implements
@@ -840,6 +845,7 @@ pub struct CapabilityStatement {
     /// - **Strength**: required
     /// - **Description**: All published FHIR Versions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/FHIR-version|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/FHIR-version")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.fhirVersion")]
     #[fhir_serde(rename = "fhirVersion")]
     pub fhir_version: Code,
@@ -866,6 +872,7 @@ pub struct CapabilityStatement {
     /// - **Strength**: required
     /// - **Description**: The mime type of an attachment. Any valid mime type is allowed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/mimetypes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/mimetypes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.format")]
     pub format: Option<Vec<Code>>,
     /// Patch formats supported
@@ -892,6 +899,7 @@ pub struct CapabilityStatement {
     /// - **Strength**: required
     /// - **Description**: BCP 13 (RFCs 2045, 2046, 2047, 4288, 4289 and 2049)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/mimetypes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/mimetypes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.patchFormat")]
     #[fhir_serde(rename = "patchFormat")]
     pub patch_format: Option<Vec<Code>>,
@@ -918,6 +926,7 @@ pub struct CapabilityStatement {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.acceptLanguage")]
     #[fhir_serde(rename = "acceptLanguage")]
     pub accept_language: Option<Vec<Code>>,
@@ -1141,6 +1150,7 @@ pub struct CapabilityStatementDocument {
     /// 
     /// ## Conditions
     /// Used when: cpb-7
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/document-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.document.mode")]
     pub mode: Code,
     /// Description of document support
@@ -1632,6 +1642,7 @@ pub struct CapabilityStatementMessagingEndpoint {
     /// - **Strength**: extensible
     /// - **Description**: The protocol used for message transport.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/message-transport
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/message-transport")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.messaging.endpoint.protocol")]
     pub protocol: Coding,
     /// Network address or identifier of the end-point
@@ -1772,6 +1783,7 @@ pub struct CapabilityStatementMessagingSupportedMessage {
     /// - **Strength**: required
     /// - **Description**: The mode of a message capability statement.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/event-capability-mode|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/event-capability-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.messaging.supportedMessage.mode")]
     pub mode: Code,
     /// Message supported by this system
@@ -1925,6 +1937,7 @@ pub struct CapabilityStatementRest {
     /// 
     /// ## Conditions
     /// Used when: cpb-4
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/restful-capability-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.rest.mode")]
     pub mode: Code,
     /// General description of implementation
@@ -2168,6 +2181,7 @@ pub struct CapabilityStatementRestInteraction {
     /// - **Strength**: required
     /// - **Description**: Operations supported by REST at the system level.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/system-restful-interaction|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/system-restful-interaction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.rest.interaction.code")]
     pub code: Code,
     /// Anything special about operation behavior
@@ -2317,6 +2331,7 @@ pub struct CapabilityStatementRestResource {
     /// 
     /// ## Conditions
     /// Used when: cpb-9
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.rest.resource.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -2424,6 +2439,7 @@ pub struct CapabilityStatementRestResource {
     /// - **Strength**: required
     /// - **Description**: How the system supports versioning for a resource.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/versioning-policy|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/versioning-policy")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.rest.resource.versioning")]
     pub versioning: Option<Code>,
     /// Whether vRead can return past versions
@@ -2500,6 +2516,7 @@ pub struct CapabilityStatementRestResource {
     /// - **Strength**: required
     /// - **Description**: A code that indicates how the server supports conditional read.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/conditional-read-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/conditional-read-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.rest.resource.conditionalRead")]
     #[fhir_serde(rename = "conditionalRead")]
     pub conditional_read: Option<Code>,
@@ -2553,6 +2570,7 @@ pub struct CapabilityStatementRestResource {
     /// - **Strength**: required
     /// - **Description**: A code that indicates how the server supports conditional delete.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/conditional-delete-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/conditional-delete-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.rest.resource.conditionalDelete")]
     #[fhir_serde(rename = "conditionalDelete")]
     pub conditional_delete: Option<Code>,
@@ -2570,6 +2588,7 @@ pub struct CapabilityStatementRestResource {
     /// - **Strength**: required
     /// - **Description**: A set of flags that defines how references are supported.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/reference-handling-policy|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/reference-handling-policy")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.rest.resource.referencePolicy")]
     #[fhir_serde(rename = "referencePolicy")]
     pub reference_policy: Option<Vec<Code>>,
@@ -2792,6 +2811,7 @@ pub struct CapabilityStatementRestResourceInteraction {
     /// - **Strength**: required
     /// - **Description**: Operations supported by REST at the type or instance level.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/type-restful-interaction|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/type-restful-interaction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.rest.resource.interaction.code")]
     pub code: Code,
     /// Anything special about operation behavior
@@ -3179,6 +3199,7 @@ pub struct CapabilityStatementRestResourceSearchParam {
     /// - **Strength**: required
     /// - **Description**: Data types allowed to be used for search parameters.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/search-param-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/search-param-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.rest.resource.searchParam.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -3336,6 +3357,7 @@ pub struct CapabilityStatementRestSecurity {
     /// - **Strength**: extensible
     /// - **Description**: Types of security services used with FHIR.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/restful-security-service
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/restful-security-service")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CapabilityStatement.rest.security.service")]
     pub service: Option<Vec<CodeableConcept>>,
     /// General description of how security works

@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in StructureMap
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum StructureMapVersionAlgorithm {
     /// Variant accepting the String type.
@@ -114,6 +114,7 @@ pub struct StructureMap {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureMap.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -362,6 +363,7 @@ pub struct StructureMap {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureMap.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<StructureMapVersionAlgorithm>,
@@ -434,6 +436,7 @@ pub struct StructureMap {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureMap.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -615,6 +618,7 @@ pub struct StructureMap {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureMap.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this structure map is defined
@@ -1031,6 +1035,7 @@ pub struct StructureMapGroup {
     /// - **Strength**: required
     /// - **Description**: If this is the default rule set to apply for the source type, or this combination of types.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/map-group-type-mode|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/map-group-type-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureMap.group.typeMode")]
     #[fhir_serde(rename = "typeMode")]
     pub type_mode: Option<Code>,
@@ -1235,6 +1240,7 @@ pub struct StructureMapGroupInput {
     /// - **Strength**: required
     /// - **Description**: Mode for this instance of data.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/map-input-mode|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/map-input-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureMap.group.input.mode")]
     pub mode: Code,
     /// Documentation for this instance of data
@@ -1783,6 +1789,7 @@ pub struct StructureMapGroupRuleSource {
     /// - **Strength**: required
     /// - **Description**: If field is a list, how to manage the source.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/map-source-list-mode|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/map-source-list-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureMap.group.rule.source.listMode")]
     #[fhir_serde(rename = "listMode")]
     pub list_mode: Option<Code>,
@@ -2021,6 +2028,7 @@ pub struct StructureMapGroupRuleTarget {
     /// - **Strength**: required
     /// - **Description**: If field is a list, how to manage the production.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/map-target-list-mode|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/map-target-list-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureMap.group.rule.target.listMode")]
     #[fhir_serde(rename = "listMode")]
     pub list_mode: Option<Vec<Code>>,
@@ -2056,6 +2064,7 @@ pub struct StructureMapGroupRuleTarget {
     /// - **Strength**: required
     /// - **Description**: How data is copied/created.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/map-transform|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/map-transform")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureMap.group.rule.target.transform")]
     pub transform: Option<Code>,
     /// Parameters to the transform
@@ -2075,7 +2084,7 @@ pub struct StructureMapGroupRuleTarget {
 }
 
 /// Choice of types for the value\[x\] field in StructureMapGroupRuleTargetParameter
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum StructureMapGroupRuleTargetParameterValue {
     /// Variant accepting the Id type.
@@ -2362,6 +2371,7 @@ pub struct StructureMapStructure {
     /// - **Strength**: required
     /// - **Description**: How the referenced structure is used in this mapping.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/map-model-mode|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/map-model-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureMap.structure.mode")]
     pub mode: Code,
     /// Name for type in this map

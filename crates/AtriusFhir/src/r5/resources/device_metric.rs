@@ -106,6 +106,7 @@ pub struct DeviceMetric {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceMetric.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -277,6 +278,7 @@ pub struct DeviceMetric {
     /// - **Strength**: preferred
     /// - **Description**: IEEE 11073-10101
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/devicemetric-type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/devicemetric-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceMetric.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -302,6 +304,7 @@ pub struct DeviceMetric {
     /// - **Strength**: preferred
     /// - **Description**: IEEE 11073-10101
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ucum-units
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/ucum-units")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceMetric.unit")]
     pub unit: Option<CodeableConcept>,
     /// Describes the link to the Device
@@ -340,6 +343,7 @@ pub struct DeviceMetric {
     /// - **Strength**: required
     /// - **Description**: Describes the operational status of the DeviceMetric.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/metric-operational-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/metric-operational-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceMetric.operationalStatus")]
     #[fhir_serde(rename = "operationalStatus")]
     pub operational_status: Option<Code>,
@@ -361,6 +365,7 @@ pub struct DeviceMetric {
     /// - **Strength**: required
     /// - **Description**: Describes the typical color of representation.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/color-codes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/color-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceMetric.color")]
     pub color: Option<Code>,
     /// measurement | setting | calculation | unspecified
@@ -381,6 +386,7 @@ pub struct DeviceMetric {
     /// - **Strength**: required
     /// - **Description**: Describes the category of the metric.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/metric-category|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/metric-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceMetric.category")]
     pub category: Code,
     /// Indicates how often the metric is taken or recorded
@@ -530,6 +536,7 @@ pub struct DeviceMetricCalibration {
     /// - **Strength**: required
     /// - **Description**: Describes the type of a metric calibration.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/metric-calibration-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/metric-calibration-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceMetric.calibration.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Code>,
@@ -547,6 +554,7 @@ pub struct DeviceMetricCalibration {
     /// - **Strength**: required
     /// - **Description**: Describes the state of a metric calibration.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/metric-calibration-state|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/metric-calibration-state")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceMetric.calibration.state")]
     pub state: Option<Code>,
     /// Describes the time last calibration has been performed

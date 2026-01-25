@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the author\[x\] field in Annotation
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "author")]
 pub enum AnnotationAuthor {
     /// Variant accepting the Reference type.

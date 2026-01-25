@@ -79,6 +79,7 @@ pub struct ExtendedContactDetail {
     /// - **Strength**: preferred
     /// - **Description**: The purpose for which an extended contact detail should be used.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/contactentity-type
+    #[fhir_binding(strength="preferred", valueset="http://terminology.hl7.org/ValueSet/contactentity-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExtendedContactDetail.purpose")]
     pub purpose: Option<CodeableConcept>,
     /// Name of an individual to contact

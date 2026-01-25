@@ -106,6 +106,7 @@ pub struct ExplanationOfBenefit {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -294,6 +295,7 @@ pub struct ExplanationOfBenefit {
     /// - **Strength**: required
     /// - **Description**: A code specifying the state of the resource instance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/explanationofbenefit-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/explanationofbenefit-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.status")]
     pub status: Code,
     /// Category or discipline
@@ -323,6 +325,7 @@ pub struct ExplanationOfBenefit {
     /// - **Strength**: extensible
     /// - **Description**: The type or discipline-style of the claim.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/claim-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -349,6 +352,7 @@ pub struct ExplanationOfBenefit {
     /// - **Strength**: example
     /// - **Description**: A more granular claim typecode.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-subtype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-subtype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.subType")]
     #[fhir_serde(rename = "subType")]
     pub sub_type: Option<CodeableConcept>,
@@ -383,6 +387,7 @@ pub struct ExplanationOfBenefit {
     /// - **Strength**: required
     /// - **Description**: Complete, proposed, exploratory, other.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-use|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/claim-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Code,
@@ -527,6 +532,7 @@ pub struct ExplanationOfBenefit {
     /// - **Strength**: example
     /// - **Description**: The timeliness with which processing is required: stat, normal, deferred.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/process-priority
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/process-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.priority")]
     pub priority: Option<CodeableConcept>,
     /// For whom to reserve funds
@@ -556,6 +562,7 @@ pub struct ExplanationOfBenefit {
     /// 
     /// ## Aliases
     /// Fund pre-allocation
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/fundsreserve")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.fundsReserveRequested")]
     #[fhir_serde(rename = "fundsReserveRequested")]
     pub funds_reserve_requested: Option<CodeableConcept>,
@@ -582,6 +589,7 @@ pub struct ExplanationOfBenefit {
     /// - **Strength**: example
     /// - **Description**: For whom funds are to be reserved: (Patient, Provider, None).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fundsreserve
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/fundsreserve")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.fundsReserve")]
     #[fhir_serde(rename = "fundsReserve")]
     pub funds_reserve: Option<CodeableConcept>,
@@ -787,6 +795,7 @@ pub struct ExplanationOfBenefit {
     /// - **Strength**: required
     /// - **Description**: The result of the claim processing.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-outcome|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/claim-outcome")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.outcome")]
     pub outcome: Code,
     /// Result of the adjudication
@@ -816,6 +825,7 @@ pub struct ExplanationOfBenefit {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-decision
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-decision")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.decision")]
     pub decision: Option<CodeableConcept>,
     /// Disposition Message
@@ -899,6 +909,7 @@ pub struct ExplanationOfBenefit {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-diagnosisrelatedgroup
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-diagnosisrelatedgroup")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.diagnosisRelatedGroup")]
     #[fhir_serde(rename = "diagnosisRelatedGroup")]
     pub diagnosis_related_group: Option<CodeableConcept>,
@@ -1155,6 +1166,7 @@ pub struct ExplanationOfBenefit {
     /// - **Strength**: example
     /// - **Description**: The forms codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/forms
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/forms")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.formCode")]
     #[fhir_serde(rename = "formCode")]
     pub form_code: Option<CodeableConcept>,
@@ -1228,7 +1240,7 @@ pub struct ExplanationOfBenefit {
 }
 
 /// Choice of types for the location\[x\] field in ExplanationOfBenefitAccident
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "location")]
 pub enum ExplanationOfBenefitAccidentLocation {
     /// Variant accepting the Address type.
@@ -1383,6 +1395,7 @@ pub struct ExplanationOfBenefitAccident {
     /// - **Strength**: extensible
     /// - **Description**: Type of accident: work place, auto, etc.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ActIncidentCode
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/v3-ActIncidentCode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.accident.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1405,7 +1418,7 @@ pub struct ExplanationOfBenefitAccident {
 }
 
 /// Choice of types for the serviced\[x\] field in ExplanationOfBenefitAddItem
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "serviced")]
 pub enum ExplanationOfBenefitAddItemServiced {
     /// Variant accepting the Date type.
@@ -1417,7 +1430,7 @@ pub enum ExplanationOfBenefitAddItemServiced {
 }
 
 /// Choice of types for the location\[x\] field in ExplanationOfBenefitAddItem
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "location")]
 pub enum ExplanationOfBenefitAddItemLocation {
     /// Variant accepting the CodeableConcept type.
@@ -1635,6 +1648,7 @@ pub struct ExplanationOfBenefitAddItem {
     /// - **Strength**: example
     /// - **Description**: Codes for the revenue or cost centers supplying the service and/or products.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-revenue-center
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-revenue-center")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.revenue")]
     pub revenue: Option<CodeableConcept>,
     /// Billing, service, product, or drug code
@@ -1668,6 +1682,7 @@ pub struct ExplanationOfBenefitAddItem {
     /// 
     /// ## Aliases
     /// Drug Code, Bill Code, Service Code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.productOrService")]
     #[fhir_serde(rename = "productOrService")]
     pub product_or_service: Option<CodeableConcept>,
@@ -1691,6 +1706,7 @@ pub struct ExplanationOfBenefitAddItem {
     /// 
     /// ## Aliases
     /// End of a range of Drug Code; Bill Code; Service Cod
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.productOrServiceEnd")]
     #[fhir_serde(rename = "productOrServiceEnd")]
     pub product_or_service_end: Option<CodeableConcept>,
@@ -1733,6 +1749,7 @@ pub struct ExplanationOfBenefitAddItem {
     /// - **Strength**: example
     /// - **Description**: Item type or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or an appliance was lost or stolen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-modifiers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-modifiers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.modifier")]
     pub modifier: Option<Vec<CodeableConcept>>,
     /// Program the product or service is provided under
@@ -1757,6 +1774,7 @@ pub struct ExplanationOfBenefitAddItem {
     /// - **Strength**: example
     /// - **Description**: Program specific reason codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-program-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-program-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.programCode")]
     #[fhir_serde(rename = "programCode")]
     pub program_code: Option<Vec<CodeableConcept>>,
@@ -1795,6 +1813,7 @@ pub struct ExplanationOfBenefitAddItem {
     /// - **Strength**: example
     /// - **Description**: Place where the service is rendered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-place
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-place")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.location[x]")]
     #[fhir_serde(flatten)]
     pub location: Option<ExplanationOfBenefitAddItemLocation>,
@@ -2088,6 +2107,7 @@ pub struct ExplanationOfBenefitAddItemBodySite {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/tooth
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/tooth")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.bodySite.site")]
     pub site: Option<Vec<CodeableReference>>,
     /// Sub-location
@@ -2106,6 +2126,7 @@ pub struct ExplanationOfBenefitAddItemBodySite {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/surface
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/surface")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.bodySite.subSite")]
     #[fhir_serde(rename = "subSite")]
     pub sub_site: Option<Vec<CodeableConcept>>,
@@ -2243,6 +2264,7 @@ pub struct ExplanationOfBenefitAddItemDetail {
     /// - **Strength**: example
     /// - **Description**: Codes for the revenue or cost centers supplying the service and/or products.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-revenue-center
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-revenue-center")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.detail.revenue")]
     pub revenue: Option<CodeableConcept>,
     /// Billing, service, product, or drug code
@@ -2276,6 +2298,7 @@ pub struct ExplanationOfBenefitAddItemDetail {
     /// 
     /// ## Aliases
     /// Drug Code, Bill Code, Service Code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.detail.productOrService")]
     #[fhir_serde(rename = "productOrService")]
     pub product_or_service: Option<CodeableConcept>,
@@ -2299,6 +2322,7 @@ pub struct ExplanationOfBenefitAddItemDetail {
     /// 
     /// ## Aliases
     /// End of a range of Drug Code; Bill Code; Service Cod
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.detail.productOrServiceEnd")]
     #[fhir_serde(rename = "productOrServiceEnd")]
     pub product_or_service_end: Option<CodeableConcept>,
@@ -2326,6 +2350,7 @@ pub struct ExplanationOfBenefitAddItemDetail {
     /// - **Strength**: example
     /// - **Description**: Item type or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or an appliance was lost or stolen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-modifiers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-modifiers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.detail.modifier")]
     pub modifier: Option<Vec<CodeableConcept>>,
     /// Paid by the patient
@@ -2620,6 +2645,7 @@ pub struct ExplanationOfBenefitAddItemDetailSubDetail {
     /// - **Strength**: example
     /// - **Description**: Codes for the revenue or cost centers supplying the service and/or products.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-revenue-center
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-revenue-center")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.detail.subDetail.revenue")]
     pub revenue: Option<CodeableConcept>,
     /// Billing, service, product, or drug code
@@ -2653,6 +2679,7 @@ pub struct ExplanationOfBenefitAddItemDetailSubDetail {
     /// 
     /// ## Aliases
     /// Drug Code, Bill Code, Service Code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.detail.subDetail.productOrService")]
     #[fhir_serde(rename = "productOrService")]
     pub product_or_service: Option<CodeableConcept>,
@@ -2676,6 +2703,7 @@ pub struct ExplanationOfBenefitAddItemDetailSubDetail {
     /// 
     /// ## Aliases
     /// End of a range of Drug Code; Bill Code; Service Cod
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.detail.subDetail.productOrServiceEnd")]
     #[fhir_serde(rename = "productOrServiceEnd")]
     pub product_or_service_end: Option<CodeableConcept>,
@@ -2703,6 +2731,7 @@ pub struct ExplanationOfBenefitAddItemDetailSubDetail {
     /// - **Strength**: example
     /// - **Description**: Item type or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or an appliance was lost or stolen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-modifiers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-modifiers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.addItem.detail.subDetail.modifier")]
     pub modifier: Option<Vec<CodeableConcept>>,
     /// Paid by the patient
@@ -2974,6 +3003,7 @@ pub struct ExplanationOfBenefitBenefitBalance {
     /// - **Strength**: example
     /// - **Description**: Benefit categories such as: oral, medical, vision, oral-basic etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-benefitcategory
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-benefitcategory")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.benefitBalance.category")]
     pub category: CodeableConcept,
     /// Excluded from the plan
@@ -3045,6 +3075,7 @@ pub struct ExplanationOfBenefitBenefitBalance {
     /// - **Strength**: example
     /// - **Description**: Code to classify in or out of network services.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/benefit-network
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/benefit-network")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.benefitBalance.network")]
     pub network: Option<CodeableConcept>,
     /// Individual or family
@@ -3064,6 +3095,7 @@ pub struct ExplanationOfBenefitBenefitBalance {
     /// - **Strength**: example
     /// - **Description**: Unit covered/serviced - individual or family.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/benefit-unit
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/benefit-unit")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.benefitBalance.unit")]
     pub unit: Option<CodeableConcept>,
     /// Annual or lifetime
@@ -3084,6 +3116,7 @@ pub struct ExplanationOfBenefitBenefitBalance {
     /// - **Strength**: example
     /// - **Description**: Coverage unit - annual, lifetime.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/benefit-term
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/benefit-term")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.benefitBalance.term")]
     pub term: Option<CodeableConcept>,
     /// Benefit Summary
@@ -3100,7 +3133,7 @@ pub struct ExplanationOfBenefitBenefitBalance {
 }
 
 /// Choice of types for the allowed\[x\] field in ExplanationOfBenefitBenefitBalanceFinancial
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "allowed")]
 pub enum ExplanationOfBenefitBenefitBalanceFinancialAllowed {
     /// Variant accepting the UnsignedInt type.
@@ -3115,7 +3148,7 @@ pub enum ExplanationOfBenefitBenefitBalanceFinancialAllowed {
 }
 
 /// Choice of types for the used\[x\] field in ExplanationOfBenefitBenefitBalanceFinancial
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "used")]
 pub enum ExplanationOfBenefitBenefitBalanceFinancialUsed {
     /// Variant accepting the UnsignedInt type.
@@ -3246,6 +3279,7 @@ pub struct ExplanationOfBenefitBenefitBalanceFinancial {
     /// - **Strength**: example
     /// - **Description**: Deductable, visits, co-pay, etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/benefit-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/benefit-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.benefitBalance.financial.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -3454,6 +3488,7 @@ pub struct ExplanationOfBenefitCareTeam {
     /// - **Strength**: example
     /// - **Description**: The role codes for the care team members.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-careteamrole
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-careteamrole")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.careTeam.role")]
     pub role: Option<CodeableConcept>,
     /// Practitioner or provider specialization
@@ -3474,12 +3509,13 @@ pub struct ExplanationOfBenefitCareTeam {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/provider-qualification
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/provider-qualification")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.careTeam.specialty")]
     pub specialty: Option<CodeableConcept>,
 }
 
 /// Choice of types for the diagnosis\[x\] field in ExplanationOfBenefitDiagnosis
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "diagnosis")]
 pub enum ExplanationOfBenefitDiagnosisDiagnosis {
     /// Variant accepting the CodeableConcept type.
@@ -3631,6 +3667,7 @@ pub struct ExplanationOfBenefitDiagnosis {
     /// - **Strength**: example
     /// - **Description**: ICD10 Diagnostic codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/icd-10
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/icd-10")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.diagnosis.diagnosis[x]")]
     #[fhir_serde(flatten)]
     pub diagnosis: Option<ExplanationOfBenefitDiagnosisDiagnosis>,
@@ -3655,6 +3692,7 @@ pub struct ExplanationOfBenefitDiagnosis {
     /// - **Strength**: example
     /// - **Description**: The type of the diagnosis: admitting, principal, discharge.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-diagnosistype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-diagnosistype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.diagnosis.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -3676,13 +3714,14 @@ pub struct ExplanationOfBenefitDiagnosis {
     /// - **Strength**: example
     /// - **Description**: Present on admission.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-diagnosis-on-admission
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-diagnosis-on-admission")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.diagnosis.onAdmission")]
     #[fhir_serde(rename = "onAdmission")]
     pub on_admission: Option<CodeableConcept>,
 }
 
 /// Choice of types for the when\[x\] field in ExplanationOfBenefitEvent
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "when")]
 pub enum ExplanationOfBenefitEventWhen {
     /// Variant accepting the DateTime type.
@@ -3806,6 +3845,7 @@ pub struct ExplanationOfBenefitEvent {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/datestype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/datestype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.event.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -4014,7 +4054,7 @@ pub struct ExplanationOfBenefitInsurance {
 }
 
 /// Choice of types for the serviced\[x\] field in ExplanationOfBenefitItem
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "serviced")]
 pub enum ExplanationOfBenefitItemServiced {
     /// Variant accepting the Date type.
@@ -4026,7 +4066,7 @@ pub enum ExplanationOfBenefitItemServiced {
 }
 
 /// Choice of types for the location\[x\] field in ExplanationOfBenefitItem
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "location")]
 pub enum ExplanationOfBenefitItemLocation {
     /// Variant accepting the CodeableConcept type.
@@ -4256,6 +4296,7 @@ pub struct ExplanationOfBenefitItem {
     /// - **Strength**: example
     /// - **Description**: Codes for the revenue or cost centers supplying the service and/or products.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-revenue-center
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-revenue-center")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.revenue")]
     pub revenue: Option<CodeableConcept>,
     /// Benefit classification
@@ -4281,6 +4322,7 @@ pub struct ExplanationOfBenefitItem {
     /// - **Strength**: example
     /// - **Description**: Benefit categories such as: oral, medical, vision, oral-basic etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-benefitcategory
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-benefitcategory")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.category")]
     pub category: Option<CodeableConcept>,
     /// Billing, service, product, or drug code
@@ -4314,6 +4356,7 @@ pub struct ExplanationOfBenefitItem {
     /// 
     /// ## Aliases
     /// Drug Code, Bill Code, Service Code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.productOrService")]
     #[fhir_serde(rename = "productOrService")]
     pub product_or_service: Option<CodeableConcept>,
@@ -4337,6 +4380,7 @@ pub struct ExplanationOfBenefitItem {
     /// 
     /// ## Aliases
     /// End of a range of Drug Code; Bill Code; Service Cod
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.productOrServiceEnd")]
     #[fhir_serde(rename = "productOrServiceEnd")]
     pub product_or_service_end: Option<CodeableConcept>,
@@ -4379,6 +4423,7 @@ pub struct ExplanationOfBenefitItem {
     /// - **Strength**: example
     /// - **Description**: Item type or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or an appliance was lost or stolen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-modifiers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-modifiers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.modifier")]
     pub modifier: Option<Vec<CodeableConcept>>,
     /// Program the product or service is provided under
@@ -4403,6 +4448,7 @@ pub struct ExplanationOfBenefitItem {
     /// - **Strength**: example
     /// - **Description**: Program specific reason codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-program-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-program-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.programCode")]
     #[fhir_serde(rename = "programCode")]
     pub program_code: Option<Vec<CodeableConcept>>,
@@ -4441,6 +4487,7 @@ pub struct ExplanationOfBenefitItem {
     /// - **Strength**: example
     /// - **Description**: Place where the service is rendered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-place
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-place")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.location[x]")]
     #[fhir_serde(flatten)]
     pub location: Option<ExplanationOfBenefitItemLocation>,
@@ -4781,6 +4828,7 @@ pub struct ExplanationOfBenefitItemAdjudication {
     /// - **Strength**: example
     /// - **Description**: The adjudication codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adjudication
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adjudication")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.adjudication.category")]
     pub category: CodeableConcept,
     /// Explanation of adjudication outcome
@@ -4805,6 +4853,7 @@ pub struct ExplanationOfBenefitItemAdjudication {
     /// - **Strength**: example
     /// - **Description**: Adjudication reason codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adjudication-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adjudication-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.adjudication.reason")]
     pub reason: Option<CodeableConcept>,
     /// Monetary amount
@@ -4964,6 +5013,7 @@ pub struct ExplanationOfBenefitItemBodySite {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/tooth
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/tooth")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.bodySite.site")]
     pub site: Option<Vec<CodeableReference>>,
     /// Sub-location
@@ -4982,6 +5032,7 @@ pub struct ExplanationOfBenefitItemBodySite {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/surface
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/surface")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.bodySite.subSite")]
     #[fhir_serde(rename = "subSite")]
     pub sub_site: Option<Vec<CodeableConcept>>,
@@ -5134,6 +5185,7 @@ pub struct ExplanationOfBenefitItemDetail {
     /// - **Strength**: example
     /// - **Description**: Codes for the revenue or cost centers supplying the service and/or products.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-revenue-center
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-revenue-center")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.detail.revenue")]
     pub revenue: Option<CodeableConcept>,
     /// Benefit classification
@@ -5160,6 +5212,7 @@ pub struct ExplanationOfBenefitItemDetail {
     /// - **Strength**: example
     /// - **Description**: Benefit categories such as: oral, medical, vision, oral-basic etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-benefitcategory
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-benefitcategory")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.detail.category")]
     pub category: Option<CodeableConcept>,
     /// Billing, service, product, or drug code
@@ -5193,6 +5246,7 @@ pub struct ExplanationOfBenefitItemDetail {
     /// 
     /// ## Aliases
     /// Drug Code, Bill Code, Service Code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.detail.productOrService")]
     #[fhir_serde(rename = "productOrService")]
     pub product_or_service: Option<CodeableConcept>,
@@ -5216,6 +5270,7 @@ pub struct ExplanationOfBenefitItemDetail {
     /// 
     /// ## Aliases
     /// End of a range of Drug Code; Bill Code; Service Cod
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.detail.productOrServiceEnd")]
     #[fhir_serde(rename = "productOrServiceEnd")]
     pub product_or_service_end: Option<CodeableConcept>,
@@ -5243,6 +5298,7 @@ pub struct ExplanationOfBenefitItemDetail {
     /// - **Strength**: example
     /// - **Description**: Item type or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or an appliance was lost or stolen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-modifiers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-modifiers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.detail.modifier")]
     pub modifier: Option<Vec<CodeableConcept>>,
     /// Program the product or service is provided under
@@ -5267,6 +5323,7 @@ pub struct ExplanationOfBenefitItemDetail {
     /// - **Strength**: example
     /// - **Description**: Program specific reason codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-program-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-program-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.detail.programCode")]
     #[fhir_serde(rename = "programCode")]
     pub program_code: Option<Vec<CodeableConcept>>,
@@ -5592,6 +5649,7 @@ pub struct ExplanationOfBenefitItemDetailSubDetail {
     /// - **Strength**: example
     /// - **Description**: Codes for the revenue or cost centers supplying the service and/or products.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-revenue-center
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-revenue-center")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.detail.subDetail.revenue")]
     pub revenue: Option<CodeableConcept>,
     /// Benefit classification
@@ -5617,6 +5675,7 @@ pub struct ExplanationOfBenefitItemDetailSubDetail {
     /// - **Strength**: example
     /// - **Description**: Benefit categories such as: oral, medical, vision, oral-basic etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-benefitcategory
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-benefitcategory")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.detail.subDetail.category")]
     pub category: Option<CodeableConcept>,
     /// Billing, service, product, or drug code
@@ -5650,6 +5709,7 @@ pub struct ExplanationOfBenefitItemDetailSubDetail {
     /// 
     /// ## Aliases
     /// Drug Code, Bill Code, Service Code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.detail.subDetail.productOrService")]
     #[fhir_serde(rename = "productOrService")]
     pub product_or_service: Option<CodeableConcept>,
@@ -5673,6 +5733,7 @@ pub struct ExplanationOfBenefitItemDetailSubDetail {
     /// 
     /// ## Aliases
     /// End of a range of Drug Code; Bill Code; Service Cod
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.detail.subDetail.productOrServiceEnd")]
     #[fhir_serde(rename = "productOrServiceEnd")]
     pub product_or_service_end: Option<CodeableConcept>,
@@ -5700,6 +5761,7 @@ pub struct ExplanationOfBenefitItemDetailSubDetail {
     /// - **Strength**: example
     /// - **Description**: Item type or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or an appliance was lost or stolen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-modifiers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-modifiers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.detail.subDetail.modifier")]
     pub modifier: Option<Vec<CodeableConcept>>,
     /// Program the product or service is provided under
@@ -5724,6 +5786,7 @@ pub struct ExplanationOfBenefitItemDetailSubDetail {
     /// - **Strength**: example
     /// - **Description**: Program specific reason codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-program-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-program-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.detail.subDetail.programCode")]
     #[fhir_serde(rename = "programCode")]
     pub program_code: Option<Vec<CodeableConcept>>,
@@ -6014,6 +6077,7 @@ pub struct ExplanationOfBenefitItemReviewOutcome {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-decision
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-decision")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.reviewOutcome.decision")]
     pub decision: Option<CodeableConcept>,
     /// Reason for result of the adjudication
@@ -6034,6 +6098,7 @@ pub struct ExplanationOfBenefitItemReviewOutcome {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-decision-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-decision-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.item.reviewOutcome.reason")]
     pub reason: Option<Vec<CodeableConcept>>,
     /// Preauthorization reference
@@ -6201,6 +6266,7 @@ pub struct ExplanationOfBenefitPayee {
     /// - **Strength**: example
     /// - **Description**: A code for the party to be reimbursed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/payeetype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/payeetype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.payee.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -6344,6 +6410,7 @@ pub struct ExplanationOfBenefitPayment {
     /// - **Strength**: example
     /// - **Description**: The type (partial, complete) of the payment.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-paymenttype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-paymenttype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.payment.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -6384,6 +6451,7 @@ pub struct ExplanationOfBenefitPayment {
     /// - **Strength**: example
     /// - **Description**: Payment Adjustment reason codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/payment-adjustment-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/payment-adjustment-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.payment.adjustmentReason")]
     #[fhir_serde(rename = "adjustmentReason")]
     pub adjustment_reason: Option<CodeableConcept>,
@@ -6436,7 +6504,7 @@ pub struct ExplanationOfBenefitPayment {
 }
 
 /// Choice of types for the procedure\[x\] field in ExplanationOfBenefitProcedure
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "procedure")]
 pub enum ExplanationOfBenefitProcedureProcedure {
     /// Variant accepting the CodeableConcept type.
@@ -6584,6 +6652,7 @@ pub struct ExplanationOfBenefitProcedure {
     /// - **Strength**: example
     /// - **Description**: Example procedure type codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-procedure-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-procedure-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.procedure.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -6619,6 +6688,7 @@ pub struct ExplanationOfBenefitProcedure {
     /// - **Strength**: example
     /// - **Description**: ICD10 Procedure codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/icd-10-procedures
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/icd-10-procedures")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.procedure.procedure[x]")]
     #[fhir_serde(flatten)]
     pub procedure: Option<ExplanationOfBenefitProcedureProcedure>,
@@ -6774,6 +6844,7 @@ pub struct ExplanationOfBenefitProcessNote {
     /// - **Strength**: extensible
     /// - **Description**: The presentation types of notes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/note-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/note-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.processNote.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -6811,6 +6882,7 @@ pub struct ExplanationOfBenefitProcessNote {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.processNote.language")]
     pub language: Option<CodeableConcept>,
 }
@@ -6957,6 +7029,7 @@ pub struct ExplanationOfBenefitRelated {
     /// - **Strength**: example
     /// - **Description**: Relationship of this claim to a related Claim.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/related-claim-relationship
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/related-claim-relationship")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.related.relationship")]
     pub relationship: Option<CodeableConcept>,
     /// File or case reference
@@ -6982,7 +7055,7 @@ pub struct ExplanationOfBenefitRelated {
 }
 
 /// Choice of types for the timing\[x\] field in ExplanationOfBenefitSupportingInfo
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "timing")]
 pub enum ExplanationOfBenefitSupportingInfoTiming {
     /// Variant accepting the Date type.
@@ -6994,7 +7067,7 @@ pub enum ExplanationOfBenefitSupportingInfoTiming {
 }
 
 /// Choice of types for the value\[x\] field in ExplanationOfBenefitSupportingInfo
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ExplanationOfBenefitSupportingInfoValue {
     /// Variant accepting the Boolean type.
@@ -7162,6 +7235,7 @@ pub struct ExplanationOfBenefitSupportingInfo {
     /// - **Strength**: example
     /// - **Description**: The valuset used for additional information category codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-informationcategory
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-informationcategory")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.supportingInfo.category")]
     pub category: CodeableConcept,
     /// Type of information
@@ -7187,6 +7261,7 @@ pub struct ExplanationOfBenefitSupportingInfo {
     /// - **Strength**: example
     /// - **Description**: The valuset used for additional information codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-exception
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-exception")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.supportingInfo.code")]
     pub code: Option<CodeableConcept>,
     /// When it occurred
@@ -7245,6 +7320,7 @@ pub struct ExplanationOfBenefitSupportingInfo {
     /// - **Strength**: example
     /// - **Description**: Reason codes for the missing teeth.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/missing-tooth-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/missing-tooth-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.supportingInfo.reason")]
     pub reason: Option<Coding>,
 }
@@ -7386,6 +7462,7 @@ pub struct ExplanationOfBenefitTotal {
     /// - **Strength**: example
     /// - **Description**: The adjudication codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/adjudication
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/adjudication")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ExplanationOfBenefit.total.category")]
     pub category: CodeableConcept,
     /// Financial total for the category

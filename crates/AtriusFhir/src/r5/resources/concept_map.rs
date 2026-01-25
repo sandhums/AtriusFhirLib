@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in ConceptMap
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum ConceptMapVersionAlgorithm {
     /// Variant accepting the String type.
@@ -14,7 +14,7 @@ pub enum ConceptMapVersionAlgorithm {
 }
 
 /// Choice of types for the sourceScope\[x\] field in ConceptMap
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "sourceScope")]
 pub enum ConceptMapSourceScope {
     /// Variant accepting the Uri type.
@@ -26,7 +26,7 @@ pub enum ConceptMapSourceScope {
 }
 
 /// Choice of types for the targetScope\[x\] field in ConceptMap
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "targetScope")]
 pub enum ConceptMapTargetScope {
     /// Variant accepting the Uri type.
@@ -139,6 +139,7 @@ pub struct ConceptMap {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConceptMap.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -384,6 +385,7 @@ pub struct ConceptMap {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConceptMap.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<ConceptMapVersionAlgorithm>,
@@ -459,6 +461,7 @@ pub struct ConceptMap {
     /// 
     /// ## Conditions
     /// Used when: cmd-1
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConceptMap.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -635,6 +638,7 @@ pub struct ConceptMap {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConceptMap.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this concept map is defined
@@ -802,6 +806,7 @@ pub struct ConceptMap {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/definition-topic
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/definition-topic")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConceptMap.topic")]
     pub topic: Option<Vec<CodeableConcept>>,
     /// Who authored the ConceptMap
@@ -1175,6 +1180,7 @@ pub struct ConceptMapAdditionalAttribute {
     /// - **Strength**: required
     /// - **Description**: The type of a mapping attribute value.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/conceptmap-attribute-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/conceptmap-attribute-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConceptMap.additionalAttribute.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -1775,6 +1781,7 @@ pub struct ConceptMapGroupElementTarget {
     /// 
     /// ## Conditions
     /// Used when: cmd-1
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/concept-map-relationship")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConceptMap.group.element.target.relationship")]
     pub relationship: Code,
     /// Description of status/issues in mapping
@@ -1835,7 +1842,7 @@ pub struct ConceptMapGroupElementTarget {
 }
 
 /// Choice of types for the value\[x\] field in ConceptMapGroupElementTargetDependsOn
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ConceptMapGroupElementTargetDependsOnValue {
     /// Variant accepting the Code type.
@@ -2009,7 +2016,7 @@ pub struct ConceptMapGroupElementTargetDependsOn {
 }
 
 /// Choice of types for the value\[x\] field in ConceptMapGroupElementTargetProperty
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ConceptMapGroupElementTargetPropertyValue {
     /// Variant accepting the Coding type.
@@ -2304,6 +2311,7 @@ pub struct ConceptMapGroupUnmapped {
     /// 
     /// ## Conditions
     /// Used when: cmd-3, cmd-2, cmd-8, cmd-9, cmd-10
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/conceptmap-unmapped-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConceptMap.group.unmapped.mode")]
     pub mode: Code,
     /// Fixed code when mode = fixed
@@ -2381,6 +2389,7 @@ pub struct ConceptMapGroupUnmapped {
     /// 
     /// ## Conditions
     /// Used when: cmd-9
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/concept-map-relationship")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConceptMap.group.unmapped.relationship")]
     pub relationship: Option<Code>,
     /// canonical reference to an additional ConceptMap to use for mapping if the source concept is unmapped
@@ -2581,6 +2590,7 @@ pub struct ConceptMapProperty {
     /// 
     /// ## Conditions
     /// Used when: cmd-11
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/conceptmap-property-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConceptMap.property.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,

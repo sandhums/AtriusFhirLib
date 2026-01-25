@@ -109,6 +109,7 @@ pub struct Basic {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Basic.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -286,6 +287,7 @@ pub struct Basic {
     /// - **Strength**: example
     /// - **Description**: HL7-maintained set of codes for "Basic" resources
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/basic-resource-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/basic-resource-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Basic.code")]
     pub code: CodeableConcept,
     /// Identifies the focus of this resource

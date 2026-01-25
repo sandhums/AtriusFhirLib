@@ -105,6 +105,7 @@ pub struct DeviceDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -453,6 +454,7 @@ pub struct DeviceDefinition {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-safety
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-safety")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDefinition.safety")]
     pub safety: Option<Vec<CodeableConcept>>,
     /// Shelf Life and storage information
@@ -578,6 +580,7 @@ pub struct DeviceDefinition {
     /// - **Strength**: required
     /// - **Description**: The production identifier(s) that are expected to appear in the UDI carrier.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-productidentifierinudi|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/device-productidentifierinudi")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDefinition.productionIdentifierInUDI")]
     #[fhir_serde(rename = "productionIdentifierInUDI")]
     pub production_identifier_in_u_d_i: Option<Vec<Code>>,
@@ -894,6 +897,7 @@ pub struct DeviceDefinitionClassification {
     /// - **Strength**: example
     /// - **Description**: Type of device e.g. according to official classification.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDefinition.classification.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -1031,6 +1035,7 @@ pub struct DeviceDefinitionConformsTo {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-specification-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-specification-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDefinition.conformsTo.category")]
     pub category: Option<CodeableConcept>,
     /// Identifies the standard, specification, or formal guidance that the device adheres to the Device Specification type
@@ -1051,6 +1056,7 @@ pub struct DeviceDefinitionConformsTo {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-specification-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-specification-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDefinition.conformsTo.specification")]
     pub specification: CodeableConcept,
     /// The specific form or variant of the standard, specification or formal guidance
@@ -1213,6 +1219,7 @@ pub struct DeviceDefinitionCorrectiveAction {
     /// - **Strength**: required
     /// - **Description**: The type or scope of the corrective action.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-correctiveactionscope|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/device-correctiveactionscope")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDefinition.correctiveAction.scope")]
     pub scope: Option<Code>,
     /// Start and end dates of the  corrective action
@@ -1366,6 +1373,7 @@ pub struct DeviceDefinitionDeviceName {
     /// - **Strength**: required
     /// - **Description**: The type of name the device is referred by.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-nametype|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/device-nametype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDefinition.deviceName.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -1817,6 +1825,7 @@ pub struct DeviceDefinitionLink {
     /// - **Strength**: extensible
     /// - **Description**: The type of relation between this and the linked device.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/devicedefinition-relationtype
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/devicedefinition-relationtype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDefinition.link.relation")]
     pub relation: Coding,
     /// A reference to the linked device
@@ -2266,7 +2275,7 @@ pub struct DeviceDefinitionPackagingDistributor {
 }
 
 /// Choice of types for the value\[x\] field in DeviceDefinitionProperty
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum DeviceDefinitionPropertyValue {
     /// Variant accepting the Quantity type.
@@ -2417,6 +2426,7 @@ pub struct DeviceDefinitionProperty {
     /// - **Strength**: example
     /// - **Description**: Device property type.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-property-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-property-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDefinition.property.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -2565,6 +2575,7 @@ pub struct DeviceDefinitionRegulatoryIdentifier {
     /// - **Strength**: required
     /// - **Description**: Device regulatory identifier type.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/devicedefinition-regulatory-identifier-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/devicedefinition-regulatory-identifier-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDefinition.regulatoryIdentifier.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,

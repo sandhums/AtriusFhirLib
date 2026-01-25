@@ -90,6 +90,7 @@ pub struct Address {
     /// - **Strength**: required
     /// - **Description**: The use of an address (home / work / etc.).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/address-use|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/address-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Address.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Option<Code>,
@@ -122,6 +123,7 @@ pub struct Address {
     /// - **Strength**: required
     /// - **Description**: The type of an address (physical / postal).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/address-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/address-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Address.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Code>,

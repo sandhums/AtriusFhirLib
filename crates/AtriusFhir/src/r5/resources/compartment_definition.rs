@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in CompartmentDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum CompartmentDefinitionVersionAlgorithm {
     /// Variant accepting the String type.
@@ -113,6 +113,7 @@ pub struct CompartmentDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CompartmentDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -335,6 +336,7 @@ pub struct CompartmentDefinition {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CompartmentDefinition.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<CompartmentDefinitionVersionAlgorithm>,
@@ -409,6 +411,7 @@ pub struct CompartmentDefinition {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CompartmentDefinition.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -603,6 +606,7 @@ pub struct CompartmentDefinition {
     /// - **Strength**: required
     /// - **Description**: Which type a compartment definition describes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/compartment-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/compartment-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CompartmentDefinition.code")]
     pub code: Code,
     /// Whether the search syntax is supported
@@ -758,6 +762,7 @@ pub struct CompartmentDefinitionResource {
     /// - **Strength**: required
     /// - **Description**: One of the resource types defined as part of this version of FHIR.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/resource-types|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CompartmentDefinition.resource.code")]
     pub code: Code,
     /// Search Parameter Name, or chained parameters

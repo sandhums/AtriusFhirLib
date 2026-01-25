@@ -104,6 +104,7 @@ pub struct Binary {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Binary.language")]
     pub language: Option<Code>,
     /// MimeType of the binary content
@@ -123,6 +124,7 @@ pub struct Binary {
     /// - **Strength**: required
     /// - **Description**: The mime type of an attachment. Any valid mime type is allowed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/mimetypes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/mimetypes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Binary.contentType")]
     #[fhir_serde(rename = "contentType")]
     pub content_type: Code,

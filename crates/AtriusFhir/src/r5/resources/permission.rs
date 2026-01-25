@@ -104,6 +104,7 @@ pub struct Permission {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Permission.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -252,6 +253,7 @@ pub struct Permission {
     /// - **Strength**: required
     /// - **Description**: Codes identifying the lifecycle stage of a product.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/permission-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/permission-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Permission.status")]
     pub status: Code,
     /// The person or entity that asserts the permission
@@ -339,6 +341,7 @@ pub struct Permission {
     /// - **Strength**: required
     /// - **Description**: How the rules are to be combined.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/permission-rule-combining|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/permission-rule-combining")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Permission.combining")]
     pub combining: Code,
     /// Constraints to the Permission
@@ -478,6 +481,7 @@ pub struct PermissionJustification {
     /// - **Strength**: example
     /// - **Description**: Regulatory policy examples
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-policy
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/consent-policy")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Permission.justification.basis")]
     pub basis: Option<Vec<CodeableConcept>>,
     /// Justifing rational
@@ -621,6 +625,7 @@ pub struct PermissionRule {
     /// - **Strength**: required
     /// - **Description**: How a rule statement is applied.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-provision-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/consent-provision-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Permission.rule.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Code>,
@@ -671,6 +676,7 @@ pub struct PermissionRule {
     /// - **Strength**: example
     /// - **Description**: Obligations and Refrains
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/security-label-event-examples
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/security-label-event-examples")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Permission.rule.limit")]
     pub limit: Option<Vec<CodeableConcept>>,
 }
@@ -814,6 +820,7 @@ pub struct PermissionRuleActivity {
     /// - **Strength**: example
     /// - **Description**: Detailed codes for the action.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-action
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/consent-action")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Permission.rule.activity.action")]
     pub action: Option<Vec<CodeableConcept>>,
     /// The purpose for which the permission is given
@@ -833,6 +840,7 @@ pub struct PermissionRuleActivity {
     /// - **Strength**: preferred
     /// - **Description**: What purposes of use are controlled by this exception. If more than one label is specified, operations must have all the specified labels.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-PurposeOfUse
+    #[fhir_binding(strength="preferred", valueset="http://terminology.hl7.org/ValueSet/v3-PurposeOfUse")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Permission.rule.activity.purpose")]
     pub purpose: Option<Vec<CodeableConcept>>,
 }
@@ -1129,6 +1137,7 @@ pub struct PermissionRuleDataResource {
     /// - **Strength**: required
     /// - **Description**: How a resource reference is interpreted when testing consent restrictions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/consent-data-meaning|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/consent-data-meaning")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Permission.rule.data.resource.meaning")]
     pub meaning: Code,
     /// The actual data reference

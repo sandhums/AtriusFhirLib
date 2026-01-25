@@ -105,6 +105,7 @@ pub struct PaymentNotice {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentNotice.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -277,6 +278,7 @@ pub struct PaymentNotice {
     /// - **Strength**: required
     /// - **Description**: A code specifying the state of the resource instance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fm-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fm-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentNotice.status")]
     pub status: Code,
     /// Request reference
@@ -427,6 +429,7 @@ pub struct PaymentNotice {
     /// - **Strength**: example
     /// - **Description**: The payment conveyance status codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/payment-status
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/payment-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentNotice.paymentStatus")]
     #[fhir_serde(rename = "paymentStatus")]
     pub payment_status: Option<CodeableConcept>,

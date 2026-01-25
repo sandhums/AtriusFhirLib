@@ -113,6 +113,7 @@ pub struct Expression {
     /// - **Strength**: extensible
     /// - **Description**: The media type of the expression language.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/expression-language
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/expression-language")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Expression.language")]
     pub language: Option<Code>,
     /// Expression in specified language

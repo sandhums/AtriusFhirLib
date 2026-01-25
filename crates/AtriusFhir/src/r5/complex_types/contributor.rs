@@ -74,6 +74,7 @@ pub struct Contributor {
     /// - **Strength**: required
     /// - **Description**: The type of contributor.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contributor-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/contributor-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Contributor.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,

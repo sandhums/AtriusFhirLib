@@ -290,6 +290,7 @@ mod terminology_client;
 mod terminology_functions;
 mod trace_function;
 mod type_function;
+mod html_checks_function;
 pub mod type_inference;
 
 // Modules for CLI and server functionality

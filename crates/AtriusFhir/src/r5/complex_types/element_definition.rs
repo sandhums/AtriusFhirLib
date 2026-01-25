@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the defaultValue\[x\] field in ElementDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "defaultValue")]
 pub enum ElementDefinitionDefaultValue {
     /// Variant accepting the Base64Binary type.
@@ -170,7 +170,7 @@ pub enum ElementDefinitionDefaultValue {
 }
 
 /// Choice of types for the fixed\[x\] field in ElementDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "fixed")]
 pub enum ElementDefinitionFixed {
     /// Variant accepting the Base64Binary type.
@@ -338,7 +338,7 @@ pub enum ElementDefinitionFixed {
 }
 
 /// Choice of types for the pattern\[x\] field in ElementDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "pattern")]
 pub enum ElementDefinitionPattern {
     /// Variant accepting the Base64Binary type.
@@ -506,7 +506,7 @@ pub enum ElementDefinitionPattern {
 }
 
 /// Choice of types for the minValue\[x\] field in ElementDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "minValue")]
 pub enum ElementDefinitionMinValue {
     /// Variant accepting the Date type.
@@ -542,7 +542,7 @@ pub enum ElementDefinitionMinValue {
 }
 
 /// Choice of types for the maxValue\[x\] field in ElementDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "maxValue")]
 pub enum ElementDefinitionMaxValue {
     /// Variant accepting the Date type.
@@ -743,6 +743,7 @@ pub struct ElementDefinition {
     /// - **Strength**: required
     /// - **Description**: How a property is represented when serialized.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/property-representation|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/property-representation")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ElementDefinition.representation")]
     pub representation: Option<Vec<Code>>,
     /// Name for this particular element (in a set of slices)
@@ -855,6 +856,7 @@ pub struct ElementDefinition {
     /// - **Strength**: example
     /// - **Description**: Codes that indicate the meaning of a data element.
     /// - **ValueSet**: http://loinc.org/vs
+    #[fhir_binding(strength="example", valueset="http://loinc.org/vs")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ElementDefinition.code")]
     pub code: Option<Vec<Coding>>,
     /// This element is sliced - slices follow
@@ -1897,6 +1899,7 @@ pub struct ElementDefinitionBinding {
     /// 
     /// ## Aliases
     /// conformance, extensibility
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/binding-strength")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ElementDefinition.binding.strength")]
     pub strength: Code,
     /// Intended use of codes in the bound value set
@@ -2032,6 +2035,7 @@ pub struct ElementDefinitionBindingAdditional {
     /// - **Strength**: required
     /// - **Description**: The use of an additional binding.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/additional-binding-purpose|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/additional-binding-purpose")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ElementDefinition.binding.additional.purpose")]
     pub purpose: Code,
     /// The value set for the additional binding
@@ -2251,6 +2255,7 @@ pub struct ElementDefinitionConstraint {
     /// 
     /// ## Conditions
     /// Used when: eld-26
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/constraint-severity")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ElementDefinition.constraint.severity")]
     pub severity: Code,
     /// Suppress warning or hint in profile
@@ -2341,7 +2346,7 @@ pub struct ElementDefinitionConstraint {
 }
 
 /// Choice of types for the value\[x\] field in ElementDefinitionExample
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ElementDefinitionExampleValue {
     /// Variant accepting the Base64Binary type.
@@ -2707,6 +2712,7 @@ pub struct ElementDefinitionMapping {
     /// - **Strength**: required
     /// - **Description**: BCP 13 (RFCs 2045, 2046, 2047, 4288, 4289 and 2049)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/mimetypes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/mimetypes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ElementDefinition.mapping.language")]
     pub language: Option<Code>,
     /// Details of the mapping
@@ -2908,6 +2914,7 @@ pub struct ElementDefinitionSlicing {
     /// 
     /// ## Conditions
     /// Used when: eld-25
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/resource-slicing-rules")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ElementDefinition.slicing.rules")]
     pub rules: Code,
 }
@@ -2993,6 +3000,7 @@ pub struct ElementDefinitionSlicingDiscriminator {
     /// - **Strength**: required
     /// - **Description**: How an element value is interpreted when discrimination is evaluated.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/discriminator-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/discriminator-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ElementDefinition.slicing.discriminator.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -3112,6 +3120,7 @@ pub struct ElementDefinitionType {
     /// 
     /// ## Conditions
     /// Used when: eld-11, eld-13, eld-4, eld-17
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/elementdefinition-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ElementDefinition.type.code")]
     pub code: Uri,
     /// Profiles (StructureDefinition or IG) - one must apply
@@ -3191,6 +3200,7 @@ pub struct ElementDefinitionType {
     /// 
     /// ## Conditions
     /// Used when: eld-4
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/resource-aggregation-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ElementDefinition.type.aggregation")]
     pub aggregation: Option<Vec<Code>>,
     /// either | independent | specific
@@ -3216,6 +3226,7 @@ pub struct ElementDefinitionType {
     /// - **Strength**: required
     /// - **Description**: Whether a reference needs to be version specific or version independent, or whether either can be used.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/reference-version-rules|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/reference-version-rules")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ElementDefinition.type.versioning")]
     pub versioning: Option<Code>,
 }

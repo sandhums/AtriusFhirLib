@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the occurrence\[x\] field in RiskAssessment
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurrence")]
 pub enum RiskAssessmentOccurrence {
     /// Variant accepting the DateTime type.
@@ -118,6 +118,7 @@ pub struct RiskAssessment {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RiskAssessment.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -304,6 +305,7 @@ pub struct RiskAssessment {
     /// - **Strength**: required
     /// - **Description**: The status of the risk assessment; e.g. preliminary, final, amended, etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/observation-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/observation-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RiskAssessment.status")]
     pub status: Code,
     /// Evaluation mechanism
@@ -489,7 +491,7 @@ pub struct RiskAssessment {
 }
 
 /// Choice of types for the probability\[x\] field in RiskAssessmentPrediction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "probability")]
 pub enum RiskAssessmentPredictionProbability {
     /// Variant accepting the Decimal type.
@@ -501,7 +503,7 @@ pub enum RiskAssessmentPredictionProbability {
 }
 
 /// Choice of types for the when\[x\] field in RiskAssessmentPrediction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "when")]
 pub enum RiskAssessmentPredictionWhen {
     /// Variant accepting the Period type.
@@ -672,6 +674,7 @@ pub struct RiskAssessmentPrediction {
     /// - **Strength**: example
     /// - **Description**: The likelihood of the occurrence of a specified outcome.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/risk-probability
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/risk-probability")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RiskAssessment.prediction.qualitativeRisk")]
     #[fhir_serde(rename = "qualitativeRisk")]
     pub qualitative_risk: Option<CodeableConcept>,

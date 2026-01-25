@@ -171,6 +171,7 @@ pub struct Meta {
     /// - **Strength**: extensible
     /// - **Description**: Security Labels from the Healthcare Privacy and Security Classification System.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/security-labels
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/security-labels")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Meta.security")]
     pub security: Option<Vec<Coding>>,
     /// Tags applied to this resource
@@ -197,6 +198,7 @@ pub struct Meta {
     /// - **Strength**: example
     /// - **Description**: Codes that represent various types of tags, commonly workflow-related; e.g. "Needs review by Dr. Jones".
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/common-tags
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/common-tags")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Meta.tag")]
     pub tag: Option<Vec<Coding>>,
 }

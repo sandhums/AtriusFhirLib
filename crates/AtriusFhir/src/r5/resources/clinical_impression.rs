@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the effective\[x\] field in ClinicalImpression
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "effective")]
 pub enum ClinicalImpressionEffective {
     /// Variant accepting the DateTime type.
@@ -123,6 +123,7 @@ pub struct ClinicalImpression {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalImpression.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -305,6 +306,7 @@ pub struct ClinicalImpression {
     /// - **Strength**: required
     /// - **Description**: The workflow state of a clinical impression.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/event-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/event-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalImpression.status")]
     pub status: Code,
     /// Reason for current status
@@ -328,6 +330,7 @@ pub struct ClinicalImpression {
     /// 
     /// ## Aliases
     /// Suspended Reason, Cancelled Reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinicalimpression-status-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalImpression.statusReason")]
     #[fhir_serde(rename = "statusReason")]
     pub status_reason: Option<CodeableConcept>,
@@ -482,6 +485,7 @@ pub struct ClinicalImpression {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinicalimpression-change-pattern
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinicalimpression-change-pattern")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalImpression.changePattern")]
     #[fhir_serde(rename = "changePattern")]
     pub change_pattern: Option<CodeableConcept>,
@@ -534,6 +538,7 @@ pub struct ClinicalImpression {
     /// - **Strength**: example
     /// - **Description**: Prognosis or outlook findings.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinicalimpression-prognosis
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinicalimpression-prognosis")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalImpression.prognosisCodeableConcept")]
     #[fhir_serde(rename = "prognosisCodeableConcept")]
     pub prognosis_codeable_concept: Option<Vec<CodeableConcept>>,
@@ -696,6 +701,7 @@ pub struct ClinicalImpressionFinding {
     /// - **Strength**: example
     /// - **Description**: Identification of the Condition or diagnosis.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ClinicalImpression.finding.item")]
     pub item: Option<CodeableReference>,
     /// Which investigations support finding

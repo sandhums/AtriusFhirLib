@@ -105,6 +105,7 @@ pub struct ManufacturedItemDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ManufacturedItemDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -272,6 +273,7 @@ pub struct ManufacturedItemDefinition {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ManufacturedItemDefinition.status")]
     pub status: Code,
     /// A descriptive name applied to this item
@@ -306,6 +308,7 @@ pub struct ManufacturedItemDefinition {
     /// - **Strength**: example
     /// - **Description**: Dose form for a medication, in the form suitable for administering to the patient, after mixing, where necessary.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/manufactured-dose-form
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/manufactured-dose-form")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ManufacturedItemDefinition.manufacturedDoseForm")]
     #[fhir_serde(rename = "manufacturedDoseForm")]
     pub manufactured_dose_form: CodeableConcept,
@@ -327,6 +330,7 @@ pub struct ManufacturedItemDefinition {
     /// - **Strength**: example
     /// - **Description**: The presentation type in which an administrable medicinal product is given to a patient.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/unit-of-presentation
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/unit-of-presentation")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ManufacturedItemDefinition.unitOfPresentation")]
     #[fhir_serde(rename = "unitOfPresentation")]
     pub unit_of_presentation: Option<CodeableConcept>,
@@ -379,6 +383,7 @@ pub struct ManufacturedItemDefinition {
     /// - **Strength**: example
     /// - **Description**: This value set includes all substance codes from SNOMED CT - provided as an exemplar value set.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ManufacturedItemDefinition.ingredient")]
     pub ingredient: Option<Vec<CodeableConcept>>,
     /// General characteristics of this item
@@ -776,7 +781,7 @@ pub struct ManufacturedItemDefinitionComponentConstituent {
 }
 
 /// Choice of types for the value\[x\] field in ManufacturedItemDefinitionProperty
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ManufacturedItemDefinitionPropertyValue {
     /// Variant accepting the CodeableConcept type.
@@ -922,6 +927,7 @@ pub struct ManufacturedItemDefinitionProperty {
     /// - **Strength**: example
     /// - **Description**: This value set includes all observable entity codes from SNOMED CT - provided as an exemplar value set.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/product-characteristic-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/product-characteristic-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ManufacturedItemDefinition.property.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,

@@ -106,6 +106,7 @@ pub struct EpisodeOfCare {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EpisodeOfCare.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -272,6 +273,7 @@ pub struct EpisodeOfCare {
     /// - **Strength**: required
     /// - **Description**: The status of the episode of care.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/episode-of-care-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/episode-of-care-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EpisodeOfCare.status")]
     pub status: Code,
     /// Past list of status codes (the current status may be included to cover the start date of the status)
@@ -310,6 +312,7 @@ pub struct EpisodeOfCare {
     /// - **Strength**: example
     /// - **Description**: The type of the episode of care.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/episodeofcare-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/episodeofcare-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EpisodeOfCare.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -606,6 +609,7 @@ pub struct EpisodeOfCareDiagnosis {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EpisodeOfCare.diagnosis.condition")]
     pub condition: Option<Vec<CodeableReference>>,
     /// Role that this diagnosis has within the episode of care (e.g. admission, billing, discharge …)
@@ -626,6 +630,7 @@ pub struct EpisodeOfCareDiagnosis {
     /// - **Strength**: preferred
     /// - **Description**: The type of diagnosis this condition represents.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-diagnosis-use
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/encounter-diagnosis-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EpisodeOfCare.diagnosis.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Option<CodeableConcept>,
@@ -765,6 +770,7 @@ pub struct EpisodeOfCareReason {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-reason-use
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/encounter-reason-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EpisodeOfCare.reason.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Option<CodeableConcept>,
@@ -785,6 +791,7 @@ pub struct EpisodeOfCareReason {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/encounter-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EpisodeOfCare.reason.value")]
     pub value: Option<Vec<CodeableReference>>,
 }
@@ -903,6 +910,7 @@ pub struct EpisodeOfCareStatusHistory {
     /// - **Strength**: required
     /// - **Description**: The status of the episode of care.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/episode-of-care-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/episode-of-care-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EpisodeOfCare.statusHistory.status")]
     pub status: Code,
     /// Duration the EpisodeOfCare was in the specified status

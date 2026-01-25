@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the occurrence\[x\] field in ChargeItem
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurrence")]
 pub enum ChargeItemOccurrence {
     /// Variant accepting the DateTime type.
@@ -124,6 +124,7 @@ pub struct ChargeItem {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ChargeItem.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -325,6 +326,7 @@ pub struct ChargeItem {
     /// - **Strength**: required
     /// - **Description**: Codes identifying the lifecycle stage of a ChargeItem.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/chargeitem-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/chargeitem-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ChargeItem.status")]
     pub status: Code,
     /// Part of referenced ChargeItem
@@ -366,6 +368,7 @@ pub struct ChargeItem {
     /// 
     /// ## Aliases
     /// type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/chargeitem-billingcodes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ChargeItem.code")]
     pub code: CodeableConcept,
     /// Individual service was done for/to
@@ -536,6 +539,7 @@ pub struct ChargeItem {
     /// - **Strength**: example
     /// - **Description**: SNOMED CT Body site concepts
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/body-site
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ChargeItem.bodysite")]
     pub bodysite: Option<Vec<CodeableConcept>>,
     /// Unit price overriding the associated rules
@@ -645,6 +649,7 @@ pub struct ChargeItem {
     /// - **Strength**: example
     /// - **Description**: ICD 10 diagnosis codes
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/icd-10
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/icd-10")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ChargeItem.reason")]
     pub reason: Option<Vec<CodeableConcept>>,
     /// Which rendered service is being charged?
@@ -673,6 +678,7 @@ pub struct ChargeItem {
     /// - **Strength**: example
     /// - **Description**: Example binding for product type.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ChargeItem.product")]
     pub product: Option<Vec<CodeableReference>>,
     /// Account to place this charge
@@ -836,6 +842,7 @@ pub struct ChargeItemPerformer {
     /// - **Strength**: example
     /// - **Description**: Codes describing the types of functional roles performers can take on when performing events.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/performer-role
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/performer-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ChargeItem.performer.function")]
     pub function: Option<CodeableConcept>,
     /// Individual who was performing

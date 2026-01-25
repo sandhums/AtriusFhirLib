@@ -107,6 +107,7 @@ pub struct FormularyItem {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FormularyItem.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -270,6 +271,7 @@ pub struct FormularyItem {
     /// - **Strength**: example
     /// - **Description**: A coded concept that defines the product or service identified by this formulary item.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FormularyItem.code")]
     pub code: Option<CodeableConcept>,
     /// active | entered-in-error | inactive
@@ -299,6 +301,7 @@ pub struct FormularyItem {
     /// - **Strength**: required
     /// - **Description**: A coded concept defining if the medication is in active use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/formularyitem-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/formularyitem-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="FormularyItem.status")]
     pub status: Option<Code>,
 }

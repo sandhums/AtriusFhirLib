@@ -86,6 +86,7 @@ use rust_decimal::Decimal;
 use rust_decimal::prelude::{FromPrimitive, ToPrimitive};
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
+use crate::terminology_client::TerminologyClient;
 
 /// Evaluation context for FHIRPath expressions
 ///
@@ -159,6 +160,8 @@ pub struct EvaluationContext {
     /// Terminology server URL for terminology operations
     /// If not set, uses default servers based on FHIR version
     pub terminology_server_url: Option<String>,
+
+    pub terminology_client: Option<Arc<TerminologyClient>>,
 }
 
 impl Clone for EvaluationContext {
@@ -177,6 +180,7 @@ impl Clone for EvaluationContext {
             trace_outputs: Arc::new(Mutex::new(Vec::new())), // New trace outputs for clone
             parent_context: self.parent_context.clone(),
             terminology_server_url: self.terminology_server_url.clone(),
+            terminology_client: self.terminology_client.clone(),
         }
     }
 }
@@ -240,6 +244,7 @@ impl EvaluationContext {
             trace_outputs: Arc::new(Mutex::new(Vec::new())), // Initialize trace outputs
             parent_context: None,           // No parent context by default
             terminology_server_url: None,   // No terminology server by default
+            terminology_client: None,
         }
     }
 
@@ -272,6 +277,7 @@ impl EvaluationContext {
             trace_outputs: Arc::new(Mutex::new(Vec::new())), // Initialize trace outputs
             parent_context: None,           // No parent context by default
             terminology_server_url: None,   // No terminology server by default
+            terminology_client: None,
         }
     }
 
@@ -301,6 +307,7 @@ impl EvaluationContext {
             trace_outputs: Arc::new(Mutex::new(Vec::new())), // Initialize trace outputs
             parent_context: None,           // No parent context by default
             terminology_server_url: None,   // No terminology server by default
+            terminology_client: None,
         }
     }
 
@@ -517,6 +524,7 @@ impl EvaluationContext {
             trace_outputs: Arc::new(Mutex::new(Vec::new())), // New trace outputs for child
             parent_context: Some(Box::new(self.clone())), // Clone entire parent context
             terminology_server_url: self.terminology_server_url.clone(), // Inherit terminology server from parent
+            terminology_client: self.terminology_client.clone(),
         }
     }
 
@@ -628,6 +636,13 @@ impl EvaluationContext {
 
             default_url.to_string()
         }
+    }
+    pub fn get_terminology_client(&self) -> Option<Arc<TerminologyClient>> {
+        self.terminology_client.clone()
+    }
+
+    pub fn set_terminology_client(&mut self, client: Arc<TerminologyClient>) {
+        self.terminology_client = Some(client);
     }
 }
 
@@ -3322,6 +3337,9 @@ fn call_function(
         "distinct" => {
             // Delegate to the dedicated function in distinct_functions.rs
             crate::distinct_functions::distinct_function(invocation_base)
+        }
+        "htmlChecks" => {
+            crate::html_checks_function::html_checks_function(invocation_base)
         }
         "skip" => {
             // Validate argument count

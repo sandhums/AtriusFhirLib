@@ -107,6 +107,7 @@ pub struct AdministrableProductDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdministrableProductDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -275,6 +276,7 @@ pub struct AdministrableProductDefinition {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdministrableProductDefinition.status")]
     pub status: Code,
     /// References a product from which one or more of the constituent parts of that product can be prepared and used as described by this administrable product
@@ -323,6 +325,7 @@ pub struct AdministrableProductDefinition {
     /// - **Strength**: example
     /// - **Description**: Dose form for a medication, in the form suitable for administering to the patient, after mixing, where necessary.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/administrable-dose-form
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/administrable-dose-form")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdministrableProductDefinition.administrableDoseForm")]
     #[fhir_serde(rename = "administrableDoseForm")]
     pub administrable_dose_form: Option<CodeableConcept>,
@@ -345,6 +348,7 @@ pub struct AdministrableProductDefinition {
     /// - **Strength**: example
     /// - **Description**: The presentation type in which an administrable medicinal product is given to a patient.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/unit-of-presentation
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/unit-of-presentation")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdministrableProductDefinition.unitOfPresentation")]
     #[fhir_serde(rename = "unitOfPresentation")]
     pub unit_of_presentation: Option<CodeableConcept>,
@@ -392,6 +396,7 @@ pub struct AdministrableProductDefinition {
     /// - **Strength**: example
     /// - **Description**: This value set includes all substance codes from SNOMED CT - provided as an exemplar value set.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdministrableProductDefinition.ingredient")]
     pub ingredient: Option<Vec<CodeableConcept>>,
     /// A device that is integral to the medicinal product, in effect being considered as an "ingredient" of the medicinal product
@@ -460,7 +465,7 @@ pub struct AdministrableProductDefinition {
 }
 
 /// Choice of types for the value\[x\] field in AdministrableProductDefinitionProperty
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum AdministrableProductDefinitionPropertyValue {
     /// Variant accepting the CodeableConcept type.
@@ -606,6 +611,7 @@ pub struct AdministrableProductDefinitionProperty {
     /// - **Strength**: example
     /// - **Description**: This value set includes all observable entity codes from SNOMED CT - provided as an exemplar value set.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/product-characteristic-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/product-characteristic-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdministrableProductDefinition.property.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -641,6 +647,7 @@ pub struct AdministrableProductDefinitionProperty {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdministrableProductDefinition.property.status")]
     pub status: Option<CodeableConcept>,
 }
@@ -767,6 +774,7 @@ pub struct AdministrableProductDefinitionRouteOfAdministration {
     /// - **Strength**: example
     /// - **Description**: A code specifying the route or physiological path of administration of a therapeutic agent into or onto a patient's body.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/route-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/route-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdministrableProductDefinition.routeOfAdministration.code")]
     pub code: CodeableConcept,
     /// The first dose (dose quantity) administered can be specified for the product
@@ -985,6 +993,7 @@ pub struct AdministrableProductDefinitionRouteOfAdministrationTargetSpecies {
     /// - **Strength**: example
     /// - **Description**: A tissue type of an animal.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/target-species
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/target-species")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdministrableProductDefinition.routeOfAdministration.targetSpecies.code")]
     pub code: CodeableConcept,
     /// A species specific time during which consumption of animal product is not appropriate
@@ -1128,6 +1137,7 @@ pub struct AdministrableProductDefinitionRouteOfAdministrationTargetSpeciesWithd
     /// - **Strength**: example
     /// - **Description**: A tissue type of an animal.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/animal-tissue-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/animal-tissue-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="AdministrableProductDefinition.routeOfAdministration.targetSpecies.withdrawalPeriod.tissue")]
     pub tissue: CodeableConcept,
     /// A value for the time

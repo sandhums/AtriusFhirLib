@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in SearchParameter
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum SearchParameterVersionAlgorithm {
     /// Variant accepting the String type.
@@ -117,6 +117,7 @@ pub struct SearchParameter {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SearchParameter.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -359,6 +360,7 @@ pub struct SearchParameter {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SearchParameter.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<SearchParameterVersionAlgorithm>,
@@ -454,6 +456,7 @@ pub struct SearchParameter {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SearchParameter.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -638,6 +641,7 @@ pub struct SearchParameter {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SearchParameter.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this search parameter is defined
@@ -748,6 +752,7 @@ pub struct SearchParameter {
     /// - **Strength**: required
     /// - **Description**: A type of resource, or a Reference (from all versions)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-independent-all-resource-types|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/version-independent-all-resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SearchParameter.base")]
     pub base: Option<Vec<Code>>,
     /// number | date | string | token | reference | composite | quantity | uri | special
@@ -771,6 +776,7 @@ pub struct SearchParameter {
     /// 
     /// ## Conditions
     /// Used when: spd-2, spd-3
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/search-param-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SearchParameter.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -815,6 +821,7 @@ pub struct SearchParameter {
     /// 
     /// ## Conditions
     /// Used when: spd-1
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/search-processingmode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SearchParameter.processingMode")]
     #[fhir_serde(rename = "processingMode")]
     pub processing_mode: Option<Code>,
@@ -854,6 +861,7 @@ pub struct SearchParameter {
     /// - **Strength**: required
     /// - **Description**: A type of resource, or a Reference (from all versions)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-independent-all-resource-types|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/version-independent-all-resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SearchParameter.target")]
     pub target: Option<Vec<Code>>,
     /// Allow multiple values per parameter (or)
@@ -910,6 +918,7 @@ pub struct SearchParameter {
     /// 
     /// ## Conditions
     /// Used when: spd-3
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/search-comparator")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SearchParameter.comparator")]
     pub comparator: Option<Vec<Code>>,
     /// missing | exact | contains | not | text | in | not-in | below | above | type | identifier | of-type | code-text | text-advanced | iterate
@@ -926,6 +935,7 @@ pub struct SearchParameter {
     /// - **Strength**: required
     /// - **Description**: A supported modifier for a search parameter.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/search-modifier-code|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/search-modifier-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SearchParameter.modifier")]
     pub modifier: Option<Vec<Code>>,
     /// Chained names supported

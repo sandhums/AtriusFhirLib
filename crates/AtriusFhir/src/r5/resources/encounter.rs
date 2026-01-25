@@ -106,6 +106,7 @@ pub struct Encounter {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -274,6 +275,7 @@ pub struct Encounter {
     /// - **Strength**: required
     /// - **Description**: Current state of the encounter.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/encounter-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.status")]
     pub status: Code,
     /// Classification of patient encounter context - e.g. Inpatient, outpatient
@@ -295,6 +297,7 @@ pub struct Encounter {
     /// - **Strength**: preferred
     /// - **Description**: Classification of the encounter.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/encounter-class
+    #[fhir_binding(strength="preferred", valueset="http://terminology.hl7.org/ValueSet/encounter-class")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.class")]
     pub class: Option<Vec<CodeableConcept>>,
     /// Indicates the urgency of the encounter
@@ -311,6 +314,7 @@ pub struct Encounter {
     /// - **Strength**: example
     /// - **Description**: Indicates the urgency of the encounter.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ActPriority
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-ActPriority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.priority")]
     pub priority: Option<CodeableConcept>,
     /// Specific type of encounter (e.g. e-mail consultation, surgical day-care, ...)
@@ -335,6 +339,7 @@ pub struct Encounter {
     /// - **Strength**: example
     /// - **Description**: A specific code indicating type of service provided
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/encounter-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -355,6 +360,7 @@ pub struct Encounter {
     /// - **Strength**: example
     /// - **Description**: Broad categorization of the service that is to be provided.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.serviceType")]
     #[fhir_serde(rename = "serviceType")]
     pub service_type: Option<Vec<CodeableReference>>,
@@ -410,6 +416,7 @@ pub struct Encounter {
     /// - **Strength**: example
     /// - **Description**: Current status of the subject  within the encounter.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-subject-status
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/encounter-subject-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.subjectStatus")]
     #[fhir_serde(rename = "subjectStatus")]
     pub subject_status: Option<CodeableConcept>,
@@ -713,6 +720,7 @@ pub struct Encounter {
     /// - **Strength**: example
     /// - **Description**: Medical, cultural or ethical food preferences to help with catering requirements.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-diet
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/encounter-diet")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.dietPreference")]
     #[fhir_serde(rename = "dietPreference")]
     pub diet_preference: Option<Vec<CodeableConcept>>,
@@ -731,6 +739,7 @@ pub struct Encounter {
     /// - **Strength**: preferred
     /// - **Description**: Special arrangements.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-special-arrangements
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/encounter-special-arrangements")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.specialArrangement")]
     #[fhir_serde(rename = "specialArrangement")]
     pub special_arrangement: Option<Vec<CodeableConcept>>,
@@ -762,6 +771,7 @@ pub struct Encounter {
     /// - **Strength**: preferred
     /// - **Description**: Special courtesies.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-special-courtesy
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/encounter-special-courtesy")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.specialCourtesy")]
     #[fhir_serde(rename = "specialCourtesy")]
     pub special_courtesy: Option<Vec<CodeableConcept>>,
@@ -952,6 +962,7 @@ pub struct EncounterAdmission {
     /// - **Strength**: preferred
     /// - **Description**: From where the patient was admitted.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-admit-source
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/encounter-admit-source")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.admission.admitSource")]
     #[fhir_serde(rename = "admitSource")]
     pub admit_source: Option<CodeableConcept>,
@@ -971,6 +982,7 @@ pub struct EncounterAdmission {
     /// - **Strength**: example
     /// - **Description**: The reason for re-admission of this admission encounter.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0092
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v2-0092")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.admission.reAdmission")]
     #[fhir_serde(rename = "reAdmission")]
     pub re_admission: Option<CodeableConcept>,
@@ -999,6 +1011,7 @@ pub struct EncounterAdmission {
     /// - **Strength**: example
     /// - **Description**: Discharge Disposition.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-discharge-disposition
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/encounter-discharge-disposition")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.admission.dischargeDisposition")]
     #[fhir_serde(rename = "dischargeDisposition")]
     pub discharge_disposition: Option<CodeableConcept>,
@@ -1132,6 +1145,7 @@ pub struct EncounterDiagnosis {
     /// 
     /// ## Aliases
     /// Admission diagnosis, discharge diagnosis, indication
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.diagnosis.condition")]
     pub condition: Option<Vec<CodeableReference>>,
     /// Role that this diagnosis has within the encounter (e.g. admission, billing, discharge …)
@@ -1149,6 +1163,7 @@ pub struct EncounterDiagnosis {
     /// - **Strength**: preferred
     /// - **Description**: The type of diagnosis this condition represents.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-diagnosis-use
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/encounter-diagnosis-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.diagnosis.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Option<Vec<CodeableConcept>>,
@@ -1289,6 +1304,7 @@ pub struct EncounterLocation {
     /// - **Strength**: required
     /// - **Description**: The status of the location.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-location-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/encounter-location-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.location.status")]
     pub status: Option<Code>,
     /// The physical type of the location (usually the level in the location hierarchy - bed, room, ward, virtual etc.)
@@ -1314,6 +1330,7 @@ pub struct EncounterLocation {
     /// - **Strength**: example
     /// - **Description**: Physical form of the location.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/location-form
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/location-form")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.location.form")]
     pub form: Option<CodeableConcept>,
     /// Time period during which the patient was present at the location
@@ -1471,6 +1488,7 @@ pub struct EncounterParticipant {
     /// 
     /// ## Conditions
     /// Used when: enc-1, enc-2
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/encounter-participant-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.participant.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -1662,6 +1680,7 @@ pub struct EncounterReason {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-reason-use
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/encounter-reason-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.reason.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Option<Vec<CodeableConcept>>,
@@ -1687,6 +1706,7 @@ pub struct EncounterReason {
     /// 
     /// ## Aliases
     /// Indication, Admission diagnosis
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/encounter-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Encounter.reason.value")]
     pub value: Option<Vec<CodeableReference>>,
 }

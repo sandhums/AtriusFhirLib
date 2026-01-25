@@ -109,6 +109,7 @@ pub struct MedicationDispense {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationDispense.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -309,6 +310,7 @@ pub struct MedicationDispense {
     /// - **Strength**: required
     /// - **Description**: Describes the lifecycle of the dispense.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicationdispense-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/medicationdispense-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationDispense.status")]
     pub status: Code,
     /// Why a dispense was not performed
@@ -324,6 +326,7 @@ pub struct MedicationDispense {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicationdispense-status-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicationdispense-status-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationDispense.notPerformedReason")]
     #[fhir_serde(rename = "notPerformedReason")]
     pub not_performed_reason: Option<CodeableReference>,
@@ -360,6 +363,7 @@ pub struct MedicationDispense {
     /// - **Strength**: example
     /// - **Description**: A code describing where the dispensed medication is expected to be consumed or administered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicationdispense-admin-location
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicationdispense-admin-location")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationDispense.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// What medication was supplied
@@ -387,6 +391,7 @@ pub struct MedicationDispense {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying which substance or product can be dispensed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationDispense.medication")]
     pub medication: CodeableReference,
     /// Who the dispense is for
@@ -485,6 +490,7 @@ pub struct MedicationDispense {
     /// - **Strength**: example
     /// - **Description**: ActPharmacySupplyType
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ActPharmacySupplyType
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-ActPharmacySupplyType")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationDispense.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -788,6 +794,7 @@ pub struct MedicationDispensePerformer {
     /// - **Strength**: example
     /// - **Description**: A code describing the role an individual played in dispensing a medication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicationdispense-performer-function
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicationdispense-performer-function")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationDispense.performer.function")]
     pub function: Option<CodeableConcept>,
     /// Individual who was performing
@@ -935,6 +942,7 @@ pub struct MedicationDispenseSubstitution {
     /// - **Strength**: example
     /// - **Description**: ActSubstanceAdminSubstitutionCode
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ActSubstanceAdminSubstitutionCode
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-ActSubstanceAdminSubstitutionCode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationDispense.substitution.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -953,6 +961,7 @@ pub struct MedicationDispenseSubstitution {
     /// - **Strength**: example
     /// - **Description**: SubstanceAdminSubstitutionReason
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-SubstanceAdminSubstitutionReason
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-SubstanceAdminSubstitutionReason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationDispense.substitution.reason")]
     pub reason: Option<Vec<CodeableConcept>>,
     /// Who is responsible for the substitution

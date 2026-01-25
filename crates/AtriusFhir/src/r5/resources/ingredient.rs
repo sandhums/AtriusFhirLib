@@ -105,6 +105,7 @@ pub struct Ingredient {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Ingredient.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -274,6 +275,7 @@ pub struct Ingredient {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Ingredient.status")]
     pub status: Code,
     /// The product which this ingredient is a constituent part of
@@ -309,6 +311,7 @@ pub struct Ingredient {
     /// - **Strength**: example
     /// - **Description**: A classification of the ingredient identifying its purpose within the product, e.g. active, inactive.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ingredient-role
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ingredient-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Ingredient.role")]
     pub role: CodeableConcept,
     /// Precise action within the drug product, e.g. antioxidant, alkalizing agent
@@ -330,6 +333,7 @@ pub struct Ingredient {
     /// - **Strength**: example
     /// - **Description**: A classification of the ingredient identifying its precise purpose(s) in the drug product (beyond e.g. active/inactive).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ingredient-function
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ingredient-function")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Ingredient.function")]
     pub function: Option<Vec<CodeableConcept>>,
     /// A classification of the ingredient according to where in the physical item it tends to be used, such the outer shell of a tablet, inner body or ink
@@ -544,6 +548,7 @@ pub struct IngredientManufacturer {
     /// - **Strength**: required
     /// - **Description**: The way in which this manufacturer is associated with the ingredient.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ingredient-manufacturer-role|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/ingredient-manufacturer-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Ingredient.manufacturer.role")]
     pub role: Option<Code>,
     /// An organization that manufactures this ingredient
@@ -687,6 +692,7 @@ pub struct IngredientSubstance {
     /// 
     /// ## Conditions
     /// Used when: ing-1
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Ingredient.substance.code")]
     pub code: CodeableReference,
     /// The quantity of substance, per presentation, or per volume or mass, and type of quantity
@@ -709,7 +715,7 @@ pub struct IngredientSubstance {
 }
 
 /// Choice of types for the presentation\[x\] field in IngredientSubstanceStrength
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "presentation")]
 pub enum IngredientSubstanceStrengthPresentation {
     /// Variant accepting the Ratio type.
@@ -727,7 +733,7 @@ pub enum IngredientSubstanceStrengthPresentation {
 }
 
 /// Choice of types for the concentration\[x\] field in IngredientSubstanceStrength
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "concentration")]
 pub enum IngredientSubstanceStrengthConcentration {
     /// Variant accepting the Ratio type.
@@ -967,6 +973,7 @@ pub struct IngredientSubstanceStrength {
     /// - **Strength**: example
     /// - **Description**: Jurisdiction codes
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/country
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/country")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Ingredient.substance.strength.country")]
     pub country: Option<Vec<CodeableConcept>>,
     /// Strength expressed in terms of a reference substance
@@ -993,7 +1000,7 @@ pub struct IngredientSubstanceStrength {
 }
 
 /// Choice of types for the strength\[x\] field in IngredientSubstanceStrengthReferenceStrength
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "strength")]
 pub enum IngredientSubstanceStrengthReferenceStrengthStrength {
     /// Variant accepting the Ratio type.
@@ -1133,6 +1140,7 @@ pub struct IngredientSubstanceStrengthReferenceStrength {
     /// - **Strength**: example
     /// - **Description**: This value set includes all substance codes from SNOMED CT - provided as an exemplar value set.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Ingredient.substance.strength.referenceStrength.substance")]
     pub substance: CodeableReference,
     /// Strength expressed in terms of a reference substance
@@ -1182,6 +1190,7 @@ pub struct IngredientSubstanceStrengthReferenceStrength {
     /// - **Strength**: example
     /// - **Description**: Jurisdiction codes
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/country
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/country")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Ingredient.substance.strength.referenceStrength.country")]
     pub country: Option<Vec<CodeableConcept>>,
 }

@@ -202,12 +202,13 @@ pub struct Timing {
     /// - **Strength**: preferred
     /// - **Description**: Code for a known / defined timing pattern.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/timing-abbreviation
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/timing-abbreviation")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Timing.code")]
     pub code: Option<CodeableConcept>,
 }
 
 /// Choice of types for the bounds\[x\] field in TimingRepeat
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "bounds")]
 pub enum TimingRepeatBounds {
     /// Variant accepting the Duration type.
@@ -443,6 +444,7 @@ pub struct TimingRepeat {
     /// 
     /// ## Conditions
     /// Used when: tim-1
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/units-of-time")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Timing.repeat.durationUnit")]
     #[fhir_serde(rename = "durationUnit")]
     pub duration_unit: Option<Code>,
@@ -541,6 +543,7 @@ pub struct TimingRepeat {
     /// 
     /// ## Conditions
     /// Used when: tim-2
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/units-of-time")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Timing.repeat.periodUnit")]
     #[fhir_serde(rename = "periodUnit")]
     pub period_unit: Option<Code>,
@@ -565,6 +568,7 @@ pub struct TimingRepeat {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/days-of-week|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/days-of-week")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Timing.repeat.dayOfWeek")]
     #[fhir_serde(rename = "dayOfWeek")]
     pub day_of_week: Option<Vec<Code>>,
@@ -620,6 +624,7 @@ pub struct TimingRepeat {
     /// 
     /// ## Conditions
     /// Used when: tim-9, tim-10
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/event-timing")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Timing.repeat.when")]
     pub when: Option<Vec<Code>>,
     /// Minutes from event (before or after)

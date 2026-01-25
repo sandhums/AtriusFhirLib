@@ -3,6 +3,7 @@ use rust_decimal::Decimal;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 use serde::ser::SerializeStruct;
 use atrius_fhirpath_support::evaluation_result::EvaluationResult;
+use atrius_fhirpath_support::{FhirPathEngine, FhirValidate, Invariant, ValidationIssue};
 use atrius_fhirpath_support::traits::IntoEvaluationResult;
 
 /// High-precision decimal type that preserves original string representation.
@@ -247,6 +248,19 @@ impl From<Decimal> for PreciseDecimal {
     }
 }
 
+// --- FHIRPath Evaluation ---
+// PreciseDecimal evaluates to a FHIR decimal using its parsed value.
+// If parsing failed, it evaluates to Empty.
+impl IntoEvaluationResult for PreciseDecimal {
+    fn to_evaluation_result(&self) -> EvaluationResult {
+        if let Some(v) = self.value {
+            EvaluationResult::fhir_decimal(v)
+        } else {
+            EvaluationResult::Empty
+        }
+    }
+}
+
 /// Implements serialization for `PreciseDecimal` preserving original format.
 ///
 /// This implementation ensures that the exact original string representation
@@ -370,6 +384,14 @@ impl<'de> Deserialize<'de> for PreciseDecimal {
                 &"a number, string, or object with a 'value' field",
             )),
         }
+    }
+}
+
+// --- FHIR Validation ---
+// PreciseDecimal itself has no FHIR invariants; it participates in validation as a leaf primitive.
+impl FhirValidate for PreciseDecimal {
+    fn invariants() -> &'static [Invariant] {
+        &[]
     }
 }
 
@@ -716,5 +738,54 @@ where
         }
         // If value, id, and extension are all None, return Empty
         EvaluationResult::Empty
+    }
+}
+
+// DecimalElement participates in validation so that structs containing decimals can recurse.
+// It has no element-specific invariants (FHIR constraints are emitted on containing fields/types).
+impl<E> FhirValidate for DecimalElement<E>
+where
+    E: FhirValidate + Clone,
+{
+    fn invariants() -> &'static [Invariant] {
+        &[]
+    }
+
+    fn validate_with_engine(&self, engine: &dyn FhirPathEngine) -> Vec<ValidationIssue> {
+        let mut issues = Vec::new();
+        let focus = self.to_evaluation_result();
+
+        // Run any invariants on DecimalElement itself (none today)
+        for inv in Self::invariants() {
+            match engine.eval_bool(&focus, inv.expr) {
+                Ok(true) => {}
+                Ok(false) => issues.push(ValidationIssue {
+                    key: inv.key,
+                    severity: inv.severity,
+                    path: inv.path,
+                    instance_path: inv.path.to_string(),
+                    expression: inv.expr,
+                    message: inv.human,
+                }),
+                Err(_) => issues.push(ValidationIssue {
+                    key: inv.key,
+                    severity: inv.severity,
+                    path: inv.path,
+                    instance_path: inv.path.to_string(),
+                    expression: inv.expr,
+                    message: inv.human,
+                }),
+            }
+        }
+
+        // Recurse into extensions (if present)
+        if let Some(exts) = &self.extension {
+            for e in exts {
+                issues.extend(e.validate_with_engine(engine));
+            }
+        }
+
+        // `PreciseDecimal` is a leaf; no recursion needed.
+        issues
     }
 }

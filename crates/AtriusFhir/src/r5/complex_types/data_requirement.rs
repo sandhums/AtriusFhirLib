@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the subject\[x\] field in DataRequirement
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "subject")]
 pub enum DataRequirementSubject {
     /// Variant accepting the CodeableConcept type.
@@ -85,6 +85,7 @@ pub struct DataRequirement {
     /// - **Strength**: required
     /// - **Description**: List of FHIR types (resources, data types).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fhir-types|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fhir-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DataRequirement.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -129,6 +130,7 @@ pub struct DataRequirement {
     /// - **Strength**: extensible
     /// - **Description**: The possible types of subjects for a data requirement (E.g., Patient, Practitioner, Organization, Location, etc.).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participant-resource-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/participant-resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DataRequirement.subject[x]")]
     #[fhir_serde(flatten)]
     pub subject: Option<DataRequirementSubject>,
@@ -407,7 +409,7 @@ pub struct DataRequirementCodeFilter {
 }
 
 /// Choice of types for the value\[x\] field in DataRequirementDateFilter
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum DataRequirementDateFilterValue {
     /// Variant accepting the DateTime type.
@@ -647,12 +649,13 @@ pub struct DataRequirementSort {
     /// - **Strength**: required
     /// - **Description**: The possible sort directions, ascending or descending.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/sort-direction|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/sort-direction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DataRequirement.sort.direction")]
     pub direction: Code,
 }
 
 /// Choice of types for the value\[x\] field in DataRequirementValueFilter
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum DataRequirementValueFilterValue {
     /// Variant accepting the DateTime type.
@@ -781,6 +784,7 @@ pub struct DataRequirementValueFilter {
     /// - **Strength**: required
     /// - **Description**: Possible comparators for the valueFilter element.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/value-filter-comparator|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/value-filter-comparator")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DataRequirement.valueFilter.comparator")]
     pub comparator: Option<Code>,
     /// The value of the filter, as a Period, DateTime, or Duration value

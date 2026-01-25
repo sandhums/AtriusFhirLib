@@ -85,6 +85,7 @@ pub struct HumanName {
     /// - **Strength**: required
     /// - **Description**: The use of a human name.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/name-use|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/name-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="HumanName.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Option<Code>,

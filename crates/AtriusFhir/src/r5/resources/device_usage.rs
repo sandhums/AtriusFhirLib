@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the timing\[x\] field in DeviceUsage
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "timing")]
 pub enum DeviceUsageTiming {
     /// Variant accepting the Timing type.
@@ -121,6 +121,7 @@ pub struct DeviceUsage {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceUsage.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -319,6 +320,7 @@ pub struct DeviceUsage {
     /// - **Strength**: required
     /// - **Description**: A coded concept indicating the current status of the Device Usage.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/deviceusage-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/deviceusage-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceUsage.status")]
     pub status: Code,
     /// The category of the statement - classifying how the statement is made
@@ -430,6 +432,7 @@ pub struct DeviceUsage {
     /// - **Strength**: required
     /// - **Description**: Codes representing the usage status of the device.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/deviceusage-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/deviceusage-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceUsage.usageStatus")]
     #[fhir_serde(rename = "usageStatus")]
     pub usage_status: Option<CodeableConcept>,
@@ -528,6 +531,7 @@ pub struct DeviceUsage {
     /// - **Strength**: example
     /// - **Description**: SNOMED CT Body site concepts
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/body-site
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceUsage.bodySite")]
     #[fhir_serde(rename = "bodySite")]
     pub body_site: Option<CodeableReference>,
@@ -660,6 +664,7 @@ pub struct DeviceUsageAdherence {
     /// - **Strength**: example
     /// - **Description**: Codes for adherence
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/deviceusage-adherence-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/deviceusage-adherence-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceUsage.adherence.code")]
     pub code: CodeableConcept,
     /// lost | stolen | prescribed | broken | burned | forgot
@@ -676,6 +681,7 @@ pub struct DeviceUsageAdherence {
     /// - **Strength**: example
     /// - **Description**: Codes for adherence reason
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/deviceusage-adherence-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/deviceusage-adherence-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceUsage.adherence.reason")]
     pub reason: Option<Vec<CodeableConcept>>,
 }

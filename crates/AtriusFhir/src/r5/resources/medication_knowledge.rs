@@ -99,6 +99,7 @@ pub struct MedicationKnowledge {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationKnowledge.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -278,6 +279,7 @@ pub struct MedicationKnowledge {
     /// - **Strength**: example
     /// - **Description**: A coded concept that defines the type of a medication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationKnowledge.code")]
     pub code: Option<CodeableConcept>,
     /// active | entered-in-error | inactive
@@ -312,6 +314,7 @@ pub struct MedicationKnowledge {
     /// - **Strength**: required
     /// - **Description**: A coded concept defining if the medication is in active use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicationknowledge-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/medicationknowledge-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationKnowledge.status")]
     pub status: Option<Code>,
     /// Creator or owner of the knowledge or information about the medication
@@ -537,7 +540,7 @@ pub struct MedicationKnowledge {
 }
 
 /// Choice of types for the cost\[x\] field in MedicationKnowledgeCost
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "cost")]
 pub enum MedicationKnowledgeCostCost {
     /// Variant accepting the Money type.
@@ -699,6 +702,7 @@ pub struct MedicationKnowledgeCost {
     /// - **Strength**: example
     /// - **Description**: A coded concept defining the category of a medication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-cost-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-cost-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationKnowledge.cost.cost[x]")]
     #[fhir_serde(flatten)]
     pub cost: Option<MedicationKnowledgeCostCost>,
@@ -835,6 +839,7 @@ pub struct MedicationKnowledgeDefinitional {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-form-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-form-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationKnowledge.definitional.doseForm")]
     #[fhir_serde(rename = "doseForm")]
     pub dose_form: Option<CodeableConcept>,
@@ -851,6 +856,7 @@ pub struct MedicationKnowledgeDefinitional {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/route-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/route-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationKnowledge.definitional.intendedRoute")]
     #[fhir_serde(rename = "intendedRoute")]
     pub intended_route: Option<Vec<CodeableConcept>>,
@@ -884,7 +890,7 @@ pub struct MedicationKnowledgeDefinitional {
 }
 
 /// Choice of types for the value\[x\] field in MedicationKnowledgeDefinitionalDrugCharacteristic
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum MedicationKnowledgeDefinitionalDrugCharacteristicValue {
     /// Variant accepting the CodeableConcept type.
@@ -1019,6 +1025,7 @@ pub struct MedicationKnowledgeDefinitionalDrugCharacteristic {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicationknowledge-characteristic
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicationknowledge-characteristic")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationKnowledge.definitional.drugCharacteristic.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1042,7 +1049,7 @@ pub struct MedicationKnowledgeDefinitionalDrugCharacteristic {
 }
 
 /// Choice of types for the strength\[x\] field in MedicationKnowledgeDefinitionalIngredient
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "strength")]
 pub enum MedicationKnowledgeDefinitionalIngredientStrength {
     /// Variant accepting the Ratio type.
@@ -1187,6 +1194,7 @@ pub struct MedicationKnowledgeDefinitionalIngredient {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-RoleClassIngredientEntity
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-RoleClassIngredientEntity")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationKnowledge.definitional.ingredient.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1206,6 +1214,7 @@ pub struct MedicationKnowledgeDefinitionalIngredient {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-ingredientstrength
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-ingredientstrength")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationKnowledge.definitional.ingredient.strength[x]")]
     #[fhir_serde(flatten)]
     pub strength: Option<MedicationKnowledgeDefinitionalIngredientStrength>,
@@ -1616,7 +1625,7 @@ pub struct MedicationKnowledgeIndicationGuidelineDosingGuidelineDosage {
 }
 
 /// Choice of types for the value\[x\] field in MedicationKnowledgeIndicationGuidelineDosingGuidelinePatientCharacteristic
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum MedicationKnowledgeIndicationGuidelineDosingGuidelinePatientCharacteristicValue {
     /// Variant accepting the CodeableConcept type.
@@ -1760,7 +1769,7 @@ pub struct MedicationKnowledgeIndicationGuidelineDosingGuidelinePatientCharacter
 }
 
 /// Choice of types for the source\[x\] field in MedicationKnowledgeMedicineClassification
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "source")]
 pub enum MedicationKnowledgeMedicineClassificationSource {
     /// Variant accepting the String type.
@@ -2965,7 +2974,7 @@ pub struct MedicationKnowledgeStorageGuideline {
 }
 
 /// Choice of types for the value\[x\] field in MedicationKnowledgeStorageGuidelineEnvironmentalSetting
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum MedicationKnowledgeStorageGuidelineEnvironmentalSettingValue {
     /// Variant accepting the Quantity type.

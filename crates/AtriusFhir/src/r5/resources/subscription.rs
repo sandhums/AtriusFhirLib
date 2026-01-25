@@ -105,6 +105,7 @@ pub struct Subscription {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Subscription.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -293,6 +294,7 @@ pub struct Subscription {
     /// - **Strength**: required
     /// - **Description**: The status of a subscription.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/subscription-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/subscription-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Subscription.status")]
     pub status: Code,
     /// Reference to the subscription topic being subscribed to
@@ -409,6 +411,7 @@ pub struct Subscription {
     /// - **Strength**: extensible
     /// - **Description**: The type of method used to execute a subscription.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/subscription-channel-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/subscription-channel-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Subscription.channelType")]
     #[fhir_serde(rename = "channelType")]
     pub channel_type: Coding,
@@ -510,6 +513,7 @@ pub struct Subscription {
     /// - **Strength**: required
     /// - **Description**: BCP 13 (RFCs 2045, 2046, 2047, 4288, 4289 and 2049)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/mimetypes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/mimetypes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Subscription.contentType")]
     #[fhir_serde(rename = "contentType")]
     pub content_type: Option<Code>,
@@ -536,6 +540,7 @@ pub struct Subscription {
     /// - **Strength**: required
     /// - **Description**: Codes to represent how much resource content to send in the notification payload.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/subscription-payload-content|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/subscription-payload-content")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Subscription.content")]
     pub content: Option<Code>,
     /// Maximum number of events that can be combined in a single notification
@@ -684,6 +689,7 @@ pub struct SubscriptionFilterBy {
     /// - **Strength**: extensible
     /// - **Description**: A type of resource, or a Reference (from all versions)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/subscription-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/subscription-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Subscription.filterBy.resourceType")]
     #[fhir_serde(rename = "resourceType")]
     pub resource_type: Option<Uri>,
@@ -724,6 +730,7 @@ pub struct SubscriptionFilterBy {
     /// 
     /// ## Conditions
     /// Used when: scr-1
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/search-comparator")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Subscription.filterBy.comparator")]
     pub comparator: Option<Code>,
     /// missing | exact | contains | not | text | in | not-in | below | above | type | identifier | of-type | code-text | text-advanced | iterate
@@ -747,6 +754,7 @@ pub struct SubscriptionFilterBy {
     /// 
     /// ## Conditions
     /// Used when: scr-1
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/search-modifier-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Subscription.filterBy.modifier")]
     pub modifier: Option<Code>,
     /// Literal value or resource path

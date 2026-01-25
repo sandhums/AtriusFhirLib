@@ -105,6 +105,7 @@ pub struct ResearchSubject {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchSubject.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -268,6 +269,7 @@ pub struct ResearchSubject {
     /// - **Strength**: required
     /// - **Description**: Codes that convey the current publication status of the research study resource.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchSubject.status")]
     pub status: Code,
     /// Subject status
@@ -509,6 +511,7 @@ pub struct ResearchSubjectProgress {
     /// - **Strength**: example
     /// - **Description**: Identifies the kind of state being refered to.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-subject-state-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/research-subject-state-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchSubject.progress.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -526,6 +529,7 @@ pub struct ResearchSubjectProgress {
     /// - **Strength**: required
     /// - **Description**: Indicates the progression of a study subject through a study.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-subject-state|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/research-subject-state")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchSubject.progress.subjectState")]
     #[fhir_serde(rename = "subjectState")]
     pub subject_state: Option<CodeableConcept>,
@@ -547,6 +551,7 @@ pub struct ResearchSubjectProgress {
     /// - **Strength**: example
     /// - **Description**: Indicates the progression of a study subject through the study milestones.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/research-subject-milestone
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/research-subject-milestone")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchSubject.progress.milestone")]
     pub milestone: Option<CodeableConcept>,
     /// State change reason
@@ -564,6 +569,7 @@ pub struct ResearchSubjectProgress {
     /// - **Strength**: example
     /// - **Description**: Indicates why the state of the subject changed.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/state-change-reason
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/state-change-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ResearchSubject.progress.reason")]
     pub reason: Option<CodeableConcept>,
     /// State change date

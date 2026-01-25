@@ -105,6 +105,7 @@ pub struct EnrollmentResponse {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EnrollmentResponse.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -269,6 +270,7 @@ pub struct EnrollmentResponse {
     /// - **Strength**: required
     /// - **Description**: A code specifying the state of the resource instance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fm-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fm-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EnrollmentResponse.status")]
     pub status: Option<Code>,
     /// Claim reference
@@ -296,6 +298,7 @@ pub struct EnrollmentResponse {
     /// - **Strength**: required
     /// - **Description**: The outcome of the processing.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/enrollment-outcome|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/enrollment-outcome")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EnrollmentResponse.outcome")]
     pub outcome: Option<Code>,
     /// Disposition Message

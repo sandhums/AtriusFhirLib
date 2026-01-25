@@ -116,6 +116,7 @@ pub struct Bundle {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Bundle.language")]
     pub language: Option<Code>,
     /// Persistent identifier for the bundle
@@ -168,6 +169,7 @@ pub struct Bundle {
     /// 
     /// ## Conditions
     /// Used when: bdl-1, bdl-2, bdl-3a, bdl-3b, bdl-3c, bdl-3d, bdl-7, bdl-9, bdl-10, bdl-11, bdl-12, bdl-13, bdl-14, bdl-15, bdl-17, bdl-18
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/bundle-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Bundle.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -721,6 +723,7 @@ pub struct BundleEntryRequest {
     /// 
     /// ## Conditions
     /// Used when: bdl-3b, bdl-3c, bdl-14, bdl-15
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/http-verb")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Bundle.entry.request.method")]
     pub method: Code,
     /// URL for HTTP equivalent of this entry
@@ -1140,6 +1143,7 @@ pub struct BundleEntrySearch {
     /// - **Strength**: required
     /// - **Description**: Why an entry is in the result set - whether it's included as a match or because of an _include requirement, or to convey information or warning information about the search process.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/search-entry-mode|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/search-entry-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Bundle.entry.search.mode")]
     pub mode: Option<Code>,
     /// Search ranking (between 0 and 1)
@@ -1308,6 +1312,7 @@ pub struct BundleLink {
     /// 
     /// ## Conditions
     /// Used when: bdl-18
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/iana-link-relations")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Bundle.link.relation")]
     pub relation: Code,
     /// Reference details for the link

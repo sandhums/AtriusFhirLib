@@ -105,6 +105,7 @@ pub struct ImmunizationRecommendation {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImmunizationRecommendation.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -441,6 +442,7 @@ pub struct ImmunizationRecommendationRecommendation {
     /// 
     /// ## Conditions
     /// Used when: imr-1
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/vaccine-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImmunizationRecommendation.recommendation.vaccineCode")]
     #[fhir_serde(rename = "vaccineCode")]
     pub vaccine_code: Option<Vec<CodeableConcept>>,
@@ -470,6 +472,7 @@ pub struct ImmunizationRecommendationRecommendation {
     /// 
     /// ## Conditions
     /// Used when: imr-1
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-target-disease")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImmunizationRecommendation.recommendation.targetDisease")]
     #[fhir_serde(rename = "targetDisease")]
     pub target_disease: Option<Vec<CodeableConcept>>,
@@ -490,6 +493,7 @@ pub struct ImmunizationRecommendationRecommendation {
     /// - **Strength**: example
     /// - **Description**: The type of vaccine administered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/vaccine-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/vaccine-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImmunizationRecommendation.recommendation.contraindicatedVaccineCode")]
     #[fhir_serde(rename = "contraindicatedVaccineCode")]
     pub contraindicated_vaccine_code: Option<Vec<CodeableConcept>>,
@@ -512,6 +516,7 @@ pub struct ImmunizationRecommendationRecommendation {
     /// - **Strength**: example
     /// - **Description**: The patient's status with respect to a vaccination protocol.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-recommendation-status
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-recommendation-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImmunizationRecommendation.recommendation.forecastStatus")]
     #[fhir_serde(rename = "forecastStatus")]
     pub forecast_status: CodeableConcept,
@@ -532,6 +537,7 @@ pub struct ImmunizationRecommendationRecommendation {
     /// - **Strength**: example
     /// - **Description**: The reason for the patient's status with respect to a vaccination protocol.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-recommendation-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-recommendation-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImmunizationRecommendation.recommendation.forecastReason")]
     #[fhir_serde(rename = "forecastReason")]
     pub forecast_reason: Option<Vec<CodeableConcept>>,
@@ -754,6 +760,7 @@ pub struct ImmunizationRecommendationRecommendationDateCriterion {
     /// - **Strength**: example
     /// - **Description**: Classifies date criterion with respect to conveying information about a patient's vaccination status (e.g. due date, latest to give date, etc.).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/immunization-recommendation-date-criterion
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/immunization-recommendation-date-criterion")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImmunizationRecommendation.recommendation.dateCriterion.code")]
     pub code: CodeableConcept,
     /// Recommended date

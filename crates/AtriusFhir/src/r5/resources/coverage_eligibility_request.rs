@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the serviced\[x\] field in CoverageEligibilityRequest
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "serviced")]
 pub enum CoverageEligibilityRequestServiced {
     /// Variant accepting the Date type.
@@ -121,6 +121,7 @@ pub struct CoverageEligibilityRequest {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CoverageEligibilityRequest.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -293,6 +294,7 @@ pub struct CoverageEligibilityRequest {
     /// - **Strength**: required
     /// - **Description**: A code specifying the state of the resource instance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fm-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fm-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CoverageEligibilityRequest.status")]
     pub status: Code,
     /// Desired processing priority
@@ -312,6 +314,7 @@ pub struct CoverageEligibilityRequest {
     /// - **Strength**: example
     /// - **Description**: The timeliness with which processing is required: STAT, normal, Deferred.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/process-priority
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/process-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CoverageEligibilityRequest.priority")]
     pub priority: Option<CodeableConcept>,
     /// auth-requirements | benefits | discovery | validation
@@ -338,6 +341,7 @@ pub struct CoverageEligibilityRequest {
     /// - **Strength**: required
     /// - **Description**: A code specifying the types of information being requested.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/eligibilityrequest-purpose|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/eligibilityrequest-purpose")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CoverageEligibilityRequest.purpose")]
     pub purpose: Option<Vec<Code>>,
     /// Intended recipient of products and services
@@ -536,7 +540,7 @@ pub struct CoverageEligibilityRequest {
 }
 
 /// Choice of types for the when\[x\] field in CoverageEligibilityRequestEvent
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "when")]
 pub enum CoverageEligibilityRequestEventWhen {
     /// Variant accepting the DateTime type.
@@ -660,6 +664,7 @@ pub struct CoverageEligibilityRequestEvent {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/datestype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/datestype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CoverageEligibilityRequest.event.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -993,6 +998,7 @@ pub struct CoverageEligibilityRequestItem {
     /// - **Strength**: example
     /// - **Description**: Benefit categories such as: oral, medical, vision etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/ex-benefitcategory
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/ex-benefitcategory")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CoverageEligibilityRequest.item.category")]
     pub category: Option<CodeableConcept>,
     /// Billing, service, product, or drug code
@@ -1017,6 +1023,7 @@ pub struct CoverageEligibilityRequestItem {
     /// - **Strength**: example
     /// - **Description**: Allowable service and product codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-uscls
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-uscls")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CoverageEligibilityRequest.item.productOrService")]
     #[fhir_serde(rename = "productOrService")]
     pub product_or_service: Option<CodeableConcept>,
@@ -1043,6 +1050,7 @@ pub struct CoverageEligibilityRequestItem {
     /// - **Strength**: example
     /// - **Description**: Item type or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or an appliance was lost or stolen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/claim-modifiers
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/claim-modifiers")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CoverageEligibilityRequest.item.modifier")]
     pub modifier: Option<Vec<CodeableConcept>>,
     /// Perfoming practitioner
@@ -1135,7 +1143,7 @@ pub struct CoverageEligibilityRequestItem {
 }
 
 /// Choice of types for the diagnosis\[x\] field in CoverageEligibilityRequestItemDiagnosis
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "diagnosis")]
 pub enum CoverageEligibilityRequestItemDiagnosisDiagnosis {
     /// Variant accepting the CodeableConcept type.
@@ -1267,6 +1275,7 @@ pub struct CoverageEligibilityRequestItemDiagnosis {
     /// - **Strength**: example
     /// - **Description**: ICD10 Diagnostic codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/icd-10
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/icd-10")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CoverageEligibilityRequest.item.diagnosis.diagnosis[x]")]
     #[fhir_serde(flatten)]
     pub diagnosis: Option<CoverageEligibilityRequestItemDiagnosisDiagnosis>,

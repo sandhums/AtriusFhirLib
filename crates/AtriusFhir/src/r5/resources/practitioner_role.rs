@@ -108,6 +108,7 @@ pub struct PractitionerRole {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PractitionerRole.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -368,6 +369,7 @@ pub struct PractitionerRole {
     /// - **Strength**: example
     /// - **Description**: The role a person plays representing an organization.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/practitioner-role
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/practitioner-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PractitionerRole.code")]
     pub code: Option<Vec<CodeableConcept>>,
     /// Specific specialty of the practitioner
@@ -395,6 +397,7 @@ pub struct PractitionerRole {
     /// - **Strength**: preferred
     /// - **Description**: Specific specialty associated with the agency.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/c80-practice-codes
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/c80-practice-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PractitionerRole.specialty")]
     pub specialty: Option<Vec<CodeableConcept>>,
     /// Location(s) where the practitioner provides care
@@ -461,6 +464,7 @@ pub struct PractitionerRole {
     /// - **Strength**: example
     /// - **Description**: A custom attribute that could be provided at a service (e.g. Wheelchair accessibility).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-mode
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PractitionerRole.characteristic")]
     pub characteristic: Option<Vec<CodeableConcept>>,
     /// A language the practitioner (in this role) can use in patient communication
@@ -496,6 +500,7 @@ pub struct PractitionerRole {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PractitionerRole.communication")]
     pub communication: Option<Vec<CodeableConcept>>,
     /// Times the Practitioner is available at this location and/or healthcare service (including exceptions)

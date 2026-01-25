@@ -83,6 +83,7 @@ pub struct Signature {
     /// - **Strength**: preferred
     /// - **Description**: An indication of the reason that an entity signed the object.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/signature-type
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/signature-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Signature.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<Coding>>,
@@ -163,6 +164,7 @@ pub struct Signature {
     /// - **Strength**: required
     /// - **Description**: BCP 13 (RFCs 2045, 2046, 2047, 4288, 4289 and 2049)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/mimetypes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/mimetypes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Signature.targetFormat")]
     #[fhir_serde(rename = "targetFormat")]
     pub target_format: Option<Code>,
@@ -182,6 +184,7 @@ pub struct Signature {
     /// - **Strength**: required
     /// - **Description**: BCP 13 (RFCs 2045, 2046, 2047, 4288, 4289 and 2049)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/mimetypes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/mimetypes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Signature.sigFormat")]
     #[fhir_serde(rename = "sigFormat")]
     pub sig_format: Option<Code>,

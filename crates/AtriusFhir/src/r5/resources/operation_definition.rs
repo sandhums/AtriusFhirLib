@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in OperationDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum OperationDefinitionVersionAlgorithm {
     /// Variant accepting the String type.
@@ -117,6 +117,7 @@ pub struct OperationDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -359,6 +360,7 @@ pub struct OperationDefinition {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationDefinition.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<OperationDefinitionVersionAlgorithm>,
@@ -439,6 +441,7 @@ pub struct OperationDefinition {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationDefinition.status")]
     pub status: Code,
     /// operation | query
@@ -464,6 +467,7 @@ pub struct OperationDefinition {
     /// 
     /// ## Conditions
     /// Used when: opd-5, opd-6, opd-7
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/operation-kind")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationDefinition.kind")]
     pub kind: Code,
     /// For testing purposes, not real usage
@@ -646,6 +650,7 @@ pub struct OperationDefinition {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationDefinition.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this operation definition is defined
@@ -809,6 +814,7 @@ pub struct OperationDefinition {
     /// - **Strength**: required
     /// - **Description**: A type of resource, or a Reference (from all versions)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-independent-all-resource-types|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/version-independent-all-resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationDefinition.resource")]
     pub resource: Option<Vec<Code>>,
     /// Invoke at the system level?
@@ -1238,6 +1244,7 @@ pub struct OperationDefinitionParameter {
     /// 
     /// ## Conditions
     /// Used when: opd-6, opd-7, opd-4
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/operation-parameter-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationDefinition.parameter.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Code,
@@ -1258,6 +1265,7 @@ pub struct OperationDefinitionParameter {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/operation-parameter-scope|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/operation-parameter-scope")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationDefinition.parameter.scope")]
     pub scope: Option<Vec<Code>>,
     /// Minimum Cardinality
@@ -1316,6 +1324,7 @@ pub struct OperationDefinitionParameter {
     /// 
     /// ## Conditions
     /// Used when: opd-7, opd-1, opd-2, opd-3
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fhir-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationDefinition.parameter.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Code>,
@@ -1338,6 +1347,7 @@ pub struct OperationDefinitionParameter {
     /// - **Strength**: required
     /// - **Description**: A list of all the types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fhir-types|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fhir-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationDefinition.parameter.allowedType")]
     #[fhir_serde(rename = "allowedType")]
     pub allowed_type: Option<Vec<Code>>,
@@ -1393,6 +1403,7 @@ pub struct OperationDefinitionParameter {
     /// 
     /// ## Conditions
     /// Used when: opd-6, opd-2, opd-4
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/search-param-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationDefinition.parameter.searchType")]
     #[fhir_serde(rename = "searchType")]
     pub search_type: Option<Code>,
@@ -1566,6 +1577,7 @@ pub struct OperationDefinitionParameterBinding {
     /// 
     /// ## Aliases
     /// conformance, extensibility
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/binding-strength")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationDefinition.parameter.binding.strength")]
     pub strength: Code,
     /// Source of value set

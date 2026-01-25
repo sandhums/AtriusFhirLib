@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in TerminologyCapabilities
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum TerminologyCapabilitiesVersionAlgorithm {
     /// Variant accepting the String type.
@@ -121,6 +121,7 @@ pub struct TerminologyCapabilities {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TerminologyCapabilities.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -368,6 +369,7 @@ pub struct TerminologyCapabilities {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TerminologyCapabilities.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<TerminologyCapabilitiesVersionAlgorithm>,
@@ -443,6 +445,7 @@ pub struct TerminologyCapabilities {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TerminologyCapabilities.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -633,6 +636,7 @@ pub struct TerminologyCapabilities {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TerminologyCapabilities.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this terminology capabilities is defined
@@ -724,6 +728,7 @@ pub struct TerminologyCapabilities {
     /// 
     /// ## Conditions
     /// Used when: tcp-3, tcp-5, tcp-4
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/capability-statement-kind")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TerminologyCapabilities.kind")]
     pub kind: Code,
     /// Software that is covered by this terminology capability statement
@@ -842,6 +847,7 @@ pub struct TerminologyCapabilities {
     /// - **Strength**: required
     /// - **Description**: The degree to which the server supports the code search parameter on ValueSet, if it is supported.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/code-search-support|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/code-search-support")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TerminologyCapabilities.codeSearch")]
     #[fhir_serde(rename = "codeSearch")]
     pub code_search: Option<Code>,
@@ -1164,6 +1170,7 @@ pub struct TerminologyCapabilitiesCodeSystem {
     /// - **Strength**: required
     /// - **Description**: The extent of the content of the code system (the concepts and codes it defines) are represented in a code system resource.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/codesystem-content-mode|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/codesystem-content-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TerminologyCapabilities.codeSystem.content")]
     pub content: Code,
     /// Whether subsumption is supported
@@ -1345,6 +1352,7 @@ pub struct TerminologyCapabilitiesCodeSystemVersion {
     /// - **Strength**: required
     /// - **Description**: IETF language tag
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TerminologyCapabilities.codeSystem.version.language")]
     pub language: Option<Vec<Code>>,
     /// Filter Properties supported

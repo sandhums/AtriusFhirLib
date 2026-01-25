@@ -108,6 +108,7 @@ pub struct OrganizationAffiliation {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OrganizationAffiliation.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -378,6 +379,7 @@ pub struct OrganizationAffiliation {
     /// - **Strength**: example
     /// - **Description**: The role the participating organization providing services to the primary organization.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/organization-role
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/organization-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OrganizationAffiliation.code")]
     pub code: Option<Vec<CodeableConcept>>,
     /// Specific specialty of the participatingOrganization in the context of the role
@@ -398,6 +400,7 @@ pub struct OrganizationAffiliation {
     /// - **Strength**: preferred
     /// - **Description**: Specific specialty associated with the participating organization.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/c80-practice-codes
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/c80-practice-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OrganizationAffiliation.specialty")]
     pub specialty: Option<Vec<CodeableConcept>>,
     /// The location(s) at which the role occurs

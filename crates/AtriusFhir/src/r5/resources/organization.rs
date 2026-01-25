@@ -108,6 +108,7 @@ pub struct Organization {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Organization.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -329,6 +330,7 @@ pub struct Organization {
     /// - **Strength**: example
     /// - **Description**: Used to categorize the organization.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/organization-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/organization-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Organization.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,

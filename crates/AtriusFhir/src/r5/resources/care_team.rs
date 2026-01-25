@@ -105,6 +105,7 @@ pub struct CareTeam {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CareTeam.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -287,6 +288,7 @@ pub struct CareTeam {
     /// - **Strength**: required
     /// - **Description**: Indicates the status of the care team.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/care-team-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/care-team-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CareTeam.status")]
     pub status: Option<Code>,
     /// Type of team
@@ -316,6 +318,7 @@ pub struct CareTeam {
     /// - **Strength**: example
     /// - **Description**: Indicates the type of care team.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/care-team-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/care-team-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CareTeam.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Name of the team, such as crisis assessment team
@@ -413,6 +416,7 @@ pub struct CareTeam {
     /// - **Strength**: example
     /// - **Description**: Indicates the reason for the care team.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinical-findings
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinical-findings")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CareTeam.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// Organization responsible for the care team
@@ -463,7 +467,7 @@ pub struct CareTeam {
 }
 
 /// Choice of types for the coverage\[x\] field in CareTeamParticipant
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "coverage")]
 pub enum CareTeamParticipantCoverage {
     /// Variant accepting the Period type.
@@ -610,6 +614,7 @@ pub struct CareTeamParticipant {
     /// 
     /// ## Conditions
     /// Used when: ctm-2
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/participant-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CareTeam.participant.role")]
     pub role: Option<CodeableConcept>,
     /// Who is involved

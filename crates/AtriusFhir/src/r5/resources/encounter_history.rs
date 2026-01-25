@@ -105,6 +105,7 @@ pub struct EncounterHistory {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EncounterHistory.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -290,6 +291,7 @@ pub struct EncounterHistory {
     /// - **Strength**: required
     /// - **Description**: Current state of the encounter.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/encounter-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EncounterHistory.status")]
     pub status: Code,
     /// Classification of patient encounter
@@ -311,6 +313,7 @@ pub struct EncounterHistory {
     /// - **Strength**: extensible
     /// - **Description**: Classification of the encounter.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ActEncounterCode
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/v3-ActEncounterCode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EncounterHistory.class")]
     pub class: CodeableConcept,
     /// Specific type of encounter
@@ -335,6 +338,7 @@ pub struct EncounterHistory {
     /// - **Strength**: example
     /// - **Description**: A specific code indicating type of service provided
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/encounter-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EncounterHistory.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -355,6 +359,7 @@ pub struct EncounterHistory {
     /// - **Strength**: example
     /// - **Description**: Broad categorization of the service that is to be provided.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EncounterHistory.serviceType")]
     #[fhir_serde(rename = "serviceType")]
     pub service_type: Option<Vec<CodeableReference>>,
@@ -402,6 +407,7 @@ pub struct EncounterHistory {
     /// - **Strength**: example
     /// - **Description**: Current status of the subject  within the encounter.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-subject-status
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/encounter-subject-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EncounterHistory.subjectStatus")]
     #[fhir_serde(rename = "subjectStatus")]
     pub subject_status: Option<CodeableConcept>,
@@ -623,6 +629,7 @@ pub struct EncounterHistoryLocation {
     /// - **Strength**: example
     /// - **Description**: Physical form of the location.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/location-form
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/location-form")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="EncounterHistory.location.form")]
     pub form: Option<CodeableConcept>,
 }

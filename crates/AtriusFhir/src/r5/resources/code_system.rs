@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in CodeSystem
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum CodeSystemVersionAlgorithm {
     /// Variant accepting the String type.
@@ -119,6 +119,7 @@ pub struct CodeSystem {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CodeSystem.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -368,6 +369,7 @@ pub struct CodeSystem {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CodeSystem.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<CodeSystemVersionAlgorithm>,
@@ -440,6 +442,7 @@ pub struct CodeSystem {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CodeSystem.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -623,6 +626,7 @@ pub struct CodeSystem {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CodeSystem.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this code system is defined
@@ -790,6 +794,7 @@ pub struct CodeSystem {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/definition-topic
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/definition-topic")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CodeSystem.topic")]
     pub topic: Option<Vec<CodeableConcept>>,
     /// Who authored the CodeSystem
@@ -940,6 +945,7 @@ pub struct CodeSystem {
     /// 
     /// ## Conditions
     /// Used when: csd-2, csd-3
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/codesystem-hierarchy-meaning")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CodeSystem.hierarchyMeaning")]
     #[fhir_serde(rename = "hierarchyMeaning")]
     pub hierarchy_meaning: Option<Code>,
@@ -1012,6 +1018,7 @@ pub struct CodeSystem {
     /// 
     /// ## Conditions
     /// Used when: csd-4
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/codesystem-content-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CodeSystem.content")]
     pub content: Code,
     /// Canonical URL of Code System this adds designations and properties to
@@ -1453,6 +1460,7 @@ pub struct CodeSystemConceptDesignation {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CodeSystem.concept.designation.language")]
     pub language: Option<Code>,
     /// Details how this designation would be used
@@ -1476,6 +1484,7 @@ pub struct CodeSystemConceptDesignation {
     /// 
     /// ## Conditions
     /// Used when: csd-5
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/designation-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CodeSystem.concept.designation.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Option<Coding>,
@@ -1501,6 +1510,7 @@ pub struct CodeSystemConceptDesignation {
     /// 
     /// ## Conditions
     /// Used when: csd-5
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/designation-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CodeSystem.concept.designation.additionalUse")]
     #[fhir_serde(rename = "additionalUse")]
     pub additional_use: Option<Vec<Coding>>,
@@ -1518,7 +1528,7 @@ pub struct CodeSystemConceptDesignation {
 }
 
 /// Choice of types for the value\[x\] field in CodeSystemConceptProperty
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum CodeSystemConceptPropertyValue {
     /// Variant accepting the Code type.
@@ -1827,6 +1837,7 @@ pub struct CodeSystemFilter {
     /// - **Strength**: required
     /// - **Description**: The kind of operation to perform as a part of a property based filter.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/filter-operator|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/filter-operator")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CodeSystem.filter.operator")]
     pub operator: Option<Vec<Code>>,
     /// What to use for the value
@@ -2019,6 +2030,7 @@ pub struct CodeSystemProperty {
     /// - **Strength**: required
     /// - **Description**: The type of a property value.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/concept-property-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/concept-property-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="CodeSystem.property.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,

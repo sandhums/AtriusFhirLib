@@ -104,6 +104,7 @@ pub struct Flag {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Flag.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -286,6 +287,7 @@ pub struct Flag {
     /// - **Strength**: required
     /// - **Description**: Indicates whether this flag is active and needs to be displayed to a user, or whether it is no longer needed or was entered in error.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/flag-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/flag-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Flag.status")]
     pub status: Code,
     /// Clinical, administrative, etc
@@ -311,6 +313,7 @@ pub struct Flag {
     /// - **Strength**: example
     /// - **Description**: A general category for flags for filtering/display purposes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/flag-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/flag-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Flag.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Coded or textual message to display to user
@@ -334,6 +337,7 @@ pub struct Flag {
     /// - **Strength**: example
     /// - **Description**: Detail codes identifying specific flagged issues.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/flag-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/flag-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Flag.code")]
     pub code: CodeableConcept,
     /// Who/What is flag about?

@@ -105,6 +105,7 @@ pub struct OperationOutcome {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationOutcome.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -374,6 +375,7 @@ pub struct OperationOutcomeIssue {
     /// - **Strength**: required
     /// - **Description**: How the issue affects the success of the action.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/issue-severity|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/issue-severity")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationOutcome.issue.severity")]
     pub severity: Code,
     /// Error or warning code
@@ -412,6 +414,7 @@ pub struct OperationOutcomeIssue {
     /// - **Strength**: required
     /// - **Description**: A code that describes the type of issue.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/issue-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/issue-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationOutcome.issue.code")]
     pub code: Code,
     /// Additional details about the error
@@ -436,6 +439,7 @@ pub struct OperationOutcomeIssue {
     /// - **Strength**: example
     /// - **Description**: A code that provides details as the exact issue.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/operation-outcome
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/operation-outcome")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="OperationOutcome.issue.details")]
     pub details: Option<CodeableConcept>,
     /// Additional diagnostic information about the issue

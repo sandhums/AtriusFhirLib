@@ -109,6 +109,7 @@ pub struct Count {
     /// - **Strength**: required
     /// - **Description**: How the Quantity should be understood and represented.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/quantity-comparator|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/quantity-comparator")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Count.comparator")]
     pub comparator: Option<Code>,
     /// Unit representation

@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in Citation
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum CitationVersionAlgorithm {
     /// Variant accepting the String type.
@@ -117,6 +117,7 @@ pub struct Citation {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -352,6 +353,7 @@ pub struct Citation {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<CitationVersionAlgorithm>,
@@ -430,6 +432,7 @@ pub struct Citation {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -610,6 +613,7 @@ pub struct Citation {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this citation is defined
@@ -870,6 +874,7 @@ pub struct Citation {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/citation-status-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/citation-status-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.currentState")]
     #[fhir_serde(rename = "currentState")]
     pub current_state: Option<Vec<CodeableConcept>>,
@@ -1125,6 +1130,7 @@ pub struct CitationCitedArtifact {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/cited-artifact-status-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/cited-artifact-status-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.currentState")]
     #[fhir_serde(rename = "currentState")]
     pub current_state: Option<Vec<CodeableConcept>>,
@@ -1376,6 +1382,7 @@ pub struct CitationCitedArtifactAbstract {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/cited-artifact-abstract-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/cited-artifact-abstract-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.abstract.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1393,6 +1400,7 @@ pub struct CitationCitedArtifactAbstract {
     /// - **Strength**: preferred
     /// - **Description**: A human language.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/languages
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.abstract.language")]
     pub language: Option<CodeableConcept>,
     /// Abstract content
@@ -1535,6 +1543,7 @@ pub struct CitationCitedArtifactClassification {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/cited-artifact-classification-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/cited-artifact-classification-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.classification.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1551,6 +1560,7 @@ pub struct CitationCitedArtifactClassification {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/citation-artifact-classifier
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/citation-artifact-classifier")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.classification.classifier")]
     pub classifier: Option<Vec<CodeableConcept>>,
     /// Complex or externally created classification
@@ -1897,6 +1907,7 @@ pub struct CitationCitedArtifactContributorshipEntry {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/artifact-contribution-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/artifact-contribution-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.contributorship.entry.contributionType")]
     #[fhir_serde(rename = "contributionType")]
     pub contribution_type: Option<Vec<CodeableConcept>>,
@@ -1913,6 +1924,7 @@ pub struct CitationCitedArtifactContributorshipEntry {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contributor-role
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/contributor-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.contributorship.entry.role")]
     pub role: Option<CodeableConcept>,
     /// Contributions with accounting for time or number
@@ -2076,6 +2088,7 @@ pub struct CitationCitedArtifactContributorshipEntryContributionInstance {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/artifact-contribution-instance-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/artifact-contribution-instance-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.contributorship.entry.contributionInstance.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -2205,6 +2218,7 @@ pub struct CitationCitedArtifactContributorshipSummary {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contributor-summary-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/contributor-summary-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.contributorship.summary.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -2222,6 +2236,7 @@ pub struct CitationCitedArtifactContributorshipSummary {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contributor-summary-style
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/contributor-summary-style")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.contributorship.summary.style")]
     pub style: Option<CodeableConcept>,
     /// Used to code the producer or rule for creating the display string
@@ -2237,6 +2252,7 @@ pub struct CitationCitedArtifactContributorshipSummary {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/contributor-summary-source
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/contributor-summary-source")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.contributorship.summary.source")]
     pub source: Option<CodeableConcept>,
     /// The display string for the author list, contributor list, or contributorship statement
@@ -2365,6 +2381,7 @@ pub struct CitationCitedArtifactPart {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/cited-artifact-part-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/cited-artifact-part-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.part.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -2541,6 +2558,7 @@ pub struct CitationCitedArtifactPublicationForm {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/cited-medium
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/cited-medium")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.publicationForm.citedMedium")]
     #[fhir_serde(rename = "citedMedium")]
     pub cited_medium: Option<CodeableConcept>,
@@ -2645,6 +2663,7 @@ pub struct CitationCitedArtifactPublicationForm {
     /// - **Strength**: preferred
     /// - **Description**: A human language.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/languages
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.publicationForm.language")]
     pub language: Option<Vec<CodeableConcept>>,
     /// Entry number or identifier for inclusion in a database
@@ -2848,6 +2867,7 @@ pub struct CitationCitedArtifactPublicationFormPublishedIn {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/published-in-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/published-in-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.publicationForm.publishedIn.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -3019,6 +3039,7 @@ pub struct CitationCitedArtifactRelatesTo {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/related-artifact-type-all|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/related-artifact-type-all")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.relatesTo.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -3035,6 +3056,7 @@ pub struct CitationCitedArtifactRelatesTo {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/citation-artifact-classifier
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/citation-artifact-classifier")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.relatesTo.classifier")]
     pub classifier: Option<Vec<CodeableConcept>>,
     /// Short label
@@ -3249,6 +3271,7 @@ pub struct CitationCitedArtifactStatusDate {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/cited-artifact-status-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/cited-artifact-status-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.statusDate.activity")]
     pub activity: CodeableConcept,
     /// Either occurred or expected
@@ -3390,6 +3413,7 @@ pub struct CitationCitedArtifactTitle {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/title-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/title-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.title.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -3407,6 +3431,7 @@ pub struct CitationCitedArtifactTitle {
     /// - **Strength**: preferred
     /// - **Description**: A human language.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/languages
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.title.language")]
     pub language: Option<CodeableConcept>,
     /// The title of the article or artifact
@@ -3667,6 +3692,7 @@ pub struct CitationCitedArtifactWebLocation {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/artifact-url-classifier
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/artifact-url-classifier")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.citedArtifact.webLocation.classifier")]
     pub classifier: Option<Vec<CodeableConcept>>,
     /// The specific URL
@@ -3801,6 +3827,7 @@ pub struct CitationClassification {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/citation-classification-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/citation-classification-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.classification.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -3817,6 +3844,7 @@ pub struct CitationClassification {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/citation-artifact-classifier
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/citation-artifact-classifier")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.classification.classifier")]
     pub classifier: Option<Vec<CodeableConcept>>,
 }
@@ -3939,6 +3967,7 @@ pub struct CitationStatusDate {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/citation-status-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/citation-status-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.statusDate.activity")]
     pub activity: CodeableConcept,
     /// Either occurred or expected
@@ -4081,6 +4110,7 @@ pub struct CitationSummary {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/citation-summary-style
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/citation-summary-style")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Citation.summary.style")]
     pub style: Option<CodeableConcept>,
     /// The human-readable display of the citation summary

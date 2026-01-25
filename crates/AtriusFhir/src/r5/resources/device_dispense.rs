@@ -106,6 +106,7 @@ pub struct DeviceDispense {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDispense.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -300,6 +301,7 @@ pub struct DeviceDispense {
     /// - **Strength**: required
     /// - **Description**: Describes the lifecycle of the dispense.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/devicedispense-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/devicedispense-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDispense.status")]
     pub status: Code,
     /// Why a dispense was or was not performed
@@ -316,6 +318,7 @@ pub struct DeviceDispense {
     /// - **Strength**: example
     /// - **Description**: A code describing why a dispense was or was not performed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/devicedispense-status-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/devicedispense-status-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="DeviceDispense.statusReason")]
     #[fhir_serde(rename = "statusReason")]
     pub status_reason: Option<CodeableReference>,

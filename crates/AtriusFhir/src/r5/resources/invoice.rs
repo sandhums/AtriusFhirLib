@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the period\[x\] field in Invoice
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "period")]
 pub enum InvoicePeriod {
     /// Variant accepting the Date type.
@@ -118,6 +118,7 @@ pub struct Invoice {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Invoice.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -285,6 +286,7 @@ pub struct Invoice {
     /// - **Strength**: required
     /// - **Description**: Codes identifying the lifecycle stage of an Invoice.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/invoice-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/invoice-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Invoice.status")]
     pub status: Code,
     /// Reason for cancellation of this Invoice
@@ -556,7 +558,7 @@ pub struct Invoice {
 }
 
 /// Choice of types for the serviced\[x\] field in InvoiceLineItem
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "serviced")]
 pub enum InvoiceLineItemServiced {
     /// Variant accepting the Date type.
@@ -568,7 +570,7 @@ pub enum InvoiceLineItemServiced {
 }
 
 /// Choice of types for the chargeItem\[x\] field in InvoiceLineItem
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "chargeItem")]
 pub enum InvoiceLineItemChargeItem {
     /// Variant accepting the Reference type.

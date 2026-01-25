@@ -105,6 +105,7 @@ pub struct RequestOrchestration {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -383,6 +384,7 @@ pub struct RequestOrchestration {
     /// - **Strength**: required
     /// - **Description**: Codes identifying the lifecycle stage of a request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.status")]
     pub status: Code,
     /// proposal | plan | directive | order | original-order | reflex-order | filler-order | instance-order | option
@@ -411,6 +413,7 @@ pub struct RequestOrchestration {
     /// 
     /// ## Aliases
     /// category
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-intent")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.intent")]
     pub intent: Code,
     /// routine | urgent | asap | stat
@@ -432,6 +435,7 @@ pub struct RequestOrchestration {
     /// - **Strength**: required
     /// - **Description**: Identifies the level of importance to be assigned to actioning the request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-priority|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.priority")]
     pub priority: Option<Code>,
     /// What's being requested/ordered
@@ -456,6 +460,7 @@ pub struct RequestOrchestration {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/action-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.code")]
     pub code: Option<CodeableConcept>,
     /// Who the request orchestration is about
@@ -516,6 +521,7 @@ pub struct RequestOrchestration {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-reason-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/action-reason-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// What goals
@@ -559,7 +565,7 @@ pub struct RequestOrchestration {
 }
 
 /// Choice of types for the timing\[x\] field in RequestOrchestrationAction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "timing")]
 pub enum RequestOrchestrationActionTiming {
     /// Variant accepting the DateTime type.
@@ -583,7 +589,7 @@ pub enum RequestOrchestrationActionTiming {
 }
 
 /// Choice of types for the definition\[x\] field in RequestOrchestrationAction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "definition")]
 pub enum RequestOrchestrationActionDefinition {
     /// Variant accepting the Canonical type.
@@ -780,6 +786,7 @@ pub struct RequestOrchestrationAction {
     /// - **Strength**: required
     /// - **Description**: Identifies the level of importance to be assigned to actioning the request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-priority|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.priority")]
     pub priority: Option<Code>,
     /// Code representing the meaning of the action or sub-actions
@@ -796,6 +803,7 @@ pub struct RequestOrchestrationAction {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/action-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.code")]
     pub code: Option<Vec<CodeableConcept>>,
     /// Supporting documentation for the intended performer of the action
@@ -956,6 +964,7 @@ pub struct RequestOrchestrationAction {
     /// - **Strength**: extensible
     /// - **Description**: The type of action to be performed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/action-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -973,6 +982,7 @@ pub struct RequestOrchestrationAction {
     /// - **Strength**: required
     /// - **Description**: Defines organization behavior of a group.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-grouping-behavior|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-grouping-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.groupingBehavior")]
     #[fhir_serde(rename = "groupingBehavior")]
     pub grouping_behavior: Option<Code>,
@@ -990,6 +1000,7 @@ pub struct RequestOrchestrationAction {
     /// - **Strength**: required
     /// - **Description**: Defines selection behavior of a group.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-selection-behavior|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-selection-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.selectionBehavior")]
     #[fhir_serde(rename = "selectionBehavior")]
     pub selection_behavior: Option<Code>,
@@ -1007,6 +1018,7 @@ pub struct RequestOrchestrationAction {
     /// - **Strength**: required
     /// - **Description**: Defines expectations around whether an action or action group is required.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-required-behavior|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-required-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.requiredBehavior")]
     #[fhir_serde(rename = "requiredBehavior")]
     pub required_behavior: Option<Code>,
@@ -1024,6 +1036,7 @@ pub struct RequestOrchestrationAction {
     /// - **Strength**: required
     /// - **Description**: Defines selection frequency behavior for an action or group.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-precheck-behavior|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-precheck-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.precheckBehavior")]
     #[fhir_serde(rename = "precheckBehavior")]
     pub precheck_behavior: Option<Code>,
@@ -1041,6 +1054,7 @@ pub struct RequestOrchestrationAction {
     /// - **Strength**: required
     /// - **Description**: Defines behavior for an action or a group for how many times that item may be repeated.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-cardinality-behavior|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-cardinality-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.cardinalityBehavior")]
     #[fhir_serde(rename = "cardinalityBehavior")]
     pub cardinality_behavior: Option<Code>,
@@ -1264,6 +1278,7 @@ pub struct RequestOrchestrationActionCondition {
     /// - **Strength**: required
     /// - **Description**: The kind of condition for the action.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-condition-kind|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-condition-kind")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.condition.kind")]
     pub kind: Code,
     /// Boolean-valued expression
@@ -1743,7 +1758,7 @@ pub struct RequestOrchestrationActionOutput {
 }
 
 /// Choice of types for the actor\[x\] field in RequestOrchestrationActionParticipant
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "actor")]
 pub enum RequestOrchestrationActionParticipantActor {
     /// Variant accepting the Canonical type.
@@ -1875,6 +1890,7 @@ pub struct RequestOrchestrationActionParticipant {
     /// - **Strength**: required
     /// - **Description**: The type of participant in the activity.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-participant-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-participant-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.participant.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Code>,
@@ -1920,6 +1936,7 @@ pub struct RequestOrchestrationActionParticipant {
     /// - **Strength**: example
     /// - **Description**: Defines roles played by participants for the action.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/action-participant-role
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/action-participant-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.participant.role")]
     pub role: Option<CodeableConcept>,
     /// E.g. Author, Reviewer, Witness, etc
@@ -1936,6 +1953,7 @@ pub struct RequestOrchestrationActionParticipant {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-participant-function
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/action-participant-function")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.participant.function")]
     pub function: Option<CodeableConcept>,
     /// Who/what is participating?
@@ -1953,7 +1971,7 @@ pub struct RequestOrchestrationActionParticipant {
 }
 
 /// Choice of types for the offset\[x\] field in RequestOrchestrationActionRelatedAction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "offset")]
 pub enum RequestOrchestrationActionRelatedActionOffset {
     /// Variant accepting the Duration type.
@@ -2091,6 +2109,7 @@ pub struct RequestOrchestrationActionRelatedAction {
     /// - **Strength**: required
     /// - **Description**: Defines the types of relationships between actions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-relationship-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-relationship-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.relatedAction.relationship")]
     pub relationship: Code,
     /// before | before-start | before-end | concurrent | concurrent-with-start | concurrent-with-end | after | after-start | after-end
@@ -2107,6 +2126,7 @@ pub struct RequestOrchestrationActionRelatedAction {
     /// - **Strength**: required
     /// - **Description**: Defines the types of relationships between actions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/action-relationship-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/action-relationship-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RequestOrchestration.action.relatedAction.endRelationship")]
     #[fhir_serde(rename = "endRelationship")]
     pub end_relationship: Option<Code>,

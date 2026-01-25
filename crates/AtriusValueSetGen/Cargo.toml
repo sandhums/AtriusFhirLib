@@ -1,0 +1,15 @@
+[package]
+name = "atrius-value-set-gen"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde = { workspace = true}
+serde_json = { workspace = true}
+anyhow = "1"
+
+# Pretty-print generated Rust
+prettyplease = "0.2"
+syn = { version = "2", features = ["full"] }
+quote = "1"
+proc-macro2 = "1"

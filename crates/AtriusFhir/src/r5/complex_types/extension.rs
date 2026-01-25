@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the value\[x\] field in Extension
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ExtensionValue {
     /// Variant accepting the Base64Binary type.

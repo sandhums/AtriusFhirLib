@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in Library
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum LibraryVersionAlgorithm {
     /// Variant accepting the String type.
@@ -14,7 +14,7 @@ pub enum LibraryVersionAlgorithm {
 }
 
 /// Choice of types for the subject\[x\] field in Library
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "subject")]
 pub enum LibrarySubject {
     /// Variant accepting the CodeableConcept type.
@@ -128,6 +128,7 @@ pub struct Library {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Library.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -377,6 +378,7 @@ pub struct Library {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Library.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<LibraryVersionAlgorithm>,
@@ -460,6 +462,7 @@ pub struct Library {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Library.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -504,6 +507,7 @@ pub struct Library {
     /// - **Strength**: extensible
     /// - **Description**: The type of knowledge asset this library contains.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/library-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/library-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Library.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -525,6 +529,7 @@ pub struct Library {
     /// - **Strength**: extensible
     /// - **Description**: The possible types of subjects for a library (E.g. Patient, Practitioner, Organization, Location, etc.).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/participant-resource-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/participant-resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Library.subject[x]")]
     #[fhir_serde(flatten)]
     pub subject: Option<LibrarySubject>,
@@ -684,6 +689,7 @@ pub struct Library {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Library.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this library is defined
@@ -862,6 +868,7 @@ pub struct Library {
     /// - **Strength**: example
     /// - **Description**: High-level categorization of the definition, used for searching, sorting, and filtering.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/definition-topic
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/definition-topic")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Library.topic")]
     pub topic: Option<Vec<CodeableConcept>>,
     /// Who authored the content

@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the quantity\[x\] field in ServiceRequest
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "quantity")]
 pub enum ServiceRequestQuantity {
     /// Variant accepting the Quantity type.
@@ -17,7 +17,7 @@ pub enum ServiceRequestQuantity {
 }
 
 /// Choice of types for the occurrence\[x\] field in ServiceRequest
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurrence")]
 pub enum ServiceRequestOccurrence {
     /// Variant accepting the DateTime type.
@@ -32,7 +32,7 @@ pub enum ServiceRequestOccurrence {
 }
 
 /// Choice of types for the asNeeded\[x\] field in ServiceRequest
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "asNeeded")]
 pub enum ServiceRequestAsNeeded {
     /// Variant accepting the Boolean type.
@@ -150,6 +150,7 @@ pub struct ServiceRequest {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ServiceRequest.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -438,6 +439,7 @@ pub struct ServiceRequest {
     /// - **Strength**: required
     /// - **Description**: The status of a service order.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ServiceRequest.status")]
     pub status: Code,
     /// proposal | plan | directive | order +
@@ -462,6 +464,7 @@ pub struct ServiceRequest {
     /// - **Strength**: required
     /// - **Description**: The kind of service request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-intent|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-intent")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ServiceRequest.intent")]
     pub intent: Code,
     /// Classification of service
@@ -490,6 +493,7 @@ pub struct ServiceRequest {
     /// - **Strength**: example
     /// - **Description**: Classification of the requested service.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/servicerequest-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/servicerequest-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ServiceRequest.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// routine | urgent | asap | stat
@@ -511,6 +515,7 @@ pub struct ServiceRequest {
     /// - **Strength**: required
     /// - **Description**: Identifies the level of importance to be assigned to actioning the request.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/request-priority|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/request-priority")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ServiceRequest.priority")]
     pub priority: Option<Code>,
     /// True if service/procedure should not be performed
@@ -573,6 +578,7 @@ pub struct ServiceRequest {
     /// 
     /// ## Conditions
     /// Used when: prr-1
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/procedure-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ServiceRequest.code")]
     pub code: Option<CodeableReference>,
     /// Additional order information
@@ -714,6 +720,7 @@ pub struct ServiceRequest {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying the pre-condition that should hold prior to performing a procedure.  For example "pain", "on flare-up", etc.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-as-needed-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-as-needed-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ServiceRequest.asNeeded[x]")]
     #[fhir_serde(flatten)]
     pub as_needed: Option<ServiceRequestAsNeeded>,
@@ -783,6 +790,7 @@ pub struct ServiceRequest {
     /// 
     /// ## Aliases
     /// specialty
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/participant-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ServiceRequest.performerType")]
     #[fhir_serde(rename = "performerType")]
     pub performer_type: Option<CodeableConcept>,
@@ -830,6 +838,7 @@ pub struct ServiceRequest {
     /// - **Strength**: example
     /// - **Description**: A location type where services are delivered.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ServiceDeliveryLocationRoleType
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-ServiceDeliveryLocationRoleType")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ServiceRequest.location")]
     pub location: Option<Vec<CodeableReference>>,
     /// Explanation/Justification for procedure or service
@@ -859,6 +868,7 @@ pub struct ServiceRequest {
     /// - **Strength**: example
     /// - **Description**: SNOMED CT Condition/Problem/Diagnosis Codes
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/procedure-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/procedure-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ServiceRequest.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// Associated insurance coverage
@@ -956,6 +966,7 @@ pub struct ServiceRequest {
     /// 
     /// ## Conditions
     /// Used when: bdystr-1
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ServiceRequest.bodySite")]
     #[fhir_serde(rename = "bodySite")]
     pub body_site: Option<Vec<CodeableConcept>>,
@@ -1178,7 +1189,7 @@ pub struct ServiceRequestOrderDetail {
 }
 
 /// Choice of types for the value\[x\] field in ServiceRequestOrderDetailParameter
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ServiceRequestOrderDetailParameterValue {
     /// Variant accepting the Quantity type.
@@ -1326,6 +1337,7 @@ pub struct ServiceRequestOrderDetailParameter {
     /// - **Strength**: example
     /// - **Description**: Codes for order detail parameters.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/servicerequest-orderdetail-parameter-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/servicerequest-orderdetail-parameter-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ServiceRequest.orderDetail.parameter.code")]
     pub code: CodeableConcept,
     /// The value for the order detail
@@ -1352,7 +1364,7 @@ pub struct ServiceRequestOrderDetailParameter {
 }
 
 /// Choice of types for the instruction\[x\] field in ServiceRequestPatientInstruction
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "instruction")]
 pub enum ServiceRequestPatientInstructionInstruction {
     /// Variant accepting the Markdown type.

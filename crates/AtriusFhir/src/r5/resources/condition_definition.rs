@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in ConditionDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum ConditionDefinitionVersionAlgorithm {
     /// Variant accepting the String type.
@@ -113,6 +113,7 @@ pub struct ConditionDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -360,6 +361,7 @@ pub struct ConditionDefinition {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<ConditionDefinitionVersionAlgorithm>,
@@ -445,6 +447,7 @@ pub struct ConditionDefinition {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -627,6 +630,7 @@ pub struct ConditionDefinition {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Identification of the condition, problem or diagnosis
@@ -649,6 +653,7 @@ pub struct ConditionDefinition {
     /// - **Strength**: example
     /// - **Description**: Identification of the condition or diagnosis.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.code")]
     pub code: CodeableConcept,
     /// Subjective severity of condition
@@ -672,6 +677,7 @@ pub struct ConditionDefinition {
     /// - **Strength**: preferred
     /// - **Description**: A subjective assessment of the severity of the condition as evaluated by the clinician.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-severity
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/condition-severity")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.severity")]
     pub severity: Option<CodeableConcept>,
     /// Anatomical location, if relevant
@@ -699,6 +705,7 @@ pub struct ConditionDefinition {
     /// - **Strength**: example
     /// - **Description**: SNOMED CT Body site concepts
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/body-site
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.bodySite")]
     #[fhir_serde(rename = "bodySite")]
     pub body_site: Option<CodeableConcept>,
@@ -720,6 +727,7 @@ pub struct ConditionDefinition {
     /// - **Strength**: example
     /// - **Description**: Codes describing condition stages (e.g. Cancer stages).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-stage
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-stage")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.stage")]
     pub stage: Option<CodeableConcept>,
     /// Whether Severity is appropriate
@@ -951,6 +959,7 @@ pub struct ConditionDefinitionMedication {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying the category of medication request.  For example, where the medication is to be consumed or administered, or the type of medication treatment.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/medicationrequest-category
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/medicationrequest-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.medication.category")]
     pub category: Option<CodeableConcept>,
     /// Code for relevant Medication
@@ -967,6 +976,7 @@ pub struct ConditionDefinitionMedication {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying substance or product that can be ordered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.medication.code")]
     pub code: Option<CodeableConcept>,
 }
@@ -1084,6 +1094,7 @@ pub struct ConditionDefinitionObservation {
     /// - **Strength**: preferred
     /// - **Description**: Codes for high level observation categories.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/observation-category
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/observation-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.observation.category")]
     pub category: Option<CodeableConcept>,
     /// Code for relevant Observation
@@ -1100,6 +1111,7 @@ pub struct ConditionDefinitionObservation {
     /// - **Strength**: example
     /// - **Description**: Codes identifying names of simple observations.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/observation-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/observation-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.observation.code")]
     pub code: Option<CodeableConcept>,
 }
@@ -1228,7 +1240,7 @@ pub struct ConditionDefinitionPlan {
 }
 
 /// Choice of types for the value\[x\] field in ConditionDefinitionPrecondition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ConditionDefinitionPreconditionValue {
     /// Variant accepting the CodeableConcept type.
@@ -1353,6 +1365,7 @@ pub struct ConditionDefinitionPrecondition {
     /// - **Strength**: required
     /// - **Description**: Kind of precondition for the condition.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-precondition-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/condition-precondition-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.precondition.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -1370,6 +1383,7 @@ pub struct ConditionDefinitionPrecondition {
     /// - **Strength**: example
     /// - **Description**: Codes identifying names of simple observations.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/observation-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/observation-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.precondition.code")]
     pub code: CodeableConcept,
     /// Value of Observation
@@ -1499,6 +1513,7 @@ pub struct ConditionDefinitionQuestionnaire {
     /// - **Strength**: required
     /// - **Description**: The use of a questionnaire.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-questionnaire-purpose|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/condition-questionnaire-purpose")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ConditionDefinition.questionnaire.purpose")]
     pub purpose: Code,
     /// Specific Questionnaire

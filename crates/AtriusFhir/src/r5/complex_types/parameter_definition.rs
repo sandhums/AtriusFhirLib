@@ -88,6 +88,7 @@ pub struct ParameterDefinition {
     /// - **Strength**: required
     /// - **Description**: Whether the parameter is input or output.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/operation-parameter-use|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/operation-parameter-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ParameterDefinition.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Code,
@@ -153,6 +154,7 @@ pub struct ParameterDefinition {
     /// - **Strength**: required
     /// - **Description**: List of FHIR types (resources, data types).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fhir-types|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fhir-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ParameterDefinition.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,

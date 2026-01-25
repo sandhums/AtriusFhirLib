@@ -107,6 +107,7 @@ pub struct Endpoint {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Endpoint.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -278,6 +279,7 @@ pub struct Endpoint {
     /// - **Strength**: required
     /// - **Description**: The status of the endpoint.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/endpoint-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/endpoint-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Endpoint.status")]
     pub status: Code,
     /// Protocol/Profile/Standard to be used with this endpoint connection
@@ -304,6 +306,7 @@ pub struct Endpoint {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/endpoint-connection-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/endpoint-connection-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Endpoint.connectionType")]
     #[fhir_serde(rename = "connectionType")]
     pub connection_type: Option<Vec<CodeableConcept>>,
@@ -353,6 +356,7 @@ pub struct Endpoint {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/endpoint-environment
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/endpoint-environment")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Endpoint.environmentType")]
     #[fhir_serde(rename = "environmentType")]
     pub environment_type: Option<Vec<CodeableConcept>>,
@@ -603,6 +607,7 @@ pub struct EndpointPayload {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/endpoint-payload-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/endpoint-payload-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Endpoint.payload.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -630,6 +635,7 @@ pub struct EndpointPayload {
     /// - **Strength**: required
     /// - **Description**: BCP 13 (RFCs 2045, 2046, 2047, 4288, 4289 and 2049)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/mimetypes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/mimetypes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Endpoint.payload.mimeType")]
     #[fhir_serde(rename = "mimeType")]
     pub mime_type: Option<Vec<Code>>,

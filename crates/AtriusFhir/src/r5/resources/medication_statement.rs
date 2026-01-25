@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the effective\[x\] field in MedicationStatement
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "effective")]
 pub enum MedicationStatementEffective {
     /// Variant accepting the DateTime type.
@@ -142,6 +142,7 @@ pub struct MedicationStatement {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationStatement.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -335,6 +336,7 @@ pub struct MedicationStatement {
     /// - **Strength**: required
     /// - **Description**: A coded concept indicating the current status of a MedicationStatement.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-statement-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/medication-statement-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationStatement.status")]
     pub status: Code,
     /// Type of medication statement
@@ -355,6 +357,7 @@ pub struct MedicationStatement {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying where the medication included in the MedicationStatement is expected to be consumed or administered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicationrequest-admin-location
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicationrequest-admin-location")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationStatement.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// What medication was taken
@@ -383,6 +386,7 @@ pub struct MedicationStatement {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying the substance or product being taken.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationStatement.medication")]
     pub medication: CodeableReference,
     /// Who is/was taking  the medication
@@ -511,6 +515,7 @@ pub struct MedicationStatement {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying why the medication is being taken.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationStatement.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// Further information about the usage
@@ -723,6 +728,7 @@ pub struct MedicationStatementAdherence {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-statement-adherence
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-statement-adherence")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationStatement.adherence.code")]
     pub code: CodeableConcept,
     /// Details of the reason for the current use of the medication
@@ -743,6 +749,7 @@ pub struct MedicationStatementAdherence {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/reason-medication-status-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/reason-medication-status-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicationStatement.adherence.reason")]
     pub reason: Option<CodeableConcept>,
 }

@@ -9,8 +9,9 @@ R4  = ["atrius-fhir-lib/R4"]
 R4B = ["atrius-fhir-lib/R4B"]
 R5  = ["atrius-fhir-lib/R5"]
 R6  = ["atrius-fhir-lib/R6"]
+terminology-http = ["atrius-fhir-path/terminology-http"]
 [dependencies]
 atrius-fhir-lib = { path = "../AtriusFhir", default-features = false, features = ["R5"]}
 atrius-fhirpath-support = { path = "../AtriusFhirPathSupport"}
-atrius-fhir-path = { path = "../AtriusFhirPath"}
+atrius-fhir-path = { path = "../AtriusFhirPath", features = ["terminology-http"]}
 serde_json = { workspace = true }

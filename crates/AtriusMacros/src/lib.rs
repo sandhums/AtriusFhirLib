@@ -392,7 +392,7 @@ pub fn type_info_derive(input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 
-#[proc_macro_derive(FhirValidate, attributes(fhir_invariant))]
+#[proc_macro_derive(FhirValidate, attributes(fhir_invariant, fhir_binding))]
 pub fn derive_fhir_validate(input: TokenStream) -> TokenStream {
     fhir_validate::derive(input)
 }

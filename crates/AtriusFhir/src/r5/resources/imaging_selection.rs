@@ -108,6 +108,7 @@ pub struct ImagingSelection {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingSelection.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -285,6 +286,7 @@ pub struct ImagingSelection {
     /// - **Strength**: required
     /// - **Description**: The status of the ImagingSelection.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/imagingselection-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/imagingselection-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingSelection.status")]
     pub status: Code,
     /// Subject of the selected instances
@@ -370,6 +372,7 @@ pub struct ImagingSelection {
     /// - **Strength**: example
     /// - **Description**: Key Object Selection Document Title.
     /// - **ValueSet**: http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_7010.html
+    #[fhir_binding(strength="example", valueset="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_7010.html")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingSelection.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Imaging Selection purpose text or code
@@ -401,6 +404,7 @@ pub struct ImagingSelection {
     /// 
     /// ## Aliases
     /// Description
+    #[fhir_binding(strength="example", valueset="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_7010.html")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingSelection.code")]
     pub code: CodeableConcept,
     /// DICOM Study Instance UID
@@ -583,6 +587,7 @@ pub struct ImagingSelection {
     /// 
     /// ## Aliases
     /// BodyPartExamined
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingSelection.bodySite")]
     #[fhir_serde(rename = "bodySite")]
     pub body_site: Option<CodeableReference>,
@@ -819,6 +824,7 @@ pub struct ImagingSelectionInstance {
     /// 
     /// ## Aliases
     /// SOPClassUID
+    #[fhir_binding(strength="extensible", valueset="http://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_B.5.html#table_B.5-1")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingSelection.instance.sopClass")]
     #[fhir_serde(rename = "sopClass")]
     pub sop_class: Option<Coding>,
@@ -1006,6 +1012,7 @@ pub struct ImagingSelectionInstanceImageRegion2D {
     /// 
     /// ## Aliases
     /// GraphicType
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/imagingselection-2dgraphictype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingSelection.instance.imageRegion2D.regionType")]
     #[fhir_serde(rename = "regionType")]
     pub region_type: Code,
@@ -1165,6 +1172,7 @@ pub struct ImagingSelectionInstanceImageRegion3D {
     /// 
     /// ## Aliases
     /// GraphicType
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/imagingselection-3dgraphictype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingSelection.instance.imageRegion3D.regionType")]
     #[fhir_serde(rename = "regionType")]
     pub region_type: Code,
@@ -1319,6 +1327,7 @@ pub struct ImagingSelectionPerformer {
     /// - **Strength**: extensible
     /// - **Description**: The type of involvement of the performer.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/series-performer-function
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/series-performer-function")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingSelection.performer.function")]
     pub function: Option<CodeableConcept>,
     /// Author (human or machine)

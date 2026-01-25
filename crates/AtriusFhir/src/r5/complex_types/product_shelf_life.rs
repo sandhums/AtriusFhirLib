@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the period\[x\] field in ProductShelfLife
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "period")]
 pub enum ProductShelfLifePeriod {
     /// Variant accepting the Duration type.

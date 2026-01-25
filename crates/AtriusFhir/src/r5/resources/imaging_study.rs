@@ -108,6 +108,7 @@ pub struct ImagingStudy {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingStudy.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -289,6 +290,7 @@ pub struct ImagingStudy {
     /// - **Strength**: required
     /// - **Description**: The status of the ImagingStudy.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/imagingstudy-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/imagingstudy-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingStudy.status")]
     pub status: Code,
     /// All of the distinct values for series' modalities
@@ -312,6 +314,7 @@ pub struct ImagingStudy {
     /// 
     /// ## Aliases
     /// ModalitiesInStudy
+    #[fhir_binding(strength="extensible", valueset="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingStudy.modality")]
     pub modality: Option<Vec<CodeableConcept>>,
     /// Who or what is the subject of the study
@@ -532,6 +535,7 @@ pub struct ImagingStudy {
     /// - **Strength**: preferred
     /// - **Description**: Use of RadLex is preferred
     /// - **ValueSet**: http://loinc.org/vs/loinc-rsna-radiology-playbook
+    #[fhir_binding(strength="preferred", valueset="http://loinc.org/vs/loinc-rsna-radiology-playbook")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingStudy.procedure")]
     pub procedure: Option<Vec<CodeableReference>>,
     /// Where ImagingStudy occurred
@@ -572,6 +576,7 @@ pub struct ImagingStudy {
     /// - **Strength**: example
     /// - **Description**: The reason for the study.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/procedure-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/procedure-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingStudy.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// User-defined comments
@@ -795,6 +800,7 @@ pub struct ImagingStudySeries {
     /// 
     /// ## Aliases
     /// Modality
+    #[fhir_binding(strength="extensible", valueset="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_33.html")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingStudy.series.modality")]
     pub modality: CodeableConcept,
     /// A short human readable summary of the series
@@ -892,6 +898,7 @@ pub struct ImagingStudySeries {
     /// 
     /// ## Aliases
     /// BodyPartExamined
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/body-site")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingStudy.series.bodySite")]
     #[fhir_serde(rename = "bodySite")]
     pub body_site: Option<CodeableReference>,
@@ -915,6 +922,7 @@ pub struct ImagingStudySeries {
     /// - **Strength**: example
     /// - **Description**: Codes describing body site laterality (left, right, etc.).
     /// - **ValueSet**: http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_244.html
+    #[fhir_binding(strength="example", valueset="http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_244.html")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingStudy.series.laterality")]
     pub laterality: Option<CodeableConcept>,
     /// Specimen imaged
@@ -1127,6 +1135,7 @@ pub struct ImagingStudySeriesInstance {
     /// 
     /// ## Aliases
     /// SOPClassUID
+    #[fhir_binding(strength="extensible", valueset="http://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_B.5.html#table_B.5-1")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingStudy.series.instance.sopClass")]
     #[fhir_serde(rename = "sopClass")]
     pub sop_class: Coding,
@@ -1299,6 +1308,7 @@ pub struct ImagingStudySeriesPerformer {
     /// - **Strength**: extensible
     /// - **Description**: The type of involvement of the performer.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/series-performer-function
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/series-performer-function")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="ImagingStudy.series.performer.function")]
     pub function: Option<CodeableConcept>,
     /// Who performed the series

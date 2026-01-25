@@ -104,6 +104,7 @@ pub struct MolecularSequence {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MolecularSequence.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -269,6 +270,7 @@ pub struct MolecularSequence {
     /// - **Strength**: required
     /// - **Description**: Type if a sequence -- DNA, RNA, or amino acid sequence.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/sequence-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/sequence-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MolecularSequence.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Code>,
@@ -511,6 +513,7 @@ pub struct MolecularSequenceRelative {
     /// - **Strength**: extensible
     /// - **Description**: Genomic coordinate system.
     /// - **ValueSet**: http://loinc.org/LL5323-2/
+    #[fhir_binding(strength="extensible", valueset="http://loinc.org/LL5323-2/")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MolecularSequence.relative.coordinateSystem")]
     #[fhir_serde(rename = "coordinateSystem")]
     pub coordinate_system: CodeableConcept,
@@ -753,7 +756,7 @@ pub struct MolecularSequenceRelativeEdit {
 }
 
 /// Choice of types for the sequence\[x\] field in MolecularSequenceRelativeStartingSequence
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "sequence")]
 pub enum MolecularSequenceRelativeStartingSequenceSequence {
     /// Variant accepting the CodeableConcept type.
@@ -897,6 +900,7 @@ pub struct MolecularSequenceRelativeStartingSequence {
     /// 
     /// ## Conditions
     /// Used when: msq-6, msq-5
+    #[fhir_binding(strength="extensible", valueset="http://loinc.org/LL1040-6/")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MolecularSequence.relative.startingSequence.genomeAssembly")]
     #[fhir_serde(rename = "genomeAssembly")]
     pub genome_assembly: Option<CodeableConcept>,
@@ -923,6 +927,7 @@ pub struct MolecularSequenceRelativeStartingSequence {
     /// 
     /// ## Conditions
     /// Used when: msq-5
+    #[fhir_binding(strength="required", valueset="http://loinc.org/LL2938-0/")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MolecularSequence.relative.startingSequence.chromosome")]
     pub chromosome: Option<CodeableConcept>,
     /// The reference sequence that represents the starting sequence
@@ -1004,6 +1009,7 @@ pub struct MolecularSequenceRelativeStartingSequence {
     /// - **Strength**: required
     /// - **Description**: Type for orientation
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/orientation-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/orientation-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MolecularSequence.relative.startingSequence.orientation")]
     pub orientation: Option<Code>,
     /// watson | crick
@@ -1025,6 +1031,7 @@ pub struct MolecularSequenceRelativeStartingSequence {
     /// - **Strength**: required
     /// - **Description**: Type for strand
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/strand-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/strand-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MolecularSequence.relative.startingSequence.strand")]
     pub strand: Option<Code>,
 }

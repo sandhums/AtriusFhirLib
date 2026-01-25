@@ -119,6 +119,7 @@ pub struct Reference {
     /// - **Strength**: extensible
     /// - **Description**: Aa resource (or, for logical models, the URI of the logical model).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/resource-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/resource-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Reference.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Uri>,

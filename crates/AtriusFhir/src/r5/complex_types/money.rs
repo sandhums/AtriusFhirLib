@@ -95,6 +95,7 @@ pub struct Money {
     /// - **Strength**: required
     /// - **Description**: A code indicating the currency, taken from ISO 4217.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/currencies|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/currencies")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Money.currency")]
     pub currency: Option<Code>,
 }

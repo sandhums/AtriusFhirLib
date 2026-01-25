@@ -105,6 +105,7 @@ pub struct PaymentReconciliation {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentReconciliation.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -266,6 +267,7 @@ pub struct PaymentReconciliation {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/payment-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/payment-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentReconciliation.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -296,6 +298,7 @@ pub struct PaymentReconciliation {
     /// - **Strength**: required
     /// - **Description**: A code specifying the state of the resource instance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/fm-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/fm-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentReconciliation.status")]
     pub status: Code,
     /// Workflow originating payment
@@ -312,6 +315,7 @@ pub struct PaymentReconciliation {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/payment-kind
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/payment-kind")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentReconciliation.kind")]
     pub kind: Option<CodeableConcept>,
     /// Period covered
@@ -377,6 +381,7 @@ pub struct PaymentReconciliation {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/payment-issuertype
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/payment-issuertype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentReconciliation.issuerType")]
     #[fhir_serde(rename = "issuerType")]
     pub issuer_type: Option<CodeableConcept>,
@@ -452,6 +457,7 @@ pub struct PaymentReconciliation {
     /// - **Strength**: required
     /// - **Description**: The outcome of the processing.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/payment-outcome|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/payment-outcome")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentReconciliation.outcome")]
     pub outcome: Option<Code>,
     /// Disposition message
@@ -511,6 +517,7 @@ pub struct PaymentReconciliation {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0570
+    #[fhir_binding(strength="extensible", valueset="http://terminology.hl7.org/ValueSet/v2-0570")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentReconciliation.method")]
     pub method: Option<CodeableConcept>,
     /// Type of card
@@ -683,6 +690,7 @@ pub struct PaymentReconciliation {
     /// - **Strength**: example
     /// - **Description**: The forms codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/forms
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/forms")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentReconciliation.formCode")]
     #[fhir_serde(rename = "formCode")]
     pub form_code: Option<CodeableConcept>,
@@ -704,7 +712,7 @@ pub struct PaymentReconciliation {
 }
 
 /// Choice of types for the targetItem\[x\] field in PaymentReconciliationAllocation
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "targetItem")]
 pub enum PaymentReconciliationAllocationTargetItem {
     /// Variant accepting the String type.
@@ -917,6 +925,7 @@ pub struct PaymentReconciliationAllocation {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/payment-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/payment-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentReconciliation.allocation.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1126,6 +1135,7 @@ pub struct PaymentReconciliationProcessNote {
     /// - **Strength**: required
     /// - **Description**: The presentation types of notes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/note-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/note-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="PaymentReconciliation.processNote.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Code>,

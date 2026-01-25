@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in SubscriptionTopic
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum SubscriptionTopicVersionAlgorithm {
     /// Variant accepting the String type.
@@ -113,6 +113,7 @@ pub struct SubscriptionTopic {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -371,6 +372,7 @@ pub struct SubscriptionTopic {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<SubscriptionTopicVersionAlgorithm>,
@@ -467,6 +469,7 @@ pub struct SubscriptionTopic {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.status")]
     pub status: Code,
     /// If for testing purposes, not real usage
@@ -632,6 +635,7 @@ pub struct SubscriptionTopic {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this SubscriptionTopic is defined
@@ -968,6 +972,7 @@ pub struct SubscriptionTopicCanFilterBy {
     /// - **Strength**: extensible
     /// - **Description**: A type of resource, or a Reference (from all versions)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/subscription-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/subscription-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.canFilterBy.resource")]
     pub resource: Option<Uri>,
     /// Human-readable and computation-friendly name for a filter parameter usable by subscriptions on this topic, via Subscription.filterBy.filterParameter
@@ -1031,6 +1036,7 @@ pub struct SubscriptionTopicCanFilterBy {
     /// - **Strength**: required
     /// - **Description**: Search Comparator Codes supported in this filter.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/search-comparator|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/search-comparator")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.canFilterBy.comparator")]
     pub comparator: Option<Vec<Code>>,
     /// missing | exact | contains | not | text | in | not-in | below | above | type | identifier | of-type | code-text | text-advanced | iterate
@@ -1051,6 +1057,7 @@ pub struct SubscriptionTopicCanFilterBy {
     /// - **Strength**: required
     /// - **Description**: Search Modifier Codes supported in this filter.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/search-modifier-code|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/search-modifier-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.canFilterBy.modifier")]
     pub modifier: Option<Vec<Code>>,
 }
@@ -1196,6 +1203,7 @@ pub struct SubscriptionTopicEventTrigger {
     /// - **Strength**: example
     /// - **Description**: FHIR Value set/code system definition for HL7 V2 table 0003 (EVENT TYPE CODE).
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v2-0003
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v2-0003")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.eventTrigger.event")]
     pub event: CodeableConcept,
     /// Data Type or Resource (reference to definition) for this trigger definition
@@ -1220,6 +1228,7 @@ pub struct SubscriptionTopicEventTrigger {
     /// - **Strength**: extensible
     /// - **Description**: A type of resource, or a Reference (from all versions)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/subscription-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/subscription-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.eventTrigger.resource")]
     pub resource: Uri,
 }
@@ -1356,6 +1365,7 @@ pub struct SubscriptionTopicNotificationShape {
     /// - **Strength**: extensible
     /// - **Description**: A type of resource, or a Reference (from all versions)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/subscription-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/subscription-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.notificationShape.resource")]
     pub resource: Uri,
     /// Include directives, rooted in the resource for this shape
@@ -1543,6 +1553,7 @@ pub struct SubscriptionTopicResourceTrigger {
     /// - **Strength**: extensible
     /// - **Description**: A type of resource, or a Reference (from all versions)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/subscription-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/subscription-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.resourceTrigger.resource")]
     pub resource: Uri,
     /// create | update | delete
@@ -1564,6 +1575,7 @@ pub struct SubscriptionTopicResourceTrigger {
     /// - **Strength**: required
     /// - **Description**: FHIR RESTful interaction used to filter a resource-based SubscriptionTopic trigger.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/interaction-trigger|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/interaction-trigger")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.resourceTrigger.supportedInteraction")]
     #[fhir_serde(rename = "supportedInteraction")]
     pub supported_interaction: Option<Vec<Code>>,
@@ -1745,6 +1757,7 @@ pub struct SubscriptionTopicResourceTriggerQueryCriteria {
     /// - **Strength**: required
     /// - **Description**: Behavior a server can exhibit when a criteria state does not exist (e.g., state prior to a create or after a delete).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/subscriptiontopic-cr-behavior|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/subscriptiontopic-cr-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.resourceTrigger.queryCriteria.resultForCreate")]
     #[fhir_serde(rename = "resultForCreate")]
     pub result_for_create: Option<Code>,
@@ -1786,6 +1799,7 @@ pub struct SubscriptionTopicResourceTriggerQueryCriteria {
     /// - **Strength**: required
     /// - **Description**: Behavior a server can exhibit when a criteria state does not exist (e.g., state prior to a create or after a delete).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/subscriptiontopic-cr-behavior|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/subscriptiontopic-cr-behavior")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SubscriptionTopic.resourceTrigger.queryCriteria.resultForDelete")]
     #[fhir_serde(rename = "resultForDelete")]
     pub result_for_delete: Option<Code>,

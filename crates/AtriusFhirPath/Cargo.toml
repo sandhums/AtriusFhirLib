@@ -9,6 +9,7 @@ R4 = ["atrius-fhir-lib/R4"]
 R4B = ["atrius-fhir-lib/R4B"]
 R5 = ["atrius-fhir-lib/R5"]
 R6 = ["atrius-fhir-lib/R6"]
+terminology-http = []
 
 [dependencies]
 atrius-fhir-lib = { path = "../AtriusFhir"}
@@ -26,7 +27,7 @@ lazy_static = "1.4" # For lazy static initialization of tokio runtime
 base64 = "0.22" # For encode/decode functions
 hex = "0.4" # For hex encode/decode functions
 octofhir-ucum = { version = "0.5", features = ["fhir"] } # For UCUM unit handling and conversion
-reqwest = { version = "0.12", features = ["json"] } # For terminology server HTTP calls
+reqwest = { version = "0.12", features = ["json", "blocking"] } # For terminology server HTTP calls
 rayon = "1.8" # For data parallelism
 arc-swap = "1.6" # For lock-free atomic data structures
 parking_lot = "0.12" # For better mutexes than std

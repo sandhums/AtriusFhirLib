@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the occurrence\[x\] field in SupplyDelivery
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurrence")]
 pub enum SupplyDeliveryOccurrence {
     /// Variant accepting the DateTime type.
@@ -120,6 +120,7 @@ pub struct SupplyDelivery {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SupplyDelivery.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -335,6 +336,7 @@ pub struct SupplyDelivery {
     /// - **Strength**: required
     /// - **Description**: Status of the supply delivery.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/supplydelivery-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/supplydelivery-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SupplyDelivery.status")]
     pub status: Option<Code>,
     /// Patient for whom the item is supplied
@@ -363,6 +365,7 @@ pub struct SupplyDelivery {
     /// - **Strength**: required
     /// - **Description**: The type of supply dispense.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/supplydelivery-supplyitemtype|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/supplydelivery-supplyitemtype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SupplyDelivery.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -432,7 +435,7 @@ pub struct SupplyDelivery {
 }
 
 /// Choice of types for the item\[x\] field in SupplyDeliverySuppliedItem
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "item")]
 pub enum SupplyDeliverySuppliedItemItem {
     /// Variant accepting the CodeableConcept type.
@@ -571,6 +574,7 @@ pub struct SupplyDeliverySuppliedItem {
     /// - **Strength**: example
     /// - **Description**: The item that was delivered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/supplydelivery-supplyitemtype
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/supplydelivery-supplyitemtype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="SupplyDelivery.suppliedItem.item[x]")]
     #[fhir_serde(flatten)]
     pub item: Option<SupplyDeliverySuppliedItemItem>,

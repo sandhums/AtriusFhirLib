@@ -107,6 +107,7 @@ pub struct HealthcareService {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="HealthcareService.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -337,6 +338,7 @@ pub struct HealthcareService {
     /// 
     /// ## Aliases
     /// service category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="HealthcareService.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Type of service that may be delivered or performed
@@ -359,6 +361,7 @@ pub struct HealthcareService {
     /// 
     /// ## Aliases
     /// service type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="HealthcareService.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -380,6 +383,7 @@ pub struct HealthcareService {
     /// - **Strength**: preferred
     /// - **Description**: A specialty that a healthcare service may provide.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/c80-practice-codes
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/c80-practice-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="HealthcareService.specialty")]
     pub specialty: Option<Vec<CodeableConcept>>,
     /// Location(s) where service may be provided
@@ -529,6 +533,7 @@ pub struct HealthcareService {
     /// - **Strength**: example
     /// - **Description**: The code(s) that detail the conditions under which the healthcare service is available/offered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-provision-conditions
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-provision-conditions")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="HealthcareService.serviceProvisionCode")]
     #[fhir_serde(rename = "serviceProvisionCode")]
     pub service_provision_code: Option<Vec<CodeableConcept>>,
@@ -562,6 +567,7 @@ pub struct HealthcareService {
     /// - **Strength**: example
     /// - **Description**: Government or local programs that this service applies to.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/program
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/program")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="HealthcareService.program")]
     pub program: Option<Vec<CodeableConcept>>,
     /// Collection of characteristics (attributes)
@@ -581,6 +587,7 @@ pub struct HealthcareService {
     /// - **Strength**: example
     /// - **Description**: A custom attribute that could be provided at a service (e.g. Wheelchair accessibility).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-mode
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="HealthcareService.characteristic")]
     pub characteristic: Option<Vec<CodeableConcept>>,
     /// The language that this service is offered in
@@ -605,6 +612,7 @@ pub struct HealthcareService {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="HealthcareService.communication")]
     pub communication: Option<Vec<CodeableConcept>>,
     /// Ways that the service accepts referrals
@@ -622,6 +630,7 @@ pub struct HealthcareService {
     /// - **Strength**: example
     /// - **Description**: The methods of referral can be used when referring to a specific HealthcareService resource.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/service-referral-method
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/service-referral-method")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="HealthcareService.referralMethod")]
     #[fhir_serde(rename = "referralMethod")]
     pub referral_method: Option<Vec<CodeableConcept>>,

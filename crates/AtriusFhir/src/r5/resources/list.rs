@@ -106,6 +106,7 @@ pub struct List {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="List.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -271,6 +272,7 @@ pub struct List {
     /// - **Strength**: required
     /// - **Description**: The current state of the list.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/list-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/list-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="List.status")]
     pub status: Code,
     /// working | snapshot | changes
@@ -302,6 +304,7 @@ pub struct List {
     /// - **Strength**: required
     /// - **Description**: The processing mode that applies to this list.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/list-mode|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/list-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="List.mode")]
     pub mode: Code,
     /// Descriptive name for the list
@@ -349,6 +352,7 @@ pub struct List {
     /// - **Strength**: example
     /// - **Description**: What the purpose of a list is.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/list-example-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/list-example-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="List.code")]
     pub code: Option<CodeableConcept>,
     /// If all resources have the same subject(s)
@@ -459,6 +463,7 @@ pub struct List {
     /// - **Strength**: preferred
     /// - **Description**: What order applies to the items in a list.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/list-order
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/list-order")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="List.orderedBy")]
     #[fhir_serde(rename = "orderedBy")]
     pub ordered_by: Option<CodeableConcept>,
@@ -520,6 +525,7 @@ pub struct List {
     /// 
     /// ## Conditions
     /// Used when: lst-1
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/list-empty-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="List.emptyReason")]
     #[fhir_serde(rename = "emptyReason")]
     pub empty_reason: Option<CodeableConcept>,
@@ -658,6 +664,7 @@ pub struct ListEntry {
     /// - **Strength**: example
     /// - **Description**: Codes that provide further information about the reason and meaning of the item in the list.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/list-item-flag
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/list-item-flag")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="List.entry.flag")]
     pub flag: Option<CodeableConcept>,
     /// If this item is actually marked as deleted

@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in StructureDefinition
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum StructureDefinitionVersionAlgorithm {
     /// Variant accepting the String type.
@@ -133,6 +133,7 @@ pub struct StructureDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -387,6 +388,7 @@ pub struct StructureDefinition {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureDefinition.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<StructureDefinitionVersionAlgorithm>,
@@ -468,6 +470,7 @@ pub struct StructureDefinition {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureDefinition.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -650,6 +653,7 @@ pub struct StructureDefinition {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureDefinition.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this structure definition is defined
@@ -745,6 +749,7 @@ pub struct StructureDefinition {
     /// - **Strength**: extensible
     /// - **Description**: Codes for the meaning of the defined structure (SNOMED CT and LOINC codes, as an example).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/definition-use
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/definition-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureDefinition.keyword")]
     pub keyword: Option<Vec<Coding>>,
     /// FHIR Version this StructureDefinition targets
@@ -772,6 +777,7 @@ pub struct StructureDefinition {
     /// - **Strength**: required
     /// - **Description**: All published FHIR Versions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/FHIR-version|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/FHIR-version")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureDefinition.fhirVersion")]
     #[fhir_serde(rename = "fhirVersion")]
     pub fhir_version: Option<Code>,
@@ -809,6 +815,7 @@ pub struct StructureDefinition {
     /// 
     /// ## Conditions
     /// Used when: sdf-15a, sdf-15, sdf-11, sdf-29, sdf-8, sdf-3, sdf-8a
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/structure-definition-kind")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureDefinition.kind")]
     pub kind: Code,
     /// Whether the structure is abstract
@@ -926,6 +933,7 @@ pub struct StructureDefinition {
     /// 
     /// ## Conditions
     /// Used when: sdf-18, sdf-11, sdf-5, sdf-8, sdf-8a
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/fhir-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureDefinition.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Uri,
@@ -984,6 +992,7 @@ pub struct StructureDefinition {
     /// 
     /// ## Conditions
     /// Used when: sdf-1, sdf-21, sdf-5, sdf-27, sdf-29
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/type-derivation-rule")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureDefinition.derivation")]
     pub derivation: Option<Code>,
     /// Snapshot view of the structure
@@ -1167,6 +1176,7 @@ pub struct StructureDefinitionContext {
     /// - **Strength**: required
     /// - **Description**: How an extension context is interpreted.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/extension-context-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/extension-context-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="StructureDefinition.context.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,

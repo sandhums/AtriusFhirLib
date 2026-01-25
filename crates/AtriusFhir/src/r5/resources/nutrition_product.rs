@@ -104,6 +104,7 @@ pub struct NutritionProduct {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionProduct.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -256,6 +257,7 @@ pub struct NutritionProduct {
     /// 
     /// ## Aliases
     /// type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/edible-substance-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionProduct.code")]
     pub code: Option<CodeableConcept>,
     /// active | inactive | entered-in-error
@@ -281,6 +283,7 @@ pub struct NutritionProduct {
     /// - **Strength**: required
     /// - **Description**: Codes identifying the lifecycle stage of a product.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/nutritionproduct-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/nutritionproduct-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionProduct.status")]
     pub status: Code,
     /// Broad product groups or categories used to classify the product, such as Legume and Legume Products, Beverages, or Beef Products
@@ -304,6 +307,7 @@ pub struct NutritionProduct {
     /// 
     /// ## Aliases
     /// class
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/nutrition-product-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionProduct.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Manufacturer, representative or officially responsible for the product
@@ -373,6 +377,7 @@ pub struct NutritionProduct {
     /// - **Strength**: example
     /// - **Description**: Codes that identify substances that can be an allergen.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/allergen-class
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/allergen-class")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionProduct.knownAllergen")]
     #[fhir_serde(rename = "knownAllergen")]
     pub known_allergen: Option<Vec<CodeableReference>>,
@@ -413,7 +418,7 @@ pub struct NutritionProduct {
 }
 
 /// Choice of types for the value\[x\] field in NutritionProductCharacteristic
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum NutritionProductCharacteristicValue {
     /// Variant accepting the CodeableConcept type.
@@ -551,6 +556,7 @@ pub struct NutritionProductCharacteristic {
     /// - **Strength**: example
     /// - **Description**: Codes that identify properties that can be measured.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/measurement-property
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/measurement-property")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionProduct.characteristic.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -1040,6 +1046,7 @@ pub struct NutritionProductNutrient {
     /// - **Strength**: example
     /// - **Description**: Codes that identify nutrients that could be parts of nutrition products.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/nutrition-product-nutrient
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/nutrition-product-nutrient")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionProduct.nutrient.item")]
     pub item: Option<CodeableReference>,
     /// The amount of nutrient expressed in one or more units: X per pack / per serving / per dose

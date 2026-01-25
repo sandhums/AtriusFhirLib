@@ -102,6 +102,7 @@ pub struct Parameters {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Parameters.language")]
     pub language: Option<Code>,
     /// Operation Parameter
@@ -124,7 +125,7 @@ pub struct Parameters {
 }
 
 /// Choice of types for the value\[x\] field in ParametersParameter
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum ParametersParameterValue {
     /// Variant accepting the Base64Binary type.

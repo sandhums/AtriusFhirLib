@@ -115,6 +115,7 @@ pub struct Device {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -338,6 +339,7 @@ pub struct Device {
     /// - **Strength**: required
     /// - **Description**: The record status of the device.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/device-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.status")]
     pub status: Option<Code>,
     /// lost | damaged | destroyed | available
@@ -354,6 +356,7 @@ pub struct Device {
     /// - **Strength**: extensible
     /// - **Description**: The availability status reason of the device.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-availability-status
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/device-availability-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.availabilityStatus")]
     #[fhir_serde(rename = "availabilityStatus")]
     pub availability_status: Option<CodeableConcept>,
@@ -523,6 +526,7 @@ pub struct Device {
     /// - **Strength**: example
     /// - **Description**: Categories of medical devices.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// The kind or type of device
@@ -546,6 +550,7 @@ pub struct Device {
     /// - **Strength**: example
     /// - **Description**: Codes to identify medical devices.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -611,6 +616,7 @@ pub struct Device {
     /// - **Strength**: example
     /// - **Description**: Operational mode of a device.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-operation-mode
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-operation-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.mode")]
     pub mode: Option<CodeableConcept>,
     /// The series of occurrences that repeats during the operation of the device
@@ -752,6 +758,7 @@ pub struct Device {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-safety
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-safety")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.safety")]
     pub safety: Option<Vec<CodeableConcept>>,
     /// The higher level or encompassing device that this device is a logical part of
@@ -890,6 +897,7 @@ pub struct DeviceConformsTo {
     /// - **Strength**: example
     /// - **Description**: The kind of standards used by the device.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-specification-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-specification-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.conformsTo.category")]
     pub category: Option<CodeableConcept>,
     /// Identifies the standard, specification, or formal guidance that the device adheres to
@@ -908,6 +916,7 @@ pub struct DeviceConformsTo {
     /// - **Strength**: example
     /// - **Description**: The type of version indicated for the device.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-specification-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-specification-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.conformsTo.specification")]
     pub specification: CodeableConcept,
     /// Specific form or variant of the standard
@@ -1065,6 +1074,7 @@ pub struct DeviceName {
     /// - **Strength**: required
     /// - **Description**: The type of name the device is referred by.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-nametype|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/device-nametype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.name.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,
@@ -1089,7 +1099,7 @@ pub struct DeviceName {
 }
 
 /// Choice of types for the value\[x\] field in DeviceProperty
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum DevicePropertyValue {
     /// Variant accepting the Quantity type.
@@ -1241,6 +1251,7 @@ pub struct DeviceProperty {
     /// - **Strength**: example
     /// - **Description**: Device property type.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/device-property-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-property-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.property.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -1509,6 +1520,7 @@ pub struct DeviceUdiCarrier {
     /// - **Strength**: required
     /// - **Description**: Codes to identify how UDI data was entered.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/udi-entry-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/udi-entry-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.udiCarrier.entryType")]
     #[fhir_serde(rename = "entryType")]
     pub entry_type: Option<Code>,
@@ -1630,6 +1642,7 @@ pub struct DeviceVersion {
     /// 
     /// ## Aliases
     /// Σ
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/device-versiontype")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Device.version.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,

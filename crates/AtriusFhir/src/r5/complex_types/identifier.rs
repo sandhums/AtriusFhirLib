@@ -84,6 +84,7 @@ pub struct Identifier {
     /// - **Strength**: required
     /// - **Description**: Identifies the purpose for this identifier, if known .
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/identifier-use|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/identifier-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Identifier.use")]
     #[fhir_serde(rename = "use")]
     pub r#use: Option<Code>,
@@ -118,6 +119,7 @@ pub struct Identifier {
     /// - **Strength**: extensible
     /// - **Description**: A coded type for an identifier that can be used to determine which identifier to use for a specific purpose.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/identifier-type
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/identifier-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Identifier.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,

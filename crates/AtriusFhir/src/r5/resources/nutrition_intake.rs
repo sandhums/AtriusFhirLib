@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the occurrence\[x\] field in NutritionIntake
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "occurrence")]
 pub enum NutritionIntakeOccurrence {
     /// Variant accepting the DateTime type.
@@ -14,7 +14,7 @@ pub enum NutritionIntakeOccurrence {
 }
 
 /// Choice of types for the reported\[x\] field in NutritionIntake
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "reported")]
 pub enum NutritionIntakeReported {
     /// Variant accepting the Boolean type.
@@ -137,6 +137,7 @@ pub struct NutritionIntake {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionIntake.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -384,6 +385,7 @@ pub struct NutritionIntake {
     /// - **Strength**: required
     /// - **Description**: A coded concept indicating the current status of a NutritionIntake.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/event-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/event-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionIntake.status")]
     pub status: Code,
     /// Reason for current status
@@ -405,6 +407,7 @@ pub struct NutritionIntake {
     /// - **Strength**: example
     /// - **Description**: A coded concept indicating the reason for the status of the statement.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/clinicalimpression-status-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/clinicalimpression-status-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionIntake.statusReason")]
     #[fhir_serde(rename = "statusReason")]
     pub status_reason: Option<Vec<CodeableConcept>>,
@@ -425,6 +428,7 @@ pub struct NutritionIntake {
     /// - **Strength**: example
     /// - **Description**: A coded concept identifying an overall type of diet or nutrition that is represented by this intake.  See consumedItem for more details.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/diet-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/diet-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionIntake.code")]
     pub code: Option<CodeableConcept>,
     /// Who is/was consuming the food or fluid
@@ -593,6 +597,7 @@ pub struct NutritionIntake {
     /// - **Strength**: example
     /// - **Description**: Reason for why something was ingested.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/condition-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionIntake.reason")]
     pub reason: Option<Vec<CodeableReference>>,
     /// Further information about the consumption
@@ -726,6 +731,7 @@ pub struct NutritionIntakeConsumedItem {
     /// - **Strength**: example
     /// - **Description**: Types of food.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/edible-substance-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/edible-substance-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionIntake.consumedItem.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -754,6 +760,7 @@ pub struct NutritionIntakeConsumedItem {
     /// - **Strength**: example
     /// - **Description**: Specific food that can be consumed by a patient.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/food-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/food-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionIntake.consumedItem.nutritionProduct")]
     #[fhir_serde(rename = "nutritionProduct")]
     pub nutrition_product: CodeableReference,
@@ -826,6 +833,7 @@ pub struct NutritionIntakeConsumedItem {
     /// - **Strength**: example
     /// - **Description**: Reasons for why something was not consumed.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/not-consumed-reason
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/not-consumed-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionIntake.consumedItem.notConsumedReason")]
     #[fhir_serde(rename = "notConsumedReason")]
     pub not_consumed_reason: Option<CodeableConcept>,
@@ -950,6 +958,7 @@ pub struct NutritionIntakeIngredientLabel {
     /// - **Strength**: example
     /// - **Description**: Types of nutrients that can be found in a nutrition product.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/nutrient-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/nutrient-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionIntake.ingredientLabel.nutrient")]
     pub nutrient: CodeableReference,
     /// Total amount of nutrient consumed
@@ -1078,6 +1087,7 @@ pub struct NutritionIntakePerformer {
     /// - **Strength**: example
     /// - **Description**: Type of performance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/performer-role
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/performer-role")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="NutritionIntake.performer.function")]
     pub function: Option<CodeableConcept>,
     /// Who performed the intake

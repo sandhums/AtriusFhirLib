@@ -106,6 +106,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -275,6 +276,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: Overall defining type of this medicinal product.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -295,6 +297,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: Applicable domain for this product (e.g. human, veterinary).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-domain
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-domain")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.domain")]
     pub domain: Option<CodeableConcept>,
     /// A business identifier relating to a specific version of the product
@@ -332,6 +335,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: preferred
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.status")]
     pub status: Option<CodeableConcept>,
     /// The date at which the given status became applicable
@@ -384,6 +388,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: Dose forms for a product as a whole, considering all individual parts, but before any mixing
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/combined-dose-form
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/combined-dose-form")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.combinedPharmaceuticalDoseForm")]
     #[fhir_serde(rename = "combinedPharmaceuticalDoseForm")]
     pub combined_pharmaceutical_dose_form: Option<CodeableConcept>,
@@ -409,6 +414,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: A code specifying the route or physiological path of administration of a therapeutic agent into or onto a patient's body.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/route-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/route-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.route")]
     pub route: Option<Vec<CodeableConcept>>,
     /// Description of indication(s) for this product, used when structured indications are not required
@@ -446,6 +452,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: The prescription supply types appropriate to a medicinal product
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/legal-status-of-supply
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/legal-status-of-supply")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.legalStatusOfSupply")]
     #[fhir_serde(rename = "legalStatusOfSupply")]
     pub legal_status_of_supply: Option<CodeableConcept>,
@@ -467,6 +474,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: Extra measures defined for a Medicinal Product, such as heightened reporting requirements (e.g. Black Triangle Monitoring).
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-additional-monitoring
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-additional-monitoring")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.additionalMonitoringIndicator")]
     #[fhir_serde(rename = "additionalMonitoringIndicator")]
     pub additional_monitoring_indicator: Option<CodeableConcept>,
@@ -488,6 +496,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: Extra measures defined for a Medicinal Product, such as a requirement to conduct post-authorization studies.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-special-measures
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-special-measures")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.specialMeasures")]
     #[fhir_serde(rename = "specialMeasures")]
     pub special_measures: Option<Vec<CodeableConcept>>,
@@ -508,6 +517,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: Suitability for age groups, in particular children.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-pediatric-use
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-pediatric-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.pediatricUseIndicator")]
     #[fhir_serde(rename = "pediatricUseIndicator")]
     pub pediatric_use_indicator: Option<CodeableConcept>,
@@ -528,6 +538,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: This value set includes codes from the Anatomical Therapeutic Chemical Classification System - provided as an exemplar value set.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-classification
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-classification")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.classification")]
     pub classification: Option<Vec<CodeableConcept>>,
     /// Marketing status of the medicinal product, in contrast to marketing authorization
@@ -565,6 +576,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: Types of medicinal product packs
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-package-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-package-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.packagedMedicinalProduct")]
     #[fhir_serde(rename = "packagedMedicinalProduct")]
     pub packaged_medicinal_product: Option<Vec<CodeableConcept>>,
@@ -608,6 +620,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: This value set includes all substance codes from SNOMED CT - provided as an exemplar value set.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.ingredient")]
     pub ingredient: Option<Vec<CodeableConcept>>,
     /// Any component of the drug product which is not the chemical entity defined as the drug substance, or an excipient in the drug product
@@ -630,6 +643,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: This value set includes all substance codes from SNOMED CT - provided as an exemplar value set.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.impurity")]
     pub impurity: Option<Vec<CodeableReference>>,
     /// Additional documentation about the medicinal product
@@ -718,6 +732,7 @@ pub struct MedicinalProductDefinition {
     /// - **Strength**: example
     /// - **Description**: A coded concept that defines the type of a medication.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medication-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medication-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.code")]
     pub code: Option<Vec<Coding>>,
     /// The product's name, including full name and possibly coded parts
@@ -783,7 +798,7 @@ pub struct MedicinalProductDefinition {
 }
 
 /// Choice of types for the value\[x\] field in MedicinalProductDefinitionCharacteristic
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "value")]
 pub enum MedicinalProductDefinitionCharacteristicValue {
     /// Variant accepting the CodeableConcept type.
@@ -930,6 +945,7 @@ pub struct MedicinalProductDefinitionCharacteristic {
     /// - **Strength**: example
     /// - **Description**: This value set includes all observable entity codes from SNOMED CT - provided as an exemplar value set.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/product-characteristic-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/product-characteristic-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.characteristic.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -1075,6 +1091,7 @@ pub struct MedicinalProductDefinitionContact {
     /// - **Strength**: example
     /// - **Description**: Extra measures defined for a Medicinal Product, such as heightened reporting requirements.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-contact-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-contact-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.contact.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1231,6 +1248,7 @@ pub struct MedicinalProductDefinitionCrossReference {
     /// - **Strength**: example
     /// - **Description**: Extra measures defined for a Medicinal Product, such as heightened reporting requirements.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-cross-reference-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-cross-reference-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.crossReference.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1370,6 +1388,7 @@ pub struct MedicinalProductDefinitionName {
     /// - **Strength**: example
     /// - **Description**: Type of a name for a Medicinal Product.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-name-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-name-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.name.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -1536,6 +1555,7 @@ pub struct MedicinalProductDefinitionNamePart {
     /// - **Strength**: example
     /// - **Description**: Type of part of a name for a Medicinal Product.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-name-part-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-name-part-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.name.part.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -1660,6 +1680,7 @@ pub struct MedicinalProductDefinitionNameUsage {
     /// - **Strength**: example
     /// - **Description**: Jurisdiction codes
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/country
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/country")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.name.usage.country")]
     pub country: CodeableConcept,
     /// Jurisdiction code for where this name applies
@@ -1680,6 +1701,7 @@ pub struct MedicinalProductDefinitionNameUsage {
     /// - **Strength**: example
     /// - **Description**: Jurisdiction codes
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.name.usage.jurisdiction")]
     pub jurisdiction: Option<CodeableConcept>,
     /// Language code for this name
@@ -1699,6 +1721,7 @@ pub struct MedicinalProductDefinitionNameUsage {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.name.usage.language")]
     pub language: CodeableConcept,
 }
@@ -1872,6 +1895,7 @@ pub struct MedicinalProductDefinitionOperation {
     /// - **Strength**: example
     /// - **Description**: Confidentiality rating, e.g. commercial sensitivity for a Medicinal Product.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/medicinal-product-confidentiality
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/medicinal-product-confidentiality")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MedicinalProductDefinition.operation.confidentialityIndicator")]
     #[fhir_serde(rename = "confidentialityIndicator")]
     pub confidentiality_indicator: Option<CodeableConcept>,

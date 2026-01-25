@@ -105,6 +105,7 @@ pub struct Account {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Account.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -273,6 +274,7 @@ pub struct Account {
     /// - **Strength**: required
     /// - **Description**: Indicates whether the account is available to be used.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/account-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/account-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Account.status")]
     pub status: Code,
     /// Tracks the lifecycle of the account through the billing process
@@ -294,6 +296,7 @@ pub struct Account {
     /// - **Strength**: example
     /// - **Description**: Indicates whether the account is available to be used for billing purposes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/account-billing-status
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/account-billing-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Account.billingStatus")]
     #[fhir_serde(rename = "billingStatus")]
     pub billing_status: Option<CodeableConcept>,
@@ -314,6 +317,7 @@ pub struct Account {
     /// - **Strength**: example
     /// - **Description**: The usage type of this account, permits categorization of accounts.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/account-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/account-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Account.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -505,6 +509,7 @@ pub struct Account {
     /// ## Binding
     /// - **Strength**: required
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/currencies|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/currencies")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Account.currency")]
     pub currency: Option<CodeableConcept>,
     /// Calculated account balance(s)
@@ -657,6 +662,7 @@ pub struct AccountBalance {
     /// - **Strength**: extensible
     /// - **Description**: Indicates the balance was outstanding at the given age.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/account-aggregate
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/account-aggregate")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Account.balance.aggregate")]
     pub aggregate: Option<CodeableConcept>,
     /// current | 30 | 60 | 90 | 120
@@ -674,6 +680,7 @@ pub struct AccountBalance {
     /// - **Strength**: extensible
     /// - **Description**: Indicates the balance was outstanding at the given age.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/account-balance-term
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/account-balance-term")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Account.balance.term")]
     pub term: Option<CodeableConcept>,
     /// Estimated balance
@@ -996,6 +1003,7 @@ pub struct AccountDiagnosis {
     /// 
     /// ## Conditions
     /// Used when: act-1
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/condition-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Account.diagnosis.condition")]
     pub condition: CodeableReference,
     /// Date of the diagnosis (when coded diagnosis)
@@ -1028,6 +1036,7 @@ pub struct AccountDiagnosis {
     /// - **Strength**: preferred
     /// - **Description**: The type of diagnosis this condition represents.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/encounter-diagnosis-use
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/encounter-diagnosis-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Account.diagnosis.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Vec<CodeableConcept>>,
@@ -1340,6 +1349,7 @@ pub struct AccountProcedure {
     /// 
     /// ## Conditions
     /// Used when: act-2
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/procedure-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Account.procedure.code")]
     pub code: CodeableReference,
     /// Date of the procedure (when coded procedure)
@@ -1520,6 +1530,7 @@ pub struct AccountRelatedAccount {
     /// - **Strength**: example
     /// - **Description**: Indicates the relationship between the accounts
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/account-relationship
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/account-relationship")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Account.relatedAccount.relationship")]
     pub relationship: Option<CodeableConcept>,
     /// Reference to an associated Account

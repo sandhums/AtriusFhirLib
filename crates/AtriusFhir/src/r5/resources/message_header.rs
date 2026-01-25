@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the event\[x\] field in MessageHeader
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "event")]
 pub enum MessageHeaderEvent {
     /// Variant accepting the Coding type.
@@ -124,6 +124,7 @@ pub struct MessageHeader {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MessageHeader.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -415,6 +416,7 @@ pub struct MessageHeader {
     /// - **Strength**: example
     /// - **Description**: Reason for event occurrence.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/message-reason-encounter
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/message-reason-encounter")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MessageHeader.reason")]
     pub reason: Option<CodeableConcept>,
     /// If this is a reply to prior message
@@ -479,7 +481,7 @@ pub struct MessageHeader {
 }
 
 /// Choice of types for the endpoint\[x\] field in MessageHeaderDestination
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "endpoint")]
 pub enum MessageHeaderDestinationEndpoint {
     /// Variant accepting the Url type.
@@ -824,6 +826,7 @@ pub struct MessageHeaderResponse {
     /// - **Strength**: required
     /// - **Description**: The kind of response to a message.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/response-code|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/response-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="MessageHeader.response.code")]
     pub code: Code,
     /// Specific list of hints/warnings/errors
@@ -850,7 +853,7 @@ pub struct MessageHeaderResponse {
 }
 
 /// Choice of types for the endpoint\[x\] field in MessageHeaderSource
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "endpoint")]
 pub enum MessageHeaderSourceEndpoint {
     /// Variant accepting the Url type.

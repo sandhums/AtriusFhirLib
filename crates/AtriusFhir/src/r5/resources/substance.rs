@@ -104,6 +104,7 @@ pub struct Substance {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Substance.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -284,6 +285,7 @@ pub struct Substance {
     /// - **Strength**: required
     /// - **Description**: A code to indicate if the substance is actively used.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/substance-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Substance.status")]
     pub status: Option<Code>,
     /// What class/type of substance this is
@@ -309,6 +311,7 @@ pub struct Substance {
     /// - **Strength**: extensible
     /// - **Description**: Category or classification of substance.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-category
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/substance-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Substance.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// What substance this is
@@ -333,6 +336,7 @@ pub struct Substance {
     /// - **Strength**: example
     /// - **Description**: Substance codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Substance.code")]
     pub code: CodeableReference,
     /// Textual description of the substance, comments
@@ -396,7 +400,7 @@ pub struct Substance {
 }
 
 /// Choice of types for the substance\[x\] field in SubstanceIngredient
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "substance")]
 pub enum SubstanceIngredientSubstance {
     /// Variant accepting the CodeableConcept type.
@@ -541,6 +545,7 @@ pub struct SubstanceIngredient {
     /// - **Strength**: example
     /// - **Description**: Substance Ingredient codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/substance-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/substance-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Substance.ingredient.substance[x]")]
     #[fhir_serde(flatten)]
     pub substance: Option<SubstanceIngredientSubstance>,

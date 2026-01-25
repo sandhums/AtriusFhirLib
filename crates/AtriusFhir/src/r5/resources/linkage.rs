@@ -106,6 +106,7 @@ pub struct Linkage {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Linkage.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -427,6 +428,7 @@ pub struct LinkageItem {
     /// - **Strength**: required
     /// - **Description**: Used to distinguish different roles a resource can play within a set of linked resources.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/linkage-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/linkage-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Linkage.item.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,

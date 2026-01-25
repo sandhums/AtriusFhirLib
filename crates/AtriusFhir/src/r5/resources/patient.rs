@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the deceased\[x\] field in Patient
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "deceased")]
 pub enum PatientDeceased {
     /// Variant accepting the Boolean type.
@@ -14,7 +14,7 @@ pub enum PatientDeceased {
 }
 
 /// Choice of types for the multipleBirth\[x\] field in Patient
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "multipleBirth")]
 pub enum PatientMultipleBirth {
     /// Variant accepting the Boolean type.
@@ -133,6 +133,7 @@ pub struct Patient {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Patient.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -400,6 +401,7 @@ pub struct Patient {
     /// - **Strength**: required
     /// - **Description**: The gender of a person used for administrative purposes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/administrative-gender|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/administrative-gender")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Patient.gender")]
     pub gender: Option<Code>,
     /// The date of birth for the individual
@@ -490,6 +492,7 @@ pub struct Patient {
     /// - **Strength**: extensible
     /// - **Description**: The domestic partnership status of a person.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/marital-status
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/marital-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Patient.maritalStatus")]
     #[fhir_serde(rename = "maritalStatus")]
     pub marital_status: Option<CodeableConcept>,
@@ -805,6 +808,7 @@ pub struct PatientCommunication {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Patient.communication.language")]
     pub language: CodeableConcept,
     /// Language preference indicator
@@ -958,6 +962,7 @@ pub struct PatientContact {
     /// - **Strength**: extensible
     /// - **Description**: The nature of the relationship between a patient and a contact person for that patient.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/patient-contactrelationship
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/patient-contactrelationship")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Patient.contact.relationship")]
     pub relationship: Option<Vec<CodeableConcept>>,
     /// A name associated with the contact person
@@ -1036,6 +1041,7 @@ pub struct PatientContact {
     /// - **Strength**: required
     /// - **Description**: The gender of a person used for administrative purposes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/administrative-gender|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/administrative-gender")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Patient.contact.gender")]
     pub gender: Option<Code>,
     /// Organization that is associated with the contact
@@ -1220,6 +1226,7 @@ pub struct PatientLink {
     /// - **Strength**: required
     /// - **Description**: The type of link between this patient resource and another Patient resource, or Patient/RelatedPerson when using the `seealso` code
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/link-type|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/link-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Patient.link.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Code,

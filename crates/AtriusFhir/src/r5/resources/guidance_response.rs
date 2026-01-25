@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the module\[x\] field in GuidanceResponse
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "module")]
 pub enum GuidanceResponseModule {
     /// Variant accepting the Uri type.
@@ -125,6 +125,7 @@ pub struct GuidanceResponse {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="GuidanceResponse.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -304,6 +305,7 @@ pub struct GuidanceResponse {
     /// ## Binding
     /// - **Strength**: example
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/guidance-module-code
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/guidance-module-code")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="GuidanceResponse.module[x]")]
     #[fhir_serde(flatten)]
     pub module: Option<GuidanceResponseModule>,
@@ -336,6 +338,7 @@ pub struct GuidanceResponse {
     /// - **Strength**: required
     /// - **Description**: The status of a guidance response.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/guidance-response-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/guidance-response-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="GuidanceResponse.status")]
     pub status: Code,
     /// Patient the request was performed for

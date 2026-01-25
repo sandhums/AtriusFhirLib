@@ -107,6 +107,7 @@ pub struct RegulatedAuthorization {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RegulatedAuthorization.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -285,6 +286,7 @@ pub struct RegulatedAuthorization {
     /// - **Strength**: example
     /// - **Description**: Overall type of this authorization.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/regulated-authorization-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/regulated-authorization-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RegulatedAuthorization.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -320,6 +322,7 @@ pub struct RegulatedAuthorization {
     /// - **Strength**: example
     /// - **Description**: Jurisdiction codes
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RegulatedAuthorization.region")]
     pub region: Option<Vec<CodeableConcept>>,
     /// The status that is authorised e.g. approved. Intermediate states can be tracked with cases and applications
@@ -340,6 +343,7 @@ pub struct RegulatedAuthorization {
     /// - **Strength**: preferred
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RegulatedAuthorization.status")]
     pub status: Option<CodeableConcept>,
     /// The date at which the current status was assigned
@@ -405,6 +409,7 @@ pub struct RegulatedAuthorization {
     /// - **Strength**: preferred
     /// - **Description**: The overall intended use of a product.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/product-intended-use
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/product-intended-use")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RegulatedAuthorization.intendedUse")]
     #[fhir_serde(rename = "intendedUse")]
     pub intended_use: Option<CodeableConcept>,
@@ -426,6 +431,7 @@ pub struct RegulatedAuthorization {
     /// - **Strength**: example
     /// - **Description**: A legal or regulatory framework against which an authorization is granted, or other reasons for it.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/regulated-authorization-basis
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/regulated-authorization-basis")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RegulatedAuthorization.basis")]
     pub basis: Option<Vec<CodeableConcept>>,
     /// The organization that has been granted this authorization, by the regulator
@@ -497,7 +503,7 @@ pub struct RegulatedAuthorization {
 }
 
 /// Choice of types for the date\[x\] field in RegulatedAuthorizationCase
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "date")]
 pub enum RegulatedAuthorizationCaseDate {
     /// Variant accepting the Period type.
@@ -648,6 +654,7 @@ pub struct RegulatedAuthorizationCase {
     /// - **Strength**: example
     /// - **Description**: The type of a case involved in an application.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/regulated-authorization-case-type
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/regulated-authorization-case-type")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RegulatedAuthorization.case.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<CodeableConcept>,
@@ -668,6 +675,7 @@ pub struct RegulatedAuthorizationCase {
     /// - **Strength**: preferred
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="RegulatedAuthorization.case.status")]
     pub status: Option<CodeableConcept>,
     /// Relevant date for this case

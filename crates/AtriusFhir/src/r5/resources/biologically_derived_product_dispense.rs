@@ -104,6 +104,7 @@ pub struct BiologicallyDerivedProductDispense {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BiologicallyDerivedProductDispense.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -298,6 +299,7 @@ pub struct BiologicallyDerivedProductDispense {
     /// - **Strength**: required
     /// - **Description**: Describes the lifecycle of the dispense.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/biologicallyderivedproductdispense-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/biologicallyderivedproductdispense-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BiologicallyDerivedProductDispense.status")]
     pub status: Code,
     /// Relationship between the donor and intended recipient
@@ -318,6 +320,7 @@ pub struct BiologicallyDerivedProductDispense {
     /// - **Strength**: example
     /// - **Description**: Describes the relationship between the recipient and origin of the dispensed product.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/biologicallyderivedproductdispense-origin-relationship
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/biologicallyderivedproductdispense-origin-relationship")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BiologicallyDerivedProductDispense.originRelationshipType")]
     #[fhir_serde(rename = "originRelationshipType")]
     pub origin_relationship_type: Option<CodeableConcept>,
@@ -368,6 +371,7 @@ pub struct BiologicallyDerivedProductDispense {
     /// - **Strength**: example
     /// - **Description**: Describes the type of matching between the recipient and origin of the dispensed product.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/biologicallyderivedproductdispense-match-status
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/biologicallyderivedproductdispense-match-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BiologicallyDerivedProductDispense.matchStatus")]
     #[fhir_serde(rename = "matchStatus")]
     pub match_status: Option<CodeableConcept>,
@@ -609,6 +613,7 @@ pub struct BiologicallyDerivedProductDispensePerformer {
     /// - **Strength**: example
     /// - **Description**: Describes the the role or function of the performer in the dispense.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/biologicallyderivedproductdispense-performer-function
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/biologicallyderivedproductdispense-performer-function")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="BiologicallyDerivedProductDispense.performer.function")]
     pub function: Option<CodeableConcept>,
     /// Who performed the action

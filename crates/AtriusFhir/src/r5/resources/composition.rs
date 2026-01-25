@@ -115,6 +115,7 @@ pub struct Composition {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Composition.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -349,6 +350,7 @@ pub struct Composition {
     /// - **Strength**: required
     /// - **Description**: The workflow/clinical status of the composition.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/composition-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/composition-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Composition.status")]
     pub status: Code,
     /// Kind of composition (LOINC if possible)
@@ -378,6 +380,7 @@ pub struct Composition {
     /// - **Strength**: preferred
     /// - **Description**: Type of a composition.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/doc-typecodes
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/doc-typecodes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Composition.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: CodeableConcept,
@@ -404,6 +407,7 @@ pub struct Composition {
     /// - **Strength**: example
     /// - **Description**: High-level kind of a clinical document at a macro level.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/referenced-item-category
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/referenced-item-category")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Composition.category")]
     pub category: Option<Vec<CodeableConcept>>,
     /// Who and/or what the composition is about
@@ -818,6 +822,7 @@ pub struct CompositionAttester {
     /// - **Strength**: preferred
     /// - **Description**: The way in which a person authenticated a composition.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/composition-attestation-mode
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/composition-attestation-mode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Composition.attester.mode")]
     pub mode: CodeableConcept,
     /// When the composition was attested
@@ -1008,6 +1013,7 @@ pub struct CompositionEvent {
     /// - **Strength**: example
     /// - **Description**: This list of codes represents the main clinical acts being documented.
     /// - **ValueSet**: http://terminology.hl7.org/ValueSet/v3-ActCode
+    #[fhir_binding(strength="example", valueset="http://terminology.hl7.org/ValueSet/v3-ActCode")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Composition.event.detail")]
     pub detail: Option<Vec<CodeableReference>>,
 }
@@ -1172,6 +1178,7 @@ pub struct CompositionSection {
     /// - **Strength**: example
     /// - **Description**: Classification of a section of a composition/document.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/doc-section-codes
+    #[fhir_binding(strength="example", valueset="http://hl7.org/fhir/ValueSet/doc-section-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Composition.section.code")]
     pub code: Option<CodeableConcept>,
     /// Who and/or what authored the section
@@ -1259,6 +1266,7 @@ pub struct CompositionSection {
     /// - **Strength**: preferred
     /// - **Description**: What order applies to the items in the entry.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/list-order
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/list-order")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Composition.section.orderedBy")]
     #[fhir_serde(rename = "orderedBy")]
     pub ordered_by: Option<CodeableConcept>,
@@ -1309,6 +1317,7 @@ pub struct CompositionSection {
     /// 
     /// ## Conditions
     /// Used when: cmp-2
+    #[fhir_binding(strength="preferred", valueset="http://hl7.org/fhir/ValueSet/list-empty-reason")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="Composition.section.emptyReason")]
     #[fhir_serde(rename = "emptyReason")]
     pub empty_reason: Option<CodeableConcept>,

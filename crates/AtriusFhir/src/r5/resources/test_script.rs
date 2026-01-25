@@ -2,7 +2,7 @@
 use crate::r5::*;
 
 /// Choice of types for the versionAlgorithm\[x\] field in TestScript
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "versionAlgorithm")]
 pub enum TestScriptVersionAlgorithm {
     /// Variant accepting the String type.
@@ -114,6 +114,7 @@ pub struct TestScript {
     /// - **Strength**: required
     /// - **Description**: IETF language tag for a human language
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/all-languages|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/all-languages")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.language")]
     pub language: Option<Code>,
     /// Text summary of the resource, for human interpretation
@@ -362,6 +363,7 @@ pub struct TestScript {
     /// ## Binding
     /// - **Strength**: extensible
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/version-algorithm
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/version-algorithm")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.versionAlgorithm[x]")]
     #[fhir_serde(flatten)]
     pub version_algorithm: Option<TestScriptVersionAlgorithm>,
@@ -434,6 +436,7 @@ pub struct TestScript {
     /// - **Strength**: required
     /// - **Description**: The lifecycle status of an artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/publication-status|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/publication-status")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.status")]
     pub status: Code,
     /// For testing purposes, not real usage
@@ -614,6 +617,7 @@ pub struct TestScript {
     /// - **Strength**: extensible
     /// - **Description**: Countries and regions within which this artifact is targeted for use.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/jurisdiction
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/jurisdiction")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.jurisdiction")]
     pub jurisdiction: Option<Vec<CodeableConcept>>,
     /// Why this test script is defined
@@ -985,6 +989,7 @@ pub struct TestScriptDestination {
     /// - **Strength**: extensible
     /// - **Description**: The type of destination profile the test system supports.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/testscript-profile-destination-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/testscript-profile-destination-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.destination.profile")]
     pub profile: Coding,
     /// The url path of the destination server
@@ -1780,6 +1785,7 @@ pub struct TestScriptOrigin {
     /// - **Strength**: extensible
     /// - **Description**: The type of origin profile the test system supports.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/testscript-profile-origin-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/testscript-profile-origin-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.origin.profile")]
     pub profile: Coding,
     /// The url path of the origin server
@@ -1933,6 +1939,7 @@ pub struct TestScriptScope {
     /// - **Strength**: extensible
     /// - **Description**: The expectation of whether the test must pass for the system to be considered conformant with the artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/testscript-scope-conformance-codes
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/testscript-scope-conformance-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.scope.conformance")]
     pub conformance: Option<CodeableConcept>,
     /// unit | integration | production
@@ -1954,6 +1961,7 @@ pub struct TestScriptScope {
     /// - **Strength**: extensible
     /// - **Description**: The phase of testing for this artifact.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/testscript-scope-phase-codes
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/testscript-scope-phase-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.scope.phase")]
     pub phase: Option<CodeableConcept>,
 }
@@ -2400,6 +2408,7 @@ pub struct TestScriptSetupActionAssert {
     /// 
     /// ## Conditions
     /// Used when: tst-12, tst-13
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/assert-direction-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.setup.action.assert.direction")]
     pub direction: Option<Code>,
     /// Id of the source fixture to be evaluated
@@ -2490,6 +2499,7 @@ pub struct TestScriptSetupActionAssert {
     /// 
     /// ## Conditions
     /// Used when: tst-5, tst-6
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/mimetypes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.setup.action.assert.contentType")]
     #[fhir_serde(rename = "contentType")]
     pub content_type: Option<Code>,
@@ -2516,6 +2526,7 @@ pub struct TestScriptSetupActionAssert {
     /// - **Strength**: required
     /// - **Description**: The default type of manual completion to use for assertion.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/assert-manual-completion-codes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/assert-manual-completion-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.setup.action.assert.defaultManualCompletion")]
     #[fhir_serde(rename = "defaultManualCompletion")]
     pub default_manual_completion: Option<Code>,
@@ -2633,6 +2644,7 @@ pub struct TestScriptSetupActionAssert {
     /// - **Strength**: required
     /// - **Description**: The type of operator to use for assertions.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/assert-operator-codes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/assert-operator-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.setup.action.assert.operator")]
     pub operator: Option<Code>,
     /// XPath or JSONPath expression
@@ -2681,6 +2693,7 @@ pub struct TestScriptSetupActionAssert {
     /// 
     /// ## Conditions
     /// Used when: tst-5, tst-6
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/http-operations")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.setup.action.assert.requestMethod")]
     #[fhir_serde(rename = "requestMethod")]
     pub request_method: Option<Code>,
@@ -2723,6 +2736,7 @@ pub struct TestScriptSetupActionAssert {
     /// 
     /// ## Conditions
     /// Used when: tst-5, tst-6
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/concrete-fhir-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.setup.action.assert.resource")]
     pub resource: Option<Uri>,
     /// continue | switchingProtocols | okay | created | accepted | nonAuthoritativeInformation | noContent | resetContent | partialContent | multipleChoices | movedPermanently | found | seeOther | notModified | useProxy | temporaryRedirect | permanentRedirect | badRequest | unauthorized | paymentRequired | forbidden | notFound | methodNotAllowed | notAcceptable | proxyAuthenticationRequired | requestTimeout | conflict | gone | lengthRequired | preconditionFailed | contentTooLarge | uriTooLong | unsupportedMediaType | rangeNotSatisfiable | expectationFailed | misdirectedRequest | unprocessableContent | upgradeRequired | internalServerError | notImplemented | badGateway | serviceUnavailable | gatewayTimeout | httpVersionNotSupported
@@ -2758,6 +2772,7 @@ pub struct TestScriptSetupActionAssert {
     /// 
     /// ## Conditions
     /// Used when: tst-12, tst-5, tst-13, tst-6
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/assert-response-code-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.setup.action.assert.response")]
     pub response: Option<Code>,
     /// HTTP response code to test
@@ -2894,7 +2909,7 @@ pub struct TestScriptSetupActionAssert {
 }
 
 /// Choice of types for the link\[x\] field in TestScriptSetupActionAssertRequirement
-#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath)]
+#[derive(Debug, Clone, PartialEq, FhirSerde, FhirPath, FhirValidate)]
 #[fhir_choice_element(base_name = "link")]
 pub enum TestScriptSetupActionAssertRequirementLink {
     /// Variant accepting the Uri type.
@@ -3152,6 +3167,7 @@ pub struct TestScriptSetupActionOperation {
     /// 
     /// ## Conditions
     /// Used when: tst-7, tst-8, tst-9
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/testscript-operation-codes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.setup.action.operation.type")]
     #[fhir_serde(rename = "type")]
     pub r#type: Option<Coding>,
@@ -3182,6 +3198,7 @@ pub struct TestScriptSetupActionOperation {
     /// - **Strength**: extensible
     /// - **Description**: A list of all the concrete types defined in this version of the FHIR specification - Data Types and Resource Types.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/concrete-fhir-types
+    #[fhir_binding(strength="extensible", valueset="http://hl7.org/fhir/ValueSet/concrete-fhir-types")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.setup.action.operation.resource")]
     pub resource: Option<Uri>,
     /// Tracking/logging operation label
@@ -3235,6 +3252,7 @@ pub struct TestScriptSetupActionOperation {
     /// - **Strength**: required
     /// - **Description**: BCP 13 (RFCs 2045, 2046, 2047, 4288, 4289 and 2049)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/mimetypes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/mimetypes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.setup.action.operation.accept")]
     pub accept: Option<Code>,
     /// Mime type of the request payload contents, with charset etc
@@ -3259,6 +3277,7 @@ pub struct TestScriptSetupActionOperation {
     /// - **Strength**: required
     /// - **Description**: BCP 13 (RFCs 2045, 2046, 2047, 4288, 4289 and 2049)
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/mimetypes|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/mimetypes")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.setup.action.operation.contentType")]
     #[fhir_serde(rename = "contentType")]
     pub content_type: Option<Code>,
@@ -3313,6 +3332,7 @@ pub struct TestScriptSetupActionOperation {
     /// - **Strength**: required
     /// - **Description**: The allowable request method or HTTP operation codes.
     /// - **ValueSet**: http://hl7.org/fhir/ValueSet/http-operations|5.0.0
+    #[fhir_binding(strength="required", valueset="http://hl7.org/fhir/ValueSet/http-operations")]
     #[fhir_invariant(key="ele-1", severity="error", human="All FHIR elements must have a @value or children", expr="hasValue() or (children().count() > id.count())", path="TestScript.setup.action.operation.method")]
     pub method: Option<Code>,
     /// Server initiating the request
