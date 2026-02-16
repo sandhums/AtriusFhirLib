@@ -1,6 +1,6 @@
 use axum::Json;
-use helios_fhirpath::handlers::evaluate_fhirpath;
-use helios_fhirpath::models::FhirPathParameters;
+use atrius_fhir_path::handlers::evaluate_fhirpath;
+use atrius_fhir_path::models::FhirPathParameters;
 use serde_json::json;
 
 #[tokio::test]
@@ -73,9 +73,9 @@ async fn test_context_with_trace_function() {
 
 #[test]
 fn test_trace_with_context_full_expression() {
-    use helios_fhir::FhirResource;
-    use helios_fhir::r4::Patient;
-    use helios_fhirpath::{EvaluationContext, evaluate_expression};
+    use atrius_fhir_lib::fhir_version::FhirResource;
+    use atrius_fhir_lib::r5::Patient;
+    use atrius_fhir_path::{EvaluationContext, evaluate_expression};
 
     // Create patient matching the user's example
     let patient_json = json!({
@@ -103,8 +103,8 @@ fn test_trace_with_context_full_expression() {
     });
 
     let patient: Patient = serde_json::from_value(patient_json.clone()).unwrap();
-    let patient_resource: helios_fhir::r4::Resource = helios_fhir::r4::Resource::Patient(patient);
-    let resource = FhirResource::R4(Box::new(patient_resource));
+    let patient_resource: atrius_fhir_lib::r5::Resource = atrius_fhir_lib::r5::Resource::Patient(patient);
+    let resource = FhirResource::R5(Box::new(patient_resource));
 
     let context = EvaluationContext::new(vec![resource]);
 
@@ -116,14 +116,14 @@ fn test_trace_with_context_full_expression() {
 
     // Parse and evaluate with context
     use chumsky::Parser;
-    let parsed = helios_fhirpath::parser::parser()
+    let parsed = atrius_fhir_path::parser::parser()
         .parse(expression)
         .into_result()
         .unwrap();
 
     // Get the name items
     let name_items = match context_result {
-        helios_fhirpath::EvaluationResult::Collection { items, .. } => items,
+        atrius_fhir_path::EvaluationResult::Collection { items, .. } => items,
         single => vec![single],
     };
 
@@ -133,12 +133,12 @@ fn test_trace_with_context_full_expression() {
     for (i, name_item) in name_items.iter().enumerate() {
         println!("Processing name[{}]", i);
         let result =
-            helios_fhirpath::evaluator::evaluate(&parsed, &context, Some(name_item)).unwrap();
+            atrius_fhir_path::evaluator::evaluate(&parsed, &context, Some(name_item)).unwrap();
         println!("Result: {:?}", result);
 
         // Should match expected
         match result {
-            helios_fhirpath::EvaluationResult::String(s, _) => {
+            atrius_fhir_path::EvaluationResult::String(s, _) => {
                 assert_eq!(
                     s, expected_results[i],
                     "Result for name[{}] doesn't match",
@@ -152,9 +152,9 @@ fn test_trace_with_context_full_expression() {
 
 #[test]
 fn test_trace_with_context_simple() {
-    use helios_fhir::FhirResource;
-    use helios_fhir::r4::Patient;
-    use helios_fhirpath::{EvaluationContext, evaluate_expression};
+    use atrius_fhir_lib::fhir_version::FhirResource;
+    use atrius_fhir_lib::r5::Patient;
+    use atrius_fhir_path::{EvaluationContext, evaluate_expression};
 
     // Create a simple patient with name
     let patient_json = json!({
@@ -166,8 +166,8 @@ fn test_trace_with_context_simple() {
     });
 
     let patient: Patient = serde_json::from_value(patient_json.clone()).unwrap();
-    let patient_resource: helios_fhir::r4::Resource = helios_fhir::r4::Resource::Patient(patient);
-    let resource = FhirResource::R4(Box::new(patient_resource));
+    let patient_resource: atrius_fhir_lib::r5::Resource = atrius_fhir_lib::r5::Resource::Patient(patient);
+    let resource = FhirResource::R5(Box::new(patient_resource));
 
     let context = EvaluationContext::new(vec![resource]);
 
@@ -180,25 +180,25 @@ fn test_trace_with_context_simple() {
 
     // Parse and evaluate with context
     use chumsky::Parser;
-    let parsed = helios_fhirpath::parser::parser()
+    let parsed = atrius_fhir_path::parser::parser()
         .parse(expression)
         .into_result()
         .unwrap();
 
     // Get the first name as context
     let name_items = match context_result {
-        helios_fhirpath::EvaluationResult::Collection { items, .. } => items,
+        atrius_fhir_path::EvaluationResult::Collection { items, .. } => items,
         single => vec![single],
     };
 
     for name_item in &name_items {
         let result =
-            helios_fhirpath::evaluator::evaluate(&parsed, &context, Some(name_item)).unwrap();
+            atrius_fhir_path::evaluator::evaluate(&parsed, &context, Some(name_item)).unwrap();
         println!("Result with context: {:?}", result);
 
         // Should contain "Doe"
         match result {
-            helios_fhirpath::EvaluationResult::String(s, _) => {
+            atrius_fhir_path::EvaluationResult::String(s, _) => {
                 assert_eq!(s, "Doe");
             }
             _ => panic!("Expected string result"),

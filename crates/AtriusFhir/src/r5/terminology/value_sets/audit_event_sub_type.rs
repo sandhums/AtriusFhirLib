@@ -15,7 +15,7 @@ use super::super::super::string::String as FhirString;
 ///Title: Audit Event Sub-Type
 ///Status: active
 ///More detailed code concerning the type of the audit event - defined by DICOM with some additional FHIR, HL7, and other additions.
-///Compose includes 12 explicit concept codes
+///Compose includes 18 explicit concept codes
 ///Contains terminology rules (filters and/or include.valueSet) that are not evaluated locally
 ///Includes systems:
 ///- http://dicom.nema.org/resources/ontology/DCM
@@ -23,12 +23,11 @@ use super::super::super::string::String as FhirString;
 ///Includes other ValueSets:
 ///- http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_401.html
 ///- http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_403.html
-///Includes non-enumerated whole systems (requires terminology server for definitive validation):
-///- http://dicom.nema.org/resources/ontology/DCM
 pub struct AuditEventSubType;
 impl AuditEventSubType {
     pub const URL: &'static str = "http://hl7.org/fhir/ValueSet/audit-event-sub-type";
     pub const HAS_NONLOCAL_RULES: bool = true;
+    pub const HAS_FILTERS: bool = false;
     pub fn version() -> Option<&'static str> {
         Some("5.0.0")
     }
@@ -44,11 +43,31 @@ impl AuditEventSubType {
             "http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_403.html",
         ]
     }
+    /// compose.include.filter / compose.exclude.filter rules.
+    ///
+    /// These are NOT evaluated locally; they are emitted for diagnostics/routing.
+    pub fn filter_rules() -> &'static [(&'static str, &'static str, &'static str)] {
+        &[]
+    }
     /// Systems that are included as whole CodeSystems but are not locally enumerable.
     ///
     /// If this is non-empty, callers should use a terminology server for definitive validation.
     pub fn include_whole_systems() -> &'static [&'static str] {
-        &["http://dicom.nema.org/resources/ontology/DCM"]
+        &[]
+    }
+    /// Return the implied system if this ValueSet constrains codes to exactly one system.
+    ///
+    /// This is used to allow limited validation of primitive `code` bindings.
+    pub fn single_system() -> Option<&'static str> {
+        let systems = Self::include_systems();
+        if systems.len() == 1 {
+            return Some(systems[0]);
+        }
+        let whole = Self::include_whole_systems();
+        if whole.len() == 1 {
+            return Some(whole[0]);
+        }
+        None
     }
     /// Returns true only when this ValueSet can be treated as fully locally checkable.
     ///
@@ -58,6 +77,34 @@ impl AuditEventSubType {
         !Self::HAS_NONLOCAL_RULES
             && (!Self::expansion_pairs().is_empty() || !Self::include_pairs().is_empty())
     }
+    /// Returns true if this ValueSet is a "pure whole-system" include.
+    ///
+    /// Pure whole-system means membership is equivalent to validating the code exists in the
+    /// included CodeSystem (no explicit include/exclude concepts, no expansion, no include.valueSet,
+    /// and no filter rules).
+    ///
+    /// This enables routing remote checks to `CodeSystem/$validate-code` for Snowstorm and efficiency.
+    pub fn is_pure_whole_system() -> bool {
+        if Self::include_whole_systems().len() != 1 {
+            return false;
+        }
+        if !Self::filter_rules().is_empty() {
+            return false;
+        }
+        if !Self::include_value_sets().is_empty() {
+            return false;
+        }
+        if !Self::include_pairs().is_empty() {
+            return false;
+        }
+        if !Self::expansion_pairs().is_empty() {
+            return false;
+        }
+        if !Self::exclude_pairs().is_empty() {
+            return false;
+        }
+        true
+    }
     fn include_pairs() -> &'static [(&'static str, &'static str)] {
         &[
             ("http://hl7.org/fhir/restful-interaction", "read"),
@@ -66,8 +113,14 @@ impl AuditEventSubType {
             ("http://hl7.org/fhir/restful-interaction", "patch"),
             ("http://hl7.org/fhir/restful-interaction", "delete"),
             ("http://hl7.org/fhir/restful-interaction", "history"),
+            ("http://hl7.org/fhir/restful-interaction", "history-instance"),
+            ("http://hl7.org/fhir/restful-interaction", "history-type"),
+            ("http://hl7.org/fhir/restful-interaction", "history-system"),
             ("http://hl7.org/fhir/restful-interaction", "create"),
             ("http://hl7.org/fhir/restful-interaction", "search"),
+            ("http://hl7.org/fhir/restful-interaction", "search-type"),
+            ("http://hl7.org/fhir/restful-interaction", "search-system"),
+            ("http://hl7.org/fhir/restful-interaction", "search-compartment"),
             ("http://hl7.org/fhir/restful-interaction", "capabilities"),
             ("http://hl7.org/fhir/restful-interaction", "transaction"),
             ("http://hl7.org/fhir/restful-interaction", "batch"),
@@ -117,6 +170,26 @@ impl AuditEventSubType {
             ),
             (
                 "http://hl7.org/fhir/restful-interaction",
+                "history-instance",
+                Some("history-instance"),
+                Some("Retrieve the change history for a particular resource."),
+            ),
+            (
+                "http://hl7.org/fhir/restful-interaction",
+                "history-system",
+                Some("history-system"),
+                Some("Retrieve the change history for all resources on a system."),
+            ),
+            (
+                "http://hl7.org/fhir/restful-interaction",
+                "history-type",
+                Some("history-type"),
+                Some(
+                    "Retrieve the change history for all resources of a particular type.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/restful-interaction",
                 "operation",
                 Some("operation"),
                 Some("Perform an operation as defined by an OperationDefinition."),
@@ -139,6 +212,26 @@ impl AuditEventSubType {
                 Some("search"),
                 Some(
                     "Search a resource type or all resources based on some filter criteria.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/restful-interaction",
+                "search-compartment",
+                Some("search-compartment"),
+                Some("Search resources in a compartment based on some filter criteria."),
+            ),
+            (
+                "http://hl7.org/fhir/restful-interaction",
+                "search-system",
+                Some("search-system"),
+                Some("Search all resources based on some filter criteria."),
+            ),
+            (
+                "http://hl7.org/fhir/restful-interaction",
+                "search-type",
+                Some("search-type"),
+                Some(
+                    "Search all resources of the specified type based on some filter criteria.",
                 ),
             ),
             (
@@ -333,17 +426,5 @@ impl super::super::bindings::ValueSetMembership<CodeableConcept> for AuditEventS
     fn contains(v: &CodeableConcept) -> bool {
         Self::contains_codeable_concept(v)
     }
-}
-fn is_rgb_hex(code: &str) -> bool {
-    let b = code.as_bytes();
-    if b.len() != 7 || b[0] != b'#' {
-        return false;
-    }
-    fn is_hex(x: u8) -> bool {
-        (b'0'..=b'9').contains(&x) || (b'a'..=b'f').contains(&x)
-            || (b'A'..=b'F').contains(&x)
-    }
-    is_hex(b[1]) && is_hex(b[2]) && is_hex(b[3]) && is_hex(b[4]) && is_hex(b[5])
-        && is_hex(b[6])
 }
 

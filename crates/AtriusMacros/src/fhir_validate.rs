@@ -616,7 +616,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
                         // local helper: run invs against a value
                         let focus = value.to_evaluation_result();
                         for inv in #const_name {
-                            match engine.eval_bool(&focus, inv.expr) {
+                            match engine.eval_bool_with_root(&focus, __fhir_root, inv.expr) {
                                 Ok(true) => {}
                                 Ok(false) => __fhir_push_issue(atrius_fhirpath_support::validate::ValidationIssue {
                                     key: inv.key,
@@ -643,9 +643,9 @@ pub fn derive(input: TokenStream) -> TokenStream {
                             }
                         }
                         #binding_stmt_tokens
-                       
+
                         if #do_recurse_lit {
-                            let child_issues = atrius_fhirpath_support::validate::FhirValidate::validate_with_engine(value, engine);
+                            let child_issues = atrius_fhirpath_support::validate::FhirValidate::validate_with_engine_root(value, engine, __fhir_root);
                             for mut ci in child_issues {
                                 if ci.instance_path == ci.path {
                                     ci.instance_path.clear();
@@ -724,15 +724,25 @@ pub fn derive(input: TokenStream) -> TokenStream {
                     engine: &dyn atrius_fhirpath_support::validate::FhirPathEngine
                 ) -> Vec<atrius_fhirpath_support::validate::ValidationIssue> {
                     use atrius_fhirpath_support::traits::IntoEvaluationResult;
+                    let __fhir_root_val = self.to_evaluation_result();
+                    atrius_fhirpath_support::validate::FhirValidate::validate_with_engine_root(self, engine, &__fhir_root_val)
+                }
+
+                fn validate_with_engine_root(
+                    &self,
+                    engine: &dyn atrius_fhirpath_support::validate::FhirPathEngine,
+                    root: &atrius_fhirpath_support::evaluation_result::EvaluationResult,
+                ) -> Vec<atrius_fhirpath_support::validate::ValidationIssue> {
+                    use atrius_fhirpath_support::traits::IntoEvaluationResult;
+
+                    // Make root available to all nested field closures
+                    let __fhir_root = root;
 
                     let mut issues = Vec::new();
 
                     use std::collections::HashSet;
 
                     let mut __fhir_seen: HashSet<std::string::String> = HashSet::new();
-                    // De-duplicate issues aggressively. Invariant evaluation + recursion can naturally produce
-                    // repeats (e.g., overlapping constraints or repeated traversal). Signature uses invariant key,
-                    // declared path, concrete instance_path, and expression.
                     fn __fhir_push_issue(
                         issue: atrius_fhirpath_support::validate::ValidationIssue,
                         issues: &mut Vec<atrius_fhirpath_support::validate::ValidationIssue>,
@@ -754,30 +764,32 @@ pub fn derive(input: TokenStream) -> TokenStream {
                     {
                         let focus = self.to_evaluation_result();
                         for inv in <Self as atrius_fhirpath_support::validate::FhirValidate>::invariants() {
-                            match engine.eval_bool(&focus, inv.expr) {
+                            match engine.eval_bool_with_root(&focus, __fhir_root, inv.expr) {
                                 Ok(true) => {}
-                                Ok(false) => __fhir_push_issue(atrius_fhirpath_support::validate::ValidationIssue {
-                                    key: inv.key,
-                                    severity: inv.severity,
-                                    path: inv.path,
-                                    instance_path: inv.path.to_string(),
-                                    expression: inv.expr,
-                                    message: inv.human,
-                                },
-                                &mut issues,
-                                &mut __fhir_seen,
-                            ),
-                                Err(_) => __fhir_push_issue(atrius_fhirpath_support::validate::ValidationIssue {
-                                    key: inv.key,
-                                    severity: inv.severity,
-                                    path: inv.path,
-                                    instance_path: inv.path.to_string(),
-                                    expression: inv.expr,
-                                    message: inv.human,
-                                },
-                                &mut issues,
-                                &mut __fhir_seen,
-                            ),
+                                Ok(false) => __fhir_push_issue(
+                                    atrius_fhirpath_support::validate::ValidationIssue {
+                                        key: inv.key,
+                                        severity: inv.severity,
+                                        path: inv.path,
+                                        instance_path: inv.path.to_string(),
+                                        expression: inv.expr,
+                                        message: inv.human,
+                                    },
+                                    &mut issues,
+                                    &mut __fhir_seen,
+                                ),
+                                Err(_) => __fhir_push_issue(
+                                    atrius_fhirpath_support::validate::ValidationIssue {
+                                        key: inv.key,
+                                        severity: inv.severity,
+                                        path: inv.path,
+                                        instance_path: inv.path.to_string(),
+                                        expression: inv.expr,
+                                        message: inv.human,
+                                    },
+                                    &mut issues,
+                                    &mut __fhir_seen,
+                                ),
                             }
                         }
                     }
@@ -804,7 +816,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
                     if do_recurse {
                         arms.push(quote! {
                             Self::#v_ident(inner) => {
-                                atrius_fhirpath_support::validate::FhirValidate::validate_with_engine(inner, engine)
+                                atrius_fhirpath_support::validate::FhirValidate::validate_with_engine_root(inner, engine, __fhir_root)
                             }
                         });
                     } else {
@@ -839,6 +851,18 @@ pub fn derive(input: TokenStream) -> TokenStream {
                     engine: &dyn atrius_fhirpath_support::validate::FhirPathEngine
                 ) -> Vec<atrius_fhirpath_support::validate::ValidationIssue> {
                     use atrius_fhirpath_support::traits::IntoEvaluationResult;
+                    let __fhir_root_val = self.to_evaluation_result();
+                    atrius_fhirpath_support::validate::FhirValidate::validate_with_engine_root(self, engine, &__fhir_root_val)
+                }
+
+                fn validate_with_engine_root(
+                    &self,
+                    engine: &dyn atrius_fhirpath_support::validate::FhirPathEngine,
+                    root: &atrius_fhirpath_support::evaluation_result::EvaluationResult,
+                ) -> Vec<atrius_fhirpath_support::validate::ValidationIssue> {
+                    use atrius_fhirpath_support::traits::IntoEvaluationResult;
+
+                    let __fhir_root = root;
 
                     let mut issues = Vec::new();
 
@@ -846,7 +870,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
                     {
                         let focus = self.to_evaluation_result();
                         for inv in <Self as atrius_fhirpath_support::validate::FhirValidate>::invariants() {
-                            match engine.eval_bool(&focus, inv.expr) {
+                            match engine.eval_bool_with_root(&focus, __fhir_root, inv.expr) {
                                 Ok(true) => {}
                                 Ok(false) => issues.push(atrius_fhirpath_support::validate::ValidationIssue {
                                     key: inv.key,
@@ -868,7 +892,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
                         }
                     }
 
-                    // delegate to the contained value
+                    // delegate to the contained value using the SAME root
                     let mut child = match self {
                         #(#arms)*
                     };
@@ -890,6 +914,11 @@ fn binding_check_tokens(
     path_literal: &str,                      // e.g. "Practitioner.gender"
 ) -> proc_macro2::TokenStream {
     use quote::quote;
+
+    // FHIR binding strength "example" is non-normative; do not emit validation.
+    // if strength == "example" {
+    //     return quote! {};
+    // }
 
     // Helper: last ident of a TypePath (e.g., Option, Vec, Coding, CodeableConcept, Code)
     fn last_ident(ty: &syn::Type) -> Option<String> {
@@ -945,178 +974,78 @@ fn binding_check_tokens(
     // Base dispatch (ONLY ONE call). NOTE: `binding_ops_by_url` returns ops with fn pointers.
     let kind = last_ident(ty).unwrap_or_default();
 
-    // Binding checks are emitted only for coded shapes (Code, Coding, CodeableConcept) because only
-    // these carry the `system|code` data needed for membership checks and remote terminology calls.
-    //
-    // The macro expands to:
-    // - local membership check via generated ValueSet binding ops (fn pointers)
-    // - optional remote $validate-code via engine.validate_code_in_valueset(valueset_url, system, code)
-    // - tri-state semantics (Some(true)/Some(false)/None) to support "unknown terminology" outcomes
     match kind.as_str() {
         "Coding" => {
-            let membership_call = quote! { (ops.contains_coding)(#field_access) };
             quote! {
-                if let Some(ops) = crate::r5::terminology::value_sets::binding_ops_by_url(#valueset_url) {
-                    let ok_local = #membership_call;
-                    if !ok_local {
-                        let has_nonlocal = crate::r5::terminology::value_sets::valueset_has_nonlocal_rules(#valueset_url)
+                let local_ok: Option<bool> = crate::r5::terminology::value_sets::binding_ops_by_url(#valueset_url)
+                    .map(|ops| (ops.contains_coding)(#field_access));
+
+                if local_ok != Some(true) {
+                    // When local ops exist and return false, decide whether remote validation is warranted.
+                    // When local ops are missing, we must try remote (if possible) to avoid silently skipping required bindings.
+                    let has_nonlocal = crate::r5::terminology::value_sets::valueset_has_nonlocal_rules(#valueset_url)
+                        .unwrap_or(false);
+                    let is_locally_enumerated = crate::r5::terminology::value_sets::valueset_is_locally_enumerated(#valueset_url)
+                        .unwrap_or(true);
+
+                    let should_try_remote = if local_ok.is_none() {
+                        true
+                    } else {
+                        has_nonlocal || !is_locally_enumerated
+                    };
+
+                    let sev_violation = match #strength {
+                        "required" => atrius_fhirpath_support::validate::ValidationSeverity::Error,
+                        "extensible" | "preferred" | "example" => atrius_fhirpath_support::validate::ValidationSeverity::Warning,
+                        _ => atrius_fhirpath_support::validate::ValidationSeverity::Warning,
+                    };
+
+                    if should_try_remote {
+                        let coding = #field_access;
+                        let system = coding.system.as_ref().and_then(|u| u.value.as_deref());
+                        let code = coding.code.as_ref().and_then(|c| c.value.as_deref());
+
+                        let pure_whole = crate::r5::terminology::value_sets::valueset_is_pure_whole_system_by_url(#valueset_url)
                             .unwrap_or(false);
-                        let is_locally_enumerated = crate::r5::terminology::value_sets::valueset_is_locally_enumerated(#valueset_url)
-                            .unwrap_or(true);
-                        let should_try_remote = has_nonlocal || !is_locally_enumerated;
 
-                        let sev_violation = match #strength {
-                            "required" => atrius_fhirpath_support::validate::ValidationSeverity::Error,
-                            "extensible" | "preferred" => atrius_fhirpath_support::validate::ValidationSeverity::Warning,
-                            _ => atrius_fhirpath_support::validate::ValidationSeverity::Warning,
-                        };
+                        let remote_result = if let (Some(system), Some(code)) = (system, code) {
+                            #[cfg(debug_assertions)]
+                            {
+                                println!(
+                                    "[BINDING][Coding] path={} valueset={} pure_whole={} system={} code={}",
+                                    #path_literal,
+                                    #valueset_url,
+                                    pure_whole,
+                                    system,
+                                    code
+                                );
+                            }
 
-                        if should_try_remote {
-                            let coding = #field_access;
-                            let system = coding.system.as_ref().and_then(|u| u.value.as_deref());
-                            let code = coding.code.as_ref().and_then(|c| c.value.as_deref());
-
-                            let remote_result = if let (Some(system), Some(code)) = (system, code) {
+                            if pure_whole {
+                                engine.validate_code_in_codesystem(system, code)
+                            } else {
                                 engine.validate_code_in_valueset(#valueset_url, system, code)
-                            } else {
-                                None
-                            };
-
-                            match remote_result {
-                                Some(true) => {}
-                                Some(false) => {
-                                    __fhir_push_issue(
-                                        atrius_fhirpath_support::validate::ValidationIssue {
-                                            key: "binding",
-                                            severity: sev_violation,
-                                            path: #path_literal,
-                                            instance_path: __fhir_instance_path.clone(),
-                                            expression: "valueset-membership",
-                                            message: "ValueSet binding not satisfied",
-                                        },
-                                        &mut issues,
-                                        &mut __fhir_seen,
-                                    );
-                                }
-                                None => {
-                                    __fhir_push_issue(
-                                        atrius_fhirpath_support::validate::ValidationIssue {
-                                            key: "binding",
-                                            severity: atrius_fhirpath_support::validate::ValidationSeverity::Warning,
-                                            path: #path_literal,
-                                            instance_path: __fhir_instance_path.clone(),
-                                            expression: "valueset-membership",
-                                            message: "ValueSet binding could not be verified (terminology unavailable)",
-                                        },
-                                        &mut issues,
-                                        &mut __fhir_seen,
-                                    );
-                                }
                             }
                         } else {
-                            __fhir_push_issue(
-                                atrius_fhirpath_support::validate::ValidationIssue {
-                                    key: "binding",
-                                    severity: sev_violation,
-                                    path: #path_literal,
-                                    instance_path: __fhir_instance_path.clone(),
-                                    expression: "valueset-membership",
-                                    message: "ValueSet binding not satisfied",
-                                },
-                                &mut issues,
-                                &mut __fhir_seen,
-                            );
-                        }
-                    }
-                }
-            }
-        }
-        // CodeableConcept binding validation
-        //
-        // Semantics:
-        // - A CodeableConcept is valid if *any* of its codings is a member of the ValueSet.
-        // - Local membership is checked first (fast, offline).
-        // - If local membership fails AND the ValueSet requires external rules,
-        //   we fall back to remote terminology validation ($validate-code).
-        //
-        // Remote validation is tri-state:
-        //   Some(true)  => confirmed member (accept)
-        //   Some(false) => confirmed non-member (violation depends on binding strength)
-        //   None        => unknown / terminology unavailable (emit warning)
-        //
-        // Aggregation across codings:
-        // - any_true  => overall true
-        // - else any_false => overall false
-        // - else any_none  => unknown
-        "CodeableConcept" => {
-            // membership_call expands to ops.contains_codeable_concept(value)
-            let membership_call = quote! { (ops.contains_codeable_concept)(#field_access) };
-            quote! {
-                if let Some(ops) = crate::r5::terminology::value_sets::binding_ops_by_url(#valueset_url) {
-                    // Local membership check (fast, offline) - checks all codings locally, using generated ValueSet code.
-                    let ok_local = #membership_call;
-                    if !ok_local {
-                        let has_nonlocal = crate::r5::terminology::value_sets::valueset_has_nonlocal_rules(#valueset_url)
-                            .unwrap_or(false);
-                        let is_locally_enumerated = crate::r5::terminology::value_sets::valueset_is_locally_enumerated(#valueset_url)
-                            .unwrap_or(true);
-                        // Decide whether remote validation is needed
-                        let should_try_remote = has_nonlocal || !is_locally_enumerated;
-                        // Binding strength → severity mapping
-                        let sev_violation = match #strength {
-                            "required" => atrius_fhirpath_support::validate::ValidationSeverity::Error,
-                            "extensible" | "preferred" => atrius_fhirpath_support::validate::ValidationSeverity::Warning,
-                            _ => atrius_fhirpath_support::validate::ValidationSeverity::Warning,
+                            None
                         };
-
-                        if should_try_remote {
-                            let cc = #field_access;
-                            // Remote validation across multiple codings
-                            // If there are no codings, we immediately return None (unknown).
-                            let remote_result: Option<bool> = if let Some(codings) = cc.coding.as_ref() {
-                                let mut any_none = false;
-                                let mut any_false = false;
-                                let mut any_true = false;
-                                // Loop over codings, extract system and code
-                                for coding in codings.iter() {
-                                    let system = coding.system.as_ref().and_then(|u| u.value.as_deref());
-                                    let code = coding.code.as_ref().and_then(|c| c.value.as_deref());
-
-                                    if let (Some(system), Some(code)) = (system, code) {
-                                        // call terminology server
-                                        // this maps directly to ValueSet/$validate-code?url=...&system=...&code=...
-                                        match engine.validate_code_in_valueset(#valueset_url, system, code) {
-                                            Some(true) => {
-                                                any_true = true;
-                                                break;
-                                            }
-                                            Some(false) => any_false = true,
-                                            None => any_none = true,
-                                        }
-                                    } else {
-                                        any_none = true;
-                                    }
-                                }
-                                // Aggregation rule:
-                                // CodeableConcept is valid if ANY coding is valid.
-                                // Unknowns are only returned if no definitive true/false result exists.
-                                if any_true {
-                                    Some(true)
-                                } else if any_false {
-                                    Some(false)
-                                } else if any_none {
-                                    None
+                        match remote_result {
+                            Some(true) => {}
+                            Some(false) => {
+                                if pure_whole {
+                                    __fhir_push_issue(
+                                        atrius_fhirpath_support::validate::ValidationIssue {
+                                            key: "terminology",
+                                            severity: atrius_fhirpath_support::validate::ValidationSeverity::Error,
+                                            path: #path_literal,
+                                            instance_path: __fhir_instance_path.clone(),
+                                            expression: "codesystem-validity",
+                                            message: "Unknown code in CodeSystem",
+                                        },
+                                        &mut issues,
+                                        &mut __fhir_seen,
+                                    );
                                 } else {
-                                    None
-                                }
-                            } else {
-                                None
-                            };
-                           // Emit issues based on result
-                            match remote_result {
-                                // No issue — binding satisfied.
-                                Some(true) => {}
-                                Some(false) => {
                                     __fhir_push_issue(
                                         atrius_fhirpath_support::validate::ValidationIssue {
                                             key: "binding",
@@ -1130,15 +1059,251 @@ fn binding_check_tokens(
                                         &mut __fhir_seen,
                                     );
                                 }
-                                None => {
+                            }
+                            None => {
+                                let (expr, msg) = if pure_whole {
+                                    ("codesystem-validity", "CodeSystem validation could not be verified (terminology unavailable)")
+                                } else {
+                                    ("valueset-membership", "ValueSet binding could not be verified (terminology unavailable)")
+                                };
+
+                                __fhir_push_issue(
+                                    atrius_fhirpath_support::validate::ValidationIssue {
+                                        key: "terminology",
+                                        severity: atrius_fhirpath_support::validate::ValidationSeverity::Warning,
+                                        path: #path_literal,
+                                        instance_path: __fhir_instance_path.clone(),
+                                        expression: expr,
+                                        message: msg,
+                                    },
+                                    &mut issues,
+                                    &mut __fhir_seen,
+                                );
+                            }
+                        }
+                    } else {
+                        __fhir_push_issue(
+                            atrius_fhirpath_support::validate::ValidationIssue {
+                                key: "binding",
+                                severity: sev_violation,
+                                path: #path_literal,
+                                instance_path: __fhir_instance_path.clone(),
+                                expression: "valueset-membership",
+                                message: "ValueSet binding not satisfied",
+                            },
+                            &mut issues,
+                            &mut __fhir_seen,
+                        );
+                    }
+                }
+            }
+        }
+        "CodeableConcept" => {
+            quote! {
+                let local_ok: Option<bool> = crate::r5::terminology::value_sets::binding_ops_by_url(#valueset_url)
+                    .map(|ops| (ops.contains_codeable_concept)(#field_access));
+
+                if local_ok != Some(true) {
+                    let has_nonlocal = crate::r5::terminology::value_sets::valueset_has_nonlocal_rules(#valueset_url)
+                        .unwrap_or(false);
+                    let is_locally_enumerated = crate::r5::terminology::value_sets::valueset_is_locally_enumerated(#valueset_url)
+                        .unwrap_or(true);
+
+                    let should_try_remote = if local_ok.is_none() {
+                        true
+                    } else {
+                        has_nonlocal || !is_locally_enumerated
+                    };
+
+                    let sev_violation = match #strength {
+                        "required" => atrius_fhirpath_support::validate::ValidationSeverity::Error,
+                        "extensible" | "preferred" | "example" => atrius_fhirpath_support::validate::ValidationSeverity::Warning,
+                        _ => atrius_fhirpath_support::validate::ValidationSeverity::Warning,
+                    };
+
+                    if should_try_remote {
+                        let cc = #field_access;
+                        let pure_whole = crate::r5::terminology::value_sets::valueset_is_pure_whole_system_by_url(#valueset_url)
+                            .unwrap_or(false);
+                        let remote_result: Option<bool> = if let Some(codings) = cc.coding.as_ref() {
+                            let mut any_none = false;
+                            let mut any_false = false;
+                            let mut any_true = false;
+
+                            for coding in codings.iter() {
+                                let system = coding.system.as_ref().and_then(|u| u.value.as_deref());
+                                let code = coding.code.as_ref().and_then(|c| c.value.as_deref());
+
+                                if let (Some(system), Some(code)) = (system, code) {
+                                    #[cfg(debug_assertions)]
+                                    {
+                                        println!(
+                                            "[BINDING][CodeableConcept] path={} valueset={} pure_whole={} system={} code={}",
+                                            #path_literal,
+                                            #valueset_url,
+                                            pure_whole,
+                                            system,
+                                            code
+                                        );
+                                    }
+                                    match if pure_whole {
+                                        engine.validate_code_in_codesystem(system, code)
+                                    } else {
+                                        engine.validate_code_in_valueset(#valueset_url, system, code)
+                                    } {
+                                        Some(true) => {
+                                            any_true = true;
+                                            break;
+                                        }
+                                        Some(false) => any_false = true,
+                                        None => any_none = true,
+                                    }
+                                } else {
+                                    any_none = true;
+                                }
+                            }
+
+                            if any_true {
+                                Some(true)
+                            } else if any_false {
+                                Some(false)
+                            } else if any_none {
+                                None
+                            } else {
+                                None
+                            }
+                        } else {
+                            None
+                        };
+
+                        match remote_result {
+                            Some(true) => {}
+                            Some(false) => {
+                                if pure_whole {
+                                    __fhir_push_issue(
+                                        atrius_fhirpath_support::validate::ValidationIssue {
+                                            key: "terminology",
+                                            severity: atrius_fhirpath_support::validate::ValidationSeverity::Error,
+                                            path: #path_literal,
+                                            instance_path: __fhir_instance_path.clone(),
+                                            expression: "codesystem-validity",
+                                            message: "Unknown code in CodeSystem",
+                                        },
+                                        &mut issues,
+                                        &mut __fhir_seen,
+                                    );
+                                } else {
                                     __fhir_push_issue(
                                         atrius_fhirpath_support::validate::ValidationIssue {
                                             key: "binding",
-                                            severity: atrius_fhirpath_support::validate::ValidationSeverity::Warning,
+                                            severity: sev_violation,
                                             path: #path_literal,
                                             instance_path: __fhir_instance_path.clone(),
                                             expression: "valueset-membership",
-                                            message: "ValueSet binding could not be verified (terminology unavailable)",
+                                            message: "ValueSet binding not satisfied",
+                                        },
+                                        &mut issues,
+                                        &mut __fhir_seen,
+                                    );
+                                }
+                            }
+                            None => {
+                                let (expr, msg) = if pure_whole {
+                                    ("codesystem-validity", "CodeSystem validation could not be verified (terminology unavailable)")
+                                } else {
+                                    ("valueset-membership", "ValueSet binding could not be verified (terminology unavailable)")
+                                };
+
+                                __fhir_push_issue(
+                                    atrius_fhirpath_support::validate::ValidationIssue {
+                                        key: "terminology",
+                                        severity: atrius_fhirpath_support::validate::ValidationSeverity::Warning,
+                                        path: #path_literal,
+                                        instance_path: __fhir_instance_path.clone(),
+                                        expression: expr,
+                                        message: msg,
+                                    },
+                                    &mut issues,
+                                    &mut __fhir_seen,
+                                );
+                            }
+                        }
+                    } else {
+                        __fhir_push_issue(
+                            atrius_fhirpath_support::validate::ValidationIssue {
+                                key: "binding",
+                                severity: sev_violation,
+                                path: #path_literal,
+                                instance_path: __fhir_instance_path.clone(),
+                                expression: "valueset-membership",
+                                message: "ValueSet binding not satisfied",
+                            },
+                            &mut issues,
+                            &mut __fhir_seen,
+                        );
+                    }
+                }
+            }
+        }
+        "Code" => {
+            quote! {
+                let local_ok: Option<bool> = crate::r5::terminology::value_sets::binding_ops_by_url(#valueset_url)
+                    .map(|ops| (ops.contains_code)(#field_access));
+
+                if local_ok != Some(true) {
+                    let has_nonlocal = crate::r5::terminology::value_sets::valueset_has_nonlocal_rules(#valueset_url)
+                        .unwrap_or(false);
+                    let is_locally_enumerated = crate::r5::terminology::value_sets::valueset_is_locally_enumerated(#valueset_url)
+                        .unwrap_or(true);
+
+                    let should_try_remote = if local_ok.is_none() {
+                        true
+                    } else {
+                        has_nonlocal || !is_locally_enumerated
+                    };
+
+                    let sev_violation = match #strength {
+                        "required" => atrius_fhirpath_support::validate::ValidationSeverity::Error,
+                        "extensible" | "preferred" | "example" => atrius_fhirpath_support::validate::ValidationSeverity::Warning,
+                        _ => atrius_fhirpath_support::validate::ValidationSeverity::Warning,
+                    };
+
+                    if should_try_remote {
+                        // Try to get the single system for this ValueSet, if possible
+                        let system = crate::r5::terminology::value_sets::valueset_single_system_by_url(#valueset_url);
+                        if let Some(system) = system {
+                            // Only attempt remote validation if system is known and code is present
+                            let code = #field_access.value.as_deref();
+                            let remote_result = if let Some(code) = code {
+                                engine.validate_code_in_codesystem(system, code)
+                            } else {
+                                None
+                            };
+                            match remote_result {
+                                Some(true) => {}
+                                Some(false) => {
+                                    __fhir_push_issue(
+                                        atrius_fhirpath_support::validate::ValidationIssue {
+                                            key: "terminology",
+                                            severity: atrius_fhirpath_support::validate::ValidationSeverity::Error,
+                                            path: #path_literal,
+                                            instance_path: __fhir_instance_path.clone(),
+                                            expression: "codesystem-validity",
+                                            message: "Unknown code in CodeSystem",
+                                        },
+                                        &mut issues,
+                                        &mut __fhir_seen,
+                                    );
+                                }
+                                None => {
+                                    __fhir_push_issue(
+                                        atrius_fhirpath_support::validate::ValidationIssue {
+                                            key: "terminology",
+                                            severity: atrius_fhirpath_support::validate::ValidationSeverity::Warning,
+                                            path: #path_literal,
+                                            instance_path: __fhir_instance_path.clone(),
+                                            expression: "codesystem-validity",
+                                            message: "CodeSystem validation could not be verified (terminology unavailable)",
                                         },
                                         &mut issues,
                                         &mut __fhir_seen,
@@ -1146,43 +1311,6 @@ fn binding_check_tokens(
                                 }
                             }
                         } else {
-                            __fhir_push_issue(
-                                atrius_fhirpath_support::validate::ValidationIssue {
-                                    key: "binding",
-                                    severity: sev_violation,
-                                    path: #path_literal,
-                                    instance_path: __fhir_instance_path.clone(),
-                                    expression: "valueset-membership",
-                                    message: "ValueSet binding not satisfied",
-                                },
-                                &mut issues,
-                                &mut __fhir_seen,
-                            );
-                        }
-                    }
-                }
-            }
-        }
-
-        "Code" => {
-            let membership_call = quote! { (ops.contains_code)(#field_access) };
-            quote! {
-                if let Some(ops) = crate::r5::terminology::value_sets::binding_ops_by_url(#valueset_url) {
-                    let ok_local = #membership_call;
-                    if !ok_local {
-                        let has_nonlocal = crate::r5::terminology::value_sets::valueset_has_nonlocal_rules(#valueset_url)
-                            .unwrap_or(false);
-                        let is_locally_enumerated = crate::r5::terminology::value_sets::valueset_is_locally_enumerated(#valueset_url)
-                            .unwrap_or(true);
-                        let should_try_remote = has_nonlocal || !is_locally_enumerated;
-
-                        let sev_violation = match #strength {
-                            "required" => atrius_fhirpath_support::validate::ValidationSeverity::Error,
-                            "extensible" | "preferred" => atrius_fhirpath_support::validate::ValidationSeverity::Warning,
-                            _ => atrius_fhirpath_support::validate::ValidationSeverity::Warning,
-                        };
-
-                        if should_try_remote {
                             __fhir_push_issue(
                                 atrius_fhirpath_support::validate::ValidationIssue {
                                     key: "binding",
@@ -1195,25 +1323,24 @@ fn binding_check_tokens(
                                 &mut issues,
                                 &mut __fhir_seen,
                             );
-                        } else {
-                            __fhir_push_issue(
-                                atrius_fhirpath_support::validate::ValidationIssue {
-                                    key: "binding",
-                                    severity: sev_violation,
-                                    path: #path_literal,
-                                    instance_path: __fhir_instance_path.clone(),
-                                    expression: "valueset-membership",
-                                    message: "ValueSet binding not satisfied",
-                                },
-                                &mut issues,
-                                &mut __fhir_seen,
-                            );
                         }
+                    } else {
+                        __fhir_push_issue(
+                            atrius_fhirpath_support::validate::ValidationIssue {
+                                key: "binding",
+                                severity: sev_violation,
+                                path: #path_literal,
+                                instance_path: __fhir_instance_path.clone(),
+                                expression: "valueset-membership",
+                                message: "ValueSet binding not satisfied",
+                            },
+                            &mut issues,
+                            &mut __fhir_seen,
+                        );
                     }
                 }
             }
         }
-
         _ => quote! {},
     }
 }

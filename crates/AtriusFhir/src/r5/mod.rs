@@ -131,15 +131,16 @@
 
 use serde::{Deserialize, Serialize};
 use atrius_macros::{FhirPath, FhirSerde, FhirValidate};
+use atrius_fhirpath_support::{FhirPathEngine, FhirValidate, Invariant, ValidationIssue};
 use crate::precise_decimal::{ DecimalElement};
 use crate::element::Element;
-// use crate::date_time::{PrecisionTime, PrecisionDateTime, PrecisionDate, PrecisionInstant};
-// use crate::fhir_version::FhirComplexTypeProvider;
+
 
 pub mod primitives;
 pub mod complex_types;
 pub mod resources;
 pub mod terminology;
+
 pub use primitives::*;
 pub use complex_types::*;
 pub use resources::*;
@@ -306,6 +307,992 @@ pub enum Resource {
     VerificationResult(VerificationResult),
     ViewDefinition(ViewDefinition),
     VisionPrescription(VisionPrescription),
+}
+
+// Delegating FhirValidate impl for the Resource enum
+impl FhirValidate for Resource {
+    fn invariants() -> &'static [Invariant] {
+        // Resource-level invariants are not defined; each concrete resource type
+        // carries its own invariants. Validation is delegated in validate_with_engine().
+        &[]
+    }
+
+    fn validate_with_engine(&self, engine: &dyn FhirPathEngine) -> Vec<ValidationIssue> {
+        use atrius_fhirpath_support::traits::IntoEvaluationResult;
+        match self {
+            Self::Account(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ActivityDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ActorDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::AdministrableProductDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::AdverseEvent(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::AllergyIntolerance(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Appointment(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::AppointmentResponse(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ArtifactAssessment(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::AuditEvent(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Basic(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Binary(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::BiologicallyDerivedProduct(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::BiologicallyDerivedProductDispense(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::BodyStructure(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Bundle(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::CapabilityStatement(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::CarePlan(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::CareTeam(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ChargeItem(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ChargeItemDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Citation(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Claim(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ClaimResponse(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ClinicalImpression(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ClinicalUseDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::CodeSystem(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Communication(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::CommunicationRequest(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::CompartmentDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Composition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ConceptMap(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Condition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ConditionDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Consent(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Contract(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Coverage(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::CoverageEligibilityRequest(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::CoverageEligibilityResponse(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::DetectedIssue(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Device(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::DeviceAssociation(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::DeviceDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::DeviceDispense(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::DeviceMetric(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::DeviceRequest(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::DeviceUsage(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::DiagnosticReport(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::DocumentReference(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Encounter(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::EncounterHistory(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Endpoint(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::EnrollmentRequest(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::EnrollmentResponse(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::EpisodeOfCare(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::EventDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Evidence(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::EvidenceReport(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::EvidenceVariable(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ExampleScenario(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ExplanationOfBenefit(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::FamilyMemberHistory(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Flag(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::FormularyItem(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::GenomicStudy(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Goal(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::GraphDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Group(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::GuidanceResponse(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::HealthcareService(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ImagingSelection(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ImagingStudy(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Immunization(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ImmunizationEvaluation(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ImmunizationRecommendation(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ImplementationGuide(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Ingredient(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::InsurancePlan(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::InventoryItem(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::InventoryReport(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Invoice(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Library(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Linkage(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::List(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Location(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ManufacturedItemDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Measure(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::MeasureReport(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Medication(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::MedicationAdministration(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::MedicationDispense(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::MedicationKnowledge(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::MedicationRequest(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::MedicationStatement(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::MedicinalProductDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::MessageDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::MessageHeader(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::MolecularSequence(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::NamingSystem(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::NutritionIntake(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::NutritionOrder(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::NutritionProduct(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Observation(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ObservationDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::OperationDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::OperationOutcome(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Organization(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::OrganizationAffiliation(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::PackagedProductDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Parameters(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Patient(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::PaymentNotice(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::PaymentReconciliation(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Permission(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Person(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::PlanDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Practitioner(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::PractitionerRole(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Procedure(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Provenance(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Questionnaire(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::QuestionnaireResponse(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::RegulatedAuthorization(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::RelatedPerson(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::RequestOrchestration(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Requirements(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ResearchStudy(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ResearchSubject(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::RiskAssessment(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Schedule(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::SearchParameter(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ServiceRequest(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Slot(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Specimen(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::SpecimenDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::StructureDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::StructureMap(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Subscription(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::SubscriptionStatus(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::SubscriptionTopic(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Substance(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::SubstanceDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::SubstanceNucleicAcid(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::SubstancePolymer(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::SubstanceProtein(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::SubstanceReferenceInformation(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::SubstanceSourceMaterial(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::SupplyDelivery(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::SupplyRequest(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Task(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::TerminologyCapabilities(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::TestPlan(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::TestReport(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::TestScript(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::Transport(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ValueSet(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::VerificationResult(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::ViewDefinition(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+            Self::VisionPrescription(r) => {
+                let __fhir_root_val = r.to_evaluation_result();
+                r.validate_with_engine_root(engine, &__fhir_root_val)
+            },
+        }
+    }
+
+    fn validate_with_engine_root(
+        &self,
+        engine: &dyn FhirPathEngine,
+        root: &atrius_fhirpath_support::evaluation_result::EvaluationResult,
+    ) -> Vec<ValidationIssue> {
+        match self {
+            Self::Account(r) => r.validate_with_engine_root(engine, root),
+            Self::ActivityDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::ActorDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::AdministrableProductDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::AdverseEvent(r) => r.validate_with_engine_root(engine, root),
+            Self::AllergyIntolerance(r) => r.validate_with_engine_root(engine, root),
+            Self::Appointment(r) => r.validate_with_engine_root(engine, root),
+            Self::AppointmentResponse(r) => r.validate_with_engine_root(engine, root),
+            Self::ArtifactAssessment(r) => r.validate_with_engine_root(engine, root),
+            Self::AuditEvent(r) => r.validate_with_engine_root(engine, root),
+            Self::Basic(r) => r.validate_with_engine_root(engine, root),
+            Self::Binary(r) => r.validate_with_engine_root(engine, root),
+            Self::BiologicallyDerivedProduct(r) => r.validate_with_engine_root(engine, root),
+            Self::BiologicallyDerivedProductDispense(r) => r.validate_with_engine_root(engine, root),
+            Self::BodyStructure(r) => r.validate_with_engine_root(engine, root),
+            Self::Bundle(r) => r.validate_with_engine_root(engine, root),
+            Self::CapabilityStatement(r) => r.validate_with_engine_root(engine, root),
+            Self::CarePlan(r) => r.validate_with_engine_root(engine, root),
+            Self::CareTeam(r) => r.validate_with_engine_root(engine, root),
+            Self::ChargeItem(r) => r.validate_with_engine_root(engine, root),
+            Self::ChargeItemDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::Citation(r) => r.validate_with_engine_root(engine, root),
+            Self::Claim(r) => r.validate_with_engine_root(engine, root),
+            Self::ClaimResponse(r) => r.validate_with_engine_root(engine, root),
+            Self::ClinicalImpression(r) => r.validate_with_engine_root(engine, root),
+            Self::ClinicalUseDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::CodeSystem(r) => r.validate_with_engine_root(engine, root),
+            Self::Communication(r) => r.validate_with_engine_root(engine, root),
+            Self::CommunicationRequest(r) => r.validate_with_engine_root(engine, root),
+            Self::CompartmentDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::Composition(r) => r.validate_with_engine_root(engine, root),
+            Self::ConceptMap(r) => r.validate_with_engine_root(engine, root),
+            Self::Condition(r) => r.validate_with_engine_root(engine, root),
+            Self::ConditionDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::Consent(r) => r.validate_with_engine_root(engine, root),
+            Self::Contract(r) => r.validate_with_engine_root(engine, root),
+            Self::Coverage(r) => r.validate_with_engine_root(engine, root),
+            Self::CoverageEligibilityRequest(r) => r.validate_with_engine_root(engine, root),
+            Self::CoverageEligibilityResponse(r) => r.validate_with_engine_root(engine, root),
+            Self::DetectedIssue(r) => r.validate_with_engine_root(engine, root),
+            Self::Device(r) => r.validate_with_engine_root(engine, root),
+            Self::DeviceAssociation(r) => r.validate_with_engine_root(engine, root),
+            Self::DeviceDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::DeviceDispense(r) => r.validate_with_engine_root(engine, root),
+            Self::DeviceMetric(r) => r.validate_with_engine_root(engine, root),
+            Self::DeviceRequest(r) => r.validate_with_engine_root(engine, root),
+            Self::DeviceUsage(r) => r.validate_with_engine_root(engine, root),
+            Self::DiagnosticReport(r) => r.validate_with_engine_root(engine, root),
+            Self::DocumentReference(r) => r.validate_with_engine_root(engine, root),
+            Self::Encounter(r) => r.validate_with_engine_root(engine, root),
+            Self::EncounterHistory(r) => r.validate_with_engine_root(engine, root),
+            Self::Endpoint(r) => r.validate_with_engine_root(engine, root),
+            Self::EnrollmentRequest(r) => r.validate_with_engine_root(engine, root),
+            Self::EnrollmentResponse(r) => r.validate_with_engine_root(engine, root),
+            Self::EpisodeOfCare(r) => r.validate_with_engine_root(engine, root),
+            Self::EventDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::Evidence(r) => r.validate_with_engine_root(engine, root),
+            Self::EvidenceReport(r) => r.validate_with_engine_root(engine, root),
+            Self::EvidenceVariable(r) => r.validate_with_engine_root(engine, root),
+            Self::ExampleScenario(r) => r.validate_with_engine_root(engine, root),
+            Self::ExplanationOfBenefit(r) => r.validate_with_engine_root(engine, root),
+            Self::FamilyMemberHistory(r) => r.validate_with_engine_root(engine, root),
+            Self::Flag(r) => r.validate_with_engine_root(engine, root),
+            Self::FormularyItem(r) => r.validate_with_engine_root(engine, root),
+            Self::GenomicStudy(r) => r.validate_with_engine_root(engine, root),
+            Self::Goal(r) => r.validate_with_engine_root(engine, root),
+            Self::GraphDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::Group(r) => r.validate_with_engine_root(engine, root),
+            Self::GuidanceResponse(r) => r.validate_with_engine_root(engine, root),
+            Self::HealthcareService(r) => r.validate_with_engine_root(engine, root),
+            Self::ImagingSelection(r) => r.validate_with_engine_root(engine, root),
+            Self::ImagingStudy(r) => r.validate_with_engine_root(engine, root),
+            Self::Immunization(r) => r.validate_with_engine_root(engine, root),
+            Self::ImmunizationEvaluation(r) => r.validate_with_engine_root(engine, root),
+            Self::ImmunizationRecommendation(r) => r.validate_with_engine_root(engine, root),
+            Self::ImplementationGuide(r) => r.validate_with_engine_root(engine, root),
+            Self::Ingredient(r) => r.validate_with_engine_root(engine, root),
+            Self::InsurancePlan(r) => r.validate_with_engine_root(engine, root),
+            Self::InventoryItem(r) => r.validate_with_engine_root(engine, root),
+            Self::InventoryReport(r) => r.validate_with_engine_root(engine, root),
+            Self::Invoice(r) => r.validate_with_engine_root(engine, root),
+            Self::Library(r) => r.validate_with_engine_root(engine, root),
+            Self::Linkage(r) => r.validate_with_engine_root(engine, root),
+            Self::List(r) => r.validate_with_engine_root(engine, root),
+            Self::Location(r) => r.validate_with_engine_root(engine, root),
+            Self::ManufacturedItemDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::Measure(r) => r.validate_with_engine_root(engine, root),
+            Self::MeasureReport(r) => r.validate_with_engine_root(engine, root),
+            Self::Medication(r) => r.validate_with_engine_root(engine, root),
+            Self::MedicationAdministration(r) => r.validate_with_engine_root(engine, root),
+            Self::MedicationDispense(r) => r.validate_with_engine_root(engine, root),
+            Self::MedicationKnowledge(r) => r.validate_with_engine_root(engine, root),
+            Self::MedicationRequest(r) => r.validate_with_engine_root(engine, root),
+            Self::MedicationStatement(r) => r.validate_with_engine_root(engine, root),
+            Self::MedicinalProductDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::MessageDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::MessageHeader(r) => r.validate_with_engine_root(engine, root),
+            Self::MolecularSequence(r) => r.validate_with_engine_root(engine, root),
+            Self::NamingSystem(r) => r.validate_with_engine_root(engine, root),
+            Self::NutritionIntake(r) => r.validate_with_engine_root(engine, root),
+            Self::NutritionOrder(r) => r.validate_with_engine_root(engine, root),
+            Self::NutritionProduct(r) => r.validate_with_engine_root(engine, root),
+            Self::Observation(r) => r.validate_with_engine_root(engine, root),
+            Self::ObservationDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::OperationDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::OperationOutcome(r) => r.validate_with_engine_root(engine, root),
+            Self::Organization(r) => r.validate_with_engine_root(engine, root),
+            Self::OrganizationAffiliation(r) => r.validate_with_engine_root(engine, root),
+            Self::PackagedProductDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::Parameters(r) => r.validate_with_engine_root(engine, root),
+            Self::Patient(r) => r.validate_with_engine_root(engine, root),
+            Self::PaymentNotice(r) => r.validate_with_engine_root(engine, root),
+            Self::PaymentReconciliation(r) => r.validate_with_engine_root(engine, root),
+            Self::Permission(r) => r.validate_with_engine_root(engine, root),
+            Self::Person(r) => r.validate_with_engine_root(engine, root),
+            Self::PlanDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::Practitioner(r) => r.validate_with_engine_root(engine, root),
+            Self::PractitionerRole(r) => r.validate_with_engine_root(engine, root),
+            Self::Procedure(r) => r.validate_with_engine_root(engine, root),
+            Self::Provenance(r) => r.validate_with_engine_root(engine, root),
+            Self::Questionnaire(r) => r.validate_with_engine_root(engine, root),
+            Self::QuestionnaireResponse(r) => r.validate_with_engine_root(engine, root),
+            Self::RegulatedAuthorization(r) => r.validate_with_engine_root(engine, root),
+            Self::RelatedPerson(r) => r.validate_with_engine_root(engine, root),
+            Self::RequestOrchestration(r) => r.validate_with_engine_root(engine, root),
+            Self::Requirements(r) => r.validate_with_engine_root(engine, root),
+            Self::ResearchStudy(r) => r.validate_with_engine_root(engine, root),
+            Self::ResearchSubject(r) => r.validate_with_engine_root(engine, root),
+            Self::RiskAssessment(r) => r.validate_with_engine_root(engine, root),
+            Self::Schedule(r) => r.validate_with_engine_root(engine, root),
+            Self::SearchParameter(r) => r.validate_with_engine_root(engine, root),
+            Self::ServiceRequest(r) => r.validate_with_engine_root(engine, root),
+            Self::Slot(r) => r.validate_with_engine_root(engine, root),
+            Self::Specimen(r) => r.validate_with_engine_root(engine, root),
+            Self::SpecimenDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::StructureDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::StructureMap(r) => r.validate_with_engine_root(engine, root),
+            Self::Subscription(r) => r.validate_with_engine_root(engine, root),
+            Self::SubscriptionStatus(r) => r.validate_with_engine_root(engine, root),
+            Self::SubscriptionTopic(r) => r.validate_with_engine_root(engine, root),
+            Self::Substance(r) => r.validate_with_engine_root(engine, root),
+            Self::SubstanceDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::SubstanceNucleicAcid(r) => r.validate_with_engine_root(engine, root),
+            Self::SubstancePolymer(r) => r.validate_with_engine_root(engine, root),
+            Self::SubstanceProtein(r) => r.validate_with_engine_root(engine, root),
+            Self::SubstanceReferenceInformation(r) => r.validate_with_engine_root(engine, root),
+            Self::SubstanceSourceMaterial(r) => r.validate_with_engine_root(engine, root),
+            Self::SupplyDelivery(r) => r.validate_with_engine_root(engine, root),
+            Self::SupplyRequest(r) => r.validate_with_engine_root(engine, root),
+            Self::Task(r) => r.validate_with_engine_root(engine, root),
+            Self::TerminologyCapabilities(r) => r.validate_with_engine_root(engine, root),
+            Self::TestPlan(r) => r.validate_with_engine_root(engine, root),
+            Self::TestReport(r) => r.validate_with_engine_root(engine, root),
+            Self::TestScript(r) => r.validate_with_engine_root(engine, root),
+            Self::Transport(r) => r.validate_with_engine_root(engine, root),
+            Self::ValueSet(r) => r.validate_with_engine_root(engine, root),
+            Self::VerificationResult(r) => r.validate_with_engine_root(engine, root),
+            Self::ViewDefinition(r) => r.validate_with_engine_root(engine, root),
+            Self::VisionPrescription(r) => r.validate_with_engine_root(engine, root),
+        }
+    }
+}
+
+// Returns the FHIR resourceType name for this enum variant
+impl Resource {
+    pub fn resource_type(&self) -> &'static str {
+        match self {
+            Self::Account(_) => "Account",
+            Self::ActivityDefinition(_) => "ActivityDefinition",
+            Self::ActorDefinition(_) => "ActorDefinition",
+            Self::AdministrableProductDefinition(_) => "AdministrableProductDefinition",
+            Self::AdverseEvent(_) => "AdverseEvent",
+            Self::AllergyIntolerance(_) => "AllergyIntolerance",
+            Self::Appointment(_) => "Appointment",
+            Self::AppointmentResponse(_) => "AppointmentResponse",
+            Self::ArtifactAssessment(_) => "ArtifactAssessment",
+            Self::AuditEvent(_) => "AuditEvent",
+            Self::Basic(_) => "Basic",
+            Self::Binary(_) => "Binary",
+            Self::BiologicallyDerivedProduct(_) => "BiologicallyDerivedProduct",
+            Self::BiologicallyDerivedProductDispense(_) => "BiologicallyDerivedProductDispense",
+            Self::BodyStructure(_) => "BodyStructure",
+            Self::Bundle(_) => "Bundle",
+            Self::CapabilityStatement(_) => "CapabilityStatement",
+            Self::CarePlan(_) => "CarePlan",
+            Self::CareTeam(_) => "CareTeam",
+            Self::ChargeItem(_) => "ChargeItem",
+            Self::ChargeItemDefinition(_) => "ChargeItemDefinition",
+            Self::Citation(_) => "Citation",
+            Self::Claim(_) => "Claim",
+            Self::ClaimResponse(_) => "ClaimResponse",
+            Self::ClinicalImpression(_) => "ClinicalImpression",
+            Self::ClinicalUseDefinition(_) => "ClinicalUseDefinition",
+            Self::CodeSystem(_) => "CodeSystem",
+            Self::Communication(_) => "Communication",
+            Self::CommunicationRequest(_) => "CommunicationRequest",
+            Self::CompartmentDefinition(_) => "CompartmentDefinition",
+            Self::Composition(_) => "Composition",
+            Self::ConceptMap(_) => "ConceptMap",
+            Self::Condition(_) => "Condition",
+            Self::ConditionDefinition(_) => "ConditionDefinition",
+            Self::Consent(_) => "Consent",
+            Self::Contract(_) => "Contract",
+            Self::Coverage(_) => "Coverage",
+            Self::CoverageEligibilityRequest(_) => "CoverageEligibilityRequest",
+            Self::CoverageEligibilityResponse(_) => "CoverageEligibilityResponse",
+            Self::DetectedIssue(_) => "DetectedIssue",
+            Self::Device(_) => "Device",
+            Self::DeviceAssociation(_) => "DeviceAssociation",
+            Self::DeviceDefinition(_) => "DeviceDefinition",
+            Self::DeviceDispense(_) => "DeviceDispense",
+            Self::DeviceMetric(_) => "DeviceMetric",
+            Self::DeviceRequest(_) => "DeviceRequest",
+            Self::DeviceUsage(_) => "DeviceUsage",
+            Self::DiagnosticReport(_) => "DiagnosticReport",
+            Self::DocumentReference(_) => "DocumentReference",
+            Self::Encounter(_) => "Encounter",
+            Self::EncounterHistory(_) => "EncounterHistory",
+            Self::Endpoint(_) => "Endpoint",
+            Self::EnrollmentRequest(_) => "EnrollmentRequest",
+            Self::EnrollmentResponse(_) => "EnrollmentResponse",
+            Self::EpisodeOfCare(_) => "EpisodeOfCare",
+            Self::EventDefinition(_) => "EventDefinition",
+            Self::Evidence(_) => "Evidence",
+            Self::EvidenceReport(_) => "EvidenceReport",
+            Self::EvidenceVariable(_) => "EvidenceVariable",
+            Self::ExampleScenario(_) => "ExampleScenario",
+            Self::ExplanationOfBenefit(_) => "ExplanationOfBenefit",
+            Self::FamilyMemberHistory(_) => "FamilyMemberHistory",
+            Self::Flag(_) => "Flag",
+            Self::FormularyItem(_) => "FormularyItem",
+            Self::GenomicStudy(_) => "GenomicStudy",
+            Self::Goal(_) => "Goal",
+            Self::GraphDefinition(_) => "GraphDefinition",
+            Self::Group(_) => "Group",
+            Self::GuidanceResponse(_) => "GuidanceResponse",
+            Self::HealthcareService(_) => "HealthcareService",
+            Self::ImagingSelection(_) => "ImagingSelection",
+            Self::ImagingStudy(_) => "ImagingStudy",
+            Self::Immunization(_) => "Immunization",
+            Self::ImmunizationEvaluation(_) => "ImmunizationEvaluation",
+            Self::ImmunizationRecommendation(_) => "ImmunizationRecommendation",
+            Self::ImplementationGuide(_) => "ImplementationGuide",
+            Self::Ingredient(_) => "Ingredient",
+            Self::InsurancePlan(_) => "InsurancePlan",
+            Self::InventoryItem(_) => "InventoryItem",
+            Self::InventoryReport(_) => "InventoryReport",
+            Self::Invoice(_) => "Invoice",
+            Self::Library(_) => "Library",
+            Self::Linkage(_) => "Linkage",
+            Self::List(_) => "List",
+            Self::Location(_) => "Location",
+            Self::ManufacturedItemDefinition(_) => "ManufacturedItemDefinition",
+            Self::Measure(_) => "Measure",
+            Self::MeasureReport(_) => "MeasureReport",
+            Self::Medication(_) => "Medication",
+            Self::MedicationAdministration(_) => "MedicationAdministration",
+            Self::MedicationDispense(_) => "MedicationDispense",
+            Self::MedicationKnowledge(_) => "MedicationKnowledge",
+            Self::MedicationRequest(_) => "MedicationRequest",
+            Self::MedicationStatement(_) => "MedicationStatement",
+            Self::MedicinalProductDefinition(_) => "MedicinalProductDefinition",
+            Self::MessageDefinition(_) => "MessageDefinition",
+            Self::MessageHeader(_) => "MessageHeader",
+            Self::MolecularSequence(_) => "MolecularSequence",
+            Self::NamingSystem(_) => "NamingSystem",
+            Self::NutritionIntake(_) => "NutritionIntake",
+            Self::NutritionOrder(_) => "NutritionOrder",
+            Self::NutritionProduct(_) => "NutritionProduct",
+            Self::Observation(_) => "Observation",
+            Self::ObservationDefinition(_) => "ObservationDefinition",
+            Self::OperationDefinition(_) => "OperationDefinition",
+            Self::OperationOutcome(_) => "OperationOutcome",
+            Self::Organization(_) => "Organization",
+            Self::OrganizationAffiliation(_) => "OrganizationAffiliation",
+            Self::PackagedProductDefinition(_) => "PackagedProductDefinition",
+            Self::Parameters(_) => "Parameters",
+            Self::Patient(_) => "Patient",
+            Self::PaymentNotice(_) => "PaymentNotice",
+            Self::PaymentReconciliation(_) => "PaymentReconciliation",
+            Self::Permission(_) => "Permission",
+            Self::Person(_) => "Person",
+            Self::PlanDefinition(_) => "PlanDefinition",
+            Self::Practitioner(_) => "Practitioner",
+            Self::PractitionerRole(_) => "PractitionerRole",
+            Self::Procedure(_) => "Procedure",
+            Self::Provenance(_) => "Provenance",
+            Self::Questionnaire(_) => "Questionnaire",
+            Self::QuestionnaireResponse(_) => "QuestionnaireResponse",
+            Self::RegulatedAuthorization(_) => "RegulatedAuthorization",
+            Self::RelatedPerson(_) => "RelatedPerson",
+            Self::RequestOrchestration(_) => "RequestOrchestration",
+            Self::Requirements(_) => "Requirements",
+            Self::ResearchStudy(_) => "ResearchStudy",
+            Self::ResearchSubject(_) => "ResearchSubject",
+            Self::RiskAssessment(_) => "RiskAssessment",
+            Self::Schedule(_) => "Schedule",
+            Self::SearchParameter(_) => "SearchParameter",
+            Self::ServiceRequest(_) => "ServiceRequest",
+            Self::Slot(_) => "Slot",
+            Self::Specimen(_) => "Specimen",
+            Self::SpecimenDefinition(_) => "SpecimenDefinition",
+            Self::StructureDefinition(_) => "StructureDefinition",
+            Self::StructureMap(_) => "StructureMap",
+            Self::Subscription(_) => "Subscription",
+            Self::SubscriptionStatus(_) => "SubscriptionStatus",
+            Self::SubscriptionTopic(_) => "SubscriptionTopic",
+            Self::Substance(_) => "Substance",
+            Self::SubstanceDefinition(_) => "SubstanceDefinition",
+            Self::SubstanceNucleicAcid(_) => "SubstanceNucleicAcid",
+            Self::SubstancePolymer(_) => "SubstancePolymer",
+            Self::SubstanceProtein(_) => "SubstanceProtein",
+            Self::SubstanceReferenceInformation(_) => "SubstanceReferenceInformation",
+            Self::SubstanceSourceMaterial(_) => "SubstanceSourceMaterial",
+            Self::SupplyDelivery(_) => "SupplyDelivery",
+            Self::SupplyRequest(_) => "SupplyRequest",
+            Self::Task(_) => "Task",
+            Self::TerminologyCapabilities(_) => "TerminologyCapabilities",
+            Self::TestPlan(_) => "TestPlan",
+            Self::TestReport(_) => "TestReport",
+            Self::TestScript(_) => "TestScript",
+            Self::Transport(_) => "Transport",
+            Self::ValueSet(_) => "ValueSet",
+            Self::VerificationResult(_) => "VerificationResult",
+            Self::ViewDefinition(_) => "ViewDefinition",
+            Self::VisionPrescription(_) => "VisionPrescription",
+        }
+    }
 }
 
 // Manual PartialEq implementation to break MIR optimization cycle with Bundle

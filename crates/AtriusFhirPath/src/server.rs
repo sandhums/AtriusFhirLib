@@ -141,7 +141,7 @@ pub struct ServerArgs {
     pub host: String,
 
     /// Log level (error, warn, info, debug, trace)
-    #[arg(short, long, env = "FHIRPATH_LOG_LEVEL", default_value = "info")]
+    #[arg(short, long, env = "FHIRPATH_LOG_LEVEL", default_value = "trace")]
     pub log_level: String,
 
     /// Enable CORS
@@ -195,17 +195,31 @@ impl From<ServerArgs> for ServerConfig {
 
 /// Run the FHIRPath server
 pub async fn run_server(config: ServerConfig) -> Result<(), Box<dyn std::error::Error>> {
+    // Temporary hard check: ensure we can see *something* even if tracing is misconfigured.
+    // (You can remove these println/eprintln lines once logging is confirmed.)
+    eprintln!("[fhirpath-server] starting (pre-tracing init)...");
     // Initialize tracing
-    let filter = format!(
-        "fhirpath_server={},tower_http={}",
-        config.log_level, config.log_level
-    );
+    // If RUST_LOG is set, it wins. Otherwise, enable a global level plus tower_http.
+    // Note: the old filter used `fhirpath_server=...`, but the crate name is not
+    // necessarily `fhirpath_server`, so our `info!` logs could be filtered out.
+    let filter = tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| {
+        // Example: "info,tower_http=info" or "trace,tower_http=trace"
+        let base = config.log_level.trim();
+        let directive = format!("{base},tower_http={base}");
+        tracing_subscriber::EnvFilter::new(directive)
+    });
+
     tracing_subscriber::fmt()
-        .with_env_filter(
-            tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| filter.into()),
-        )
+        // Write logs to stdout so they show up in typical terminal runs.
+        .with_writer(std::io::stdout)
+        .with_target(true)
+        .with_env_filter(filter)
         .init();
 
+    // Another hard check after tracing init.
+    eprintln!("[fhirpath-server] tracing initialized");
+
+    info!("run_server entered");
     info!("Starting FHIRPath server...");
     info!("Configuration: {:?}", config);
 

@@ -4,11 +4,11 @@ mod common;
 #[cfg(feature = "R5")]
 use crate::common::*;
 #[cfg(feature = "R5")]
-use helios_fhir::r5;
+use atrius_fhir_lib::r5;
 #[cfg(feature = "R5")]
-use helios_fhirpath::EvaluationContext;
+use atrius_fhir_path::EvaluationContext;
 #[cfg(feature = "R5")]
-use helios_fhirpath_support::EvaluationResult;
+use atrius_fhirpath_support::evaluation_result::EvaluationResult;
 #[cfg(feature = "R5")]
 use std::fs::File;
 #[cfg(feature = "R5")]
@@ -51,7 +51,7 @@ fn load_test_resource_r5(json_filename: &str) -> Result<EvaluationContext, Strin
 
     // Create an evaluation context with the resource
     let mut context =
-        EvaluationContext::new(vec![helios_fhir::FhirResource::R5(Box::new(resource))]);
+        EvaluationContext::new(vec![atrius_fhir_lib::fhir_version::FhirResource::R5(Box::new(resource))]);
 
     // Use common context setup
     setup_resource_context(&mut context, json_filename);
@@ -284,7 +284,7 @@ fn test_r5_test_suite() {
             } else if test.outputs.is_empty() {
                 // Special case: tests with no outputs should expect empty result
                 // We need to evaluate the expression directly since run_fhir_test doesn't return the result
-                match helios_fhirpath::evaluate_expression(&test.expression, &context) {
+                match atrius_fhir_path::evaluate_expression(&test.expression, &context) {
                     Ok(result) => {
                         // Check if the result is actually empty
                         match &result {

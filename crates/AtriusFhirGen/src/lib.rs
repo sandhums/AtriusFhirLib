@@ -296,6 +296,7 @@ fn process_single_version_dir(version: &FhirVersion, output_path: impl AsRef<Pat
         writeln!(file, "pub mod primitives;")?;
         writeln!(file, "pub mod complex_types;")?;
         writeln!(file, "pub mod resources;")?;
+        writeln!(file, "pub mod terminology;")?;
         writeln!(file)?;
         writeln!(file, "pub use primitives::*;")?;
         writeln!(file, "pub use complex_types::*;")?;

@@ -1,15 +1,15 @@
 use chumsky::Parser;
-use helios_fhir::FhirVersion;
-use helios_fhirpath::{
+use atrius_fhir_lib::fhir_version::FhirVersion;
+use atrius_fhir_path::{
     evaluator::{EvaluationContext, evaluate},
     parser::parser,
 };
-use helios_fhirpath_support::EvaluationResult;
+use atrius_fhirpath_support::evaluation_result::EvaluationResult;
 
 #[test]
 #[ignore = "Decimal precision cannot preserve trailing zeros - requires architecture change"]
 fn test_precision_decimal() {
-    let context = EvaluationContext::new_empty(FhirVersion::R4);
+    let context = EvaluationContext::new_empty(FhirVersion::R5);
     let expr = parser().parse("1.58700.precision()").unwrap();
     let result = evaluate(&expr, &context, None).unwrap();
 
@@ -27,7 +27,7 @@ fn test_precision_decimal() {
 #[test]
 fn test_precision_decimal_normalized() {
     // Test with the actual behavior - decimals are normalized
-    let context = EvaluationContext::new_empty(FhirVersion::R4);
+    let context = EvaluationContext::new_empty(FhirVersion::R5);
     let expr = parser().parse("1.587.precision()").unwrap();
     let result = evaluate(&expr, &context, None).unwrap();
 
@@ -41,7 +41,7 @@ fn test_precision_decimal_normalized() {
 
 #[test]
 fn test_precision_integer() {
-    let context = EvaluationContext::new_empty(FhirVersion::R4);
+    let context = EvaluationContext::new_empty(FhirVersion::R5);
     let expr = parser().parse("123.precision()").unwrap();
     let result = evaluate(&expr, &context, None).unwrap();
 
@@ -55,7 +55,7 @@ fn test_precision_integer() {
 
 #[test]
 fn test_precision_year() {
-    let context = EvaluationContext::new_empty(FhirVersion::R4);
+    let context = EvaluationContext::new_empty(FhirVersion::R5);
     let expr = parser().parse("@2014.precision()").unwrap();
     let result = evaluate(&expr, &context, None).unwrap();
 
@@ -69,7 +69,7 @@ fn test_precision_year() {
 
 #[test]
 fn test_precision_datetime_milliseconds() {
-    let context = EvaluationContext::new_empty(FhirVersion::R4);
+    let context = EvaluationContext::new_empty(FhirVersion::R5);
     let expr = parser()
         .parse("@2014-01-05T10:30:00.000.precision()")
         .unwrap();
@@ -88,7 +88,7 @@ fn test_precision_datetime_milliseconds() {
 
 #[test]
 fn test_precision_time_minutes() {
-    let context = EvaluationContext::new_empty(FhirVersion::R4);
+    let context = EvaluationContext::new_empty(FhirVersion::R5);
     let expr = parser().parse("@T10:30.precision()").unwrap();
     let result = evaluate(&expr, &context, None).unwrap();
 
@@ -102,7 +102,7 @@ fn test_precision_time_minutes() {
 
 #[test]
 fn test_precision_time_milliseconds() {
-    let context = EvaluationContext::new_empty(FhirVersion::R4);
+    let context = EvaluationContext::new_empty(FhirVersion::R5);
     let expr = parser().parse("@T10:30:00.000.precision()").unwrap();
     let result = evaluate(&expr, &context, None).unwrap();
 
@@ -116,7 +116,7 @@ fn test_precision_time_milliseconds() {
 
 #[test]
 fn test_precision_empty() {
-    let context = EvaluationContext::new_empty(FhirVersion::R4);
+    let context = EvaluationContext::new_empty(FhirVersion::R5);
     let expr = parser().parse("{}.precision()").unwrap();
     let result = evaluate(&expr, &context, None).unwrap();
 

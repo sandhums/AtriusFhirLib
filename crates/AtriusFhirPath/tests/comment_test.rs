@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
     use chumsky::Parser;
-    use helios_fhirpath::parser::parser;
+    use atrius_fhir_path::parser::parser;
 
     #[test]
     fn test_single_line_comment() {

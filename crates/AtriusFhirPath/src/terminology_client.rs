@@ -131,7 +131,7 @@ impl TerminologyClient {
     ///
     /// Example base URLs:
     /// - `http://localhost:8080/fhir`
-    /// - `https://tx.fhir.org/r4`
+    /// - `https://tx.fhir.org/r5`
     pub fn new(base_url: String, fhir_version: FhirVersion) -> Self {
         Self {
             client: Client::new(),
@@ -456,6 +456,29 @@ impl TerminologyClient {
         }
     }
 
+    /// Synchronous wrapper for CodeSystem code validation.
+    ///
+    /// Returns:
+    /// - `Some(true)`  => code is valid in the CodeSystem
+    /// - `Some(false)` => code is NOT valid in the CodeSystem
+    /// - `None`        => unknown (no runtime, network failure, parse failure, etc.)
+    pub fn validate_cs_sync(&self, code_system_url: &str, code: &str) -> Option<bool> {
+        // Requires a Tokio runtime to be present.
+        let handle = tokio::runtime::Handle::try_current().ok()?;
+
+        tokio::task::block_in_place(|| {
+            handle.block_on(async {
+                match self
+                    .validate_cs(code_system_url, code, None, None)
+                    .await
+                {
+                    Ok(v) => Self::extract_validate_result_bool(&v),
+                    Err(_) => None,
+                }
+            })
+        })
+    }
+
     /// Check subsumption using `POST /CodeSystem/$subsumes`.
     ///
     /// This answers: “Does `code_a` subsume `code_b` in this CodeSystem?”
@@ -638,11 +661,14 @@ impl TerminologyClient {
 /// The engine calls `TerminologyProvider::validate_in_valueset()` when local ValueSet membership
 /// checks cannot conclusively determine membership.
 ///
-/// This implementation delegates to `validate_vs_sync()`, so it requires a Tokio runtime.
+/// This implementation delegates to `validate_vs_sync()` and `validate_cs_sync()`, so it requires a Tokio runtime.
 /// If no runtime is available, the result degrades to `None` (unknown).
 impl TerminologyProvider for TerminologyClient {
     fn validate_in_valueset(&self, valueset_url: &str, system: &str, code: &str) -> Option<bool> {
         self.validate_vs_sync(valueset_url, system, code)
+    }
+    fn validate_in_codesystem(&self, system: &str, code: &str) -> Option<bool> {
+        self.validate_cs_sync(system, code)
     }
 }
 #[cfg(test)]
@@ -652,16 +678,16 @@ mod tests {
 
     #[test]
     fn test_terminology_client_creation() {
-        let client = TerminologyClient::new("https://tx.fhir.org/r4/".to_string(), FhirVersion::R4);
-        assert_eq!(client.base_url, "https://tx.fhir.org/r4");
+        let client = TerminologyClient::new("https://tx.fhir.org/r5/".to_string(), FhirVersion::R5);
+        assert_eq!(client.base_url, "https://tx.fhir.org/r5");
     }
 
     #[test]
     fn test_base_url_normalization() {
-        let client = TerminologyClient::new("https://tx.fhir.org/r4/".to_string(), FhirVersion::R4);
-        assert_eq!(client.base_url, "https://tx.fhir.org/r4");
+        let client = TerminologyClient::new("https://tx.fhir.org/r5/".to_string(), FhirVersion::R5);
+        assert_eq!(client.base_url, "https://tx.fhir.org/r5");
 
-        let client2 = TerminologyClient::new("https://tx.fhir.org/r4".to_string(), FhirVersion::R4);
-        assert_eq!(client2.base_url, "https://tx.fhir.org/r4");
+        let client2 = TerminologyClient::new("https://tx.fhir.org/r5".to_string(), FhirVersion::R5);
+        assert_eq!(client2.base_url, "https://tx.fhir.org/r5");
     }
 }

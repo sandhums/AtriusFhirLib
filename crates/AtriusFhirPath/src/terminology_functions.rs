@@ -45,7 +45,7 @@
 
 use std::collections::HashMap;
 use std::sync::Arc;
-use tokio::runtime::Handle;
+use tokio::runtime::{Handle,Runtime};
 
 use serde_json::Value;
 
@@ -62,7 +62,7 @@ lazy_static::lazy_static! {
     /// - When running inside an async context, we use `block_in_place` to avoid blocking reactor threads.
     /// - This approach allows terminology functions to be called from both async and sync Rust code
     ///   without deadlocking or stalling async tasks.
-    static ref RUNTIME: tokio::runtime::Runtime = tokio::runtime::Runtime::new().expect("Failed to create tokio runtime");
+    static ref RUNTIME: Runtime = Runtime::new().expect("Failed to create tokio runtime");
 }
 
 /// Executes an async future in a context that may be synchronous or asynchronous.
@@ -74,14 +74,23 @@ lazy_static::lazy_static! {
 ///
 /// # Why use `block_in_place`?
 /// To avoid blocking core async reactor threads, which could deadlock async code.
+/// Executes a future in a context that may be synchronous or asynchronous, without creating a per-call runtime.
+///
+/// We intentionally do *not* create a new Tokio runtime per call, because dropping a runtime inside
+/// an async context can panic. Instead, if already in a Tokio runtime, we use `block_in_place` and
+/// block on the current runtime's handle. Callers in async request handlers should prefer to wrap
+/// terminology validation in `spawn_blocking` if they are concerned about blocking.
 fn block_on_async<F, T>(future: F) -> T
 where
     F: std::future::Future<Output = T> + Send + 'static,
     T: Send + 'static,
 {
+    // If we're already inside a Tokio runtime, we must not create/drop a new runtime here.
+    // Instead, temporarily move to a blocking region and drive the future on the *current* runtime.
     if let Ok(handle) = Handle::try_current() {
         tokio::task::block_in_place(move || handle.block_on(future))
     } else {
+        // No runtime is active in this thread => use the module-wide runtime.
         RUNTIME.block_on(future)
     }
 }

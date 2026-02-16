@@ -1,5 +1,5 @@
-use helios_fhir::FhirResource;
-use helios_fhirpath::{EvaluationContext, evaluate_expression};
+use atrius_fhir_lib::fhir_version::FhirResource;
+use atrius_fhir_path::{EvaluationContext, evaluate_expression};
 use serde_json::json;
 
 #[test]
@@ -43,8 +43,8 @@ fn test_uri_type_preservation() {
     });
 
     // Parse the JSON into a FHIR resource
-    let resource: helios_fhir::r4::Resource = serde_json::from_value(patient_json).unwrap();
-    let fhir_resource = FhirResource::R4(Box::new(resource));
+    let resource: atrius_fhir_lib::r5::Resource = serde_json::from_value(patient_json).unwrap();
+    let fhir_resource = FhirResource::R5(Box::new(resource));
 
     // Create evaluation context
     let context = EvaluationContext::new(vec![fhir_resource]);
@@ -53,7 +53,7 @@ fn test_uri_type_preservation() {
     let result = evaluate_expression("identifier[0].type.coding[0].system", &context).unwrap();
 
     // Verify the value is correct
-    if let helios_fhirpath_support::EvaluationResult::String(value, _type_info) = &result {
+    if let atrius_fhirpath_support::evaluation_result::EvaluationResult::String(value, _type_info) = &result {
         assert_eq!(value, "http://terminology.hl7.org/CodeSystem/v2-0203");
 
         // Test 2: Check the type using type() function
@@ -61,7 +61,7 @@ fn test_uri_type_preservation() {
             evaluate_expression("identifier[0].type.coding[0].system.type().name", &context)
                 .unwrap();
 
-        if let helios_fhirpath_support::EvaluationResult::String(type_name, _) = type_result {
+        if let atrius_fhirpath_support::evaluation_result::EvaluationResult::String(type_name, _) = type_result {
             // This should be "uri" but currently returns "String"
             println!("Type name: {}", type_name);
             assert_eq!(
@@ -79,7 +79,7 @@ fn test_uri_type_preservation() {
             &context,
         )
         .unwrap();
-        if let helios_fhirpath_support::EvaluationResult::String(namespace, _) = namespace_result {
+        if let atrius_fhirpath_support::evaluation_result::EvaluationResult::String(namespace, _) = namespace_result {
             println!("Namespace: {}", namespace);
             assert_eq!(
                 namespace, "FHIR",
@@ -112,15 +112,15 @@ fn test_code_type_preservation() {
         ]
     });
 
-    let resource: helios_fhir::r4::Resource = serde_json::from_value(patient_json).unwrap();
-    let fhir_resource = FhirResource::R4(Box::new(resource));
+    let resource: atrius_fhir_lib::r5::Resource = serde_json::from_value(patient_json).unwrap();
+    let fhir_resource = FhirResource::R5(Box::new(resource));
     let context = EvaluationContext::new(vec![fhir_resource]);
 
     // Check code field type
     let type_result =
         evaluate_expression("identifier[0].type.coding[0].code.type().name", &context).unwrap();
 
-    if let helios_fhirpath_support::EvaluationResult::String(type_name, _) = type_result {
+    if let atrius_fhirpath_support::evaluation_result::EvaluationResult::String(type_name, _) = type_result {
         println!("Code type name: {}", type_name);
         assert_eq!(
             type_name, "code",

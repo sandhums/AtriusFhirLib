@@ -48,6 +48,9 @@ pub trait TerminologyProvider: Send + Sync {
     /// - Some(false) => confirmed NOT a member
     /// - None        => cannot decide (misconfigured, unavailable, etc.)
     fn validate_in_valueset(&self, valueset_url: &str, system: &str, code: &str) -> Option<bool>;
+
+    /// Validate whether `system|code` is a valid code in the CodeSystem identified by `system` (canonical URL).
+    fn validate_in_codesystem(&self, system: &str, code: &str) -> Option<bool>;
 }
 
 /// Configuration for `AtriusFhirPathEngine`.
@@ -141,6 +144,91 @@ impl AtriusFhirPathEngine {
             ))),
         }
     }
+
+    /// Dump keys and key types/values for debug.
+    fn debug_dump_object(label: &str, v: &EvaluationResult) {
+        match v {
+            EvaluationResult::Object { map, .. } => {
+                let mut keys: Vec<String> = map.keys().cloned().collect();
+                keys.sort();
+                eprintln!("[dbg] {label} keys_len={} keys={:?}", keys.len(), keys);
+
+                // Commonly important members for this bug
+                for k in ["contained", "id", "resourceType", "subject", "reference"] {
+                    if let Some(m) = map.get(k) {
+                        eprintln!("[dbg] {label}.{k} type={} val={m:?}", m.type_name());
+                    } else {
+                        eprintln!("[dbg] {label}.{k} <missing>");
+                    }
+                }
+            }
+            other => {
+                eprintln!("[dbg] {label} is not Object: type={} val={other:?}", other.type_name());
+            }
+        }
+    }
+
+    /// Evaluate a FHIRPath expression and return the raw `EvaluationResult`.
+    ///
+    /// This is for debugging / tooling (expressions that are not boolean), e.g.
+    /// `%rootResource.contained.first().id`.
+    pub fn eval_raw_with_root(
+        &self,
+        focus: &EvaluationResult,
+        root: &EvaluationResult,
+        expr: &str,
+    ) -> Result<EvaluationResult, EvaluationError> {
+        // 1) Parse
+        let parsed = parser()
+            .parse(expr)
+            .into_result()
+            .map_err(|errs| {
+                let msg = errs
+                    .into_iter()
+                    .map(|e| format!("{:?}", e))
+                    .collect::<Vec<_>>()
+                    .join("; ");
+                EvaluationError::InvalidArgument(format!("Invalid FHIRPath: {expr}. {msg}"))
+            })?;
+
+        // 2) Build context seeded with the root resource
+        let mut context = EvaluationContext::new_empty_with_default_version();
+        context.set_this(root.clone());
+        context.init_root_and_current(root.clone());
+
+        // 3) Evaluate against provided focus, with root variables available
+        let result = evaluate(&parsed, &context, Some(focus))?;
+
+        // 4) Optional debug output
+        // if std::env::var("FHIRPATH_DEBUG").ok().as_deref() == Some("1")
+        //     || expr.contains("trace(")
+        //     || expr.contains("%rootResource")
+        {
+            eprintln!("[eval_raw] expr={expr}");
+            eprintln!("[eval_raw] focus_type={}", focus.type_name());
+            eprintln!("[eval_raw] root_type={}", root.type_name());
+            Self::debug_dump_object("focus", focus);
+            Self::debug_dump_object("root", root);
+            eprintln!("[eval_raw] result={result:?}");
+
+            // root/current markers
+            let rr = context.root_resource.lock();
+            eprintln!("[eval_raw] context.root_resource_set={}", (*rr).is_some());
+            drop(rr);
+            let cr = context.current_resource.lock();
+            eprintln!("[eval_raw] context.current_resource_set={}", (*cr).is_some());
+            drop(cr);
+
+            // traces
+            let traces = context.trace_outputs.lock();
+            eprintln!("[eval_raw] traces_len={}", traces.len());
+            for (name, val) in traces.iter() {
+                eprintln!("[eval_raw] trace {name} = {val:?}");
+            }
+        }
+
+        Ok(result)
+    }
 }
 
 impl FhirPathEngine for AtriusFhirPathEngine {
@@ -169,11 +257,114 @@ impl FhirPathEngine for AtriusFhirPathEngine {
                     .join("; ");
                 EvaluationError::InvalidArgument(format!("Invalid FHIRPath: {expr}. {msg}"))
             })?;
-        // 2. Build context
-        let context = EvaluationContext::new_empty_with_default_version();
+
+        // 2. Build context.
+        // IMPORTANT: `eval_bool` is used for invariant evaluation when the caller does not
+        // provide an explicit root resource. In that case, the focus *is* the resource.
+        // We must seed the EvaluationContext with this resource so `%resource` and
+        // `%rootResource` resolve correctly (matching Helios server behavior).
+        let mut context = EvaluationContext::new_empty_with_default_version();
+        context.set_this(focus.clone());
+        context.init_root_and_current(focus.clone());
+
+        // 3. Evaluate
         let result = evaluate(&parsed, &context, Some(focus))?;
 
-        // 3. Boolean coercion
+        // 4. Boolean coercion
+        self.coerce_to_bool(expr, result)
+    }
+
+    /// Parse + evaluate a FHIRPath expression with an explicit *root* resource.
+    ///
+    /// This mirrors the Helios server behavior: a stable root resource is seeded into the
+    /// `EvaluationContext` so expressions using `%rootResource` (and related variables)
+    /// behave correctly even when `focus` is a nested element.
+    fn eval_bool_with_root(
+        &self,
+        focus: &EvaluationResult,
+        root: &EvaluationResult,
+        expr: &str,
+    ) -> Result<bool, EvaluationError> {
+        // eprintln!("[eval_bool_with_root] expr={expr}");
+        // 1. Parse
+        let parsed = parser()
+            .parse(expr)
+            .into_result()
+            .map_err(|errs| {
+                let msg = errs
+                    .into_iter()
+                    .map(|e| format!("{:?}", e))
+                    .collect::<Vec<_>>()
+                    .join("; ");
+                EvaluationError::InvalidArgument(format!("Invalid FHIRPath: {expr}. {msg}"))
+            })?;
+
+        // 2. Build context seeded with the *root* resource.
+        // IMPORTANT: We must not seed from `focus` (which may be a nested element like Reference).
+        let mut context = EvaluationContext::new_empty_with_default_version();
+        context.set_this(root.clone());
+        context.init_root_and_current(root.clone());
+
+        // 3. Evaluate against the provided focus, but with root variables available.
+        let result = evaluate(&parsed, &context, Some(focus))?;
+        {
+            // eprintln!("[eval] expr={expr}");
+            // eprintln!("[eval] focus_type={:?}", focus);
+            // eprintln!("[eval] root_type={}", root.type_name());
+            // // ----------------------------
+            // // 1️⃣ BEFORE invariant checks
+            // // ----------------------------
+            // let probe = |label: &str, probe_expr: &str| {
+            //     match parser().parse(probe_expr).into_result() {
+            //         Ok(parsed) => match evaluate(&parsed, &context, Some(focus)) {
+            //             Ok(res) => eprintln!("[probe] {label}: {probe_expr} => {res:?}"),
+            //             Err(e) => eprintln!("[probe] {label}: {probe_expr} ERROR => {e:?}"),
+            //         },
+            //         Err(_) => eprintln!("[probe] parse failed: {probe_expr}"),
+            //     }
+            // };
+            //
+            // // Probes: first the variables themselves, then the fields.
+            // // If the variables are Empty, the issue is variable resolution (not resourceType).
+            // probe("root_resource_var", "%rootResource");
+            // probe("resource_var", "%resource");
+            //
+            // // These should BOTH be "Observation" (if resourceType is implemented as a virtual property).
+            // probe("root_resource_type", "%rootResource.resourceType");
+            // probe("resource_type", "%resource.resourceType");
+            //
+            // // This should include your contained Patient id
+            // probe("root_contained_ids", "%rootResource.contained.id");
+            // eprintln!("[eval] result={result:?}");
+            // let traces = context.trace_outputs.lock();
+            // eprintln!("[eval] traces_len={}", traces.len());
+            // for (name, val) in traces.iter() {
+            //     eprintln!("[eval] trace {name} = {val:?}");
+            // }
+
+            // let rr = context.root_resource.lock();
+            // eprintln!("[eval] context.root_resource_set={}", (*rr).is_some());
+            // drop(rr);
+            // let cr = context.current_resource.lock();
+            // eprintln!("[eval] context.current_resource_set={}", (*cr).is_some());
+            // drop(cr);
+
+            // // Probe rootResource access inside the SAME context we used for the real evaluation
+            // let probe_expr = "%rootResource.contained.id";
+            // if let Ok(probe_parsed) = parser().parse(probe_expr).into_result() {
+            //     match evaluate(&probe_parsed, &context, Some(focus)) {
+            //         Ok(probe_res) => eprintln!("[eval] probe {probe_expr} => {probe_res:?}"),
+            //         Err(e) => eprintln!("[eval] probe {probe_expr} ERROR => {e:?}"),
+            //     }
+            // } else {
+            //     eprintln!("[eval] probe parse failed for {probe_expr}");
+            // }
+
+            // Also dump object keys for focus/root
+            // Self::debug_dump_object("focus", focus);
+            // Self::debug_dump_object("root", root);
+        }
+        // 4. Boolean coercion
         self.coerce_to_bool(expr, result)
     }
     /// Delegate ValueSet membership validation to the configured terminology provider.
@@ -192,6 +383,11 @@ impl FhirPathEngine for AtriusFhirPathEngine {
             .as_ref()
             .and_then(|p| p.validate_in_valueset(valueset_url, system, code))
     }
+    fn validate_code_in_codesystem(&self, system: &str, code: &str) -> Option<bool> {
+        self.config.terminology
+            .as_ref()
+            .and_then(|p| p.validate_in_codesystem(system, code))
+    }
 }
 
 /// Blocking HTTP terminology provider.
@@ -208,7 +404,8 @@ impl FhirPathEngine for AtriusFhirPathEngine {
 #[cfg(feature = "terminology-http")]
 pub struct HttpTerminologyProvider {
     pub base_url: String,
-    pub client: reqwest::blocking::Client,
+    #[allow(dead_code)]
+    pub client: reqwest::Client,
 }
 
 #[cfg(feature = "terminology-http")]
@@ -220,7 +417,7 @@ impl HttpTerminologyProvider {
     pub fn new(base_url: impl Into<String>) -> Self {
         Self {
             base_url: base_url.into(),
-            client: reqwest::blocking::Client::new(),
+            client: reqwest::Client::new(),
         }
     }
 
@@ -260,27 +457,69 @@ impl TerminologyProvider for HttpTerminologyProvider {
         let url = format!("{}/ValueSet/$validate-code", self.normalize_base());
         #[cfg(debug_assertions)]
         println!("{:#?}", url);
-        let resp = self
-            .client
-            .get(url)
-            .query(&[
-                ("url", valueset_url),
-                ("system", system),
-                ("code", code),
-            ])
-            .send()
+        // let resp = self
+        //     .client
+        //     .get(url)
+        //     .query(&[
+        //         ("url", valueset_url),
+        //         ("system", system),
+        //         ("code", code),
+        //     ])
+        //     .send()
+        //     .ok()?;
+        // ureq is truly blocking and does NOT spin up a tokio runtime
+        let mut resp = ureq::get(&url)
+            .query("url", valueset_url)
+            .query("system", system)
+            .query("code", code)
+            .call()
             .ok()?;
         #[cfg(debug_assertions)]
         println!("{:#?}", resp);
         if !resp.status().is_success() {
             return None;
         }
-
-        let params: Parameters = resp.json().ok()?;
+        let params: Parameters = resp.body_mut().read_json().ok()?;
         params
             .parameter
             .into_iter()
             .find(|p| p.name == "result")
             .and_then(|p| p.value_boolean)
+    }
+    fn validate_in_codesystem(&self, system: &str, code: &str) -> Option<bool> {
+        #[derive(serde::Deserialize)]
+        struct Parameters {
+            #[serde(default)]
+            parameter: Vec<Parameter>,
+        }
+        #[derive(serde::Deserialize)]
+        struct Parameter {
+            name: String,
+            #[serde(rename = "valueBoolean")]
+            value_boolean: Option<bool>,
+        }
+
+        let url = format!("{}/CodeSystem/$validate-code", self.normalize_base());
+        println!("{:#?}", url);
+        // Snowstorm accepts CodeSystem $validate-code using `coding=system|code`
+        // e.g. ?coding=http://loinc.org|29463-7
+        let coding_param = format!("{}|{}", system, code);
+        let mut resp = ureq::get(&url)
+            .query("coding", &coding_param)
+            .call()
+            .ok()?;
+         println!("{:#?}", resp.status());
+        // let status = resp.status();
+        if !resp.status().is_success() {
+            return None;
+        }
+
+        let params: Parameters = resp.body_mut().read_json().ok()?;
+
+        let result = params.parameter.into_iter()
+            .find(|p| p.name == "result")
+            .and_then(|p| p.value_boolean) ;
+        println!("CodeSystem validate result = {:?}", result);
+        result
     }
 }

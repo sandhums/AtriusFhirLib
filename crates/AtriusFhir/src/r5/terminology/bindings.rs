@@ -2,7 +2,7 @@
 // DO NOT EDIT MANUALLY
 
 /// Trait implemented by generated ValueSet wrappers to provide membership checks
-/// for different bound FHIR datatypes (`code`, `Coding`, `CodeableConcept`).
+/// for different bound FHIR datatypes (`Code`, `Coding`, `CodeableConcept`). Generated wrappers implement this trait for all three.
 pub trait ValueSetMembership<T> {
     fn contains(v: &T) -> bool;
 }
@@ -85,6 +85,8 @@ pub trait BindingValidator<T> {
     /// - If remote returns `None` -> Unknown (do not emit Error).
     ///
     /// `remote_validate` must implement ValueSet `$validate-code` semantics:
+    ///
+    /// NOTE: Remote validation requires both `system` and `code` (most terminology servers reject `code` without `system`).
     /// `remote_validate(valueset_url, system, code) -> Option<bool>`.
     fn check_with_remote(
         self,

@@ -14,6 +14,7 @@ use atrius_fhir_path::server::{ServerArgs, ServerConfig, run_server};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    
     let args = ServerArgs::parse();
     let config = ServerConfig::from(args);
     run_server(config).await?;

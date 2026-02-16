@@ -30,6 +30,63 @@ pub fn generate_resource_enum(resources: Vec<String>) -> String {
 
     output.push_str("}\n\n");
 
+    // Implement FhirValidate for the Resource enum by delegating to the inner resource structs.
+    // This allows callers to validate an unknown resource (parsed as `Resource`) without first
+    // matching on the concrete type.
+    output.push_str("// Delegating FhirValidate impl for the Resource enum\n");
+    output.push_str("impl FhirValidate for Resource {\n");
+    output.push_str("    fn invariants() -> &'static [Invariant] {\n");
+    output.push_str("        // Resource-level invariants are not defined; each concrete resource type\n");
+    output.push_str("        // carries its own invariants. Validation is delegated in validate_with_engine().\n");
+    output.push_str("        &[]\n");
+    output.push_str("    }\n\n");
+    output.push_str("    fn validate_with_engine(&self, engine: &dyn FhirPathEngine) -> Vec<ValidationIssue> {\n");
+    output.push_str("        use atrius_fhirpath_support::traits::IntoEvaluationResult;\n");
+    output.push_str("        match self {\n");
+    for resource in &resources {
+        output.push_str(&format!(
+            "            Self::{}(r) => {{\n                let __fhir_root_val = r.to_evaluation_result();\n                r.validate_with_engine_root(engine, &__fhir_root_val)\n            }},\n",
+            resource
+        ));
+    }
+    output.push_str("        }\n");
+    output.push_str("    }\n\n");
+
+    output.push_str("    fn validate_with_engine_root(\n");
+    output.push_str("        &self,\n");
+    output.push_str("        engine: &dyn FhirPathEngine,\n");
+    output.push_str("        root: &atrius_fhirpath_support::evaluation_result::EvaluationResult,\n");
+    output.push_str("    ) -> Vec<ValidationIssue> {\n");
+    output.push_str("        match self {\n");
+
+    for resource in &resources {
+        output.push_str(&format!(
+            "            Self::{}(r) => r.validate_with_engine_root(engine, root),\n",
+            resource
+        ));
+    }
+
+    output.push_str("        }\n");
+    output.push_str("    }\n");
+    output.push_str("}\n\n");
+
+    // Add a helper to return the FHIR resourceType name (useful for CRUD routing, tables, etc.)
+    output.push_str("// Returns the FHIR resourceType name for this enum variant\n");
+    output.push_str("impl Resource {\n");
+    output.push_str("    pub fn resource_type(&self) -> &'static str {\n");
+    output.push_str("        match self {\n");
+
+    for resource in &resources {
+        output.push_str(&format!(
+            "            Self::{}(_) => \"{}\",\n",
+            resource, resource
+        ));
+    }
+
+    output.push_str("        }\n");
+    output.push_str("    }\n");
+    output.push_str("}\n\n");
+
     // Manual PartialEq implementation to break MIR optimization cycle with Bundle
     // Using #[inline(never)] prevents the compiler from inlining and creating cycles during optimization
     output.push_str(

@@ -1,8 +1,8 @@
 #[cfg(test)]
 mod tests {
     use chumsky::Parser;
-    use helios_fhirpath::parse_debug::expression_to_debug_tree;
-    use helios_fhirpath::type_inference::{InferredType, TypeContext};
+    use atrius_fhir_path::parse_debug::expression_to_debug_tree;
+    use atrius_fhir_path::type_inference::{InferredType, TypeContext};
 
     #[test]
     fn test_parse_debug_tree_with_types() {
@@ -10,7 +10,7 @@ mod tests {
         let expression = "trace('trc').given.join(' ').combine(family).join(', ')";
 
         // Parse the expression
-        let parsed = helios_fhirpath::parser::parser()
+        let parsed = atrius_fhir_path::parser::parser()
             .parse(expression)
             .into_result()
             .expect("Failed to parse expression");
@@ -46,7 +46,7 @@ mod tests {
     fn test_simple_member_access() {
         let expression = "given";
 
-        let parsed = helios_fhirpath::parser::parser()
+        let parsed = atrius_fhir_path::parser::parser()
             .parse(expression)
             .into_result()
             .expect("Failed to parse expression");

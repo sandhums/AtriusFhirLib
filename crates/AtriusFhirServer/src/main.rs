@@ -2,6 +2,7 @@ use std::sync::Arc;
 use atrius_fhir_lib::fhir_version::FhirResource;
 use atrius_fhir_lib::r5::primitives::String as FhirString;
 use atrius_fhir_lib::r5::{Address, Code, CodeableConcept, Coding, ContactPoint, ExtendedContactDetail, Extension, ExtensionValue, HumanName, Id, Identifier, Meta, Narrative, Organization, Patient, PatientContact, Resource, Uri};
+use atrius_fhir_lib::r5::terminology::code_systems::AdministrativeGender;
 use atrius_fhir_path::engine::{AtriusFhirPathEngine, HttpTerminologyProvider};
 use atrius_fhir_path::{evaluate_expression, EvaluationContext};
 use atrius_fhirpath_support::traits::IntoEvaluationResult;
@@ -47,7 +48,7 @@ fn main() {
                 ..Default::default()
             }
         ]),
-        gender: Some("female".to_string().into()),
+        gender: Some(AdministrativeGender::Male.to_code()),
         marital_status: Some( CodeableConcept {
             id: None,
             extension: None,
@@ -108,7 +109,7 @@ fn main() {
     let issues = patient.validate_with_engine(&engine);
     let issues2 = iden.validate_with_engine(&engine);
     let org_issues = org.validate_with_engine(&engine);
-    // println!("{}", json);
+    println!("{}", json);
     // println!("{:#?}", parsed);
     // println!("{:#?}", name_result);
     // println!("{:#?}", result);

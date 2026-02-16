@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+
 use atrius_fhir_lib::fhir_version::FhirVersion;
 /// Generates a comprehensive module documentation header for a FHIR version.
 ///
@@ -211,10 +211,10 @@ pub fn generate_version_header(version: &FhirVersion) -> String {
 
 use serde::{{Deserialize, Serialize}};
 use atrius_macros::{{FhirPath, FhirSerde, FhirValidate}};
+use atrius_fhirpath_support::{{FhirPathEngine, FhirValidate, Invariant, ValidationIssue}};
 use crate::precise_decimal::{{ DecimalElement}};
 use crate::element::Element;
-// use crate::date_time::{{PrecisionTime, PrecisionDateTime, PrecisionDate, PrecisionInstant}};
-// use crate::fhir_version::FhirComplexTypeProvider;
+
 
 ",
         version.as_str(),

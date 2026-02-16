@@ -1,5 +1,5 @@
-use helios_fhirpath::date_operation::{apply_date_type_operation, parse_date_literal};
-use helios_fhirpath_support::EvaluationResult;
+use atrius_fhir_path::date_operation::{apply_date_type_operation, parse_date_literal};
+use atrius_fhirpath_support::evaluation_result::EvaluationResult;
 
 #[test]
 fn test_date_literals_with_is() {

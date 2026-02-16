@@ -1,5 +1,5 @@
-use helios_fhir::FhirResource;
-use helios_fhirpath::{EvaluationContext, evaluate_expression};
+use atrius_fhir_lib::fhir_version::FhirResource;
+use atrius_fhir_path::{EvaluationContext, evaluate_expression};
 
 #[test]
 fn test_fhir_observation_boundary() {
@@ -16,9 +16,9 @@ fn test_fhir_observation_boundary() {
         }
     });
 
-    let observation: helios_fhir::r4::Observation =
+    let observation: atrius_fhir_lib::r5::Observation =
         serde_json::from_value(observation_json).unwrap();
-    let resource = FhirResource::R4(Box::new(helios_fhir::r4::Resource::Observation(
+    let resource = FhirResource::R5(Box::new(atrius_fhir_lib::r5::Resource::Observation(
         observation,
     )));
     let context = EvaluationContext::new(vec![resource]);
@@ -63,9 +63,9 @@ fn test_fhir_datetime_observation_boundary() {
         "valueDateTime": "2010-10-10"
     });
 
-    let observation: helios_fhir::r4::Observation =
+    let observation: atrius_fhir_lib::r5::Observation =
         serde_json::from_value(observation_json).unwrap();
-    let resource = FhirResource::R4(Box::new(helios_fhir::r4::Resource::Observation(
+    let resource = FhirResource::R5(Box::new(atrius_fhir_lib::r5::Resource::Observation(
         observation,
     )));
     let context = EvaluationContext::new(vec![resource]);
@@ -98,8 +98,8 @@ fn test_fhir_patient_boundary() {
         "birthDate": "1970-06"
     });
 
-    let patient: helios_fhir::r4::Patient = serde_json::from_value(patient_json).unwrap();
-    let resource = FhirResource::R4(Box::new(helios_fhir::r4::Resource::Patient(patient)));
+    let patient: atrius_fhir_lib::r5::Patient = serde_json::from_value(patient_json).unwrap();
+    let resource = FhirResource::R5(Box::new(atrius_fhir_lib::r5::Resource::Patient(patient)));
     let context = EvaluationContext::new(vec![resource]);
 
     // Test the boundary function on birthDate

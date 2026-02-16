@@ -1,5 +1,5 @@
-use helios_fhir::FhirResource;
-use helios_fhirpath::{EvaluationContext, evaluate_expression};
+use atrius_fhir_lib::fhir_version::FhirResource;
+use atrius_fhir_path::{EvaluationContext, evaluate_expression};
 use serde_json::json;
 
 #[test]
@@ -18,8 +18,8 @@ fn test_uuid_type_preserved_in_evaluation() {
     });
 
     // Parse the JSON into a FHIR resource
-    let resource: helios_fhir::r4::Resource = serde_json::from_value(parameters_json).unwrap();
-    let fhir_resource = FhirResource::R4(Box::new(resource));
+    let resource: atrius_fhir_lib::r5::Resource = serde_json::from_value(parameters_json).unwrap();
+    let fhir_resource = FhirResource::R5(Box::new(resource));
 
     // Create evaluation context
     let context = EvaluationContext::new(vec![fhir_resource]);
@@ -32,14 +32,14 @@ fn test_uuid_type_preserved_in_evaluation() {
     let result =
         evaluate_expression("parameter[0].extension[0].value", &context).unwrap_or_else(|e| {
             println!("Error evaluating value: {:?}", e);
-            helios_fhirpath_support::EvaluationResult::Empty
+            atrius_fhirpath_support::evaluation_result::EvaluationResult::Empty
         });
 
     // Print the result for debugging
     println!("Result: {:?}", result);
 
     // Verify it has the correct type information
-    if let helios_fhirpath_support::EvaluationResult::String(value, type_info) = result {
+    if let atrius_fhirpath_support::evaluation_result::EvaluationResult::String(value, type_info) = result {
         assert_eq!(value, "550e8400-e29b-41d4-a716-446655440000");
 
         // Check that type info is preserved

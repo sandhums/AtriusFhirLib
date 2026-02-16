@@ -15,13 +15,14 @@ use super::super::super::string::String as FhirString;
 ///Title: Study Design
 ///Status: draft
 ///This is a set of terms for study design characteristics.
-///Compose includes 25 explicit concept codes
+///Compose includes 72 explicit concept codes
 ///Includes systems:
 ///- http://hl7.org/fhir/study-design
 pub struct StudyDesign;
 impl StudyDesign {
     pub const URL: &'static str = "http://hl7.org/fhir/ValueSet/study-design";
     pub const HAS_NONLOCAL_RULES: bool = false;
+    pub const HAS_FILTERS: bool = false;
     pub fn version() -> Option<&'static str> {
         Some("5.0.0")
     }
@@ -31,11 +32,31 @@ impl StudyDesign {
     pub fn include_value_sets() -> &'static [&'static str] {
         &[]
     }
+    /// compose.include.filter / compose.exclude.filter rules.
+    ///
+    /// These are NOT evaluated locally; they are emitted for diagnostics/routing.
+    pub fn filter_rules() -> &'static [(&'static str, &'static str, &'static str)] {
+        &[]
+    }
     /// Systems that are included as whole CodeSystems but are not locally enumerable.
     ///
     /// If this is non-empty, callers should use a terminology server for definitive validation.
     pub fn include_whole_systems() -> &'static [&'static str] {
         &[]
+    }
+    /// Return the implied system if this ValueSet constrains codes to exactly one system.
+    ///
+    /// This is used to allow limited validation of primitive `code` bindings.
+    pub fn single_system() -> Option<&'static str> {
+        let systems = Self::include_systems();
+        if systems.len() == 1 {
+            return Some(systems[0]);
+        }
+        let whole = Self::include_whole_systems();
+        if whole.len() == 1 {
+            return Some(whole[0]);
+        }
+        None
     }
     /// Returns true only when this ValueSet can be treated as fully locally checkable.
     ///
@@ -45,17 +66,82 @@ impl StudyDesign {
         !Self::HAS_NONLOCAL_RULES
             && (!Self::expansion_pairs().is_empty() || !Self::include_pairs().is_empty())
     }
+    /// Returns true if this ValueSet is a "pure whole-system" include.
+    ///
+    /// Pure whole-system means membership is equivalent to validating the code exists in the
+    /// included CodeSystem (no explicit include/exclude concepts, no expansion, no include.valueSet,
+    /// and no filter rules).
+    ///
+    /// This enables routing remote checks to `CodeSystem/$validate-code` for Snowstorm and efficiency.
+    pub fn is_pure_whole_system() -> bool {
+        if Self::include_whole_systems().len() != 1 {
+            return false;
+        }
+        if !Self::filter_rules().is_empty() {
+            return false;
+        }
+        if !Self::include_value_sets().is_empty() {
+            return false;
+        }
+        if !Self::include_pairs().is_empty() {
+            return false;
+        }
+        if !Self::expansion_pairs().is_empty() {
+            return false;
+        }
+        if !Self::exclude_pairs().is_empty() {
+            return false;
+        }
+        true
+    }
     fn include_pairs() -> &'static [(&'static str, &'static str)] {
         &[
             ("http://hl7.org/fhir/study-design", "SEVCO:01001"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01003"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01006"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01007"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01008"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01009"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01005"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01004"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01029"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01041"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01038"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01030"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01031"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01032"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01033"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01034"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01035"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01036"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01002"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01037"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01010"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01011"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01012"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01024"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01025"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01013"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01014"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01020"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01021"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01015"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01023"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01016"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01017"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01022"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01044"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01027"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01028"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01018"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01019"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01045"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01026"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01039"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01050"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01040"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01048"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01046"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01049"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01042"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01051"),
@@ -72,6 +158,16 @@ impl StudyDesign {
             ("http://hl7.org/fhir/study-design", "SEVCO:01054"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01085"),
             ("http://hl7.org/fhir/study-design", "SEVCO:01089"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01096"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01097"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01098"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01088"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01091"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01090"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01092"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01093"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01094"),
+            ("http://hl7.org/fhir/study-design", "SEVCO:01095"),
         ]
     }
     fn include_entries() -> &'static [(
@@ -99,9 +195,151 @@ impl StudyDesign {
             ),
             (
                 "http://hl7.org/fhir/study-design",
+                "SEVCO:01003",
+                Some("randomized assignment"),
+                Some(
+                    "An interventional study design in which an independent variable (an exposure or intervention) is prospectively assigned or modified by random chance to separate groups.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01004",
+                Some("Quasi-Randomized assignment"),
+                Some(
+                    "An interventional study design with a method of allocation that is not limited to random chance but is intended to produce similar baseline groups for experimentation.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01005",
+                Some("Non-randomized assignment"),
+                Some(
+                    "An interventional study design in which an independent variable (an exposure or intervention) is prospectively assigned or modified by methods other than random chance to separate groups.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01006",
+                Some("simple randomization"),
+                Some(
+                    "A randomized assignment in which each participant has the same prespecified likelihood of being assigned to a group as all other participants, independent of the assignment of any other participant.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01007",
+                Some("stratified randomization"),
+                Some(
+                    "A randomized assignment in which participants are stratified into groups based on prognostic variables and then randomized into balanced treatment groups",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01008",
+                Some("block randomization"),
+                Some(
+                    "A randomized assignment in which a pre-specified number of subjects is assigned to a block containing the same pre-specified ratio of group assignments in random order.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01009",
+                Some("adaptive randomization"),
+                Some(
+                    "A randomized assignment in which a participant’s group assignment probability is adjusted based on any factor such that the likelihood of assignment is not the same for all participants.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
                 "SEVCO:01010",
                 Some("Comparative study design"),
                 Some("A study design in which two or more groups are compared."),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01011",
+                Some("Parallel cohort design"),
+                Some(
+                    "A comparative study design in which the groups are compared concurrently and participants are expected to remain in the groups being compared for the entire duration of participation in the study.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01012",
+                Some("Crossover cohort design"),
+                Some(
+                    "A comparative study design in which participants receive two or more alternative exposures during separate periods of time.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01013",
+                Some("Case control design"),
+                Some(
+                    "A comparative study design in which the groups being compared are defined by outcome presence (case) or absence (control).",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01014",
+                Some("Matching for comparison"),
+                Some(
+                    "A comparative study design in which individual participants in different groups being compared are paired or matched into sets based on selected attributes for within-set analysis.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01015",
+                Some("Cluster as unit of allocation"),
+                Some(
+                    "A comparative study design in which participants are allocated to exposures (interventions) by their membership in groups (called clusters) rather than by individualized assignments.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01016",
+                Some("Uncontrolled cohort design"),
+                Some(
+                    "A non-comparative study design in which two or more participants are evaluated in a single group (or cohort).",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01017",
+                Some("Case report"),
+                Some(
+                    "A non-comparative study design in which a single participant is evaluated.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01018",
+                Some("Time series design"),
+                Some(
+                    "A longitudinal data collection which includes a set of time-ordered observations.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01019",
+                Some("Before and after comparison"),
+                Some(
+                    "A time series design which includes comparisons of observations before and after an event or exposure.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01020",
+                Some("Family study design"),
+                Some(
+                    "A matched study design in which related or non-related family members are compared.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01021",
+                Some("Twin study design"),
+                Some("A family study design in which twin siblings are compared."),
             ),
             (
                 "http://hl7.org/fhir/study-design",
@@ -117,6 +355,22 @@ impl StudyDesign {
                 Some("Non-comparative study design"),
                 Some(
                     "A study design with no comparisons between groups with different exposures and no comparisons between groups with different outcomes.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01024",
+                Some("Controlled crossover cohort design"),
+                Some(
+                    "A crossover cohort design in which two or more cohorts have different orders of exposures.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01025",
+                Some("Single-arm crossover design"),
+                Some(
+                    "A crossover cohort design in which all participants are in a single cohort with the same order of exposures.",
                 ),
             ),
             (
@@ -145,6 +399,110 @@ impl StudyDesign {
             ),
             (
                 "http://hl7.org/fhir/study-design",
+                "SEVCO:01029",
+                Some("Clinical trial"),
+                Some(
+                    "Interventional research in which one or more healthcare-related actions (i.e., a diagnostic, prognostic, therapeutic, preventive or screening method or intervention) is evaluated for effects on health-related biomedical or behavioral processes and/or outcomes.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01030",
+                Some("Phase 1 trial"),
+                Some(
+                    "A clinical trial to gather initial evidence in humans to support further investigation of an intervention.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01031",
+                Some("Exploratory investigational new drug study"),
+                Some(
+                    "A clinical trial that is conducted early in phase 1, involves very limited human exposure, and has no therapeutic or diagnostic intent (e.g., screening studies, microdose studies). ",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01032",
+                Some("Phase 1/Phase 2 trial"),
+                Some(
+                    " A clinical trial with a component meeting the definition of phase 1 trial and a component meeting the definition of phase 2 trial.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01033",
+                Some("Phase 2 trial"),
+                Some(
+                    "A clinical trial to gather evidence of effectiveness and safety for an intervention in patients with the disease or condition under study, but not intended to provide an adequate basis for regulatory approval for clinical use.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01034",
+                Some("Phase 2/Phase 3 trial"),
+                Some(
+                    "A clinical trial with a component meeting the definition of phase 2 trial and a component meeting the definition of phase 3 trial.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01035",
+                Some("Phase 3 Trial"),
+                Some(
+                    "A clinical trial to gather the evidence of effectiveness and safety of an intervention, intended to provide an adequate basis for regulatory approval for clinical use.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01036",
+                Some("Post-marketing study"),
+                Some(
+                    "A clinical trial to gather additional evidence of effectiveness and safety of an intervention for an already approved clinical use.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01037",
+                Some("Post-Marketing Surveillance study"),
+                Some(
+                    "An observational study to identify adverse events related to the use of an approved clinical intervention.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01038",
+                Some("Expanded Access study"),
+                Some(
+                    "A clinical trial that provides a means for obtaining an experimental drug or device for patients who are not adequately treated by existing therapy, who do not meet the eligibility criteria for enrollment, or who are otherwise unable to participate in another clinical study. ",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01039",
+                Some("Real world data collection from healthcare records"),
+                Some(
+                    "Real world data collection from data obtained routinely for a purpose of recording healthcare delivery in a record controlled by a healthcare professional.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01040",
+                Some("Real world data collection from healthcare financing records"),
+                Some(
+                    "Real world data collection from data obtained routinely for a purpose of recording healthcare financing.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01041",
+                Some("Pragmatic clinical trial"),
+                Some(
+                    "A clinical trial conducted under conditions of routine clinical practice.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
                 "SEVCO:01042",
                 Some("Secondary data collection from a registry"),
                 Some(
@@ -161,6 +519,14 @@ impl StudyDesign {
             ),
             (
                 "http://hl7.org/fhir/study-design",
+                "SEVCO:01044",
+                Some("Ecological design"),
+                Some(
+                    "A study design in which the unit of observation is a population or community defined by social relationships or physical surroundings. ",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
                 "SEVCO:01045",
                 Some("Primary data collection"),
                 Some(
@@ -169,10 +535,34 @@ impl StudyDesign {
             ),
             (
                 "http://hl7.org/fhir/study-design",
+                "SEVCO:01046",
+                Some("Real world data collection from monitoring procedures"),
+                Some(
+                    "Real world data collection from data obtained routinely for a purpose of repeated testing.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01048",
+                Some("Real world data collection from testing procedures"),
+                Some(
+                    "Real world data collection from data obtained routinely for a purpose of testing, such as diagnostic testing or screening examination.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
                 "SEVCO:01049",
                 Some("Secondary data collection from prior research"),
                 Some(
                     "A study design process in which the data are collected from data obtained during a different study than the current study.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01050",
+                Some("Real world data collection from personal health records"),
+                Some(
+                    "Real world data collection from data obtained routinely for a purpose of recording data related to personal health in a record controlled by the person, guardian, or caretaker.",
                 ),
             ),
             (
@@ -273,9 +663,87 @@ impl StudyDesign {
             ),
             (
                 "http://hl7.org/fhir/study-design",
+                "SEVCO:01088",
+                Some("Comparison Goal"),
+                Some(
+                    "A study design feature in which the study intent is to compare two or more interventions or exposures.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
                 "SEVCO:01089",
                 Some("Study Goal"),
                 Some("A study design feature specifying the intent of the study."),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01090",
+                Some("Comparative Efficacy Goal"),
+                Some(
+                    "A study design feature in which the study intent is to compare two or more interventions with respect to effectiveness in ideal conditions.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01091",
+                Some("Comparative Effectiveness Goal"),
+                Some(
+                    "A study design feature in which the study intent is to compare two or more interventions with respect to benefits and/or harms.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01092",
+                Some("Comparative Safety Goal"),
+                Some(
+                    "A study design feature in which the study intent is to compare two or more interventions with respect to harms.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01093",
+                Some("Equivalence Goal"),
+                Some(
+                    "A study goal with the intent to compare two or more interventions or exposures and determine that any difference in effects is within a prespecified range representing absence of a meaningful difference.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01094",
+                Some("Non-inferiority Goal"),
+                Some(
+                    "A study goal with the intent to compare two or more interventions or exposures and determine that any difference in effects is below a prespecified value representing a threshold between a meaningful difference and absence of a meaningful difference.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01095",
+                Some("Superiority Goal"),
+                Some(
+                    "A study goal with the intent to compare two or more interventions or exposures and detect a difference in effects.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01096",
+                Some("Evaluation Goal"),
+                Some(
+                    "A study goal to assess the efficiency, effectiveness, and impact of a given program, process, person or piece of equipment.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01097",
+                Some("Derivation Goal"),
+                Some("A study goal with the intent to generate a predictive algorithm."),
+            ),
+            (
+                "http://hl7.org/fhir/study-design",
+                "SEVCO:01098",
+                Some("Validation Goal"),
+                Some(
+                    "A study goal with the intent to determine the reliability and/or performance of a procedure for a specific predictive, classification, measurement, or communication purpose.",
+                ),
             ),
         ]
     }
@@ -447,17 +915,5 @@ impl super::super::bindings::ValueSetMembership<CodeableConcept> for StudyDesign
     fn contains(v: &CodeableConcept) -> bool {
         Self::contains_codeable_concept(v)
     }
-}
-fn is_rgb_hex(code: &str) -> bool {
-    let b = code.as_bytes();
-    if b.len() != 7 || b[0] != b'#' {
-        return false;
-    }
-    fn is_hex(x: u8) -> bool {
-        (b'0'..=b'9').contains(&x) || (b'a'..=b'f').contains(&x)
-            || (b'A'..=b'F').contains(&x)
-    }
-    is_hex(b[1]) && is_hex(b[2]) && is_hex(b[3]) && is_hex(b[4]) && is_hex(b[5])
-        && is_hex(b[6])
 }
 

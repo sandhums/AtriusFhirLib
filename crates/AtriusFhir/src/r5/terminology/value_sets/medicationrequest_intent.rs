@@ -15,13 +15,14 @@ use super::super::super::string::String as FhirString;
 ///Title: medicationRequest Intent
 ///Status: draft
 ///MedicationRequest Intent Codes
-///Compose includes 4 explicit concept codes
+///Compose includes 8 explicit concept codes
 ///Includes systems:
 ///- http://hl7.org/fhir/CodeSystem/medicationrequest-intent
 pub struct MedicationRequestIntent;
 impl MedicationRequestIntent {
     pub const URL: &'static str = "http://hl7.org/fhir/ValueSet/medicationrequest-intent";
     pub const HAS_NONLOCAL_RULES: bool = false;
+    pub const HAS_FILTERS: bool = false;
     pub fn version() -> Option<&'static str> {
         Some("5.0.0")
     }
@@ -31,11 +32,31 @@ impl MedicationRequestIntent {
     pub fn include_value_sets() -> &'static [&'static str] {
         &[]
     }
+    /// compose.include.filter / compose.exclude.filter rules.
+    ///
+    /// These are NOT evaluated locally; they are emitted for diagnostics/routing.
+    pub fn filter_rules() -> &'static [(&'static str, &'static str, &'static str)] {
+        &[]
+    }
     /// Systems that are included as whole CodeSystems but are not locally enumerable.
     ///
     /// If this is non-empty, callers should use a terminology server for definitive validation.
     pub fn include_whole_systems() -> &'static [&'static str] {
         &[]
+    }
+    /// Return the implied system if this ValueSet constrains codes to exactly one system.
+    ///
+    /// This is used to allow limited validation of primitive `code` bindings.
+    pub fn single_system() -> Option<&'static str> {
+        let systems = Self::include_systems();
+        if systems.len() == 1 {
+            return Some(systems[0]);
+        }
+        let whole = Self::include_whole_systems();
+        if whole.len() == 1 {
+            return Some(whole[0]);
+        }
+        None
     }
     /// Returns true only when this ValueSet can be treated as fully locally checkable.
     ///
@@ -45,11 +66,49 @@ impl MedicationRequestIntent {
         !Self::HAS_NONLOCAL_RULES
             && (!Self::expansion_pairs().is_empty() || !Self::include_pairs().is_empty())
     }
+    /// Returns true if this ValueSet is a "pure whole-system" include.
+    ///
+    /// Pure whole-system means membership is equivalent to validating the code exists in the
+    /// included CodeSystem (no explicit include/exclude concepts, no expansion, no include.valueSet,
+    /// and no filter rules).
+    ///
+    /// This enables routing remote checks to `CodeSystem/$validate-code` for Snowstorm and efficiency.
+    pub fn is_pure_whole_system() -> bool {
+        if Self::include_whole_systems().len() != 1 {
+            return false;
+        }
+        if !Self::filter_rules().is_empty() {
+            return false;
+        }
+        if !Self::include_value_sets().is_empty() {
+            return false;
+        }
+        if !Self::include_pairs().is_empty() {
+            return false;
+        }
+        if !Self::expansion_pairs().is_empty() {
+            return false;
+        }
+        if !Self::exclude_pairs().is_empty() {
+            return false;
+        }
+        true
+    }
     fn include_pairs() -> &'static [(&'static str, &'static str)] {
         &[
             ("http://hl7.org/fhir/CodeSystem/medicationrequest-intent", "proposal"),
             ("http://hl7.org/fhir/CodeSystem/medicationrequest-intent", "plan"),
             ("http://hl7.org/fhir/CodeSystem/medicationrequest-intent", "order"),
+            (
+                "http://hl7.org/fhir/CodeSystem/medicationrequest-intent",
+                "original-order",
+            ),
+            ("http://hl7.org/fhir/CodeSystem/medicationrequest-intent", "reflex-order"),
+            ("http://hl7.org/fhir/CodeSystem/medicationrequest-intent", "filler-order"),
+            (
+                "http://hl7.org/fhir/CodeSystem/medicationrequest-intent",
+                "instance-order",
+            ),
             ("http://hl7.org/fhir/CodeSystem/medicationrequest-intent", "option"),
         ]
     }
@@ -60,6 +119,22 @@ impl MedicationRequestIntent {
         Option<&'static str>,
     )] {
         &[
+            (
+                "http://hl7.org/fhir/CodeSystem/medicationrequest-intent",
+                "filler-order",
+                Some("Filler Order"),
+                Some(
+                    "The request represents the view of an authorization instantiated by a fulfilling system representing the details of the fulfiller's intention to act upon a submitted order.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/CodeSystem/medicationrequest-intent",
+                "instance-order",
+                Some("Instance Order"),
+                Some(
+                    "The request represents an instance for the particular order and is used to generate a schedule of requests on a medication administration record (MAR).",
+                ),
+            ),
             (
                 "http://hl7.org/fhir/CodeSystem/medicationrequest-intent",
                 "option",
@@ -78,6 +153,14 @@ impl MedicationRequestIntent {
             ),
             (
                 "http://hl7.org/fhir/CodeSystem/medicationrequest-intent",
+                "original-order",
+                Some("Original Order"),
+                Some(
+                    "The request represents the original authorization for the medication request.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/CodeSystem/medicationrequest-intent",
                 "plan",
                 Some("Plan"),
                 Some(
@@ -90,6 +173,14 @@ impl MedicationRequestIntent {
                 Some("Proposal"),
                 Some(
                     "The request is a suggestion made by someone/something that doesn't have an intention to ensure it occurs and without providing an authorization to act",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/CodeSystem/medicationrequest-intent",
+                "reflex-order",
+                Some("Reflex Order"),
+                Some(
+                    "The request represents an automatically generated supplemental authorization for action based on a parent authorization together with initial results of the action taken against that parent authorization..",
                 ),
             ),
         ]
@@ -263,17 +354,5 @@ for MedicationRequestIntent {
     fn contains(v: &CodeableConcept) -> bool {
         Self::contains_codeable_concept(v)
     }
-}
-fn is_rgb_hex(code: &str) -> bool {
-    let b = code.as_bytes();
-    if b.len() != 7 || b[0] != b'#' {
-        return false;
-    }
-    fn is_hex(x: u8) -> bool {
-        (b'0'..=b'9').contains(&x) || (b'a'..=b'f').contains(&x)
-            || (b'A'..=b'F').contains(&x)
-    }
-    is_hex(b[1]) && is_hex(b[2]) && is_hex(b[3]) && is_hex(b[4]) && is_hex(b[5])
-        && is_hex(b[6])
 }
 

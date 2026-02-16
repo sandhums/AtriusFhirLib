@@ -487,7 +487,7 @@ mod tests {
             parse_debug_tree: false,
             parse_debug: false,
             trace: false,
-            fhir_version: FhirVersion::R4,
+            fhir_version: FhirVersion::R5,
             validate: false,
             terminology_server: None,
         }

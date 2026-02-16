@@ -522,6 +522,37 @@ where
                     EvaluationResult::fhir_integer64(i)
                 }
                 EvaluationResult::String(s, _) => {
+                    // New Code Normalize empty string to FHIRPath empty collection ({}) when there are
+                    // no primitive extensions (id/extension). This makes `exists()` behave as
+                    // expected for absent primitive values.
+                    if s.is_empty() {
+                        // If the primitive has no id/extension, treat it as empty
+                        if self.id.is_none() && self.extension.is_none() {
+                            return EvaluationResult::Empty;
+                        }
+
+                        // If the primitive has id/extension, preserve those as an Element object
+                        // but omit the value (so the value itself still behaves as empty).
+                        let mut map = std::collections::HashMap::new();
+                        if let Some(id) = &self.id {
+                            map.insert("id".to_string(), EvaluationResult::string(id.clone()));
+                        }
+                        if let Some(ext) = &self.extension {
+                            let ext_collection: Vec<EvaluationResult> =
+                                ext.iter().map(|e| e.to_evaluation_result()).collect();
+                            if !ext_collection.is_empty() {
+                                map.insert(
+                                    "extension".to_string(),
+                                    EvaluationResult::collection(ext_collection),
+                                );
+                            }
+                        }
+                        if !map.is_empty() {
+                            return EvaluationResult::typed_object(map, "FHIR", "Element");
+                        }
+                        return EvaluationResult::Empty;
+                    }
+
                     // Determine the FHIR type name based on V's type
                     let fhir_type_name = if TypeId::of::<V>() == TypeId::of::<String>() {
                         // For strings, we need more context to determine the exact FHIR type

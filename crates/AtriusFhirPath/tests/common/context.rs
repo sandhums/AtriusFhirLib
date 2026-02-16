@@ -1,5 +1,5 @@
-use helios_fhirpath::EvaluationContext;
-use helios_fhirpath_support::EvaluationResult;
+use atrius_fhir_path::EvaluationContext;
+use atrius_fhirpath_support::evaluation_result::EvaluationResult;
 use std::collections::HashMap;
 
 // Trait for version-specific resource loading

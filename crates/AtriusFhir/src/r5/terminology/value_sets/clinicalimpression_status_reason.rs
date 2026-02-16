@@ -22,6 +22,7 @@ pub struct ClinicalImpressionStatusReason;
 impl ClinicalImpressionStatusReason {
     pub const URL: &'static str = "http://hl7.org/fhir/ValueSet/clinicalimpression-status-reason";
     pub const HAS_NONLOCAL_RULES: bool = false;
+    pub const HAS_FILTERS: bool = false;
     pub fn version() -> Option<&'static str> {
         Some("5.0.0")
     }
@@ -31,11 +32,31 @@ impl ClinicalImpressionStatusReason {
     pub fn include_value_sets() -> &'static [&'static str] {
         &[]
     }
+    /// compose.include.filter / compose.exclude.filter rules.
+    ///
+    /// These are NOT evaluated locally; they are emitted for diagnostics/routing.
+    pub fn filter_rules() -> &'static [(&'static str, &'static str, &'static str)] {
+        &[]
+    }
     /// Systems that are included as whole CodeSystems but are not locally enumerable.
     ///
     /// If this is non-empty, callers should use a terminology server for definitive validation.
     pub fn include_whole_systems() -> &'static [&'static str] {
         &[]
+    }
+    /// Return the implied system if this ValueSet constrains codes to exactly one system.
+    ///
+    /// This is used to allow limited validation of primitive `code` bindings.
+    pub fn single_system() -> Option<&'static str> {
+        let systems = Self::include_systems();
+        if systems.len() == 1 {
+            return Some(systems[0]);
+        }
+        let whole = Self::include_whole_systems();
+        if whole.len() == 1 {
+            return Some(whole[0]);
+        }
+        None
     }
     /// Returns true only when this ValueSet can be treated as fully locally checkable.
     ///
@@ -44,6 +65,34 @@ impl ClinicalImpressionStatusReason {
     pub fn is_locally_enumerated() -> bool {
         !Self::HAS_NONLOCAL_RULES
             && (!Self::expansion_pairs().is_empty() || !Self::include_pairs().is_empty())
+    }
+    /// Returns true if this ValueSet is a "pure whole-system" include.
+    ///
+    /// Pure whole-system means membership is equivalent to validating the code exists in the
+    /// included CodeSystem (no explicit include/exclude concepts, no expansion, no include.valueSet,
+    /// and no filter rules).
+    ///
+    /// This enables routing remote checks to `CodeSystem/$validate-code` for Snowstorm and efficiency.
+    pub fn is_pure_whole_system() -> bool {
+        if Self::include_whole_systems().len() != 1 {
+            return false;
+        }
+        if !Self::filter_rules().is_empty() {
+            return false;
+        }
+        if !Self::include_value_sets().is_empty() {
+            return false;
+        }
+        if !Self::include_pairs().is_empty() {
+            return false;
+        }
+        if !Self::expansion_pairs().is_empty() {
+            return false;
+        }
+        if !Self::exclude_pairs().is_empty() {
+            return false;
+        }
+        true
     }
     fn include_pairs() -> &'static [(&'static str, &'static str)] {
         &[
@@ -245,17 +294,5 @@ for ClinicalImpressionStatusReason {
     fn contains(v: &CodeableConcept) -> bool {
         Self::contains_codeable_concept(v)
     }
-}
-fn is_rgb_hex(code: &str) -> bool {
-    let b = code.as_bytes();
-    if b.len() != 7 || b[0] != b'#' {
-        return false;
-    }
-    fn is_hex(x: u8) -> bool {
-        (b'0'..=b'9').contains(&x) || (b'a'..=b'f').contains(&x)
-            || (b'A'..=b'F').contains(&x)
-    }
-    is_hex(b[1]) && is_hex(b[2]) && is_hex(b[3]) && is_hex(b[4]) && is_hex(b[5])
-        && is_hex(b[6])
 }
 

@@ -158,11 +158,42 @@ pub fn trace_function(
         invocation_base.clone()
     };
 
+    // Render the trace_value to a human-readable string
+    fn render_trace_value(v: &EvaluationResult) -> String {
+        match v {
+            EvaluationResult::Empty => "{}".to_string(),
+            EvaluationResult::Boolean(b, _) => b.to_string(),
+            EvaluationResult::Integer(i, _) => i.to_string(),
+            EvaluationResult::Integer64(i, _) => i.to_string(),
+            EvaluationResult::Decimal(d, _) => d.to_string(),
+            EvaluationResult::String(s, _) => s.clone(),
+            EvaluationResult::Date(d, _) => d.to_string(),
+            EvaluationResult::DateTime(dt, _) => dt.to_string(),
+            EvaluationResult::Time(t, _) => t.to_string(),
+            EvaluationResult::Quantity(v, unit, _) => {
+                // `unit` here is a `String` (not an Option), so always render it.
+                // If you later change the type to an Option, update this accordingly.
+                if unit.is_empty() {
+                    v.to_string()
+                } else {
+                    format!("{} {}", v, unit)
+                }
+            }
+            EvaluationResult::Collection { items, .. } => {
+                let parts: Vec<String> = items.iter().map(render_trace_value).collect();
+                format!("[{}]", parts.join(", "))
+            }
+            other => format!("{:?}", other),
+        }
+    }
+
+    let trace_rendered = render_trace_value(&trace_value);
+
     // Store the trace output in the context using Mutex
     context
         .trace_outputs
         .lock()
-        .push((name.to_string(), trace_value));
+        .push((name.to_string(), EvaluationResult::String(trace_rendered, None)));
 
     // Return the original input collection unchanged
     Ok(invocation_base.clone())

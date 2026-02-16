@@ -144,6 +144,97 @@ pub enum EvaluationResult {
         type_info: Option<TypeInfoResult>,
     },
 }
+// === Three-valued logic for FHIRPath (true / false / empty) ===
+
+/// FHIRPath three-valued boolean used by logical operators.
+///
+/// - `True` and `False` behave as expected
+/// - `Empty` represents "unknown / empty" per FHIRPath and propagates through logical ops
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum TriBool {
+    True,
+    False,
+    Empty,
+}
+
+impl TriBool {
+    #[inline]
+    pub fn from_bool(b: bool) -> Self {
+        if b { TriBool::True } else { TriBool::False }
+    }
+
+    #[inline]
+    pub fn is_empty(self) -> bool {
+        matches!(self, TriBool::Empty)
+    }
+
+    #[inline]
+    pub fn not(self) -> Self {
+        match self {
+            TriBool::True => TriBool::False,
+            TriBool::False => TriBool::True,
+            TriBool::Empty => TriBool::Empty,
+        }
+    }
+
+    #[inline]
+    pub fn and(self, rhs: Self) -> Self {
+        match (self, rhs) {
+            (TriBool::False, _) | (_, TriBool::False) => TriBool::False,
+            (TriBool::True, TriBool::True) => TriBool::True,
+            _ => TriBool::Empty,
+        }
+    }
+
+    #[inline]
+    pub fn or(self, rhs: Self) -> Self {
+        match (self, rhs) {
+            (TriBool::True, _) | (_, TriBool::True) => TriBool::True,
+            (TriBool::False, TriBool::False) => TriBool::False,
+            _ => TriBool::Empty,
+        }
+    }
+
+    #[inline]
+    pub fn xor(self, rhs: Self) -> Self {
+        match (self, rhs) {
+            (TriBool::Empty, _) | (_, TriBool::Empty) => TriBool::Empty,
+            (TriBool::True, TriBool::True) => TriBool::False,
+            (TriBool::False, TriBool::False) => TriBool::False,
+            (TriBool::True, TriBool::False) | (TriBool::False, TriBool::True) => TriBool::True,
+        }
+    }
+
+    /// FHIRPath implies: `a implies b` is equivalent to `not(a) or b`.
+    #[inline]
+    pub fn implies(self, rhs: Self) -> Self {
+        self.not().or(rhs)
+    }
+
+    /// Convert to an `Option<bool>` (where `Empty` => `None`).
+    #[inline]
+    pub fn to_option_bool(self) -> Option<bool> {
+        match self {
+            TriBool::True => Some(true),
+            TriBool::False => Some(false),
+            TriBool::Empty => None,
+        }
+    }
+
+    /// Convert tri-valued logic back into an `EvaluationResult`.
+    ///
+    /// This is used by logical operator implementations (e.g. `not()`, `and`, `or`, etc.)
+    /// that operate in three-valued logic but must return an `EvaluationResult`.
+    #[inline]
+    pub fn into_eval(self) -> EvaluationResult {
+        match self {
+            TriBool::True => EvaluationResult::boolean(true),
+            TriBool::False => EvaluationResult::boolean(false),
+            TriBool::Empty => EvaluationResult::Empty,
+        }
+    }
+}
+
 // === EvaluationResult Trait Implementations ===
 
 /// Implements equality comparison for `EvaluationResult`.
@@ -791,19 +882,33 @@ impl EvaluationResult {
     /// assert_eq!(other_str.to_boolean_for_logic().unwrap(), EvaluationResult::Empty);
     ///
     /// let integer = EvaluationResult::Integer(42, None);
-    /// assert_eq!(integer.to_boolean_for_logic().unwrap(), EvaluationResult::Boolean(true, None));
+    /// // Strict (R5+) logical boolean conversion does NOT coerce arbitrary integers
+    /// assert_eq!(integer.to_boolean_for_logic().unwrap(), EvaluationResult::Empty);
+    ///
+    /// // But legacy R4 compatibility mode will coerce non-zero to true
+    /// assert_eq!(integer.to_boolean_for_logic_with_r4_compat(true).unwrap(), EvaluationResult::Boolean(true, Some(TypeInfoResult::new("System", "Boolean"))));
     /// ```
     pub fn to_boolean_for_logic(&self) -> Result<EvaluationResult, EvaluationError> {
-        // Default to R5 behavior for backward compatibility
+        // Default to strict (R5+) boolean conversion for logical operators
         self.to_boolean_for_logic_with_r4_compat(false)
     }
 
-    /// Converts this evaluation result to its boolean representation for logical operations
-    /// with R4 compatibility mode for integer handling
+    /// Converts this evaluation result to its boolean representation for logical operators.
+    ///
+    /// This implements FHIRPath's strict boolean conversion rules for `and`, `or`, `xor`, `implies`, and `not()`.
+    ///
+    /// ## Rules
+    /// - `Boolean`: unchanged
+    /// - `String`: recognized boolean literals map to true/false; otherwise `Empty`
+    /// - `Collection`: empty -> `Empty`, singleton -> recurse, >1 -> error
+    /// - `Integer`/`Integer64`/`Decimal`:
+    ///     - If `r4_compat == true`: C-like semantics (0 => false, non-zero => true)
+    ///     - If `r4_compat == false`: strict conversion (0 => false, 1 => true, otherwise `Empty`)
+    /// - Other types: `Empty`
     ///
     /// # Arguments
-    /// * `r4_compat` - If true, uses R4 semantics where 0 is false and non-zero is true.
-    ///                 If false, uses R5+ semantics where all integers are truthy.
+    /// * `r4_compat` - If true, uses legacy R4/R4B-style integer/decimal semantics (0 is false, non-zero is true).
+    ///               If false, uses strict conversion (only 0/1 are convertible).
     pub fn to_boolean_for_logic_with_r4_compat(
         &self,
         r4_compat: bool,
@@ -820,37 +925,57 @@ impl EvaluationResult {
                     _ => EvaluationResult::Empty, // Unrecognized strings become Empty
                 })
             }
-            EvaluationResult::Collection { items, .. } => {
-                match items.len() {
-                    0 => Ok(EvaluationResult::Empty),
-                    1 => items[0].to_boolean_for_logic_with_r4_compat(r4_compat), // Recursive conversion
-                    n => Err(EvaluationError::SingletonEvaluationError(format!(
-                        "Boolean logic requires singleton collection, found {} items",
-                        n
-                    ))),
-                }
-            }
+            EvaluationResult::Collection { items, .. } => match items.len() {
+                0 => Ok(EvaluationResult::Empty),
+                1 => items[0].to_boolean_for_logic_with_r4_compat(r4_compat),
+                n => Err(EvaluationError::SingletonEvaluationError(format!(
+                    "Boolean logic requires singleton collection, found {} items",
+                    n
+                ))),
+            },
             EvaluationResult::Integer(i, _) => {
                 if r4_compat {
-                    // R4/R4B: C-like semantics - 0 is false, non-zero is true
+                    // Legacy R4/R4B compatibility: 0 is false, non-zero is true
                     Ok(EvaluationResult::boolean(*i != 0))
                 } else {
-                    // R5/R6: All integers are truthy (even 0)
-                    Ok(EvaluationResult::boolean(true))
+                    // Strict boolean conversion: only 0 and 1 are convertible
+                    Ok(match *i {
+                        0 => EvaluationResult::boolean(false),
+                        1 => EvaluationResult::boolean(true),
+                        _ => EvaluationResult::Empty,
+                    })
                 }
             }
             EvaluationResult::Integer64(i, _) => {
                 if r4_compat {
-                    // R4/R4B: C-like semantics - 0 is false, non-zero is true
+                    // Legacy R4/R4B compatibility: 0 is false, non-zero is true
                     Ok(EvaluationResult::boolean(*i != 0))
                 } else {
-                    // R5/R6: All integers are truthy (even 0)
-                    Ok(EvaluationResult::boolean(true))
+                    // Strict boolean conversion: only 0 and 1 are convertible
+                    Ok(match *i {
+                        0 => EvaluationResult::boolean(false),
+                        1 => EvaluationResult::boolean(true),
+                        _ => EvaluationResult::Empty,
+                    })
                 }
             }
-            // Per FHIRPath spec section 5.2: other types evaluate to Empty for logical operators
-            EvaluationResult::Decimal(_, _)
-            | EvaluationResult::Date(_, _)
+            EvaluationResult::Decimal(d, _) => {
+                if r4_compat {
+                    // Legacy compatibility: 0 is false, non-zero is true
+                    Ok(EvaluationResult::boolean(!d.is_zero()))
+                } else {
+                    // Strict conversion: only 0 and 1 are convertible
+                    Ok(if d.is_zero() {
+                        EvaluationResult::boolean(false)
+                    } else if *d == Decimal::ONE {
+                        EvaluationResult::boolean(true)
+                    } else {
+                        EvaluationResult::Empty
+                    })
+                }
+            }
+            // Per FHIRPath spec: other types evaluate to Empty for logical operators
+            EvaluationResult::Date(_, _)
             | EvaluationResult::DateTime(_, _)
             | EvaluationResult::Time(_, _)
             | EvaluationResult::Quantity(_, _, _)
@@ -858,6 +983,7 @@ impl EvaluationResult {
             EvaluationResult::Empty => Ok(EvaluationResult::Empty),
         }
     }
+
 
     /// Checks if the result is a String or Empty variant.
     ///
@@ -917,5 +1043,82 @@ impl EvaluationResult {
             EvaluationResult::Object { .. } => "Object",
         }
     }
-}
 
+
+    /// Converts the result to TriBool for logical operators (and/or/xor/implies/not).
+    ///
+    /// - `Boolean`: True/False
+    /// - `String`: recognized boolean literals => True/False; otherwise Empty
+    /// - `Collection`: empty => Empty; singleton => recurse; >1 => error
+    /// - Numeric types:
+    ///     - `r4_compat == true`: 0 => False, non-zero => True
+    ///     - `r4_compat == false`: only 0/1 are convertible; others => Empty
+    /// - Other types: Empty
+    pub fn to_tribool_for_logic(&self) -> Result<TriBool, EvaluationError> {
+        self.to_tribool_for_logic_with_r4_compat(false)
+    }
+
+    pub fn to_tribool_for_logic_with_r4_compat(&self, r4_compat: bool) -> Result<TriBool, EvaluationError> {
+        match self {
+            EvaluationResult::Boolean(b, _) => Ok(TriBool::from_bool(*b)),
+            EvaluationResult::String(s, _) => {
+                Ok(match s.to_lowercase().as_str() {
+                    "true" | "t" | "yes" | "1" | "1.0" => TriBool::True,
+                    "false" | "f" | "no" | "0" | "0.0" => TriBool::False,
+                    _ => TriBool::Empty,
+                })
+            }
+            EvaluationResult::Collection { items, .. } => match items.len() {
+                0 => Ok(TriBool::Empty),
+                1 => items[0].to_tribool_for_logic_with_r4_compat(r4_compat),
+                n => Err(EvaluationError::SingletonEvaluationError(format!(
+                    "Boolean logic requires singleton collection, found {} items",
+                    n
+                ))),
+            },
+            EvaluationResult::Integer(i, _) | EvaluationResult::Integer64(i, _) => {
+                if r4_compat {
+                    Ok(if *i != 0 { TriBool::True } else { TriBool::False })
+                } else {
+                    Ok(match *i {
+                        0 => TriBool::False,
+                        1 => TriBool::True,
+                        _ => TriBool::Empty,
+                    })
+                }
+            }
+            EvaluationResult::Decimal(d, _) => {
+                if r4_compat {
+                    Ok(if d.is_zero() { TriBool::False } else { TriBool::True })
+                } else {
+                    Ok(if d.is_zero() {
+                        TriBool::False
+                    } else if *d == Decimal::ONE {
+                        TriBool::True
+                    } else {
+                        TriBool::Empty
+                    })
+                }
+            }
+            EvaluationResult::Empty => Ok(TriBool::Empty),
+            _ => Ok(TriBool::Empty),
+        }
+    }
+
+    pub fn fhir_type_name(&self) -> Option<&str> {
+        match self {
+            EvaluationResult::Object { type_info: Some(ti), .. } => Some(&ti.name),
+            EvaluationResult::String(_, Some(ti)) => Some(&ti.name),
+            EvaluationResult::Boolean(_, Some(ti)) => Some(&ti.name),
+            EvaluationResult::Decimal(_, Some(ti)) => Some(&ti.name),
+            EvaluationResult::Integer(_, Some(ti)) => Some(&ti.name),
+            EvaluationResult::Integer64(_, Some(ti)) => Some(&ti.name),
+            EvaluationResult::Date(_, Some(ti)) => Some(&ti.name),
+            EvaluationResult::DateTime(_, Some(ti)) => Some(&ti.name),
+            EvaluationResult::Time(_, Some(ti)) => Some(&ti.name),
+            EvaluationResult::Quantity(_, _, Some(ti)) => Some(&ti.name),
+            EvaluationResult::Collection { type_info: Some(ti), .. } => Some(&ti.name),
+            _ => None,
+        }
+    }
+}

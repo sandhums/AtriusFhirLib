@@ -2,8 +2,7 @@
 //!
 //! Implements the `not()` function for boolean negation with three-valued logic.
 
-use atrius_fhirpath_support::evaluation_result::EvaluationError;
-use atrius_fhirpath_support::evaluation_result::EvaluationResult;
+use atrius_fhirpath_support::evaluation_result::{EvaluationError, EvaluationResult, TriBool};
 
 /// Implements the FHIRPath not() function
 ///
@@ -70,9 +69,9 @@ pub fn not_function(
         // For an empty collection, to_boolean_for_logic() yields Empty.
     }
 
-    // Convert invocation_base to its 3-valued logic boolean form.
-    // This handles singletons (Boolean, Integer, String, etc.) and empty/singleton collections.
-    // Pass R4 compatibility flag based on FHIR version
+    // Convert invocation_base to its three-valued logic boolean form.
+    // This preserves HL7/FHIRPath semantics (true / false / empty).
+    // Pass R4 compatibility flag based on FHIR version.
     use atrius_fhir_lib::fhir_version::FhirVersion;
     let r4_compat = match context.fhir_version {
         #[cfg(feature = "R4")]
@@ -80,22 +79,11 @@ pub fn not_function(
         #[cfg(feature = "R4B")]
         FhirVersion::R4B => true,
         #[cfg(feature = "R5")]
-        FhirVersion::R5 => false,
-        #[cfg(feature = "R6")]
         _ => false,
     };
-    let base_as_logic_bool = invocation_base.to_boolean_for_logic_with_r4_compat(r4_compat)?;
 
-    // Apply negation based on the 3-valued logic result:
-    // not(true) -> false
-    // not(false) -> true
-    // not({}) -> {}
-    match base_as_logic_bool {
-        EvaluationResult::Boolean(true, _) => Ok(EvaluationResult::boolean(false)),
-        EvaluationResult::Boolean(false, _) => Ok(EvaluationResult::boolean(true)),
-        EvaluationResult::Empty => Ok(EvaluationResult::Empty),
-        _ => unreachable!("to_boolean_for_logic should only return Boolean or Empty on Ok"),
-    }
+    let tri = invocation_base.to_tribool_for_logic_with_r4_compat(r4_compat)?;
+    Ok(tri.not().into_eval())
 }
 
 #[cfg(test)]
@@ -103,12 +91,12 @@ mod tests {
     use atrius_fhir_lib::fhir_version::FhirVersion;
     use super::*;
     use crate::EvaluationContext;
-    use atrius_fhir_lib::fhir_version::FhirVersion;
+
 
     #[test]
     fn test_not_boolean() {
         // Test not() on Boolean values
-        let context = EvaluationContext::new_empty(FhirVersion::R4);
+        let context = EvaluationContext::new_empty(FhirVersion::R5);
         let true_val = EvaluationResult::boolean(true);
         let result = not_function(&true_val, &context).unwrap();
         assert_eq!(result, EvaluationResult::boolean(false));
@@ -121,15 +109,21 @@ mod tests {
     #[test]
     fn test_not_integer() {
         // Test not() on Integer values
-        // In R4, integers have C-like semantics: 0 is false, non-zero is true
-        let context_r4 = EvaluationContext::new_empty(FhirVersion::R4);
+        // In strict (R5+) logical conversion, only 0 and 1 are convertible to boolean.
+        // Other integers become Empty and propagate through not().
+        let context_r5 = EvaluationContext::new_empty(FhirVersion::R5);
+
         let integer = EvaluationResult::integer(42);
-        let result = not_function(&integer, &context_r4).unwrap();
-        assert_eq!(result, EvaluationResult::boolean(false));
+        let result = not_function(&integer, &context_r5).unwrap();
+        assert_eq!(result, EvaluationResult::Empty);
 
         let zero = EvaluationResult::integer(0);
-        let result = not_function(&zero, &context_r4).unwrap();
-        assert_eq!(result, EvaluationResult::boolean(true)); // In R4, 0 is falsy, so not(0) is true
+        let result = not_function(&zero, &context_r5).unwrap();
+        assert_eq!(result, EvaluationResult::boolean(true));
+
+        let one = EvaluationResult::integer(1);
+        let result = not_function(&one, &context_r5).unwrap();
+        assert_eq!(result, EvaluationResult::boolean(false));
     }
 
     #[test]
@@ -137,7 +131,7 @@ mod tests {
         // Test not() on String values
         // According to FHIRPath spec and implementation in to_boolean_for_logic,
         // only specific string values are treated as boolean, others as Empty
-        let context = EvaluationContext::new_empty(FhirVersion::R4);
+        let context = EvaluationContext::new_empty(FhirVersion::R5);
 
         // "true" is considered Boolean(true)
         let true_string = EvaluationResult::string("true".to_string());
@@ -158,7 +152,7 @@ mod tests {
     #[test]
     fn test_not_empty() {
         // Test not() on Empty
-        let context = EvaluationContext::new_empty(FhirVersion::R4);
+        let context = EvaluationContext::new_empty(FhirVersion::R5);
         let empty = EvaluationResult::Empty;
         let result = not_function(&empty, &context).unwrap();
         assert_eq!(result, EvaluationResult::Empty);
@@ -167,7 +161,7 @@ mod tests {
     #[test]
     fn test_not_singleton_collection() {
         // Test not() on a singleton collection
-        let context = EvaluationContext::new_empty(FhirVersion::R4);
+        let context = EvaluationContext::new_empty(FhirVersion::R5);
         let collection = EvaluationResult::Collection {
             items: vec![EvaluationResult::boolean(true)],
             has_undefined_order: false,
@@ -188,7 +182,7 @@ mod tests {
     #[test]
     fn test_not_empty_collection() {
         // Test not() on an empty collection
-        let context = EvaluationContext::new_empty(FhirVersion::R4);
+        let context = EvaluationContext::new_empty(FhirVersion::R5);
         let collection = EvaluationResult::Collection {
             items: vec![],
             has_undefined_order: false,
@@ -202,7 +196,7 @@ mod tests {
     fn test_not_multi_item_collection() {
         // Test not() on a multi-item collection
         // Should produce an error according to the implementation
-        let context = EvaluationContext::new_empty(FhirVersion::R4);
+        let context = EvaluationContext::new_empty(FhirVersion::R5);
         let collection = EvaluationResult::Collection {
             items: vec![
                 EvaluationResult::boolean(true),

@@ -1,9 +1,10 @@
 use chumsky::Parser;
-use helios_fhir::FhirResource;
-use helios_fhir::r4::{self, Boolean, Code, Date, Extension, ExtensionValue, String as FhirString};
-use helios_fhirpath::evaluator::{EvaluationContext, evaluate};
-use helios_fhirpath::parser::parser;
-use helios_fhirpath_support::{EvaluationError, EvaluationResult};
+use atrius_fhir_lib::fhir_version::FhirResource;
+use atrius_fhir_lib::r5::{self, Boolean, Code, Date, Extension, ExtensionValue, String as FhirString};
+use atrius_fhir_path::evaluator::{EvaluationContext, evaluate};
+use atrius_fhir_path::parser::parser;
+use atrius_fhirpath_support::evaluation_result::{EvaluationResult};
+use atrius_fhirpath_support::evaluation_error::{EvaluationError};
 use rust_decimal::Decimal;
 use rust_decimal_macros::dec;
 
@@ -587,22 +588,22 @@ fn test_function_filtering_of_type() {
     );
 
     // Complex types (requires resource context and proper object representation)
-    let patient = r4::Patient {
+    let patient = r5::Patient {
         id: Some("p1".to_string().into()), // Use .to_string().into()
         active: Some(true.into()),
         ..Default::default()
     };
-    let observation = r4::Observation {
+    let observation = r5::Observation {
         id: Some("o1".to_string().into()), // Use .to_string().into()
-        status: r4::Code {
+        status: r5::Code {
             value: Some("final".to_string()),
             ..Default::default()
         },
         ..Default::default()
     };
     let resources = vec![
-        FhirResource::R4(Box::new(r4::Resource::Patient(patient))),
-        FhirResource::R4(Box::new(r4::Resource::Observation(observation))),
+        FhirResource::R5(Box::new(r5::Resource::Patient(patient))),
+        FhirResource::R5(Box::new(r5::Resource::Observation(observation))),
     ];
     let ctx_res = EvaluationContext::new(resources);
 
@@ -3640,12 +3641,12 @@ fn test_environment_variables() {
     assert!(eval("%undefinedVar", &context).is_err());
 
     // %context (needs resource context)
-    let patient = r4::Patient {
+    let patient = r5::Patient {
         id: Some("p1".to_string().into()), // Use .to_string().into()
         ..Default::default()
     };
-    let ctx_res = EvaluationContext::new(vec![FhirResource::R4(Box::new(
-        r4::Resource::Patient(patient.clone()), // Wrap in Resource enum
+    let ctx_res = EvaluationContext::new(vec![FhirResource::R5(Box::new(
+        r5::Resource::Patient(patient.clone()), // Wrap in Resource enum
     ))]); // Pass resource vec
 
     // Evaluate the %context variable using the eval function
@@ -3674,9 +3675,9 @@ fn test_environment_variables() {
 
 // Helper to create a patient context
 fn patient_context() -> EvaluationContext {
-    let patient = r4::Patient {
+    let patient = r5::Patient {
         id: Some("p1".to_string().into()), // Resource ID - Use .to_string().into()
-        identifier: Some(vec![r4::Identifier {
+        identifier: Some(vec![r5::Identifier {
             // Wrap in Some()
             r#use: Some(Code {
                 // Use imported Code
@@ -3696,7 +3697,7 @@ fn patient_context() -> EvaluationContext {
         }),
         name: Some(vec![
             // Wrap in Some()
-            r4::HumanName {
+            r5::HumanName {
                 // Official Name
                 id: Some("name1".to_string().into()), // Use .to_string().into()
                 r#use: Some(Code {
@@ -3721,7 +3722,7 @@ fn patient_context() -> EvaluationContext {
                 ]),
                 ..Default::default()
             },
-            r4::HumanName {
+            r5::HumanName {
                 // Usual Name (no family)
                 id: Some("name2".to_string().into()), // Use .to_string().into()
                 r#use: Some(Code {
@@ -3732,7 +3733,7 @@ fn patient_context() -> EvaluationContext {
                 given: Some(vec!["Johnny".to_string().into()]), // Wrap in Some(), use .to_string().into()
                 ..Default::default()
             },
-            r4::HumanName {
+            r5::HumanName {
                 // Anonymous Name (no use, no id)
                 family: Some("Smith".to_string().into()), // Use .to_string().into()
                 given: Some(vec!["Jane".to_string().into()]), // Wrap in Some(), use .to_string().into()
@@ -3741,7 +3742,7 @@ fn patient_context() -> EvaluationContext {
         ]),
         telecom: Some(vec![
             // Wrap in Some()
-            r4::ContactPoint {
+            r5::ContactPoint {
                 system: Some(Code {
                     // Use imported Code
                     value: Some("phone".to_string()),
@@ -3750,7 +3751,7 @@ fn patient_context() -> EvaluationContext {
                 value: Some("555-1234".to_string().into()), // Use .to_string().into()
                 ..Default::default()
             },
-            r4::ContactPoint {
+            r5::ContactPoint {
                 system: Some(Code {
                     // Use imported Code
                     value: Some("email".to_string()),
@@ -3764,7 +3765,7 @@ fn patient_context() -> EvaluationContext {
             // Use imported Date
             // Element with value and extension
             id: Some("birthdate-id".to_string()), // Element ID
-            value: Some(helios_fhir::PrecisionDate::parse("1980-05-15").unwrap()),
+            value: Some(atrius_fhir_lib::date_time::PrecisionDate::parse("1980-05-15").unwrap()),
             extension: Some(vec![Extension {
                 // Use imported Extension, wrap in Some()
                 url: "http://example.com/precision".to_string().into(), // Remove Some(), url is not Option
@@ -3772,14 +3773,14 @@ fn patient_context() -> EvaluationContext {
                 ..Default::default()
             }]),
         }),
-        deceased: Some(r4::PatientDeceased::Boolean(Boolean {
+        deceased: Some(r5::PatientDeceased::Boolean(Boolean {
             // Use imported Boolean
             value: Some(false),
             ..Default::default()
         })), // DeceasedBoolean (Element)
         ..Default::default()
     };
-    EvaluationContext::new(vec![FhirResource::R4(Box::new(r4::Resource::Patient(
+    EvaluationContext::new(vec![FhirResource::R5(Box::new(r5::Resource::Patient(
         // Wrap in Resource::Patient
         patient,
     )))])
@@ -3992,17 +3993,17 @@ fn test_resource_filtering_and_projection() {
 
 #[test]
 fn test_resource_oftype() {
-    let patient = r4::Patient {
+    let patient = r5::Patient {
         id: Some("p1".to_string().into()), // Use .to_string().into()
         ..Default::default()
     };
-    let observation = r4::Observation {
+    let observation = r5::Observation {
         id: Some("o1".to_string().into()), // Use .to_string().into()
         ..Default::default()
     };
     let resources = vec![
-        FhirResource::R4(Box::new(r4::Resource::Patient(patient))),
-        FhirResource::R4(Box::new(r4::Resource::Observation(observation))),
+        FhirResource::R5(Box::new(r5::Resource::Patient(patient))),
+        FhirResource::R5(Box::new(r5::Resource::Observation(observation))),
     ];
     let context = EvaluationContext::new(resources);
 
@@ -4451,9 +4452,9 @@ fn test_direct_string_operations() {
 #[test]
 fn test_resource_access() {
     // Remove duplicate imports, they are already at the top level
-    use helios_fhir::r4::{Account, Code}; // Import only needed types locally if preferred, or rely on top-level
-    // Create a dummy R4 resource for testing
-    let dummy_resource = r4::Resource::Account(Account {
+    use atrius_fhir_lib::r5::{Account, Code}; // Import only needed types locally if preferred, or rely on top-level
+    // Create a dummy R5 resource for testing
+    let dummy_resource = r5::Resource::Account(Account {
         // Use imported Account
         id: Some("theid".to_string().into()), // Convert String to Id
         meta: None,
@@ -4470,6 +4471,7 @@ fn test_resource_access() {
             extension: None,
             value: None,
         },
+        billing_status: None,
         r#type: None,
         name: None,
         subject: None,
@@ -4478,11 +4480,16 @@ fn test_resource_access() {
         owner: None,
         description: None,
         guarantor: None,
-        part_of: None,
+        diagnosis: None,
+        procedure: None,
+        related_account: None,
+        currency: None,
+        balance: None,
+        calculated_at: None,
     });
 
     // Create a context with a resource
-    let resources = vec![FhirResource::R4(Box::new(dummy_resource))]; // No need for mut
+    let resources = vec![FhirResource::R5(Box::new(dummy_resource))]; // No need for mut
     let context = EvaluationContext::new(resources);
     // Test accessing the resource id
     assert_eq!(

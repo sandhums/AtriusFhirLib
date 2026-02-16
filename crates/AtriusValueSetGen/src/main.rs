@@ -146,14 +146,21 @@ fn main() -> Result<()> {
         }
     }
 
-    // Map CodeSystem canonical URL -> concept list (when present and finite).
+    // Map CodeSystem canonical URL -> *flattened* concept list (when present and finite).
     // Used to “pull in” codes for ValueSets that include whole CodeSystems without listing concepts.
+    //
+    // NOTE: Some CodeSystems (e.g. `issue-type`) use a hierarchical concept tree. FHIR renders this as
+    // "level" in tables, but the JSON model expresses it as nested `concept` arrays. For local
+    // membership checks and for pulling codes into ValueSets, we flatten the tree so that *all*
+    // descendant concepts are available.
     let mut cs_concepts_by_url: HashMap<String, Vec<Concept>> = HashMap::new();
     for (_module, (_enum_name, cs, has_enum)) in &by_module {
         if *has_enum {
             if let Some(concepts) = cs.concept.as_ref() {
                 if !concepts.is_empty() {
-                    cs_concepts_by_url.insert(cs.url.clone(), concepts.clone());
+                    let mut flat = Vec::new();
+                    flatten_concepts(concepts, &mut flat);
+                    cs_concepts_by_url.insert(cs.url.clone(), flat);
                 }
             }
         }
@@ -206,10 +213,10 @@ fn main() -> Result<()> {
             src.push_str("#![allow(non_snake_case)]\n");
             src.push_str("#![allow(clippy::upper_case_acronyms)]\n\n");
             // We are generated under `crate::r5::terminology::code_systems`, so `super::super::super` is the `r5` module.
-            src.push_str(
-                "use super::super::super::{Boolean, Code, CodeableConcept, Coding, Element, Uri};\n\n",
-            );
-            src.push_str("use super::super::super::string::String as FhirString;\n\n");
+            // src.push_str(
+            //     "use super::super::super::{Boolean, Code, CodeableConcept, Coding, Element, Uri};\n\n",
+            // );
+            // src.push_str("use super::super::super::string::String as FhirString;\n\n");
 
             src.push_str(&prettyplease::unparse(&file_ast));
             src.push('\n');
@@ -371,8 +378,48 @@ fn generate_codesystem_stub_tokens(type_name: &str, cs: &CodeSystem) -> TokenStr
     vs_mod.push('\n');
 
     // Re-exports
-    for module in vs_by_module.keys() {
-        vs_mod.push_str(&format!("pub use {}::*;\n", module));
+    //
+    // IMPORTANT:
+    // FHIR `name` is NOT guaranteed to be unique across ValueSets (and can collide even when URLs differ).
+    // Using `pub use <module>::*;` causes ambiguous glob re-exports when two modules define the same
+    // top-level type name (e.g. multiple `FHIRTypes` wrappers).
+    //
+    // Strategy:
+    // - If a generated type name is unique, re-export it as-is: `pub use module::TypeName;`
+    // - If it collides, re-export it with a deterministic alias that preserves the base name and adds
+    //   the module suffix in PascalCase: `pub use module::TypeName as TypeName<ModuleSuffix>;`
+    {
+        use std::collections::HashMap;
+
+        fn snake_to_pascal(s: &str) -> String {
+            let mut out = String::new();
+            for part in s.split('_').filter(|p| !p.is_empty()) {
+                let mut chars = part.chars();
+                if let Some(first) = chars.next() {
+                    out.push(first.to_ascii_uppercase());
+                    out.extend(chars.map(|c| c.to_ascii_lowercase()));
+                }
+            }
+            out
+        }
+
+        let mut counts: HashMap<&str, usize> = HashMap::new();
+        for (_module, (type_name, _vs)) in vs_by_module.iter() {
+            *counts.entry(type_name.as_str()).or_insert(0) += 1;
+        }
+
+        for (module, (type_name, _vs)) in vs_by_module.iter() {
+            let n = *counts.get(type_name.as_str()).unwrap_or(&1);
+            if n == 1 {
+                vs_mod.push_str(&format!("pub use {}::{};\n", module, type_name));
+            } else {
+                let suffix = snake_to_pascal(module);
+                vs_mod.push_str(&format!(
+                    "pub use {}::{} as {}{};\n",
+                    module, type_name, type_name, suffix
+                ));
+            }
+        }
     }
 
     vs_mod.push_str(
@@ -437,16 +484,19 @@ fn generate_codesystem_stub_tokens(type_name: &str, cs: &CodeSystem) -> TokenStr
         "///\n",
     );
     vs_mod.push_str(
-        "/// NOTE: URLs are expected to be version-stripped (no `|x.y.z` suffix).\n",
+        "/// NOTE: URLs may include an optional `|x.y.z` version suffix; this function matches on the base URL.\n",
     );
     vs_mod.push_str(
         "pub fn binding_ops_by_url(url: &str) -> Option<&'static ValueSetBindingOps> {\n",
     );
-    vs_mod.push_str("    match url {\n");
+    vs_mod.push_str(
+        "    let base = url.split('|').next().unwrap_or(url);\n",
+    );
+    vs_mod.push_str("    match base {\n");
 
     for (module, (type_name, vs)) in &vs_by_module {
         let ops_name = format!("__OPS_{}", module.to_ascii_uppercase());
-        let url = vs.url.as_str();
+        let _url = vs.url.as_str();
         vs_mod.push_str(&format!(
             "        {}::{}::URL => Some(&{}),\n",
             module, type_name, ops_name
@@ -460,7 +510,8 @@ fn generate_codesystem_stub_tokens(type_name: &str, cs: &CodeSystem) -> TokenStr
     // ---- valueset_has_nonlocal_rules ----
     vs_mod.push_str("\n/// Lookup whether a ValueSet has any non-local compose rules (filters, include.valueSet, or whole-system includes without local enumeration).\n");
     vs_mod.push_str("pub fn valueset_has_nonlocal_rules(url: &str) -> Option<bool> {\n");
-    vs_mod.push_str("    match url {\n");
+    vs_mod.push_str("    let base = url.split('|').next().unwrap_or(url);\n");
+    vs_mod.push_str("    match base {\n");
     for (module, (type_name, _vs)) in &vs_by_module {
         vs_mod.push_str(&format!("        {}::{}::URL => Some({}::{}::HAS_NONLOCAL_RULES),\n", module, type_name, module, type_name));
     }
@@ -471,7 +522,8 @@ fn generate_codesystem_stub_tokens(type_name: &str, cs: &CodeSystem) -> TokenStr
     // ---- valueset_is_locally_enumerated ----
     vs_mod.push_str("\n/// Lookup whether a ValueSet is fully locally enumerable (i.e., membership can be decided without a terminology server).\n");
     vs_mod.push_str("pub fn valueset_is_locally_enumerated(url: &str) -> Option<bool> {\n");
-    vs_mod.push_str("    match url {\n");
+    vs_mod.push_str("    let base = url.split('|').next().unwrap_or(url);\n");
+    vs_mod.push_str("    match base {\n");
     for (module, (type_name, _vs)) in &vs_by_module {
         vs_mod.push_str(&format!("        {}::{}::URL => Some({}::{}::is_locally_enumerated()),\n", module, type_name, module, type_name));
     }
@@ -479,6 +531,67 @@ fn generate_codesystem_stub_tokens(type_name: &str, cs: &CodeSystem) -> TokenStr
     vs_mod.push_str("    }\n");
     vs_mod.push_str("}\n");
 
+    // ---- valueset_single_system_by_url ----
+    vs_mod.push_str(
+        "\n/// If the ValueSet implies exactly one system (via include.system or includeWholeSystem),\n",
+    );
+    vs_mod.push_str(
+        "/// return that system URI. Otherwise return None.\n",
+    );
+    vs_mod.push_str(
+        "///\n",
+    );
+    vs_mod.push_str(
+        "/// NOTE: URLs may include an optional `|x.y.z` version suffix; this function matches on the base URL.\n",
+    );
+    vs_mod.push_str(
+        "pub fn valueset_single_system_by_url(url: &str) -> Option<&'static str> {\n",
+    );
+    vs_mod.push_str(
+        "    let base = url.split('|').next().unwrap_or(url);\n",
+    );
+    vs_mod.push_str("    match base {\n");
+
+    for (module, (type_name, _vs)) in &vs_by_module {
+        vs_mod.push_str(&format!(
+            "        {}::{}::URL => {}::{}::single_system(),\n",
+            module, type_name, module, type_name
+        ));
+    }
+
+    vs_mod.push_str("        _ => None,\n");
+    vs_mod.push_str("    }\n");
+    vs_mod.push_str("}\n");
+
+    // ---- valueset_is_pure_whole_system_by_url ----
+    vs_mod.push_str(
+        "\n/// Lookup whether a ValueSet is a pure whole-system include (membership == CodeSystem membership).\n",
+    );
+    vs_mod.push_str(
+        "///\n",
+    );
+    vs_mod.push_str(
+        "/// NOTE: URLs may include an optional `|x.y.z` version suffix; this function matches on the base URL.\n",
+    );
+    vs_mod.push_str(
+        "pub fn valueset_is_pure_whole_system_by_url(url: &str) -> Option<bool> {\n",
+    );
+    vs_mod.push_str(
+        "    let base = url.split('|').next().unwrap_or(url);\n",
+    );
+    vs_mod.push_str("    match base {\n");
+
+    for (module, (type_name, _vs)) in &vs_by_module {
+        vs_mod.push_str(&format!(
+            "        {}::{}::URL => Some({}::{}::is_pure_whole_system()),\n",
+            module, type_name, module, type_name
+        ));
+    }
+
+    vs_mod.push_str("        _ => None,\n");
+    vs_mod.push_str("    }\n");
+    vs_mod.push_str("}\n");
+    
     fs::write(value_sets_dir.join("mod.rs"), vs_mod)
         .with_context(|| "failed writing terminology/value_sets/mod.rs")?;
 
@@ -708,8 +821,65 @@ where
         cs_mod.push_str(&format!("pub mod {};\n", module));
     }
     cs_mod.push('\n');
-    for module in by_module.keys() {
-        cs_mod.push_str(&format!("pub use {}::*;\n", module));
+    // Re-exports
+    //
+    // IMPORTANT:
+    // FHIR `name` is NOT guaranteed to be unique across CodeSystems (and can collide even when URLs differ).
+    // Using `pub use <module>::*;` causes ambiguous glob re-exports when two modules define the same
+    // top-level type name (e.g. two different CodeSystems both named `DeviceAssociation`).
+    //
+    // Strategy:
+    // - If a generated type name is unique, re-export it as-is: `pub use module::TypeName;`
+    // - If it collides, re-export it with a deterministic alias derived from the module name
+    //   in PascalCase: `pub use module::TypeName as <ModulePascal>;`
+    //
+    // This avoids awkward concatenations like `DeviceAssociationDeviceassociationStatus`.
+    {
+        use std::collections::HashMap;
+
+        fn snake_to_pascal(s: &str) -> String {
+            let cleaned: String = s
+                .chars()
+                .map(|ch| if ch.is_ascii_alphanumeric() { ch } else { ' ' })
+                .collect();
+
+            let mut out = String::new();
+            for w in cleaned.split_whitespace() {
+                let mut chars = w.chars();
+                if let Some(first) = chars.next() {
+                    out.push(first.to_ascii_uppercase());
+                    out.extend(chars.map(|c| c.to_ascii_lowercase()));
+                }
+            }
+            if out.is_empty() { "CodeSystem".to_string() } else { out }
+        }
+
+        let mut counts: HashMap<&str, usize> = HashMap::new();
+        for (_module, (type_name, _cs, _has_enumerated_concepts)) in by_module.iter() {
+            *counts.entry(type_name.as_str()).or_insert(0) += 1;
+        }
+
+        for (module, (type_name, _cs, _has_enumerated_concepts)) in by_module.iter() {
+            let n = *counts.get(type_name.as_str()).unwrap_or(&1);
+            if n == 1 {
+                cs_mod.push_str(&format!("pub use {}::{};\n", module, type_name));
+            } else {
+                // When multiple CodeSystems share the same top-level Rust type name, re-export
+                // each one under a deterministic alias derived from the module name.
+                //
+                // Example:
+                //   deviceassociation_status::DeviceAssociation -> DeviceassociationStatus
+                //   eligibility_outcome::ClaimProcessingCodes   -> EligibilityOutcome
+                //
+                // This keeps `use terminology::code_systems::*` usable without forcing long
+                // concatenated names.
+                let alias = snake_to_pascal(module);
+                cs_mod.push_str(&format!(
+                    "pub use {}::{} as {};\n",
+                    module, type_name, alias
+                ));
+            }
+        }
     }
 
     fs::write(code_systems_dir.join("mod.rs"), cs_mod)
@@ -825,6 +995,7 @@ struct Concept {
     display: Option<String>,
     definition: Option<String>,
     extension: Option<Vec<Extension>>,
+    concept: Option<Vec<Concept>>, // <-- needed for hierarchy
 }
 
 #[derive(Debug, Deserialize, Clone)]
@@ -1048,6 +1219,15 @@ fn flatten_expansion_contains(nodes: &[ValueSetExpansionContains], out: &mut Vec
         }
         if let Some(children) = n.contains.as_ref() {
             flatten_expansion_contains(children, out);
+        }
+    }
+}
+// For codes with hierarchy
+fn flatten_concepts(src: &[Concept], out: &mut Vec<Concept>) {
+    for c in src {
+        out.push(c.clone());
+        if let Some(children) = &c.concept {
+            flatten_concepts(children, out);
         }
     }
 }
@@ -1288,21 +1468,58 @@ fn generate_valueset_wrapper_tokens(
     // Rich explicit concepts: (system, code, display, definition)
     let mut include_entries: Vec<(String, String, Option<String>, Option<String>)> = Vec::new();
     let mut exclude_pairs: Vec<(String, String)> = Vec::new();
+
+    // (property, op, value) triples from compose.include.filter / compose.exclude.filter
+    // NOTE: we do NOT evaluate these locally; this is for routing/diagnostics.
+    let mut filter_rules: Vec<(String, String, String)> = Vec::new();
+
     let mut has_nonlocal_rules = false;
     let mut include_value_sets: Vec<String> = Vec::new();
+
     // Systems included without an inline concept list AND without a locally-enumerated CodeSystem.
     // These require a terminology server for definitive membership checks.
     let mut include_whole_systems: Vec<String> = Vec::new();
 
+    // Track whether this ValueSet uses terminology filters (compose.include.filter / compose.exclude.filter).
+    // Filters mean the ValueSet is NOT a pure whole-system include.
+    let mut has_filters = false;
+
     if let Some(compose) = vs.compose.as_ref() {
         if let Some(includes) = compose.include.as_ref() {
             for inc in includes {
+                // capture include filters (non-local)
+                if let Some(filters) = inc.filter.as_ref() {
+                    for f in filters {
+                        if let (Some(p), Some(op), Some(v)) = (f.property.as_deref(), f.op.as_deref(), f.value.as_deref()) {
+                            if !p.is_empty() && !op.is_empty() && !v.is_empty() {
+                                filter_rules.push((p.to_string(), op.to_string(), v.to_string()));
+                                has_filters = true;
+                                has_nonlocal_rules = true;
+                            }
+                        }
+                    }
+                }
+
+                // capture include.valueSet references (non-local)
+                if let Some(vss) = inc.value_set.as_ref() {
+                    if !vss.is_empty() {
+                        has_nonlocal_rules = true;
+                        include_value_sets.extend(vss.iter().cloned());
+                    }
+                }
+
+                // capture system-driven membership
                 if let Some(sys) = inc.system.as_ref() {
                     include_systems.push(sys.clone());
 
-                    if let Some(concepts) = inc.concept.as_ref() {
+                    let concepts_opt = inc.concept.as_ref();
+                    let has_concepts = concepts_opt.map(|c| !c.is_empty()).unwrap_or(false);
+                    let include_has_filters = inc.filter.as_ref().map(|f| !f.is_empty()).unwrap_or(false);
+                    let has_vs_refs = inc.value_set.as_ref().map(|v| !v.is_empty()).unwrap_or(false);
+
+                    if has_concepts {
                         // Inline enumerated concepts defined directly in the ValueSet
-                        for c in concepts {
+                        for c in concepts_opt.unwrap() {
                             include_pairs.push((sys.clone(), c.code.clone()));
                             include_entries.push((
                                 sys.clone(),
@@ -1310,6 +1527,13 @@ fn generate_valueset_wrapper_tokens(
                                 c.display.clone(),
                                 valueset_concept_definition(c).map(|s| s.to_string()),
                             ));
+                        }
+                    } else if include_has_filters || has_vs_refs {
+                        // constrained include → NOT whole-system
+                        has_nonlocal_rules = true;
+                        has_filters |= include_has_filters;
+                        if has_vs_refs {
+                            include_value_sets.extend(inc.value_set.clone().unwrap_or_default());
                         }
                     } else if let Some(cs_concepts) = cs_concepts_by_url.get(sys) {
                         // Whole CodeSystem include without inline concepts.
@@ -1331,22 +1555,32 @@ fn generate_valueset_wrapper_tokens(
                         has_nonlocal_rules = true;
                     }
                 }
-                if inc.filter.as_ref().map(|v| !v.is_empty()).unwrap_or(false) {
-                    has_nonlocal_rules = true;
-                }
-                if let Some(vss) = inc.value_set.as_ref() {
-                    if !vss.is_empty() {
-                        has_nonlocal_rules = true;
-                        for u in vss {
-                            include_value_sets.push(u.clone());
-                        }
-                    }
-                }
             }
         }
 
         if let Some(excludes) = compose.exclude.as_ref() {
             for exc in excludes {
+                // capture exclude filters (non-local)
+                if let Some(filters) = exc.filter.as_ref() {
+                    for f in filters {
+                        if let (Some(p), Some(op), Some(v)) = (f.property.as_deref(), f.op.as_deref(), f.value.as_deref()) {
+                            if !p.is_empty() && !op.is_empty() && !v.is_empty() {
+                                filter_rules.push((p.to_string(), op.to_string(), v.to_string()));
+                                has_filters = true;
+                                has_nonlocal_rules = true;
+                            }
+                        }
+                    }
+                }
+
+                // capture exclude.valueSet references (non-local)
+                if let Some(vss) = exc.value_set.as_ref() {
+                    if !vss.is_empty() {
+                        has_nonlocal_rules = true;
+                        include_value_sets.extend(vss.iter().cloned());
+                    }
+                }
+
                 if let Some(sys) = exc.system.as_ref() {
                     // Do NOT add excluded systems into include_systems.
                     if let Some(concepts) = exc.concept.as_ref() {
@@ -1354,9 +1588,6 @@ fn generate_valueset_wrapper_tokens(
                             exclude_pairs.push((sys.clone(), c.code.clone()));
                         }
                     }
-                }
-                if exc.filter.as_ref().map(|v| !v.is_empty()).unwrap_or(false) {
-                    has_nonlocal_rules = true;
                 }
             }
         }
@@ -1379,6 +1610,8 @@ fn generate_valueset_wrapper_tokens(
     include_whole_systems.dedup();
     include_entries.sort_by(|a, b| (a.0.as_str(), a.1.as_str()).cmp(&(b.0.as_str(), b.1.as_str())));
     include_entries.dedup_by(|a, b| a.0 == b.0 && a.1 == b.1);
+    filter_rules.sort_by(|a, b| (a.0.as_str(), a.1.as_str(), a.2.as_str()).cmp(&(b.0.as_str(), b.1.as_str(), b.2.as_str())));
+    filter_rules.dedup_by(|a, b| a.0 == b.0 && a.1 == b.1 && a.2 == b.2);
 
     let sys_lits: Vec<syn::LitStr> = include_systems
         .iter()
@@ -1391,6 +1624,16 @@ fn generate_valueset_wrapper_tokens(
     let whole_sys_lits: Vec<syn::LitStr> = include_whole_systems
         .iter()
         .map(|s| syn::LitStr::new(s, proc_macro2::Span::call_site()))
+        .collect();
+
+    let filter_rule_tokens: Vec<TokenStream> = filter_rules
+        .iter()
+        .map(|(p, op, v)| {
+            let p = syn::LitStr::new(p, proc_macro2::Span::call_site());
+            let op = syn::LitStr::new(op, proc_macro2::Span::call_site());
+            let v = syn::LitStr::new(v, proc_macro2::Span::call_site());
+            quote!((#p, #op, #v))
+        })
         .collect();
 
     // Render pairs as literal arrays for membership tests
@@ -1476,7 +1719,11 @@ fn generate_valueset_wrapper_tokens(
     } else {
         quote!(false)
     };
-
+    let has_filters_tokens = if has_filters {
+        quote!(true)
+    } else {
+        quote!(false)
+    };
     // Docs
     let mut docs = vec![
         format!("FHIR ValueSet: {}", type_name),
@@ -1503,6 +1750,9 @@ fn generate_valueset_wrapper_tokens(
     }
     if !exclude_pairs.is_empty() {
         docs.push(format!("Compose excludes {} explicit concept codes", exclude_pairs.len()));
+    }
+    if has_filters {
+        docs.push(format!("Compose has {} filter rule(s)", filter_rules.len()));
     }
     if has_nonlocal_rules {
         docs.push(
@@ -1531,6 +1781,36 @@ fn generate_valueset_wrapper_tokens(
 
     let doc_tokens = doc_attrs(&docs);
 
+    // Conditionally emit the is_rgb_hex helper only if needed for this ValueSet.
+    let needs_rgb_helper = include_systems
+        .iter()
+        .any(|s| s == "http://hl7.org/fhir/color-rgb");
+
+    let rgb_helper_tokens: TokenStream = if needs_rgb_helper {
+        quote! {
+            fn is_rgb_hex(code: &str) -> bool {
+                // #RRGGBB, case-insensitive hex
+                let b = code.as_bytes();
+                if b.len() != 7 || b[0] != b'#' {
+                    return false;
+                }
+                fn is_hex(x: u8) -> bool {
+                    (b'0'..=b'9').contains(&x)
+                        || (b'a'..=b'f').contains(&x)
+                        || (b'A'..=b'F').contains(&x)
+                }
+                is_hex(b[1])
+                    && is_hex(b[2])
+                    && is_hex(b[3])
+                    && is_hex(b[4])
+                    && is_hex(b[5])
+                    && is_hex(b[6])
+            }
+        }
+    } else {
+        quote! {}
+    };
+
     Some(quote! {
         #doc_tokens
         pub struct #type_ident;
@@ -1538,7 +1818,7 @@ fn generate_valueset_wrapper_tokens(
         impl #type_ident {
             pub const URL: &'static str = #url_lit;
             pub const HAS_NONLOCAL_RULES: bool = #has_nonlocal_rules_tokens;
-
+            pub const HAS_FILTERS: bool = #has_filters_tokens;
             pub fn version() -> Option<&'static str> {
                 #version_tokens
             }
@@ -1551,6 +1831,13 @@ fn generate_valueset_wrapper_tokens(
                 &[#(#vs_lits),*]
             }
 
+            /// compose.include.filter / compose.exclude.filter rules.
+            ///
+            /// These are NOT evaluated locally; they are emitted for diagnostics/routing.
+            pub fn filter_rules() -> &'static [(&'static str, &'static str, &'static str)] {
+                &[#(#filter_rule_tokens),*]
+            }
+
             /// Systems that are included as whole CodeSystems but are not locally enumerable.
             ///
             /// If this is non-empty, callers should use a terminology server for definitive validation.
@@ -1558,6 +1845,24 @@ fn generate_valueset_wrapper_tokens(
                 &[#(#whole_sys_lits),*]
             }
 
+            /// Return the implied system if this ValueSet constrains codes to exactly one system.
+            ///
+            /// This is used to allow limited validation of primitive `code` bindings.
+pub fn single_system() -> Option<&'static str> {
+    // Prefer explicit include.system when exactly one is present
+    let systems = Self::include_systems();
+    if systems.len() == 1 {
+        return Some(systems[0]);
+    }
+
+    // Otherwise allow includeWholeSystem when exactly one is present
+    let whole = Self::include_whole_systems();
+    if whole.len() == 1 {
+        return Some(whole[0]);
+    }
+
+    None
+}
             /// Returns true only when this ValueSet can be treated as fully locally checkable.
             ///
             /// If `HAS_NONLOCAL_RULES` is true (filters, include.valueSet, or non-enumerated whole-system includes),
@@ -1566,7 +1871,40 @@ fn generate_valueset_wrapper_tokens(
                 !Self::HAS_NONLOCAL_RULES
                     && (!Self::expansion_pairs().is_empty() || !Self::include_pairs().is_empty())
             }
+            /// Returns true if this ValueSet is a "pure whole-system" include.
+            ///
+            /// Pure whole-system means membership is equivalent to validating the code exists in the
+            /// included CodeSystem (no explicit include/exclude concepts, no expansion, no include.valueSet,
+            /// and no filter rules).
+            ///
+            /// This enables routing remote checks to `CodeSystem/$validate-code` for Snowstorm and efficiency.
+pub fn is_pure_whole_system() -> bool {
+    // Exactly one whole-system include
+    if Self::include_whole_systems().len() != 1 {
+        return false;
+    }
 
+    // No filters or nested ValueSet includes
+    if !Self::filter_rules().is_empty() {
+        return false;
+    }
+    if !Self::include_value_sets().is_empty() {
+        return false;
+    }
+
+    // No explicit allow/deny lists
+    if !Self::include_pairs().is_empty() {
+        return false;
+    }
+    if !Self::expansion_pairs().is_empty() {
+        return false;
+    }
+    if !Self::exclude_pairs().is_empty() {
+        return false;
+    }
+
+    true
+}
             fn include_pairs() -> &'static [(&'static str, &'static str)] {
                 &[#(#include_pair_tokens),*]
             }
@@ -1765,20 +2103,7 @@ fn generate_valueset_wrapper_tokens(
                 Self::contains_codeable_concept(v)
             }
         }
-
-        fn is_rgb_hex(code: &str) -> bool {
-            // #RRGGBB, case-insensitive hex
-            let b = code.as_bytes();
-            if b.len() != 7 || b[0] != b'#' {
-                return false;
-            }
-            fn is_hex(x: u8) -> bool {
-                (b'0'..=b'9').contains(&x)
-                    || (b'a'..=b'f').contains(&x)
-                    || (b'A'..=b'F').contains(&x)
-            }
-            is_hex(b[1]) && is_hex(b[2]) && is_hex(b[3]) && is_hex(b[4]) && is_hex(b[5]) && is_hex(b[6])
-        }
+        #rgb_helper_tokens
     })
 }
 // Generate a stub module for CodeSystems that do not enumerate concepts.

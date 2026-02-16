@@ -31,6 +31,7 @@ reqwest = { version = "0.12", features = ["json", "blocking"] } # For terminolog
 rayon = "1.8" # For data parallelism
 arc-swap = "1.6" # For lock-free atomic data structures
 parking_lot = "0.12" # For better mutexes than std
+ureq = { version = "3.1.4", features = ["json"] }
 
 # CLI and server dependencies
 clap = { version = "4.5", features = ["derive", "env"] }
@@ -47,3 +48,11 @@ axum-test = "18.0"
 tempfile = "3.0"
 criterion = { version = "0.5", features = ["html_reports"] }
 futures = "0.3"
+
+[[bin]]
+name = "fhirpath-cli"
+path = "src/bin/fhirpath-cli.rs"
+
+[[bin]]
+name = "fhirpath-server"
+path = "src/bin/fhirpath-server.rs"

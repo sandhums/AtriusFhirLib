@@ -7,10 +7,10 @@
 #[cfg(test)]
 mod tests {
     use chumsky::Parser;
-    use helios_fhir::FhirVersion;
-    use helios_fhirpath::evaluator::{EvaluationContext, evaluate};
-    use helios_fhirpath::parser::parser;
-    use helios_fhirpath_support::EvaluationResult;
+    use atrius_fhir_lib::fhir_version::FhirVersion;
+    use atrius_fhir_path::evaluator::{EvaluationContext, evaluate};
+    use atrius_fhir_path::parser::parser;
+    use atrius_fhirpath_support::evaluation_result::EvaluationResult;
 
     #[test]
     fn test_define_variable_basic_syntax() {
@@ -19,7 +19,7 @@ mod tests {
         let parsed = parser().parse(expr).into_result();
         assert!(parsed.is_ok(), "Failed to parse defineVariable expression");
 
-        let context = EvaluationContext::new_empty(FhirVersion::R4);
+        let context = EvaluationContext::new_empty(FhirVersion::R5);
         let result = evaluate(&parsed.unwrap(), &context, None);
         assert!(result.is_ok(), "defineVariable should not error");
     }
@@ -30,7 +30,7 @@ mod tests {
         let expr = "5.defineVariable('v1', 10)";
         let parsed = parser().parse(expr).into_result().unwrap();
 
-        let context = EvaluationContext::new_empty(FhirVersion::R4);
+        let context = EvaluationContext::new_empty(FhirVersion::R5);
         let result = evaluate(&parsed, &context, None).unwrap();
 
         assert_eq!(result, EvaluationResult::integer(5));
@@ -45,7 +45,7 @@ mod tests {
         let expr = "'test'.defineVariable('v1', 'value1').select(%v1)";
         let parsed = parser().parse(expr).into_result().unwrap();
 
-        let context = EvaluationContext::new_empty(FhirVersion::R4);
+        let context = EvaluationContext::new_empty(FhirVersion::R5);
         let result = evaluate(&parsed, &context, None);
 
         // The variable should be accessible and return its value
@@ -80,7 +80,7 @@ mod tests {
         let expr = "defineVariable('context', 'oops')";
         let parsed = parser().parse(expr).into_result().unwrap();
 
-        let context = EvaluationContext::new_empty(FhirVersion::R4);
+        let context = EvaluationContext::new_empty(FhirVersion::R5);
         let result = evaluate(&parsed, &context, None);
 
         assert!(result.is_err());
@@ -99,7 +99,7 @@ mod tests {
         let expr = "1 | 2 | 3";
         let parsed = parser().parse(expr).into_result().unwrap();
 
-        let context = EvaluationContext::new_empty(FhirVersion::R4);
+        let context = EvaluationContext::new_empty(FhirVersion::R5);
         let result = evaluate(&parsed, &context, None).unwrap();
 
         match result {
@@ -113,7 +113,7 @@ mod tests {
     #[test]
     fn test_context_inheritance() {
         // Test that child contexts can access parent variables
-        let mut parent_context = EvaluationContext::new_empty(FhirVersion::R4);
+        let mut parent_context = EvaluationContext::new_empty(FhirVersion::R5);
         parent_context.set_variable_result(
             "%parent_var",
             EvaluationResult::string("parent".to_string()),

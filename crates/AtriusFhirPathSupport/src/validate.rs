@@ -5,8 +5,11 @@ use crate::traits::IntoEvaluationResult;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ValidationSeverity {
+    Fatal,
     Error,
-    Warning,
+    Warning,    
+    Information,
+    Success,
 }
 
 #[derive(Debug, Clone)]
@@ -43,6 +46,22 @@ pub struct Invariant {
 /// (e.g., HAPI/Snowstorm) to answer `$validate-code`.
 pub trait FhirPathEngine {
     fn eval_bool(&self, focus: &EvaluationResult, expr: &str) -> Result<bool, EvaluationError>;
+
+    /// Evaluate a boolean expression with an explicit *root* resource available to the evaluator.
+    ///
+    /// Generated validation code should prefer this method so invariants using `%rootResource`
+    /// (and related context variables) behave correctly when validating nested elements.
+    ///
+    /// Default implementation falls back to `eval_bool` for backward compatibility.
+    fn eval_bool_with_root(
+        &self,
+        focus: &EvaluationResult,
+        root: &EvaluationResult,
+        expr: &str,
+    ) -> Result<bool, EvaluationError> {
+        let _ = root;
+        self.eval_bool(focus, expr)
+    }
     /// Validate `system|code` membership in a ValueSet using an external terminology service.
     ///
     /// This is used as a fallback when local (generated) membership checks are not enough.
@@ -63,6 +82,8 @@ pub trait FhirPathEngine {
         let _ = (valueset_url, system, code);
         None
     }
+
+    fn validate_code_in_codesystem(&self, system: &str, code: &str) -> Option<bool>;
 }
 
 /// Types that can validate themselves using generated invariants (and, via macro expansion, bindings).
@@ -78,11 +99,22 @@ pub trait FhirValidate: IntoEvaluationResult {
     fn invariants() -> &'static [Invariant];
 
     fn validate_with_engine(&self, engine: &dyn FhirPathEngine) -> Vec<ValidationIssue> {
+        let root = self.to_evaluation_result();
+        self.validate_with_engine_root(engine, &root)
+    }
+
+    /// Like `validate_with_engine`, but allows callers (macro-generated recursion) to keep a stable
+    /// root resource while validating nested elements.
+    fn validate_with_engine_root(
+        &self,
+        engine: &dyn FhirPathEngine,
+        root: &EvaluationResult,
+    ) -> Vec<ValidationIssue> {
         let mut issues = Vec::new();
         let focus = self.to_evaluation_result();
 
         for inv in Self::invariants() {
-            match engine.eval_bool(&focus, inv.expr) {
+            match engine.eval_bool_with_root(&focus, root, inv.expr) {
                 Ok(true) => {}
                 Ok(false) => issues.push(ValidationIssue {
                     key: inv.key,
@@ -124,5 +156,13 @@ where
 
     fn validate_with_engine(&self, engine: &dyn FhirPathEngine) -> Vec<ValidationIssue> {
         (*self).validate_with_engine(engine)
+    }
+
+    fn validate_with_engine_root(
+        &self,
+        engine: &dyn FhirPathEngine,
+        root: &EvaluationResult,
+    ) -> Vec<ValidationIssue> {
+        (*self).validate_with_engine_root(engine, root)
     }
 }

@@ -1,4 +1,4 @@
-use helios_fhirpath::{EvaluationContext, evaluate_expression};
+use atrius_fhir_path::{EvaluationContext, evaluate_expression};
 
 #[test]
 fn debug_reference_key_functions() {
@@ -28,8 +28,8 @@ fn debug_reference_key_functions() {
     });
 
     // Parse into FHIR resources
-    let patient_p1: helios_fhir::r4::Patient = serde_json::from_value(patient_p1_json).unwrap();
-    let patient_p2: helios_fhir::r4::Patient = serde_json::from_value(patient_p2_json).unwrap();
+    let patient_p1: atrius_fhir_lib::r5::Patient = serde_json::from_value(patient_p1_json).unwrap();
+    let patient_p2: atrius_fhir_lib::r5::Patient = serde_json::from_value(patient_p2_json).unwrap();
 
     println!("=== Testing Reference Key Functions ===\n");
 
@@ -37,8 +37,8 @@ fn debug_reference_key_functions() {
     for (name, patient) in [("p1", patient_p1), ("p2", patient_p2)] {
         println!("--- Patient {} ---", name);
 
-        let context = EvaluationContext::new(vec![helios_fhir::FhirResource::R4(Box::new(
-            helios_fhir::r4::Resource::Patient(patient),
+        let context = EvaluationContext::new(vec![atrius_fhir_lib::fhir_version::FhirResource::R5(Box::new(
+            atrius_fhir_lib::r5::Resource::Patient(patient),
         ))]);
 
         // Test individual components

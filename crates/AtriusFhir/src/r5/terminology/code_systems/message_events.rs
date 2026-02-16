@@ -5,10 +5,6 @@
 #![allow(non_snake_case)]
 #![allow(clippy::upper_case_acronyms)]
 
-use super::super::super::{Boolean, Code, CodeableConcept, Coding, Element, Uri};
-
-use super::super::super::string::String as FhirString;
-
 ///FHIR CodeSystem (non-enumerated): MessageEvent
 ///Canonical URL: http://hl7.org/fhir/message-events
 ///Version: 5.0.0

@@ -784,795 +784,796 @@ pub mod week_of_month;
 pub mod written_languages;
 pub mod yesnodontknow;
 
-pub use FHIR_version::*;
-pub use account_aggregate::*;
-pub use account_balance_term::*;
-pub use account_billing_status::*;
-pub use account_relationship::*;
-pub use account_status::*;
-pub use account_type::*;
-pub use action_cardinality_behavior::*;
-pub use action_code::*;
-pub use action_condition_kind::*;
-pub use action_grouping_behavior::*;
-pub use action_participant_function::*;
-pub use action_participant_type::*;
-pub use action_precheck_behavior::*;
-pub use action_reason_code::*;
-pub use action_relationship_type::*;
-pub use action_required_behavior::*;
-pub use action_selection_behavior::*;
-pub use action_type::*;
-pub use additional_binding_purpose::*;
-pub use additional_instruction_codes::*;
-pub use address_type::*;
-pub use address_use::*;
-pub use adjudication::*;
-pub use adjudication_error::*;
-pub use adjudication_reason::*;
-pub use administrable_dose_form::*;
-pub use administration_method_codes::*;
-pub use administration_subpotent_reason::*;
-pub use administrative_gender::*;
-pub use adverse_event_actuality::*;
-pub use adverse_event_category::*;
-pub use adverse_event_causality_assess::*;
-pub use adverse_event_causality_method::*;
-pub use adverse_event_contributing_factor::*;
-pub use adverse_event_mitigating_action::*;
-pub use adverse_event_outcome::*;
-pub use adverse_event_participant_function::*;
-pub use adverse_event_preventive_action::*;
-pub use adverse_event_seriousness::*;
-pub use adverse_event_status::*;
-pub use adverse_event_supporting_info::*;
-pub use adverse_event_type::*;
-pub use age_units::*;
-pub use all_distance_units::*;
-pub use all_languages::*;
-pub use all_resource_types::*;
-pub use all_time_units::*;
-pub use allergen_class::*;
-pub use allergy_intolerance_category::*;
-pub use allergy_intolerance_criticality::*;
-pub use allergy_intolerance_type::*;
-pub use allergyintolerance_clinical::*;
-pub use allergyintolerance_code::*;
-pub use allergyintolerance_verification::*;
-pub use animal_tissue_type::*;
-pub use appointment_cancellation_reason::*;
-pub use appointment_recurrrence_type::*;
-pub use appointmentresponse_status::*;
-pub use appointmentstatus::*;
-pub use approach_site_codes::*;
-pub use artifact_contribution_instance_type::*;
-pub use artifact_contribution_type::*;
-pub use artifact_url_classifier::*;
-pub use artifactassessment_disposition::*;
-pub use artifactassessment_information_type::*;
-pub use artifactassessment_workflow_status::*;
-pub use assert_direction_codes::*;
-pub use assert_manual_completion_codes::*;
-pub use assert_operator_codes::*;
-pub use assert_response_code_types::*;
-pub use asset_availability::*;
-pub use attribute_estimate_type::*;
-pub use audit_event_action::*;
-pub use audit_event_outcome::*;
-pub use audit_event_outcome_detail::*;
-pub use audit_event_severity::*;
-pub use audit_event_sub_type::*;
-pub use audit_event_type::*;
-pub use basic_resource_type::*;
-pub use benefit_network::*;
-pub use benefit_term::*;
-pub use benefit_type::*;
-pub use benefit_unit::*;
-pub use binding_strength::*;
-pub use biologicallyderived_product_property_type_codes::*;
-pub use biologicallyderived_product_status::*;
-pub use biologicallyderived_productcodes::*;
-pub use biologicallyderivedproductdispense_match_status::*;
-pub use biologicallyderivedproductdispense_origin_relationship::*;
-pub use biologicallyderivedproductdispense_performer_function::*;
-pub use biologicallyderivedproductdispense_status::*;
-pub use body_site::*;
-pub use bodystructure_bodylandmarkorientation_clockface_position::*;
-pub use bodystructure_code::*;
-pub use bodystructure_relative_location::*;
-pub use bundle_type::*;
-pub use c80_facilitycodes::*;
-pub use c80_practice_codes::*;
-pub use capability_format_type::*;
-pub use capability_statement_kind::*;
-pub use care_plan_activity_performed::*;
-pub use care_plan_category::*;
-pub use care_plan_intent::*;
-pub use care_team_category::*;
-pub use care_team_status::*;
-pub use catalogType::*;
-pub use cdshooks_indicator::*;
-pub use certainty_rating::*;
-pub use certainty_type::*;
-pub use characteristic_combination::*;
-pub use characteristic_offset::*;
-pub use chargeitem_billingcodes::*;
-pub use chargeitem_status::*;
-pub use citation_artifact_classifier::*;
-pub use citation_classification_type::*;
-pub use citation_status_type::*;
-pub use citation_summary_style::*;
-pub use cited_artifact_abstract_type::*;
-pub use cited_artifact_classification_type::*;
-pub use cited_artifact_part_type::*;
-pub use cited_artifact_status_type::*;
-pub use cited_medium::*;
-pub use claim_careteamrole::*;
-pub use claim_decision::*;
-pub use claim_decision_reason::*;
-pub use claim_exception::*;
-pub use claim_informationcategory::*;
-pub use claim_modifiers::*;
-pub use claim_outcome::*;
-pub use claim_subtype::*;
-pub use claim_type::*;
-pub use claim_use::*;
-pub use clinical_findings::*;
-pub use clinical_use_definition_category::*;
-pub use clinical_use_definition_type::*;
-pub use clinicalimpression_change_pattern::*;
-pub use clinicalimpression_prognosis::*;
-pub use clinicalimpression_status_reason::*;
-pub use code_search_support::*;
-pub use codesystem_content_mode::*;
-pub use codesystem_hierarchy_meaning::*;
-pub use color_codes::*;
-pub use combined_dose_form::*;
-pub use common_tags::*;
-pub use communication_category::*;
-pub use communication_not_done_reason::*;
-pub use communication_request_status_reason::*;
-pub use communication_topic::*;
-pub use compartment_type::*;
-pub use composite_measure_scoring::*;
-pub use composition_attestation_mode::*;
-pub use composition_status::*;
-pub use concept_map_relationship::*;
-pub use concept_property_type::*;
-pub use concept_subsumption_outcome::*;
-pub use conceptmap_attribute_type::*;
-pub use conceptmap_property_type::*;
-pub use conceptmap_unmapped_mode::*;
-pub use concrete_fhir_types::*;
-pub use condition_category::*;
-pub use condition_clinical::*;
-pub use condition_code::*;
-pub use condition_outcome::*;
-pub use condition_precondition_type::*;
-pub use condition_questionnaire_purpose::*;
-pub use condition_severity::*;
-pub use condition_stage::*;
-pub use condition_stage_type::*;
-pub use condition_ver_status::*;
-pub use conditional_delete_status::*;
-pub use conditional_read_status::*;
-pub use conformance_expectation::*;
-pub use consent_action::*;
-pub use consent_category::*;
-pub use consent_content_class::*;
-pub use consent_content_code::*;
-pub use consent_data_meaning::*;
-pub use consent_policy::*;
-pub use consent_provision_type::*;
-pub use consent_state_codes::*;
-pub use consent_verification::*;
-pub use consistency_type::*;
-pub use constraint_severity::*;
-pub use contact_point_system::*;
-pub use contact_point_use::*;
-pub use container_cap::*;
-pub use container_material::*;
-pub use contract_action::*;
-pub use contract_actionstatus::*;
-pub use contract_actorrole::*;
-pub use contract_assetcontext::*;
-pub use contract_assetscope::*;
-pub use contract_assetsubtype::*;
-pub use contract_assettype::*;
-pub use contract_content_derivative::*;
-pub use contract_decision_mode::*;
-pub use contract_definition_subtype::*;
-pub use contract_definition_type::*;
-pub use contract_expiration_type::*;
-pub use contract_legalstate::*;
-pub use contract_party_role::*;
-pub use contract_publicationstatus::*;
-pub use contract_scope::*;
-pub use contract_security_category::*;
-pub use contract_security_classification::*;
-pub use contract_security_control::*;
-pub use contract_signer_type::*;
-pub use contract_status::*;
-pub use contract_subtype::*;
-pub use contract_term_subtype::*;
-pub use contract_term_type::*;
-pub use contract_type::*;
-pub use contributor_role::*;
-pub use contributor_summary_source::*;
-pub use contributor_summary_style::*;
-pub use contributor_summary_type::*;
-pub use contributor_type::*;
-pub use country::*;
-pub use coverage_class::*;
-pub use coverage_copay_type::*;
-pub use coverage_financial_exception::*;
-pub use coverage_kind::*;
-pub use coverage_type::*;
-pub use coverageeligibilityresponse_ex_auth_support::*;
-pub use currencies::*;
-pub use data_absent_reason::*;
-pub use data_types::*;
-pub use datestype::*;
-pub use days_of_week::*;
-pub use definition_method::*;
-pub use definition_resource_types::*;
-pub use definition_topic::*;
-pub use definition_use::*;
-pub use designation_use::*;
-pub use detectedissue_category::*;
-pub use detectedissue_mitigation_action::*;
-pub use detectedissue_severity::*;
-pub use detectedissue_status::*;
-pub use device_action::*;
-pub use device_availability_status::*;
-pub use device_category::*;
-pub use device_correctiveactionscope::*;
-pub use device_nametype::*;
-pub use device_operation_mode::*;
-pub use device_productidentifierinudi::*;
-pub use device_property_type::*;
-pub use device_safety::*;
-pub use device_specification_category::*;
-pub use device_specification_type::*;
-pub use device_status::*;
-pub use device_type::*;
-pub use device_versiontype::*;
-pub use deviceassociation_operationstatus::*;
-pub use deviceassociation_status::*;
-pub use deviceassociation_status_reason::*;
-pub use devicedefinition_regulatory_identifier_type::*;
-pub use devicedefinition_relationtype::*;
-pub use devicedispense_status::*;
-pub use devicedispense_status_reason::*;
-pub use devicemetric_type::*;
-pub use deviceusage_adherence_code::*;
-pub use deviceusage_adherence_reason::*;
-pub use deviceusage_status::*;
-pub use diagnosis_role::*;
-pub use diagnostic_report_status::*;
-pub use diagnostic_service_sections::*;
-pub use diet_type::*;
-pub use discriminator_type::*;
-pub use disease_status::*;
-pub use disease_symptom_procedure::*;
-pub use distance_units::*;
-pub use doc_section_codes::*;
-pub use doc_typecodes::*;
-pub use document_mode::*;
-pub use document_reference_status::*;
-pub use document_relationship_type::*;
-pub use duration_units::*;
-pub use edible_substance_type::*;
-pub use elementdefinition_types::*;
-pub use eligibility_outcome::*;
-pub use eligibilityrequest_purpose::*;
-pub use eligibilityresponse_purpose::*;
-pub use encounter_admit_source::*;
-pub use encounter_diagnosis_use::*;
-pub use encounter_diet::*;
-pub use encounter_discharge_disposition::*;
-pub use encounter_location_status::*;
-pub use encounter_participant_type::*;
-pub use encounter_reason::*;
-pub use encounter_reason_use::*;
-pub use encounter_special_arrangements::*;
-pub use encounter_special_courtesy::*;
-pub use encounter_status::*;
-pub use encounter_subject_status::*;
-pub use encounter_type::*;
-pub use endpoint_connection_type::*;
-pub use endpoint_environment::*;
-pub use endpoint_payload_type::*;
-pub use endpoint_status::*;
-pub use enrollment_outcome::*;
-pub use enteral_route::*;
-pub use entformula_additive::*;
-pub use entformula_type::*;
-pub use episode_of_care_status::*;
-pub use episodeofcare_type::*;
-pub use event_capability_mode::*;
-pub use event_resource_types::*;
-pub use event_status::*;
-pub use event_timing::*;
-pub use evidence_classifier_code::*;
-pub use evidence_report_section::*;
-pub use evidence_report_type::*;
-pub use evidence_variable_event::*;
-pub use ex_benefitcategory::*;
-pub use ex_diagnosis_on_admission::*;
-pub use ex_diagnosisrelatedgroup::*;
-pub use ex_diagnosistype::*;
-pub use ex_paymenttype::*;
-pub use ex_procedure_type::*;
-pub use ex_program_code::*;
-pub use ex_revenue_center::*;
-pub use example::*;
-pub use examplescenario_actor_type::*;
-pub use examplescenario_instance_type::*;
-pub use explanationofbenefit_status::*;
-pub use expression_language::*;
-pub use extension_context_type::*;
-pub use fhir_types::*;
-pub use fhirpath_types::*;
-pub use filter_operator::*;
-pub use flag_category::*;
-pub use flag_code::*;
-pub use flag_status::*;
-pub use fm_status::*;
-pub use focus_characteristic_code::*;
-pub use food_type::*;
-pub use forms::*;
-pub use formularyitem_status::*;
-pub use fundsreserve::*;
-pub use genomicstudy_changetype::*;
-pub use genomicstudy_dataformat::*;
-pub use genomicstudy_methodtype::*;
-pub use genomicstudy_status::*;
-pub use genomicstudy_type::*;
-pub use goal_achievement::*;
-pub use goal_category::*;
-pub use goal_priority::*;
-pub use goal_start_event::*;
-pub use goal_status::*;
-pub use graph_compartment_rule::*;
-pub use graph_compartment_use::*;
-pub use group_membership_basis::*;
-pub use group_type::*;
-pub use guidance_module_code::*;
-pub use guidance_response_status::*;
-pub use guide_page_generation::*;
-pub use guide_parameter_code::*;
-pub use handling_condition::*;
-pub use history_absent_reason::*;
-pub use history_status::*;
-pub use http_operations::*;
-pub use http_verb::*;
-pub use iana_link_relations::*;
-pub use icd_10::*;
-pub use icd_10_procedures::*;
-pub use identifier_type::*;
-pub use identifier_use::*;
-pub use identity_assuranceLevel::*;
-pub use imagingselection_2dgraphictype::*;
-pub use imagingselection_3dgraphictype::*;
-pub use imagingselection_status::*;
-pub use imagingstudy_status::*;
-pub use immunization_evaluation_dose_status::*;
-pub use immunization_evaluation_dose_status_reason::*;
-pub use immunization_evaluation_status::*;
-pub use immunization_function::*;
-pub use immunization_funding_source::*;
-pub use immunization_origin::*;
-pub use immunization_program_eligibility::*;
-pub use immunization_reason::*;
-pub use immunization_recommendation_date_criterion::*;
-pub use immunization_recommendation_reason::*;
-pub use immunization_recommendation_status::*;
-pub use immunization_route::*;
-pub use immunization_site::*;
-pub use immunization_status::*;
-pub use immunization_status_reason::*;
-pub use immunization_subpotent_reason::*;
-pub use immunization_target_disease::*;
-pub use immunization_vaccine_funding_program::*;
-pub use inactive::*;
-pub use ingredient_function::*;
-pub use ingredient_manufacturer_role::*;
-pub use ingredient_role::*;
-pub use insuranceplan_applicability::*;
-pub use insuranceplan_type::*;
-pub use interactant::*;
-pub use interaction_effect::*;
-pub use interaction_incidence::*;
-pub use interaction_management::*;
-pub use interaction_trigger::*;
-pub use interaction_type::*;
-pub use inventoryitem_nametype::*;
-pub use inventoryitem_status::*;
-pub use inventoryreport_counttype::*;
-pub use inventoryreport_status::*;
-pub use invoice_status::*;
-pub use iso3166_1_2::*;
-pub use iso3166_1_3::*;
-pub use iso3166_1_N::*;
-pub use issue_severity::*;
-pub use issue_type::*;
-pub use item_type::*;
-pub use jurisdiction::*;
-pub use knowledge_representation_level::*;
-pub use languages::*;
-pub use legal_status_of_supply::*;
-pub use library_type::*;
-pub use link_type::*;
-pub use linkage_type::*;
-pub use lipid_ldl_codes::*;
-pub use list_empty_reason::*;
-pub use list_example_codes::*;
-pub use list_item_flag::*;
-pub use list_mode::*;
-pub use list_order::*;
-pub use list_status::*;
-pub use location_characteristic::*;
-pub use location_form::*;
-pub use location_mode::*;
-pub use location_status::*;
-pub use manifestation_or_symptom::*;
-pub use manufactured_dose_form::*;
-pub use map_group_type_mode::*;
-pub use map_input_mode::*;
-pub use map_model_mode::*;
-pub use map_source_list_mode::*;
-pub use map_target_list_mode::*;
-pub use map_transform::*;
-pub use marital_status::*;
-pub use measure_aggregate_method::*;
-pub use measure_data_usage::*;
-pub use measure_definition_example::*;
-pub use measure_group_example::*;
-pub use measure_improvement_notation::*;
-pub use measure_population::*;
-pub use measure_report_status::*;
-pub use measure_report_type::*;
-pub use measure_scoring_unit::*;
-pub use measure_stratifier_example::*;
-pub use measure_supplemental_data_example::*;
-pub use measure_type::*;
-pub use measurement_property::*;
-pub use measurereport_stratifier_value_example::*;
-pub use med_admin_perform_function::*;
-pub use medication_admin_location::*;
-pub use medication_admin_status::*;
-pub use medication_as_needed_reason::*;
-pub use medication_codes::*;
-pub use medication_cost_category::*;
-pub use medication_dose_aid::*;
-pub use medication_form_codes::*;
-pub use medication_ingredientstrength::*;
-pub use medication_intended_performer_role::*;
-pub use medication_statement_adherence::*;
-pub use medication_statement_status::*;
-pub use medication_status::*;
-pub use medicationdispense_admin_location::*;
-pub use medicationdispense_performer_function::*;
-pub use medicationdispense_status::*;
-pub use medicationdispense_status_reason::*;
-pub use medicationknowledge_characteristic::*;
-pub use medicationknowledge_status::*;
-pub use medicationrequest_admin_location::*;
-pub use medicationrequest_course_of_therapy::*;
-pub use medicationrequest_intent::*;
-pub use medicationrequest_status::*;
-pub use medicationrequest_status_reason::*;
-pub use medicinal_product_additional_monitoring::*;
-pub use medicinal_product_classification::*;
-pub use medicinal_product_confidentiality::*;
-pub use medicinal_product_contact_type::*;
-pub use medicinal_product_cross_reference_type::*;
-pub use medicinal_product_domain::*;
-pub use medicinal_product_name_part_type::*;
-pub use medicinal_product_name_type::*;
-pub use medicinal_product_package_type::*;
-pub use medicinal_product_pediatric_use::*;
-pub use medicinal_product_special_measures::*;
-pub use medicinal_product_type::*;
-pub use message_events::*;
-pub use message_reason_encounter::*;
-pub use message_significance_category::*;
-pub use message_transport::*;
-pub use messageheader_response_request::*;
-pub use metric_calibration_state::*;
-pub use metric_calibration_type::*;
-pub use metric_category::*;
-pub use metric_operational_status::*;
-pub use mimetypes::*;
-pub use missing_tooth_reason::*;
-pub use modified_foodtype::*;
-pub use name_use::*;
-pub use namingsystem_identifier_system_type::*;
-pub use namingsystem_identifier_type::*;
-pub use namingsystem_type::*;
-pub use narrative_status::*;
-pub use nhin_purposeofuse::*;
-pub use not_consumed_reason::*;
-pub use note_type::*;
-pub use nutrient_code::*;
-pub use nutrition_product_category::*;
-pub use nutrition_product_nutrient::*;
-pub use nutritionproduct_status::*;
-pub use object_role::*;
-pub use observation_category::*;
-pub use observation_codes::*;
-pub use observation_interpretation::*;
-pub use observation_methods::*;
-pub use observation_range_category::*;
-pub use observation_referencerange_normalvalue::*;
-pub use observation_statistics::*;
-pub use observation_status::*;
-pub use observation_triggeredbytype::*;
-pub use observation_vitalsignresult::*;
-pub use operation_kind::*;
-pub use operation_outcome::*;
-pub use operation_parameter_scope::*;
-pub use operation_parameter_use::*;
-pub use organization_role::*;
-pub use organization_type::*;
-pub use orientation_type::*;
-pub use package_material::*;
-pub use package_type::*;
-pub use packaging_type::*;
-pub use participant_resource_types::*;
-pub use participant_role::*;
-pub use participation_role_type::*;
-pub use participationstatus::*;
-pub use patient_contactrelationship::*;
-pub use payeetype::*;
-pub use payment_adjustment_reason::*;
-pub use payment_issuertype::*;
-pub use payment_kind::*;
-pub use payment_outcome::*;
-pub use payment_status::*;
-pub use payment_type::*;
-pub use performer_function::*;
-pub use performer_role::*;
-pub use permission_rule_combining::*;
-pub use permission_status::*;
-pub use permitted_data_type::*;
-pub use plan_definition_type::*;
-pub use practitioner_role::*;
-pub use prepare_patient_prior_specimen_collection::*;
-pub use price_component_type::*;
-pub use procedure_category::*;
-pub use procedure_code::*;
-pub use procedure_followup::*;
-pub use procedure_not_performed_reason::*;
-pub use procedure_outcome::*;
-pub use procedure_reason::*;
-pub use process_priority::*;
-pub use product_category::*;
-pub use product_characteristic_codes::*;
-pub use product_intended_use::*;
-pub use product_status::*;
-pub use program::*;
-pub use property_representation::*;
-pub use provenance_activity_type::*;
-pub use provenance_entity_role::*;
-pub use provenance_history_agent_type::*;
-pub use provenance_history_record_activity::*;
-pub use provider_qualification::*;
-pub use provider_taxonomy::*;
-pub use publication_status::*;
-pub use published_in_type::*;
-pub use quantity_comparator::*;
-pub use questionnaire_answer_constraint::*;
-pub use questionnaire_answers::*;
-pub use questionnaire_answers_status::*;
-pub use questionnaire_disabled_display::*;
-pub use questionnaire_enable_behavior::*;
-pub use questionnaire_enable_operator::*;
-pub use questionnaire_questions::*;
-pub use reaction_event_severity::*;
-pub use reason_medication_given_codes::*;
-pub use reason_medication_not_given_codes::*;
-pub use reason_medication_status_codes::*;
-pub use reference_handling_policy::*;
-pub use reference_version_rules::*;
-pub use referenced_item_category::*;
-pub use referencerange_appliesto::*;
-pub use referencerange_meaning::*;
-pub use regulated_authorization_basis::*;
-pub use regulated_authorization_case_type::*;
-pub use regulated_authorization_type::*;
-pub use rejection_criteria::*;
-pub use related_artifact_type::*;
-pub use related_artifact_type_all::*;
-pub use related_artifact_type_expanded::*;
-pub use related_claim_relationship::*;
-pub use relatedperson_relationshiptype::*;
-pub use relationship::*;
-pub use remittance_outcome::*;
-pub use report_action_result_codes::*;
-pub use report_codes::*;
-pub use report_participant_type::*;
-pub use report_relation_type::*;
-pub use report_result_codes::*;
-pub use report_status_codes::*;
-pub use request_intent::*;
-pub use request_priority::*;
-pub use request_resource_types::*;
-pub use request_status::*;
-pub use research_study_arm_type::*;
-pub use research_study_classifiers::*;
-pub use research_study_focus_type::*;
-pub use research_study_objective_type::*;
-pub use research_study_party_organization_type::*;
-pub use research_study_party_role::*;
-pub use research_study_phase::*;
-pub use research_study_prim_purp_type::*;
-pub use research_study_reason_stopped::*;
-pub use research_study_status::*;
-pub use research_subject_milestone::*;
-pub use research_subject_state::*;
-pub use research_subject_state_type::*;
-pub use resource_aggregation_mode::*;
-pub use resource_slicing_rules::*;
-pub use resource_status::*;
-pub use resource_types::*;
-pub use resource_validation_mode::*;
-pub use response_code::*;
-pub use restful_capability_mode::*;
-pub use restful_security_service::*;
-pub use risk_probability::*;
-pub use route_codes::*;
-pub use search_comparator::*;
-pub use search_entry_mode::*;
-pub use search_modifier_code::*;
-pub use search_param_type::*;
-pub use search_processingmode::*;
-pub use security_label_data_examples::*;
-pub use security_label_event_examples::*;
-pub use security_label_examples::*;
-pub use security_labels::*;
-pub use security_role_type::*;
-pub use security_source_type::*;
-pub use sequence_type::*;
-pub use series_performer_function::*;
-pub use service_category::*;
-pub use service_mode::*;
-pub use service_place::*;
-pub use service_provision_conditions::*;
-pub use service_referral_method::*;
-pub use service_type::*;
-pub use service_uscls::*;
-pub use servicerequest_category::*;
-pub use servicerequest_orderdetail_parameter_code::*;
-pub use signature_type::*;
-pub use slotstatus::*;
-pub use sort_direction::*;
-pub use spdx_license::*;
-pub use specimen_collection::*;
-pub use specimen_collection_method::*;
-pub use specimen_combined::*;
-pub use specimen_contained_preference::*;
-pub use specimen_container_type::*;
-pub use specimen_processing_method::*;
-pub use specimen_role::*;
-pub use specimen_status::*;
-pub use statistic_model_code::*;
-pub use statistic_type::*;
-pub use strand_type::*;
-pub use structure_definition_kind::*;
-pub use study_design::*;
-pub use submit_data_update_type::*;
-pub use subscriber_relationship::*;
-pub use subscription_channel_type::*;
-pub use subscription_error::*;
-pub use subscription_notification_type::*;
-pub use subscription_payload_content::*;
-pub use subscription_status::*;
-pub use subscription_types::*;
-pub use subscriptiontopic_cr_behavior::*;
-pub use substance_amount_type::*;
-pub use substance_category::*;
-pub use substance_code::*;
-pub use substance_codes::*;
-pub use substance_form::*;
-pub use substance_grade::*;
-pub use substance_name_authority::*;
-pub use substance_name_domain::*;
-pub use substance_name_type::*;
-pub use substance_optical_activity::*;
-pub use substance_relationship_type::*;
-pub use substance_representation_format::*;
-pub use substance_representation_type::*;
-pub use substance_source_material_genus::*;
-pub use substance_source_material_part::*;
-pub use substance_source_material_species::*;
-pub use substance_source_material_type::*;
-pub use substance_status::*;
-pub use substance_stereochemistry::*;
-pub use substance_structure_technique::*;
-pub use substance_weight_method::*;
-pub use substance_weight_type::*;
-pub use supplement_type::*;
-pub use supply_item::*;
-pub use supplydelivery_status::*;
-pub use supplydelivery_supplyitemtype::*;
-pub use supplyrequest_kind::*;
-pub use supplyrequest_reason::*;
-pub use supplyrequest_status::*;
-pub use surface::*;
-pub use system_restful_interaction::*;
-pub use target_species::*;
-pub use task_code::*;
-pub use task_intent::*;
-pub use task_status::*;
-pub use task_status_reason::*;
-pub use testscript_operation_codes::*;
-pub use testscript_profile_destination_types::*;
-pub use testscript_profile_origin_types::*;
-pub use testscript_scope_conformance_codes::*;
-pub use testscript_scope_phase_codes::*;
-pub use texture_code::*;
-pub use therapy::*;
-pub use therapy_relationship_type::*;
-pub use timezones::*;
-pub use timing_abbreviation::*;
-pub use title_type::*;
-pub use tooth::*;
-pub use transport_code::*;
-pub use transport_intent::*;
-pub use transport_status::*;
-pub use transport_status_reason::*;
-pub use trigger_type::*;
-pub use type_derivation_rule::*;
-pub use type_restful_interaction::*;
-pub use ucum_bodylength::*;
-pub use ucum_bodytemp::*;
-pub use ucum_bodyweight::*;
-pub use ucum_common::*;
-pub use ucum_units::*;
-pub use ucum_vitals_common::*;
-pub use udi_entry_type::*;
-pub use undesirable_effect_classification::*;
-pub use undesirable_effect_frequency::*;
-pub use undesirable_effect_symptom::*;
-pub use unit_of_presentation::*;
-pub use units_of_time::*;
-pub use usage_context_agreement_scope::*;
-pub use use_context::*;
-pub use vaccine_code::*;
-pub use value_filter_comparator::*;
-pub use variable_handling::*;
-pub use variable_role::*;
-pub use verificationresult_can_push_updates::*;
-pub use verificationresult_communication_method::*;
-pub use verificationresult_failure_action::*;
-pub use verificationresult_need::*;
-pub use verificationresult_primary_source_type::*;
-pub use verificationresult_push_type_available::*;
-pub use verificationresult_status::*;
-pub use verificationresult_validation_process::*;
-pub use verificationresult_validation_status::*;
-pub use verificationresult_validation_type::*;
-pub use version_algorithm::*;
-pub use version_independent_all_resource_types::*;
-pub use version_independent_resource_types::*;
-pub use versioning_policy::*;
-pub use virtual_service_type::*;
-pub use vision_base_codes::*;
-pub use vision_eye_codes::*;
-pub use vision_product::*;
-pub use warning_type::*;
-pub use week_of_month::*;
-pub use written_languages::*;
-pub use yesnodontknow::*;
+pub use FHIR_version::FHIRVersion;
+pub use account_aggregate::AccountAggregate;
+pub use account_balance_term::AccountBalanceTerm;
+pub use account_billing_status::AccountBillingStatus;
+pub use account_relationship::AccountRelationship;
+pub use account_status::AccountStatus;
+pub use account_type::AccountTypes;
+pub use action_cardinality_behavior::ActionCardinalityBehavior;
+pub use action_code::ActionCode;
+pub use action_condition_kind::ActionConditionKind;
+pub use action_grouping_behavior::ActionGroupingBehavior;
+pub use action_participant_function::ActionParticipantFunction;
+pub use action_participant_type::ActionParticipantType;
+pub use action_precheck_behavior::ActionPrecheckBehavior;
+pub use action_reason_code::ActionReasonCode;
+pub use action_relationship_type::ActionRelationshipType;
+pub use action_required_behavior::ActionRequiredBehavior;
+pub use action_selection_behavior::ActionSelectionBehavior;
+pub use action_type::ActionType;
+pub use additional_binding_purpose::AdditionalBindingPurposeVS;
+pub use additional_instruction_codes::SNOMEDCTAdditionalDosageInstructions;
+pub use address_type::AddressType;
+pub use address_use::AddressUse;
+pub use adjudication::AdjudicationValueCodes;
+pub use adjudication_error::AdjudicationErrorCodes;
+pub use adjudication_reason::AdjudicationReasonCodes;
+pub use administrable_dose_form::AdministrableDoseForm;
+pub use administration_method_codes::SNOMEDCTAdministrationMethodCodes;
+pub use administration_subpotent_reason::MedicationAdministrationSubpotentReason;
+pub use administrative_gender::AdministrativeGender;
+pub use adverse_event_actuality::AdverseEventActuality;
+pub use adverse_event_category::AdverseEventCategory;
+pub use adverse_event_causality_assess::AdverseEventCausalityAssessment;
+pub use adverse_event_causality_method::AdverseEventCausalityMethod;
+pub use adverse_event_contributing_factor::AdverseEventContributingFactor;
+pub use adverse_event_mitigating_action::AdverseEventMitigatingAction;
+pub use adverse_event_outcome::AdverseEventOutcome;
+pub use adverse_event_participant_function::AdverseEventParticipantFunction;
+pub use adverse_event_preventive_action::AdverseEventPreventiveAction;
+pub use adverse_event_seriousness::AdverseEventSeriousness;
+pub use adverse_event_status::AdverseEventStatus;
+pub use adverse_event_supporting_info::AdverseEventSupportingInforation;
+pub use adverse_event_type::AdverseEventType;
+pub use age_units::CommonUCUMCodesForAge;
+pub use all_distance_units::AllUCUMExpressionForDistance;
+pub use all_languages::AllLanguages;
+pub use all_resource_types::AllResourceTypes;
+pub use all_time_units::AllUCUMExpressionForTime;
+pub use allergen_class::CodesForAllergenClasses;
+pub use allergy_intolerance_category::AllergyIntoleranceCategory;
+pub use allergy_intolerance_criticality::AllergyIntoleranceCriticality;
+pub use allergy_intolerance_type::AllergyIntoleranceType;
+pub use allergyintolerance_clinical::AllergyIntoleranceClinicalStatusCodes;
+pub use allergyintolerance_code::SubstanceProductAndConditionAndNegationCodes;
+pub use allergyintolerance_verification::AllergyIntoleranceVerificationStatus;
+pub use animal_tissue_type::AnimalTissueType;
+pub use appointment_cancellation_reason::AppointmentCancellationReason;
+pub use appointment_recurrrence_type::AppointmentRecurrenceType;
+pub use appointmentresponse_status::AppointmentResponseStatus;
+pub use appointmentstatus::AppointmentStatus;
+pub use approach_site_codes::SNOMEDCTAnatomicalStructureAdministrationSites;
+pub use artifact_contribution_instance_type::ArtifactContributionInstanceType;
+pub use artifact_contribution_type::ArtifactContributionType;
+pub use artifact_url_classifier::ArtifactUrlClassifier;
+pub use artifactassessment_disposition::ArtifactAssessmentDisposition;
+pub use artifactassessment_information_type::ArtifactAssessmentInformationType;
+pub use artifactassessment_workflow_status::ArtifactAssessmentWorkflowStatus;
+pub use assert_direction_codes::AssertionDirectionType;
+pub use assert_manual_completion_codes::AssertionManualCompletionType;
+pub use assert_operator_codes::AssertionOperatorType;
+pub use assert_response_code_types::AssertionResponseTypes;
+pub use asset_availability::ContractResourceAssetAvailiabilityCodes;
+pub use attribute_estimate_type::AttributeEstimateType;
+pub use audit_event_action::AuditEventAction;
+pub use audit_event_outcome::AuditEventOutcome;
+pub use audit_event_outcome_detail::AuditEventOutcomeDetail;
+pub use audit_event_severity::AuditEventSeverity;
+pub use audit_event_sub_type::AuditEventSubType;
+pub use audit_event_type::AuditEventID;
+pub use basic_resource_type::BasicResourceTypes;
+pub use benefit_network::NetworkTypeCodes;
+pub use benefit_term::BenefitTermCodes;
+pub use benefit_type::BenefitTypeCodes;
+pub use benefit_unit::UnitTypeCodes;
+pub use binding_strength::BindingStrength;
+pub use biologicallyderived_product_property_type_codes::BiologicallyDerivedProductPropertyTypeCodes;
+pub use biologicallyderived_product_status::BiologicallyDerivedProductStatus;
+pub use biologicallyderived_productcodes::BiologicallyDerivedProductCodes;
+pub use biologicallyderivedproductdispense_match_status::BiologicallyDerivedProductDispenseMatchStatus;
+pub use biologicallyderivedproductdispense_origin_relationship::BiologicallyDerivedProductDispenseOriginRelationship;
+pub use biologicallyderivedproductdispense_performer_function::BiologicallyDerivedProductDispensePerformerFunction;
+pub use biologicallyderivedproductdispense_status::BiologicallyDerivedProductDispenseCodes;
+pub use body_site::SNOMEDCTBodyStructures;
+pub use bodystructure_bodylandmarkorientation_clockface_position::BodystructureBodyLandmarkClockFacePosition;
+pub use bodystructure_code::SNOMEDCTMorphologicAbnormalities;
+pub use bodystructure_relative_location::BodystructureLocationQualifier;
+pub use bundle_type::BundleType;
+pub use c80_facilitycodes::FacilityTypeCodeValueSet;
+pub use c80_practice_codes::PracticeSettingCodeValueSet;
+pub use capability_format_type::CapabilityFormatType;
+pub use capability_statement_kind::CapabilityStatementKind;
+pub use care_plan_activity_performed::CarePlanActivityPerformed;
+pub use care_plan_category::CarePlanCategory;
+pub use care_plan_intent::CarePlanIntent;
+pub use care_team_category::CareTeamCategory;
+pub use care_team_status::CareTeamStatus;
+pub use catalogType::CatalogType;
+pub use cdshooks_indicator::Indicator;
+pub use certainty_rating::EvidenceCertaintyRating;
+pub use certainty_type::EvidenceCertaintyType;
+pub use characteristic_combination::CharacteristicCombination;
+pub use characteristic_offset::CharacteristicOffset;
+pub use chargeitem_billingcodes::ChargeItemCode;
+pub use chargeitem_status::ChargeItemStatus;
+pub use citation_artifact_classifier::CitationArtifactClassifier;
+pub use citation_classification_type::CitationClassificationType;
+pub use citation_status_type::CitationStatusType;
+pub use citation_summary_style::CitationSummaryStyle;
+pub use cited_artifact_abstract_type::CitedArtifactAbstractType;
+pub use cited_artifact_classification_type::CitedArtifactClassificationType;
+pub use cited_artifact_part_type::CitedArtifactPartType;
+pub use cited_artifact_status_type::CitedArtifactStatusType;
+pub use cited_medium::CitedMedium;
+pub use claim_careteamrole::ClaimCareTeamRoleCodes;
+pub use claim_decision::ClaimAdjudicationDecisionsCodes;
+pub use claim_decision_reason::ClaimAdjudicationDecisionReasonCodes;
+pub use claim_exception::ExceptionCodes;
+pub use claim_informationcategory::ClaimInformationCategoryCodes;
+pub use claim_modifiers::ModifierTypeCodes;
+pub use claim_outcome::ClaimProcessingCodes;
+pub use claim_subtype::ExampleClaimSubTypeCodes;
+pub use claim_type::ClaimTypeCodes;
+pub use claim_use::Use;
+pub use clinical_findings::SNOMEDCTClinicalFindings;
+pub use clinical_use_definition_category::ClinicalUseDefinitionCategory;
+pub use clinical_use_definition_type::ClinicalUseDefinitionType;
+pub use clinicalimpression_change_pattern::ClinicalImpressionChangePatter;
+pub use clinicalimpression_prognosis::ClinicalImpressionPrognosis;
+pub use clinicalimpression_status_reason::ClinicalImpressionStatusReason;
+pub use code_search_support::CodeSearchSupport;
+pub use codesystem_content_mode::CodeSystemContentMode;
+pub use codesystem_hierarchy_meaning::CodeSystemHierarchyMeaning;
+pub use color_codes::ColorCodesOrRGB;
+pub use combined_dose_form::CombinedDoseForm;
+pub use common_tags::CommonTags;
+pub use communication_category::CommunicationCategory;
+pub use communication_not_done_reason::CommunicationNotDoneReason;
+pub use communication_request_status_reason::CommunicationRequestStatusReason;
+pub use communication_topic::CommunicationTopic;
+pub use compartment_type::CompartmentType;
+pub use composite_measure_scoring::CompositeMeasureScoring;
+pub use composition_attestation_mode::CompositionAttestationMode;
+pub use composition_status::CompositionStatus;
+pub use concept_map_relationship::ConceptMapRelationship;
+pub use concept_property_type::PropertyType;
+pub use concept_subsumption_outcome::ConceptSubsumptionOutcome;
+pub use conceptmap_attribute_type::ConceptMapAttributeType;
+pub use conceptmap_property_type::ConceptMapPropertyType;
+pub use conceptmap_unmapped_mode::ConceptMapGroupUnmappedMode;
+pub use concrete_fhir_types::ConcreteFHIRTypes;
+pub use condition_category::ConditionCategoryCodes;
+pub use condition_clinical::ConditionClinicalStatusCodes;
+pub use condition_code::ConditionProblemDiagnosisCodes;
+pub use condition_outcome::ConditionOutcomeCodes;
+pub use condition_precondition_type::ConditionPreconditionType;
+pub use condition_questionnaire_purpose::ConditionQuestionnairePurpose;
+pub use condition_severity::ConditionDiagnosisSeverity;
+pub use condition_stage::ConditionStage;
+pub use condition_stage_type::ConditionStageType;
+pub use condition_ver_status::ConditionVerificationStatus;
+pub use conditional_delete_status::ConditionalDeleteStatus;
+pub use conditional_read_status::ConditionalReadStatus;
+pub use conformance_expectation::ConformanceExpectation;
+pub use consent_action::ConsentActionCodes;
+pub use consent_category::ConsentCategoryCodes;
+pub use consent_content_class::ConsentContentClass;
+pub use consent_content_code::ConsentContentCodes;
+pub use consent_data_meaning::ConsentDataMeaning;
+pub use consent_policy::ConsentPolicyRuleCodes;
+pub use consent_provision_type::ConsentProvisionType;
+pub use consent_state_codes::ConsentState;
+pub use consent_verification::ConsentVerificationCodes;
+pub use consistency_type::FluidConsistencyTypeCodes;
+pub use constraint_severity::ConstraintSeverity;
+pub use contact_point_system::ContactPointSystem;
+pub use contact_point_use::ContactPointUse;
+pub use container_cap::ContainerCap;
+pub use container_material::ContainerMaterials;
+pub use contract_action::ContractActionCodes;
+pub use contract_actionstatus::ContractResourceActionStatusCodes;
+pub use contract_actorrole::ContractActorRoleCodes;
+pub use contract_assetcontext::ContractResourceAssetContextCodes;
+pub use contract_assetscope::ContractResourceAssetScopeCodes;
+pub use contract_assetsubtype::ContractResourceAssetSubTypeCodes;
+pub use contract_assettype::ContractResourceAssetTypeCodes;
+pub use contract_content_derivative::ContractContentDerivationCodes;
+pub use contract_decision_mode::ContractResourceDecisionModeCodes;
+pub use contract_definition_subtype::ContractResourceDefinitionSubtypeCodes;
+pub use contract_definition_type::ContractResourceDefinitionTypeCodes;
+pub use contract_expiration_type::ContractResourceExpirationTypeCodes;
+pub use contract_legalstate::ContractResourceLegalStateCodes;
+pub use contract_party_role::ContractResourcePartyRoleCodes;
+pub use contract_publicationstatus::ContractResourcePublicationStatusCodes;
+pub use contract_scope::ContractResourceScopeCodes as ContractResourceScopeCodesContractScope;
+pub use contract_security_category::ContractResourceScopeCodes as ContractResourceScopeCodesContractSecurityCategory;
+pub use contract_security_classification::ContractResourceScopeCodes as ContractResourceScopeCodesContractSecurityClassification;
+pub use contract_security_control::ContractResourceSecurityControlCodes;
+pub use contract_signer_type::ContractSignerTypeCodes;
+pub use contract_status::ContractResourceStatusCodes;
+pub use contract_subtype::ContractSubtypeCodes;
+pub use contract_term_subtype::ContractTermSubtypeCodes;
+pub use contract_term_type::ContractTermTypeCodes;
+pub use contract_type::ContractTypeCodes;
+pub use contributor_role::ContributorRole;
+pub use contributor_summary_source::ContributorSummarySource;
+pub use contributor_summary_style::ContributorSummaryStyle;
+pub use contributor_summary_type::ContributorSummaryType;
+pub use contributor_type::ContributorType;
+pub use country::CountryValueSet;
+pub use coverage_class::CoverageClassCodes;
+pub use coverage_copay_type::CoverageCopayTypeCodes;
+pub use coverage_financial_exception::ExampleCoverageFinancialExceptionCodes;
+pub use coverage_kind::Kind;
+pub use coverage_type::CoverageTypeAndSelfPayCodes;
+pub use coverageeligibilityresponse_ex_auth_support::CoverageEligibilityResponseAuthSupportCodes;
+pub use currencies::Currencies;
+pub use data_absent_reason::DataAbsentReason;
+pub use data_types::FHIRTypes as FHIRTypesDataTypes;
+pub use datestype::DatesTypeCodes;
+pub use days_of_week::DaysOfWeek;
+pub use definition_method::DefinitionMethod;
+pub use definition_resource_types::DefinitionResourceTypes;
+pub use definition_topic::DefinitionTopic;
+pub use definition_use::DefinitionUseCodes;
+pub use designation_use::DesignationUse;
+pub use detectedissue_category::DetectedIssueCategory;
+pub use detectedissue_mitigation_action::DetectedIssueMitigationAction;
+pub use detectedissue_severity::DetectedIssueSeverity;
+pub use detectedissue_status::DetectedIssueStatus;
+pub use device_action::ProcedureDeviceActionCodes;
+pub use device_availability_status::FHIRDeviceAvailabilityStatus;
+pub use device_category::FHIRDeviceCategory;
+pub use device_correctiveactionscope::DeviceCorrectiveActionScope;
+pub use device_nametype::DeviceNameType;
+pub use device_operation_mode::FHIRDeviceOperationMode;
+pub use device_productidentifierinudi::DeviceProductionIdentifierInUDI;
+pub use device_property_type::DeviceType as DeviceTypeDevicePropertyType;
+pub use device_safety::DeviceSafety;
+pub use device_specification_category::DeviceSpecificationCategory;
+pub use device_specification_type::DeviceSpecificationType;
+pub use device_status::FHIRDeviceStatus;
+pub use device_type::DeviceType as DeviceTypeDeviceType;
+pub use device_versiontype::DeviceVersionType;
+pub use deviceassociation_operationstatus::FHIRDeviceAssociationOperationStatus;
+pub use deviceassociation_status::DeviceAssociationCodes as DeviceAssociationCodesDeviceassociationStatus;
+pub use deviceassociation_status_reason::DeviceAssociationCodes as DeviceAssociationCodesDeviceassociationStatusReason;
+pub use devicedefinition_regulatory_identifier_type::DeviceDefinitionRegulatoryIdentifierType;
+pub use devicedefinition_relationtype::DeviceDefinitionRelationType;
+pub use devicedispense_status::DeviceDispenseStatusCodes;
+pub use devicedispense_status_reason::DeviceDispenseStatusReasonCodes;
+pub use devicemetric_type::DeviceMetricAndComponentTypes;
+pub use deviceusage_adherence_code::DeviceUsageAdherenceCode;
+pub use deviceusage_adherence_reason::DeviceUsageAdherenceReason;
+pub use deviceusage_status::DeviceUsageStatus;
+pub use diagnosis_role::DiagnosisRole;
+pub use diagnostic_report_status::DiagnosticReportStatus;
+pub use diagnostic_service_sections::DiagnosticServiceSectionCodes;
+pub use diet_type::DietCodes;
+pub use discriminator_type::DiscriminatorType;
+pub use disease_status::DiseaseStatus;
+pub use disease_symptom_procedure::DiseaseSymptomProcedure;
+pub use distance_units::CommonUCUMCodesForDistance;
+pub use doc_section_codes::DocumentSectionCodes;
+pub use doc_typecodes::FHIRDocumentTypeCodes;
+pub use document_mode::DocumentMode;
+pub use document_reference_status::DocumentReferenceStatus;
+pub use document_relationship_type::DocumentRelationshipType;
+pub use duration_units::CommonUCUMCodesForDuration;
+pub use edible_substance_type::TypesOfEdibleSubstances;
+pub use elementdefinition_types::ElementDefinitionTypes;
+pub use eligibility_outcome::EligibilityOutcome;
+pub use eligibilityrequest_purpose::EligibilityRequestPurpose;
+pub use eligibilityresponse_purpose::EligibilityResponsePurpose;
+pub use encounter_admit_source::AdmitSource;
+pub use encounter_diagnosis_use::EncounterDiagnosisUse;
+pub use encounter_diet::EncounterDiet;
+pub use encounter_discharge_disposition::DischargeDisposition;
+pub use encounter_location_status::EncounterLocationStatus;
+pub use encounter_participant_type::ParticipantType;
+pub use encounter_reason::EncounterReasonCodes;
+pub use encounter_reason_use::EncounterReasonUse;
+pub use encounter_special_arrangements::SpecialArrangements;
+pub use encounter_special_courtesy::SpecialCourtesy;
+pub use encounter_status::EncounterStatus;
+pub use encounter_subject_status::EncounterSubjectStatus;
+pub use encounter_type::EncounterType;
+pub use endpoint_connection_type::EndpointConnectionType;
+pub use endpoint_environment::EndpointEnvironment;
+pub use endpoint_payload_type::EndpointPayloadType;
+pub use endpoint_status::EndpointStatus;
+pub use enrollment_outcome::EnrollmentOutcome;
+pub use enteral_route::EnteralRouteCodes;
+pub use entformula_additive::EnteralFormulaAdditiveTypeCode;
+pub use entformula_type::EnteralFormulaTypeCodes;
+pub use episode_of_care_status::EpisodeOfCareStatus;
+pub use episodeofcare_type::EpisodeOfCareType;
+pub use event_capability_mode::EventCapabilityMode;
+pub use event_resource_types::EventResourceTypes;
+pub use event_status::EventStatus;
+pub use event_timing::EventTiming;
+pub use evidence_classifier_code::EvidenceClassifier;
+pub use evidence_report_section::ReportSectionType;
+pub use evidence_report_type::EvidenceReportType;
+pub use evidence_variable_event::EvidenceVariableEvent;
+pub use ex_benefitcategory::BenefitCategoryCodes;
+pub use ex_diagnosis_on_admission::ExampleDiagnosisOnAdmissionCodes;
+pub use ex_diagnosisrelatedgroup::ExampleDiagnosisRelatedGroupCodes;
+pub use ex_diagnosistype::ExampleDiagnosisTypeCodes;
+pub use ex_paymenttype::ExamplePaymentTypeCodes;
+pub use ex_procedure_type::ExampleProcedureTypeCodes;
+pub use ex_program_code::ExampleProgramReasonCodes;
+pub use ex_revenue_center::ExampleRevenueCenterCodes;
+pub use example::LOINCCodesForCholesterolInSerumPlasma;
+pub use examplescenario_actor_type::ExampleScenarioActorType;
+pub use examplescenario_instance_type::ExampleScenarioResourceType;
+pub use explanationofbenefit_status::ExplanationOfBenefitStatus;
+pub use expression_language::ExpressionLanguage;
+pub use extension_context_type::ExtensionContextType;
+pub use fhir_types::FHIRTypes as FHIRTypesFhirTypes;
+pub use fhirpath_types::FHIRPathTypes;
+pub use filter_operator::FilterOperator;
+pub use flag_category::FlagCategory;
+pub use flag_code::FlagCode;
+pub use flag_status::FlagStatus;
+pub use fm_status::FinancialResourceStatusCodes;
+pub use focus_characteristic_code::FocusCharacteristicCode;
+pub use food_type::FoodTypeCodes;
+pub use forms::FormCodes;
+pub use formularyitem_status::FormularyItemStatusCodes;
+pub use fundsreserve::FundsReservationCodes;
+pub use genomicstudy_changetype::GenomicStudyChangeType;
+pub use genomicstudy_dataformat::GenomicStudyDataFormat;
+pub use genomicstudy_methodtype::GenomicStudyMethodType;
+pub use genomicstudy_status::GenomicStudyStatus;
+pub use genomicstudy_type::GenomicStudyType;
+pub use goal_achievement::GoalAchievementStatus;
+pub use goal_category::GoalCategory;
+pub use goal_priority::GoalPriority;
+pub use goal_start_event::GoalStartEvent;
+pub use goal_status::GoalLifecycleStatus;
+pub use graph_compartment_rule::GraphCompartmentRule;
+pub use graph_compartment_use::GraphCompartmentUse;
+pub use group_membership_basis::GroupMembershipBasis;
+pub use group_type::GroupType;
+pub use guidance_module_code::GuidanceModuleCode;
+pub use guidance_response_status::GuidanceResponseStatus;
+pub use guide_page_generation::GuidePageGeneration;
+pub use guide_parameter_code::GuideParameterCode;
+pub use handling_condition::HandlingConditionSet;
+pub use history_absent_reason::FamilyHistoryAbsentReason;
+pub use history_status::FamilyHistoryStatus;
+pub use http_operations::TestScriptRequestMethodCode;
+pub use http_verb::HTTPVerb;
+pub use iana_link_relations::LinkRelationTypes;
+pub use icd_10::ICD10Codes;
+pub use icd_10_procedures::ICD10ProcedureCodes;
+pub use identifier_type::IdentifierTypeCodes;
+pub use identifier_use::IdentifierUse;
+pub use identity_assuranceLevel::IdentityAssuranceLevel;
+pub use imagingselection_2dgraphictype::ImagingSelection2DGraphicType;
+pub use imagingselection_3dgraphictype::ImagingSelection3DGraphicType;
+pub use imagingselection_status::ImagingSelectionStatus;
+pub use imagingstudy_status::ImagingStudyStatus;
+pub use immunization_evaluation_dose_status::ImmunizationEvaluationDoseStatusCodes;
+pub use immunization_evaluation_dose_status_reason::ImmunizationEvaluationDoseStatusReasonCodes;
+pub use immunization_evaluation_status::ImmunizationEvaluationStatusCodes;
+pub use immunization_function::ImmunizationFunctionCodes;
+pub use immunization_funding_source::ImmunizationFundingSource;
+pub use immunization_origin::ImmunizationOriginCodes;
+pub use immunization_program_eligibility::ImmunizationProgramEligibility;
+pub use immunization_reason::ImmunizationReasonCodes;
+pub use immunization_recommendation_date_criterion::ImmunizationRecommendationDateCriterionCodes;
+pub use immunization_recommendation_reason::ImmunizationRecommendationReasonCodes;
+pub use immunization_recommendation_status::ImmunizationRecommendationStatusCodes;
+pub use immunization_route::ImmunizationRouteCodes;
+pub use immunization_site::CodesForImmunizationSiteOfAdministration;
+pub use immunization_status::ImmunizationStatusCodes;
+pub use immunization_status_reason::ImmunizationStatusReasonCodes;
+pub use immunization_subpotent_reason::ImmunizationSubpotentReason;
+pub use immunization_target_disease::ImmunizationTargetDiseaseCodes;
+pub use immunization_vaccine_funding_program::CodesForVaccineFundingPrograms;
+pub use inactive::ExampleInactive;
+pub use ingredient_function::IngredientFunction;
+pub use ingredient_manufacturer_role::IngredientManufacturerRole;
+pub use ingredient_role::IngredientRole;
+pub use insuranceplan_applicability::BenefitCostApplicability;
+pub use insuranceplan_type::InsurancePlanType;
+pub use interactant::Interactant;
+pub use interaction_effect::InteractionEffect;
+pub use interaction_incidence::InteractionIncidence;
+pub use interaction_management::InteractionManagement;
+pub use interaction_trigger::InteractionTrigger;
+pub use interaction_type::InteractionType;
+pub use inventoryitem_nametype::InventoryItemStatusCodes as InventoryItemStatusCodesInventoryitemNametype;
+pub use inventoryitem_status::InventoryItemStatusCodes as InventoryItemStatusCodesInventoryitemStatus;
+pub use inventoryreport_counttype::InventoryCountType;
+pub use inventoryreport_status::InventoryReportStatus;
+pub use invoice_status::InvoiceStatus;
+pub use iso3166_1_2::Iso316612;
+pub use iso3166_1_3::Iso316613;
+pub use iso3166_1_N::Iso31661N;
+pub use issue_severity::IssueSeverity;
+pub use issue_type::IssueType;
+pub use item_type::QuestionnaireItemType;
+pub use jurisdiction::JurisdictionValueSet;
+pub use knowledge_representation_level::KnowledgeRepresentationLevel;
+pub use languages::CommonLanguages;
+pub use legal_status_of_supply::LegalStatusOfSupply;
+pub use library_type::LibraryType;
+pub use link_type::LinkType;
+pub use linkage_type::LinkageType;
+pub use lipid_ldl_codes::LDLCodes;
+pub use list_empty_reason::ListEmptyReasons;
+pub use list_example_codes::ExampleUseCodesForList;
+pub use list_item_flag::PatientMedicineChangeTypes;
+pub use list_mode::ListMode;
+pub use list_order::ListOrderCodes;
+pub use list_status::ListStatus;
+pub use location_characteristic::LocationCharacteristic;
+pub use location_form::LocationForm;
+pub use location_mode::LocationMode;
+pub use location_status::LocationStatus;
+pub use manifestation_or_symptom::ManifestationAndSymptomCodes;
+pub use manufactured_dose_form::ManufacturedDoseForm;
+pub use map_group_type_mode::StructureMapGroupTypeMode;
+pub use map_input_mode::StructureMapInputMode;
+pub use map_model_mode::StructureMapModelMode;
+pub use map_source_list_mode::StructureMapSourceListMode;
+pub use map_target_list_mode::StructureMapTargetListMode;
+pub use map_transform::StructureMapTransform;
+pub use marital_status::MaritalStatusCodes;
+pub use measure_aggregate_method::MeasureAggregateMethod;
+pub use measure_data_usage::MeasureDataUsage;
+pub use measure_definition_example::MeasureDefinitionExample;
+pub use measure_group_example::MeasureGroupExample;
+pub use measure_improvement_notation::MeasureImprovementNotation;
+pub use measure_population::MeasurePopulationType;
+pub use measure_report_status::MeasureReportStatus;
+pub use measure_report_type::MeasureReportType;
+pub use measure_scoring_unit::MeasureScoringUnit;
+pub use measure_stratifier_example::MeasureStratifierExample;
+pub use measure_supplemental_data_example::MeasureSupplementalDataExample;
+pub use measure_type::MeasureType;
+pub use measurement_property::CodesForProductCharacteristics;
+pub use measurereport_stratifier_value_example::MeasureReportStratifierValueExample;
+pub use med_admin_perform_function::MedicationAdministrationPerformerFunctionCodes;
+pub use medication_admin_location::MedicationAdministrationLocationCodes;
+pub use medication_admin_status::MedicationAdministrationStatusCodes;
+pub use medication_as_needed_reason::SNOMEDCTMedicationAsNeededReasonCodes;
+pub use medication_codes::SNOMEDCTMedicationCodes;
+pub use medication_cost_category::MedicationCostCategoryCodes;
+pub use medication_dose_aid::MedicationDoseAids;
+pub use medication_form_codes::SNOMEDCTFormCodes;
+pub use medication_ingredientstrength::MedicationIngredientStrengthCodes;
+pub use medication_intended_performer_role::MedicationIntendedPerformerRole;
+pub use medication_statement_adherence::MedicationStatementAdherenceCodes;
+pub use medication_statement_status::MedicationStatementStatusCodes;
+pub use medication_status::MedicationStatusCodes;
+pub use medicationdispense_admin_location::MedicationDispenseAdministrationLocationCodes;
+pub use medicationdispense_performer_function::MedicationDispensePerformerFunctionCodes;
+pub use medicationdispense_status::MedicationDispenseStatusCodes;
+pub use medicationdispense_status_reason::MedicationDispenseStatusReasonCodes;
+pub use medicationknowledge_characteristic::MedicationKnowledgeCharacteristicCodes;
+pub use medicationknowledge_status::MedicationKnowledgeStatusCodes;
+pub use medicationrequest_admin_location::MedicationRequestAdministrationLocationCodes;
+pub use medicationrequest_course_of_therapy::MedicationRequestCourseOfTherapyCodes;
+pub use medicationrequest_intent::MedicationRequestIntent;
+pub use medicationrequest_status::MedicationrequestStatus;
+pub use medicationrequest_status_reason::MedicationRequestStatusReasonCodes;
+pub use medicinal_product_additional_monitoring::AdditionalMonitoring;
+pub use medicinal_product_classification::ProductClassification;
+pub use medicinal_product_confidentiality::ProductConfidentiality;
+pub use medicinal_product_contact_type::ProductContactType;
+pub use medicinal_product_cross_reference_type::ProductCrossReferenceType;
+pub use medicinal_product_domain::MedicinalProductDomain;
+pub use medicinal_product_name_part_type::ProductNamePartType;
+pub use medicinal_product_name_type::ProductNameType;
+pub use medicinal_product_package_type::MedicinalProductPackageType;
+pub use medicinal_product_pediatric_use::PediatricUse;
+pub use medicinal_product_special_measures::SpecialMeasures;
+pub use medicinal_product_type::MedicinalProductType;
+pub use message_events::MessageEvent;
+pub use message_reason_encounter::ExampleMessageReasonCodes;
+pub use message_significance_category::MessageSignificanceCategory;
+pub use message_transport::MessageTransport;
+pub use messageheader_response_request::MessageheaderResponseRequest;
+pub use metric_calibration_state::DeviceMetricCalibrationState;
+pub use metric_calibration_type::DeviceMetricCalibrationType;
+pub use metric_category::DeviceMetricCategory;
+pub use metric_operational_status::DeviceMetricOperationalStatus;
+pub use mimetypes::MimeTypes;
+pub use missing_tooth_reason::MissingToothReasonCodes;
+pub use modified_foodtype::TextureModifiedFoodTypeCodes;
+pub use name_use::NameUse;
+pub use namingsystem_identifier_system_type::NamingSystemIdentifierSystemType;
+pub use namingsystem_identifier_type::NamingSystemIdentifierType;
+pub use namingsystem_type::NamingSystemType;
+pub use narrative_status::NarrativeStatus;
+pub use nhin_purposeofuse::NHINPurposeOfUse;
+pub use not_consumed_reason::ReasonsFoodItemNotConsumed;
+pub use note_type::NoteType;
+pub use nutrient_code::NutrientModifierCodes;
+pub use nutrition_product_category::CategoriesOfNutritionProducts;
+pub use nutrition_product_nutrient::CodesForNutritionProductNutrients;
+pub use nutritionproduct_status::NutritionProductStatus;
+pub use object_role::AuditEventEntityRole;
+pub use observation_category::ObservationCategoryCodes;
+pub use observation_codes::LOINCCodes;
+pub use observation_interpretation::ObservationInterpretationCodes;
+pub use observation_methods::ObservationMethods;
+pub use observation_range_category::ObservationRangeCategory;
+pub use observation_referencerange_normalvalue::ObservationReferenceRangeNormalValueCodes;
+pub use observation_statistics::StatisticsCode;
+pub use observation_status::ObservationStatus;
+pub use observation_triggeredbytype::TriggeredBytype;
+pub use observation_vitalsignresult::VitalSigns;
+pub use operation_kind::OperationKind;
+pub use operation_outcome::OperationOutcomeCodes;
+pub use operation_parameter_scope::OperationParameterScope;
+pub use operation_parameter_use::OperationParameterUse;
+pub use organization_role::OrganizationAffiliationRole;
+pub use organization_type::OrganizationType;
+pub use orientation_type::OrientationType;
+pub use package_material::PackageMaterial;
+pub use package_type::PackageType;
+pub use packaging_type::PackagingType;
+pub use participant_resource_types::ParticipantResourceTypes;
+pub use participant_role::ParticipantRoles;
+pub use participation_role_type::ParticipationRoleType;
+pub use participationstatus::ParticipationStatus;
+pub use patient_contactrelationship::PatientContactRelationship;
+pub use payeetype::ClaimPayeeTypeCodes;
+pub use payment_adjustment_reason::PaymentAdjustmentReasonCodes;
+pub use payment_issuertype::PaymentIssuerType;
+pub use payment_kind::PaymentKind;
+pub use payment_outcome::PaymentOutcome;
+pub use payment_status::PaymentStatusCodes;
+pub use payment_type::PaymentTypeCodes;
+pub use performer_function::PerformerFunctionCodes;
+pub use performer_role::ProcedurePerformerRoleCodes;
+pub use permission_rule_combining::PermissionRuleCombining;
+pub use permission_status::PermissionStatus;
+pub use permitted_data_type::ObservationDataType;
+pub use plan_definition_type::PlanDefinitionType;
+pub use practitioner_role::PractitionerRole;
+pub use prepare_patient_prior_specimen_collection::PreparePatient;
+pub use price_component_type::PriceComponentType;
+pub use procedure_category::ProcedureCategoryCodesSNOMEDCT;
+pub use procedure_code::ProcedureCodesSNOMEDCT;
+pub use procedure_followup::ProcedureFollowUpCodesSNOMEDCT;
+pub use procedure_not_performed_reason::ProcedureNotPerformedReasonSNOMEDCT;
+pub use procedure_outcome::ProcedureOutcomeCodesSNOMEDCT;
+pub use procedure_reason::ProcedureReasonCodes;
+pub use process_priority::ProcessPriorityCodes;
+pub use product_category::BiologicallyDerivedProductCategory;
+pub use product_characteristic_codes::ProductCharacteristic;
+pub use product_intended_use::ProductIntendedUse;
+pub use product_status::ProductStatus;
+pub use program::Program;
+pub use property_representation::PropertyRepresentation;
+pub use provenance_activity_type::ProvenanceActivityType;
+pub use provenance_entity_role::ProvenanceEntityRole;
+pub use provenance_history_agent_type::ProvenanceEventHistoryAgentRoleCodes;
+pub use provenance_history_record_activity::ProvenanceHistoryRecordActivityCodes;
+pub use provider_qualification::ExampleProviderQualificationCodes;
+pub use provider_taxonomy::ProviderTaxonomyCodes;
+pub use publication_status::PublicationStatus;
+pub use published_in_type::PublishedInType;
+pub use quantity_comparator::QuantityComparator;
+pub use questionnaire_answer_constraint::QuestionnaireAnswerConstraint;
+pub use questionnaire_answers::QuestionnaireAnswerCodes;
+pub use questionnaire_answers_status::QuestionnaireResponseStatus;
+pub use questionnaire_disabled_display::QuestionnaireItemDisabledDisplay;
+pub use questionnaire_enable_behavior::EnableWhenBehavior;
+pub use questionnaire_enable_operator::QuestionnaireItemOperator;
+pub use questionnaire_questions::QuestionnaireQuestionCodes;
+pub use reaction_event_severity::AllergyIntoleranceSeverity;
+pub use reason_medication_given_codes::ReasonMedicationGivenCodes;
+pub use reason_medication_not_given_codes::SNOMEDCTReasonMedicationNotGivenCodes;
+pub use reason_medication_status_codes::SNOMEDCTDrugTherapyStatusCodes;
+pub use reference_handling_policy::ReferenceHandlingPolicy;
+pub use reference_version_rules::ReferenceVersionRules;
+pub use referenced_item_category::ReferencedItemCategoryValueSet;
+pub use referencerange_appliesto::ObservationReferenceRangeAppliesToCodes;
+pub use referencerange_meaning::ObservationReferenceRangeMeaningCodes;
+pub use regulated_authorization_basis::RegulatedAuthorizationBasis;
+pub use regulated_authorization_case_type::RegulatedAuthorizationCaseType;
+pub use regulated_authorization_type::RegulatedAuthorizationType;
+pub use rejection_criteria::RejectionCriterion;
+pub use related_artifact_type::RelatedArtifactType;
+pub use related_artifact_type_all::RelatedArtifactTypeExpanded as RelatedArtifactTypeExpandedRelatedArtifactTypeAll;
+pub use related_artifact_type_expanded::RelatedArtifactTypeExpanded as RelatedArtifactTypeExpandedRelatedArtifactTypeExpanded;
+pub use related_claim_relationship::ExampleRelatedClaimRelationshipCodes;
+pub use relatedperson_relationshiptype::PatientRelationshipType;
+pub use relationship::BeneficiaryRelationshipCodes;
+pub use remittance_outcome::RemittanceOutcome;
+pub use report_action_result_codes::TestReportActionResult;
+pub use report_codes::LOINCDiagnosticReportCodes;
+pub use report_participant_type::TestReportParticipantType;
+pub use report_relation_type::ReportRelationshipType;
+pub use report_result_codes::TestReportResult;
+pub use report_status_codes::TestReportStatus;
+pub use request_intent::RequestIntent;
+pub use request_priority::RequestPriority;
+pub use request_resource_types::RequestResourceTypes;
+pub use request_status::RequestStatus;
+pub use research_study_arm_type::ResearchStudyArmType;
+pub use research_study_classifiers::ResearchStudyClassifiers;
+pub use research_study_focus_type::ResearchStudyFocusType;
+pub use research_study_objective_type::ResearchStudyObjectiveType;
+pub use research_study_party_organization_type::ResearchStudyPartyOrgType;
+pub use research_study_party_role::ResearchStudyPartyRole;
+pub use research_study_phase::ResearchStudyPhase;
+pub use research_study_prim_purp_type::ResearchStudyPrimaryPurposeType;
+pub use research_study_reason_stopped::ResearchStudyReasonStopped;
+pub use research_study_status::ResearchStudyStatus;
+pub use research_subject_milestone::ResearchSubjectMilestone;
+pub use research_subject_state::ResearchSubjectState;
+pub use research_subject_state_type::ResearchSubjectStateType;
+pub use resource_aggregation_mode::AggregationMode;
+pub use resource_slicing_rules::SlicingRules;
+pub use resource_status::CanonicalStatusCodesForFHIRResources;
+pub use resource_types::ResourceType;
+pub use resource_validation_mode::ResourceValidationMode;
+pub use response_code::ResponseType;
+pub use restful_capability_mode::RestfulCapabilityMode;
+pub use restful_security_service::RestfulSecurityService;
+pub use risk_probability::RiskProbability;
+pub use route_codes::SNOMEDCTRouteCodes;
+pub use search_comparator::SearchComparator;
+pub use search_entry_mode::SearchEntryMode;
+pub use search_modifier_code::SearchModifierCode;
+pub use search_param_type::SearchParamType;
+pub use search_processingmode::SearchProcessingModeType;
+pub use security_label_data_examples::SecurityLabelDataExamples;
+pub use security_label_event_examples::SecurityLabelEventExamples;
+pub use security_label_examples::SecurityLabelExamples;
+pub use security_labels::AllSecurityLabels;
+pub use security_role_type::SecurityRoleType;
+pub use security_source_type::AuditEventSourceType;
+pub use sequence_type::SequenceType;
+pub use series_performer_function::ImagingStudySeriesPerformerFunction;
+pub use service_category::ServiceCategory;
+pub use service_mode::ServiceMode;
+pub use service_place::ExampleServicePlaceCodes;
+pub use service_provision_conditions::ServiceProvisionConditions;
+pub use service_referral_method::ReferralMethod;
+pub use service_type::ServiceType;
+pub use service_uscls::USCLSCodes;
+pub use servicerequest_category::ServiceRequestCategoryCodes;
+pub use servicerequest_orderdetail_parameter_code::ServiceRequestOrderDetailParameterCode;
+pub use signature_type::SignatureTypeCodes;
+pub use slotstatus::SlotStatus;
+pub use sort_direction::SortDirection;
+pub use spdx_license::SPDXLicense;
+pub use specimen_collection::SpecimenCollection;
+pub use specimen_collection_method::FHIRSpecimenCollectionMethod;
+pub use specimen_combined::SpecimenCombined;
+pub use specimen_contained_preference::SpecimenContainedPreference;
+pub use specimen_container_type::SpecimenContainerType;
+pub use specimen_processing_method::SpecimenProcessingMethod;
+pub use specimen_role::SpecimenRole;
+pub use specimen_status::SpecimenStatus;
+pub use statistic_model_code::StatisticModelCode;
+pub use statistic_type::StatisticType;
+pub use strand_type::StrandType;
+pub use structure_definition_kind::StructureDefinitionKind;
+pub use study_design::StudyDesign;
+pub use submit_data_update_type::SubmitDataUpdateType;
+pub use subscriber_relationship::SubscriberRelationshipCodes;
+pub use subscription_channel_type::SubscriptionChannelType;
+pub use subscription_error::SubscriptionErrorCodes;
+pub use subscription_notification_type::SubscriptionNotificationType;
+pub use subscription_payload_content::SubscriptionPayloadContent;
+pub use subscription_status::SubscriptionStatusCodes;
+pub use subscription_types::SubscriptionTypes;
+pub use subscriptiontopic_cr_behavior::CriteriaNotExistsBehavior;
+pub use substance_amount_type::SubstanceAmountType;
+pub use substance_category::SubstanceCategoryCodes;
+pub use substance_code::SubstanceCode;
+pub use substance_codes::SNOMEDCTSubstanceCodes;
+pub use substance_form::SubstanceForm;
+pub use substance_grade::SubstanceGrade;
+pub use substance_name_authority::SubstanceNameAuthority;
+pub use substance_name_domain::SubstanceNameDomain;
+pub use substance_name_type::SubstanceNameType;
+pub use substance_optical_activity::OpticalActivity;
+pub use substance_relationship_type::SubstanceRelationshipType;
+pub use substance_representation_format::SubstanceRepresentationFormat;
+pub use substance_representation_type::SubstanceRepresentationType;
+pub use substance_source_material_genus::SourceMaterialGenus;
+pub use substance_source_material_part::SourceMaterialPart;
+pub use substance_source_material_species::SourceMaterialSpecies;
+pub use substance_source_material_type::SourceMaterialType;
+pub use substance_status::FHIRSubstanceStatus;
+pub use substance_stereochemistry::Stereochemistry;
+pub use substance_structure_technique::StructureTechnique;
+pub use substance_weight_method::WeightMethod;
+pub use substance_weight_type::WeightType;
+pub use supplement_type::SupplementTypeCodes;
+pub use supply_item::SNOMEDCTSupplyItem;
+pub use supplydelivery_status::SupplyDeliveryStatus;
+pub use supplydelivery_supplyitemtype::SupplyDeliverySupplyItemType;
+pub use supplyrequest_kind::SupplyType;
+pub use supplyrequest_reason::SupplyRequestReason;
+pub use supplyrequest_status::SupplyRequestStatus;
+pub use surface::SurfaceCodes;
+pub use system_restful_interaction::SystemRestfulInteraction;
+pub use target_species::TargetSpecies;
+pub use task_code::TaskCode;
+pub use task_intent::TaskIntent;
+pub use task_status::TaskStatus;
+pub use task_status_reason::TaskStatusReason;
+pub use testscript_operation_codes::TestScriptOperationCode;
+pub use testscript_profile_destination_types::TestScriptProfileDestinationType;
+pub use testscript_profile_origin_types::TestScriptProfileOriginType;
+pub use testscript_scope_conformance_codes::TestScriptScopeConformanceType;
+pub use testscript_scope_phase_codes::TestScriptScopePhaseType;
+pub use texture_code::TextureModifierCodes;
+pub use therapy::Therapy;
+pub use therapy_relationship_type::TherapyRelationshipType;
+pub use timezones::IANATimezones;
+pub use timing_abbreviation::TimingAbbreviation;
+pub use title_type::TitleType;
+pub use tooth::OralSiteCodes;
+pub use transport_code::TransportCode;
+pub use transport_intent::TransportIntent;
+pub use transport_status::TransportStatus;
+pub use transport_status_reason::TransportStatusReason;
+pub use trigger_type::TriggerType;
+pub use type_derivation_rule::TypeDerivationRule;
+pub use type_restful_interaction::TypeRestfulInteraction;
+pub use ucum_bodylength::BodyLengthUnits;
+pub use ucum_bodytemp::BodyTemperatureUnits;
+pub use ucum_bodyweight::BodyWeightUnits;
+pub use ucum_common::CommonUCUMUnits;
+pub use ucum_units::UCUMCodes;
+pub use ucum_vitals_common::VitalSignsUnits;
+pub use udi_entry_type::UDIEntryType;
+pub use undesirable_effect_classification::UndesirableEffectClassification;
+pub use undesirable_effect_frequency::UndesirablEffectFrequency;
+pub use undesirable_effect_symptom::UndesirableEffectSymptom;
+pub use unit_of_presentation::UnitOfPresentation;
+pub use units_of_time::UnitsOfTime;
+pub use usage_context_agreement_scope::UsageContextAgreementScope;
+pub use use_context::ContextOfUseValueSet;
+pub use vaccine_code::VaccineAdministeredValueSet;
+pub use value_filter_comparator::ValueFilterComparator;
+pub use variable_handling::EvidenceVariableHandling;
+pub use variable_role::EvidenceVariableRole;
+pub use verificationresult_can_push_updates::CanPushUpdates;
+pub use verificationresult_communication_method::VerificationresultCommunicationMethod;
+pub use verificationresult_failure_action::FailureAction;
+pub use verificationresult_need::Need;
+pub use verificationresult_primary_source_type::PrimarySourceType;
+pub use verificationresult_push_type_available::PushTypeAvailable;
+pub use verificationresult_status::VerificationResultStatus;
+pub use verificationresult_validation_process::ValidationProcess;
+pub use verificationresult_validation_status::ValidationStatus;
+pub use verificationresult_validation_type::ValidationType;
+pub use version_algorithm::VersionAlgorithm;
+pub use version_independent_all_resource_types::VersionIndependentResourceTypesAll;
+pub use version_independent_resource_types::VersionIndependentResourceTypes;
+pub use versioning_policy::ResourceVersionPolicy;
+pub use virtual_service_type::VirtualServiceType;
+pub use vision_base_codes::VisionBase;
+pub use vision_eye_codes::VisionEyes;
+pub use vision_product::ExampleVisionPrescriptionProductCodes;
+pub use warning_type::WarningType;
+pub use week_of_month::WeekOfMonth;
+pub use written_languages::CommonLanguagesWritten;
+pub use yesnodontknow::YesNoDontKnow;
 
 // ---- Runtime binding registry (generated) ----
 
 use super::super::{Code, Coding, CodeableConcept};
 
-/// Function pointers for best-effort membership checks for different bound datatypes.
-/// Generated so the validation layer can enforce bindings by ValueSet canonical URL.
+/// Function pointers for best-effort ValueSet membership checks.
+///
+/// These are used by `FhirValidate` to enforce `#[fhir_binding(...)]` by URL at runtime.
 pub struct ValueSetBindingOps {
     pub contains_code: fn(&Code) -> bool,
     pub contains_coding: fn(&Coding) -> bool,
@@ -6273,9 +6274,10 @@ static __OPS_YESNODONTKNOW: ValueSetBindingOps = ValueSetBindingOps {
 
 /// Lookup binding operations by canonical ValueSet URL.
 ///
-/// NOTE: URLs are expected to be version-stripped (no `|x.y.z` suffix).
+/// NOTE: URLs may include an optional `|x.y.z` version suffix; this function matches on the base URL.
 pub fn binding_ops_by_url(url: &str) -> Option<&'static ValueSetBindingOps> {
-    match url {
+    let base = url.split('|').next().unwrap_or(url);
+    match base {
         FHIR_version::FHIRVersion::URL => Some(&__OPS_FHIR_VERSION),
         account_aggregate::AccountAggregate::URL => Some(&__OPS_ACCOUNT_AGGREGATE),
         account_balance_term::AccountBalanceTerm::URL => Some(&__OPS_ACCOUNT_BALANCE_TERM),
@@ -7064,7 +7066,8 @@ pub fn binding_ops_by_url(url: &str) -> Option<&'static ValueSetBindingOps> {
 
 /// Lookup whether a ValueSet has any non-local compose rules (filters, include.valueSet, or whole-system includes without local enumeration).
 pub fn valueset_has_nonlocal_rules(url: &str) -> Option<bool> {
-    match url {
+    let base = url.split('|').next().unwrap_or(url);
+    match base {
         FHIR_version::FHIRVersion::URL => Some(FHIR_version::FHIRVersion::HAS_NONLOCAL_RULES),
         account_aggregate::AccountAggregate::URL => Some(account_aggregate::AccountAggregate::HAS_NONLOCAL_RULES),
         account_balance_term::AccountBalanceTerm::URL => Some(account_balance_term::AccountBalanceTerm::HAS_NONLOCAL_RULES),
@@ -7853,7 +7856,8 @@ pub fn valueset_has_nonlocal_rules(url: &str) -> Option<bool> {
 
 /// Lookup whether a ValueSet is fully locally enumerable (i.e., membership can be decided without a terminology server).
 pub fn valueset_is_locally_enumerated(url: &str) -> Option<bool> {
-    match url {
+    let base = url.split('|').next().unwrap_or(url);
+    match base {
         FHIR_version::FHIRVersion::URL => Some(FHIR_version::FHIRVersion::is_locally_enumerated()),
         account_aggregate::AccountAggregate::URL => Some(account_aggregate::AccountAggregate::is_locally_enumerated()),
         account_balance_term::AccountBalanceTerm::URL => Some(account_balance_term::AccountBalanceTerm::is_locally_enumerated()),
@@ -8636,6 +8640,1591 @@ pub fn valueset_is_locally_enumerated(url: &str) -> Option<bool> {
         week_of_month::WeekOfMonth::URL => Some(week_of_month::WeekOfMonth::is_locally_enumerated()),
         written_languages::CommonLanguagesWritten::URL => Some(written_languages::CommonLanguagesWritten::is_locally_enumerated()),
         yesnodontknow::YesNoDontKnow::URL => Some(yesnodontknow::YesNoDontKnow::is_locally_enumerated()),
+        _ => None,
+    }
+}
+
+/// If the ValueSet implies exactly one system (via include.system or includeWholeSystem),
+/// return that system URI. Otherwise return None.
+///
+/// NOTE: URLs may include an optional `|x.y.z` version suffix; this function matches on the base URL.
+pub fn valueset_single_system_by_url(url: &str) -> Option<&'static str> {
+    let base = url.split('|').next().unwrap_or(url);
+    match base {
+        FHIR_version::FHIRVersion::URL => FHIR_version::FHIRVersion::single_system(),
+        account_aggregate::AccountAggregate::URL => account_aggregate::AccountAggregate::single_system(),
+        account_balance_term::AccountBalanceTerm::URL => account_balance_term::AccountBalanceTerm::single_system(),
+        account_billing_status::AccountBillingStatus::URL => account_billing_status::AccountBillingStatus::single_system(),
+        account_relationship::AccountRelationship::URL => account_relationship::AccountRelationship::single_system(),
+        account_status::AccountStatus::URL => account_status::AccountStatus::single_system(),
+        account_type::AccountTypes::URL => account_type::AccountTypes::single_system(),
+        action_cardinality_behavior::ActionCardinalityBehavior::URL => action_cardinality_behavior::ActionCardinalityBehavior::single_system(),
+        action_code::ActionCode::URL => action_code::ActionCode::single_system(),
+        action_condition_kind::ActionConditionKind::URL => action_condition_kind::ActionConditionKind::single_system(),
+        action_grouping_behavior::ActionGroupingBehavior::URL => action_grouping_behavior::ActionGroupingBehavior::single_system(),
+        action_participant_function::ActionParticipantFunction::URL => action_participant_function::ActionParticipantFunction::single_system(),
+        action_participant_type::ActionParticipantType::URL => action_participant_type::ActionParticipantType::single_system(),
+        action_precheck_behavior::ActionPrecheckBehavior::URL => action_precheck_behavior::ActionPrecheckBehavior::single_system(),
+        action_reason_code::ActionReasonCode::URL => action_reason_code::ActionReasonCode::single_system(),
+        action_relationship_type::ActionRelationshipType::URL => action_relationship_type::ActionRelationshipType::single_system(),
+        action_required_behavior::ActionRequiredBehavior::URL => action_required_behavior::ActionRequiredBehavior::single_system(),
+        action_selection_behavior::ActionSelectionBehavior::URL => action_selection_behavior::ActionSelectionBehavior::single_system(),
+        action_type::ActionType::URL => action_type::ActionType::single_system(),
+        additional_binding_purpose::AdditionalBindingPurposeVS::URL => additional_binding_purpose::AdditionalBindingPurposeVS::single_system(),
+        additional_instruction_codes::SNOMEDCTAdditionalDosageInstructions::URL => additional_instruction_codes::SNOMEDCTAdditionalDosageInstructions::single_system(),
+        address_type::AddressType::URL => address_type::AddressType::single_system(),
+        address_use::AddressUse::URL => address_use::AddressUse::single_system(),
+        adjudication::AdjudicationValueCodes::URL => adjudication::AdjudicationValueCodes::single_system(),
+        adjudication_error::AdjudicationErrorCodes::URL => adjudication_error::AdjudicationErrorCodes::single_system(),
+        adjudication_reason::AdjudicationReasonCodes::URL => adjudication_reason::AdjudicationReasonCodes::single_system(),
+        administrable_dose_form::AdministrableDoseForm::URL => administrable_dose_form::AdministrableDoseForm::single_system(),
+        administration_method_codes::SNOMEDCTAdministrationMethodCodes::URL => administration_method_codes::SNOMEDCTAdministrationMethodCodes::single_system(),
+        administration_subpotent_reason::MedicationAdministrationSubpotentReason::URL => administration_subpotent_reason::MedicationAdministrationSubpotentReason::single_system(),
+        administrative_gender::AdministrativeGender::URL => administrative_gender::AdministrativeGender::single_system(),
+        adverse_event_actuality::AdverseEventActuality::URL => adverse_event_actuality::AdverseEventActuality::single_system(),
+        adverse_event_category::AdverseEventCategory::URL => adverse_event_category::AdverseEventCategory::single_system(),
+        adverse_event_causality_assess::AdverseEventCausalityAssessment::URL => adverse_event_causality_assess::AdverseEventCausalityAssessment::single_system(),
+        adverse_event_causality_method::AdverseEventCausalityMethod::URL => adverse_event_causality_method::AdverseEventCausalityMethod::single_system(),
+        adverse_event_contributing_factor::AdverseEventContributingFactor::URL => adverse_event_contributing_factor::AdverseEventContributingFactor::single_system(),
+        adverse_event_mitigating_action::AdverseEventMitigatingAction::URL => adverse_event_mitigating_action::AdverseEventMitigatingAction::single_system(),
+        adverse_event_outcome::AdverseEventOutcome::URL => adverse_event_outcome::AdverseEventOutcome::single_system(),
+        adverse_event_participant_function::AdverseEventParticipantFunction::URL => adverse_event_participant_function::AdverseEventParticipantFunction::single_system(),
+        adverse_event_preventive_action::AdverseEventPreventiveAction::URL => adverse_event_preventive_action::AdverseEventPreventiveAction::single_system(),
+        adverse_event_seriousness::AdverseEventSeriousness::URL => adverse_event_seriousness::AdverseEventSeriousness::single_system(),
+        adverse_event_status::AdverseEventStatus::URL => adverse_event_status::AdverseEventStatus::single_system(),
+        adverse_event_supporting_info::AdverseEventSupportingInforation::URL => adverse_event_supporting_info::AdverseEventSupportingInforation::single_system(),
+        adverse_event_type::AdverseEventType::URL => adverse_event_type::AdverseEventType::single_system(),
+        age_units::CommonUCUMCodesForAge::URL => age_units::CommonUCUMCodesForAge::single_system(),
+        all_distance_units::AllUCUMExpressionForDistance::URL => all_distance_units::AllUCUMExpressionForDistance::single_system(),
+        all_languages::AllLanguages::URL => all_languages::AllLanguages::single_system(),
+        all_resource_types::AllResourceTypes::URL => all_resource_types::AllResourceTypes::single_system(),
+        all_time_units::AllUCUMExpressionForTime::URL => all_time_units::AllUCUMExpressionForTime::single_system(),
+        allergen_class::CodesForAllergenClasses::URL => allergen_class::CodesForAllergenClasses::single_system(),
+        allergy_intolerance_category::AllergyIntoleranceCategory::URL => allergy_intolerance_category::AllergyIntoleranceCategory::single_system(),
+        allergy_intolerance_criticality::AllergyIntoleranceCriticality::URL => allergy_intolerance_criticality::AllergyIntoleranceCriticality::single_system(),
+        allergy_intolerance_type::AllergyIntoleranceType::URL => allergy_intolerance_type::AllergyIntoleranceType::single_system(),
+        allergyintolerance_clinical::AllergyIntoleranceClinicalStatusCodes::URL => allergyintolerance_clinical::AllergyIntoleranceClinicalStatusCodes::single_system(),
+        allergyintolerance_code::SubstanceProductAndConditionAndNegationCodes::URL => allergyintolerance_code::SubstanceProductAndConditionAndNegationCodes::single_system(),
+        allergyintolerance_verification::AllergyIntoleranceVerificationStatus::URL => allergyintolerance_verification::AllergyIntoleranceVerificationStatus::single_system(),
+        animal_tissue_type::AnimalTissueType::URL => animal_tissue_type::AnimalTissueType::single_system(),
+        appointment_cancellation_reason::AppointmentCancellationReason::URL => appointment_cancellation_reason::AppointmentCancellationReason::single_system(),
+        appointment_recurrrence_type::AppointmentRecurrenceType::URL => appointment_recurrrence_type::AppointmentRecurrenceType::single_system(),
+        appointmentresponse_status::AppointmentResponseStatus::URL => appointmentresponse_status::AppointmentResponseStatus::single_system(),
+        appointmentstatus::AppointmentStatus::URL => appointmentstatus::AppointmentStatus::single_system(),
+        approach_site_codes::SNOMEDCTAnatomicalStructureAdministrationSites::URL => approach_site_codes::SNOMEDCTAnatomicalStructureAdministrationSites::single_system(),
+        artifact_contribution_instance_type::ArtifactContributionInstanceType::URL => artifact_contribution_instance_type::ArtifactContributionInstanceType::single_system(),
+        artifact_contribution_type::ArtifactContributionType::URL => artifact_contribution_type::ArtifactContributionType::single_system(),
+        artifact_url_classifier::ArtifactUrlClassifier::URL => artifact_url_classifier::ArtifactUrlClassifier::single_system(),
+        artifactassessment_disposition::ArtifactAssessmentDisposition::URL => artifactassessment_disposition::ArtifactAssessmentDisposition::single_system(),
+        artifactassessment_information_type::ArtifactAssessmentInformationType::URL => artifactassessment_information_type::ArtifactAssessmentInformationType::single_system(),
+        artifactassessment_workflow_status::ArtifactAssessmentWorkflowStatus::URL => artifactassessment_workflow_status::ArtifactAssessmentWorkflowStatus::single_system(),
+        assert_direction_codes::AssertionDirectionType::URL => assert_direction_codes::AssertionDirectionType::single_system(),
+        assert_manual_completion_codes::AssertionManualCompletionType::URL => assert_manual_completion_codes::AssertionManualCompletionType::single_system(),
+        assert_operator_codes::AssertionOperatorType::URL => assert_operator_codes::AssertionOperatorType::single_system(),
+        assert_response_code_types::AssertionResponseTypes::URL => assert_response_code_types::AssertionResponseTypes::single_system(),
+        asset_availability::ContractResourceAssetAvailiabilityCodes::URL => asset_availability::ContractResourceAssetAvailiabilityCodes::single_system(),
+        attribute_estimate_type::AttributeEstimateType::URL => attribute_estimate_type::AttributeEstimateType::single_system(),
+        audit_event_action::AuditEventAction::URL => audit_event_action::AuditEventAction::single_system(),
+        audit_event_outcome::AuditEventOutcome::URL => audit_event_outcome::AuditEventOutcome::single_system(),
+        audit_event_outcome_detail::AuditEventOutcomeDetail::URL => audit_event_outcome_detail::AuditEventOutcomeDetail::single_system(),
+        audit_event_severity::AuditEventSeverity::URL => audit_event_severity::AuditEventSeverity::single_system(),
+        audit_event_sub_type::AuditEventSubType::URL => audit_event_sub_type::AuditEventSubType::single_system(),
+        audit_event_type::AuditEventID::URL => audit_event_type::AuditEventID::single_system(),
+        basic_resource_type::BasicResourceTypes::URL => basic_resource_type::BasicResourceTypes::single_system(),
+        benefit_network::NetworkTypeCodes::URL => benefit_network::NetworkTypeCodes::single_system(),
+        benefit_term::BenefitTermCodes::URL => benefit_term::BenefitTermCodes::single_system(),
+        benefit_type::BenefitTypeCodes::URL => benefit_type::BenefitTypeCodes::single_system(),
+        benefit_unit::UnitTypeCodes::URL => benefit_unit::UnitTypeCodes::single_system(),
+        binding_strength::BindingStrength::URL => binding_strength::BindingStrength::single_system(),
+        biologicallyderived_product_property_type_codes::BiologicallyDerivedProductPropertyTypeCodes::URL => biologicallyderived_product_property_type_codes::BiologicallyDerivedProductPropertyTypeCodes::single_system(),
+        biologicallyderived_product_status::BiologicallyDerivedProductStatus::URL => biologicallyderived_product_status::BiologicallyDerivedProductStatus::single_system(),
+        biologicallyderived_productcodes::BiologicallyDerivedProductCodes::URL => biologicallyderived_productcodes::BiologicallyDerivedProductCodes::single_system(),
+        biologicallyderivedproductdispense_match_status::BiologicallyDerivedProductDispenseMatchStatus::URL => biologicallyderivedproductdispense_match_status::BiologicallyDerivedProductDispenseMatchStatus::single_system(),
+        biologicallyderivedproductdispense_origin_relationship::BiologicallyDerivedProductDispenseOriginRelationship::URL => biologicallyderivedproductdispense_origin_relationship::BiologicallyDerivedProductDispenseOriginRelationship::single_system(),
+        biologicallyderivedproductdispense_performer_function::BiologicallyDerivedProductDispensePerformerFunction::URL => biologicallyderivedproductdispense_performer_function::BiologicallyDerivedProductDispensePerformerFunction::single_system(),
+        biologicallyderivedproductdispense_status::BiologicallyDerivedProductDispenseCodes::URL => biologicallyderivedproductdispense_status::BiologicallyDerivedProductDispenseCodes::single_system(),
+        body_site::SNOMEDCTBodyStructures::URL => body_site::SNOMEDCTBodyStructures::single_system(),
+        bodystructure_bodylandmarkorientation_clockface_position::BodystructureBodyLandmarkClockFacePosition::URL => bodystructure_bodylandmarkorientation_clockface_position::BodystructureBodyLandmarkClockFacePosition::single_system(),
+        bodystructure_code::SNOMEDCTMorphologicAbnormalities::URL => bodystructure_code::SNOMEDCTMorphologicAbnormalities::single_system(),
+        bodystructure_relative_location::BodystructureLocationQualifier::URL => bodystructure_relative_location::BodystructureLocationQualifier::single_system(),
+        bundle_type::BundleType::URL => bundle_type::BundleType::single_system(),
+        c80_facilitycodes::FacilityTypeCodeValueSet::URL => c80_facilitycodes::FacilityTypeCodeValueSet::single_system(),
+        c80_practice_codes::PracticeSettingCodeValueSet::URL => c80_practice_codes::PracticeSettingCodeValueSet::single_system(),
+        capability_format_type::CapabilityFormatType::URL => capability_format_type::CapabilityFormatType::single_system(),
+        capability_statement_kind::CapabilityStatementKind::URL => capability_statement_kind::CapabilityStatementKind::single_system(),
+        care_plan_activity_performed::CarePlanActivityPerformed::URL => care_plan_activity_performed::CarePlanActivityPerformed::single_system(),
+        care_plan_category::CarePlanCategory::URL => care_plan_category::CarePlanCategory::single_system(),
+        care_plan_intent::CarePlanIntent::URL => care_plan_intent::CarePlanIntent::single_system(),
+        care_team_category::CareTeamCategory::URL => care_team_category::CareTeamCategory::single_system(),
+        care_team_status::CareTeamStatus::URL => care_team_status::CareTeamStatus::single_system(),
+        catalogType::CatalogType::URL => catalogType::CatalogType::single_system(),
+        cdshooks_indicator::Indicator::URL => cdshooks_indicator::Indicator::single_system(),
+        certainty_rating::EvidenceCertaintyRating::URL => certainty_rating::EvidenceCertaintyRating::single_system(),
+        certainty_type::EvidenceCertaintyType::URL => certainty_type::EvidenceCertaintyType::single_system(),
+        characteristic_combination::CharacteristicCombination::URL => characteristic_combination::CharacteristicCombination::single_system(),
+        characteristic_offset::CharacteristicOffset::URL => characteristic_offset::CharacteristicOffset::single_system(),
+        chargeitem_billingcodes::ChargeItemCode::URL => chargeitem_billingcodes::ChargeItemCode::single_system(),
+        chargeitem_status::ChargeItemStatus::URL => chargeitem_status::ChargeItemStatus::single_system(),
+        citation_artifact_classifier::CitationArtifactClassifier::URL => citation_artifact_classifier::CitationArtifactClassifier::single_system(),
+        citation_classification_type::CitationClassificationType::URL => citation_classification_type::CitationClassificationType::single_system(),
+        citation_status_type::CitationStatusType::URL => citation_status_type::CitationStatusType::single_system(),
+        citation_summary_style::CitationSummaryStyle::URL => citation_summary_style::CitationSummaryStyle::single_system(),
+        cited_artifact_abstract_type::CitedArtifactAbstractType::URL => cited_artifact_abstract_type::CitedArtifactAbstractType::single_system(),
+        cited_artifact_classification_type::CitedArtifactClassificationType::URL => cited_artifact_classification_type::CitedArtifactClassificationType::single_system(),
+        cited_artifact_part_type::CitedArtifactPartType::URL => cited_artifact_part_type::CitedArtifactPartType::single_system(),
+        cited_artifact_status_type::CitedArtifactStatusType::URL => cited_artifact_status_type::CitedArtifactStatusType::single_system(),
+        cited_medium::CitedMedium::URL => cited_medium::CitedMedium::single_system(),
+        claim_careteamrole::ClaimCareTeamRoleCodes::URL => claim_careteamrole::ClaimCareTeamRoleCodes::single_system(),
+        claim_decision::ClaimAdjudicationDecisionsCodes::URL => claim_decision::ClaimAdjudicationDecisionsCodes::single_system(),
+        claim_decision_reason::ClaimAdjudicationDecisionReasonCodes::URL => claim_decision_reason::ClaimAdjudicationDecisionReasonCodes::single_system(),
+        claim_exception::ExceptionCodes::URL => claim_exception::ExceptionCodes::single_system(),
+        claim_informationcategory::ClaimInformationCategoryCodes::URL => claim_informationcategory::ClaimInformationCategoryCodes::single_system(),
+        claim_modifiers::ModifierTypeCodes::URL => claim_modifiers::ModifierTypeCodes::single_system(),
+        claim_outcome::ClaimProcessingCodes::URL => claim_outcome::ClaimProcessingCodes::single_system(),
+        claim_subtype::ExampleClaimSubTypeCodes::URL => claim_subtype::ExampleClaimSubTypeCodes::single_system(),
+        claim_type::ClaimTypeCodes::URL => claim_type::ClaimTypeCodes::single_system(),
+        claim_use::Use::URL => claim_use::Use::single_system(),
+        clinical_findings::SNOMEDCTClinicalFindings::URL => clinical_findings::SNOMEDCTClinicalFindings::single_system(),
+        clinical_use_definition_category::ClinicalUseDefinitionCategory::URL => clinical_use_definition_category::ClinicalUseDefinitionCategory::single_system(),
+        clinical_use_definition_type::ClinicalUseDefinitionType::URL => clinical_use_definition_type::ClinicalUseDefinitionType::single_system(),
+        clinicalimpression_change_pattern::ClinicalImpressionChangePatter::URL => clinicalimpression_change_pattern::ClinicalImpressionChangePatter::single_system(),
+        clinicalimpression_prognosis::ClinicalImpressionPrognosis::URL => clinicalimpression_prognosis::ClinicalImpressionPrognosis::single_system(),
+        clinicalimpression_status_reason::ClinicalImpressionStatusReason::URL => clinicalimpression_status_reason::ClinicalImpressionStatusReason::single_system(),
+        code_search_support::CodeSearchSupport::URL => code_search_support::CodeSearchSupport::single_system(),
+        codesystem_content_mode::CodeSystemContentMode::URL => codesystem_content_mode::CodeSystemContentMode::single_system(),
+        codesystem_hierarchy_meaning::CodeSystemHierarchyMeaning::URL => codesystem_hierarchy_meaning::CodeSystemHierarchyMeaning::single_system(),
+        color_codes::ColorCodesOrRGB::URL => color_codes::ColorCodesOrRGB::single_system(),
+        combined_dose_form::CombinedDoseForm::URL => combined_dose_form::CombinedDoseForm::single_system(),
+        common_tags::CommonTags::URL => common_tags::CommonTags::single_system(),
+        communication_category::CommunicationCategory::URL => communication_category::CommunicationCategory::single_system(),
+        communication_not_done_reason::CommunicationNotDoneReason::URL => communication_not_done_reason::CommunicationNotDoneReason::single_system(),
+        communication_request_status_reason::CommunicationRequestStatusReason::URL => communication_request_status_reason::CommunicationRequestStatusReason::single_system(),
+        communication_topic::CommunicationTopic::URL => communication_topic::CommunicationTopic::single_system(),
+        compartment_type::CompartmentType::URL => compartment_type::CompartmentType::single_system(),
+        composite_measure_scoring::CompositeMeasureScoring::URL => composite_measure_scoring::CompositeMeasureScoring::single_system(),
+        composition_attestation_mode::CompositionAttestationMode::URL => composition_attestation_mode::CompositionAttestationMode::single_system(),
+        composition_status::CompositionStatus::URL => composition_status::CompositionStatus::single_system(),
+        concept_map_relationship::ConceptMapRelationship::URL => concept_map_relationship::ConceptMapRelationship::single_system(),
+        concept_property_type::PropertyType::URL => concept_property_type::PropertyType::single_system(),
+        concept_subsumption_outcome::ConceptSubsumptionOutcome::URL => concept_subsumption_outcome::ConceptSubsumptionOutcome::single_system(),
+        conceptmap_attribute_type::ConceptMapAttributeType::URL => conceptmap_attribute_type::ConceptMapAttributeType::single_system(),
+        conceptmap_property_type::ConceptMapPropertyType::URL => conceptmap_property_type::ConceptMapPropertyType::single_system(),
+        conceptmap_unmapped_mode::ConceptMapGroupUnmappedMode::URL => conceptmap_unmapped_mode::ConceptMapGroupUnmappedMode::single_system(),
+        concrete_fhir_types::ConcreteFHIRTypes::URL => concrete_fhir_types::ConcreteFHIRTypes::single_system(),
+        condition_category::ConditionCategoryCodes::URL => condition_category::ConditionCategoryCodes::single_system(),
+        condition_clinical::ConditionClinicalStatusCodes::URL => condition_clinical::ConditionClinicalStatusCodes::single_system(),
+        condition_code::ConditionProblemDiagnosisCodes::URL => condition_code::ConditionProblemDiagnosisCodes::single_system(),
+        condition_outcome::ConditionOutcomeCodes::URL => condition_outcome::ConditionOutcomeCodes::single_system(),
+        condition_precondition_type::ConditionPreconditionType::URL => condition_precondition_type::ConditionPreconditionType::single_system(),
+        condition_questionnaire_purpose::ConditionQuestionnairePurpose::URL => condition_questionnaire_purpose::ConditionQuestionnairePurpose::single_system(),
+        condition_severity::ConditionDiagnosisSeverity::URL => condition_severity::ConditionDiagnosisSeverity::single_system(),
+        condition_stage::ConditionStage::URL => condition_stage::ConditionStage::single_system(),
+        condition_stage_type::ConditionStageType::URL => condition_stage_type::ConditionStageType::single_system(),
+        condition_ver_status::ConditionVerificationStatus::URL => condition_ver_status::ConditionVerificationStatus::single_system(),
+        conditional_delete_status::ConditionalDeleteStatus::URL => conditional_delete_status::ConditionalDeleteStatus::single_system(),
+        conditional_read_status::ConditionalReadStatus::URL => conditional_read_status::ConditionalReadStatus::single_system(),
+        conformance_expectation::ConformanceExpectation::URL => conformance_expectation::ConformanceExpectation::single_system(),
+        consent_action::ConsentActionCodes::URL => consent_action::ConsentActionCodes::single_system(),
+        consent_category::ConsentCategoryCodes::URL => consent_category::ConsentCategoryCodes::single_system(),
+        consent_content_class::ConsentContentClass::URL => consent_content_class::ConsentContentClass::single_system(),
+        consent_content_code::ConsentContentCodes::URL => consent_content_code::ConsentContentCodes::single_system(),
+        consent_data_meaning::ConsentDataMeaning::URL => consent_data_meaning::ConsentDataMeaning::single_system(),
+        consent_policy::ConsentPolicyRuleCodes::URL => consent_policy::ConsentPolicyRuleCodes::single_system(),
+        consent_provision_type::ConsentProvisionType::URL => consent_provision_type::ConsentProvisionType::single_system(),
+        consent_state_codes::ConsentState::URL => consent_state_codes::ConsentState::single_system(),
+        consent_verification::ConsentVerificationCodes::URL => consent_verification::ConsentVerificationCodes::single_system(),
+        consistency_type::FluidConsistencyTypeCodes::URL => consistency_type::FluidConsistencyTypeCodes::single_system(),
+        constraint_severity::ConstraintSeverity::URL => constraint_severity::ConstraintSeverity::single_system(),
+        contact_point_system::ContactPointSystem::URL => contact_point_system::ContactPointSystem::single_system(),
+        contact_point_use::ContactPointUse::URL => contact_point_use::ContactPointUse::single_system(),
+        container_cap::ContainerCap::URL => container_cap::ContainerCap::single_system(),
+        container_material::ContainerMaterials::URL => container_material::ContainerMaterials::single_system(),
+        contract_action::ContractActionCodes::URL => contract_action::ContractActionCodes::single_system(),
+        contract_actionstatus::ContractResourceActionStatusCodes::URL => contract_actionstatus::ContractResourceActionStatusCodes::single_system(),
+        contract_actorrole::ContractActorRoleCodes::URL => contract_actorrole::ContractActorRoleCodes::single_system(),
+        contract_assetcontext::ContractResourceAssetContextCodes::URL => contract_assetcontext::ContractResourceAssetContextCodes::single_system(),
+        contract_assetscope::ContractResourceAssetScopeCodes::URL => contract_assetscope::ContractResourceAssetScopeCodes::single_system(),
+        contract_assetsubtype::ContractResourceAssetSubTypeCodes::URL => contract_assetsubtype::ContractResourceAssetSubTypeCodes::single_system(),
+        contract_assettype::ContractResourceAssetTypeCodes::URL => contract_assettype::ContractResourceAssetTypeCodes::single_system(),
+        contract_content_derivative::ContractContentDerivationCodes::URL => contract_content_derivative::ContractContentDerivationCodes::single_system(),
+        contract_decision_mode::ContractResourceDecisionModeCodes::URL => contract_decision_mode::ContractResourceDecisionModeCodes::single_system(),
+        contract_definition_subtype::ContractResourceDefinitionSubtypeCodes::URL => contract_definition_subtype::ContractResourceDefinitionSubtypeCodes::single_system(),
+        contract_definition_type::ContractResourceDefinitionTypeCodes::URL => contract_definition_type::ContractResourceDefinitionTypeCodes::single_system(),
+        contract_expiration_type::ContractResourceExpirationTypeCodes::URL => contract_expiration_type::ContractResourceExpirationTypeCodes::single_system(),
+        contract_legalstate::ContractResourceLegalStateCodes::URL => contract_legalstate::ContractResourceLegalStateCodes::single_system(),
+        contract_party_role::ContractResourcePartyRoleCodes::URL => contract_party_role::ContractResourcePartyRoleCodes::single_system(),
+        contract_publicationstatus::ContractResourcePublicationStatusCodes::URL => contract_publicationstatus::ContractResourcePublicationStatusCodes::single_system(),
+        contract_scope::ContractResourceScopeCodes::URL => contract_scope::ContractResourceScopeCodes::single_system(),
+        contract_security_category::ContractResourceScopeCodes::URL => contract_security_category::ContractResourceScopeCodes::single_system(),
+        contract_security_classification::ContractResourceScopeCodes::URL => contract_security_classification::ContractResourceScopeCodes::single_system(),
+        contract_security_control::ContractResourceSecurityControlCodes::URL => contract_security_control::ContractResourceSecurityControlCodes::single_system(),
+        contract_signer_type::ContractSignerTypeCodes::URL => contract_signer_type::ContractSignerTypeCodes::single_system(),
+        contract_status::ContractResourceStatusCodes::URL => contract_status::ContractResourceStatusCodes::single_system(),
+        contract_subtype::ContractSubtypeCodes::URL => contract_subtype::ContractSubtypeCodes::single_system(),
+        contract_term_subtype::ContractTermSubtypeCodes::URL => contract_term_subtype::ContractTermSubtypeCodes::single_system(),
+        contract_term_type::ContractTermTypeCodes::URL => contract_term_type::ContractTermTypeCodes::single_system(),
+        contract_type::ContractTypeCodes::URL => contract_type::ContractTypeCodes::single_system(),
+        contributor_role::ContributorRole::URL => contributor_role::ContributorRole::single_system(),
+        contributor_summary_source::ContributorSummarySource::URL => contributor_summary_source::ContributorSummarySource::single_system(),
+        contributor_summary_style::ContributorSummaryStyle::URL => contributor_summary_style::ContributorSummaryStyle::single_system(),
+        contributor_summary_type::ContributorSummaryType::URL => contributor_summary_type::ContributorSummaryType::single_system(),
+        contributor_type::ContributorType::URL => contributor_type::ContributorType::single_system(),
+        country::CountryValueSet::URL => country::CountryValueSet::single_system(),
+        coverage_class::CoverageClassCodes::URL => coverage_class::CoverageClassCodes::single_system(),
+        coverage_copay_type::CoverageCopayTypeCodes::URL => coverage_copay_type::CoverageCopayTypeCodes::single_system(),
+        coverage_financial_exception::ExampleCoverageFinancialExceptionCodes::URL => coverage_financial_exception::ExampleCoverageFinancialExceptionCodes::single_system(),
+        coverage_kind::Kind::URL => coverage_kind::Kind::single_system(),
+        coverage_type::CoverageTypeAndSelfPayCodes::URL => coverage_type::CoverageTypeAndSelfPayCodes::single_system(),
+        coverageeligibilityresponse_ex_auth_support::CoverageEligibilityResponseAuthSupportCodes::URL => coverageeligibilityresponse_ex_auth_support::CoverageEligibilityResponseAuthSupportCodes::single_system(),
+        currencies::Currencies::URL => currencies::Currencies::single_system(),
+        data_absent_reason::DataAbsentReason::URL => data_absent_reason::DataAbsentReason::single_system(),
+        data_types::FHIRTypes::URL => data_types::FHIRTypes::single_system(),
+        datestype::DatesTypeCodes::URL => datestype::DatesTypeCodes::single_system(),
+        days_of_week::DaysOfWeek::URL => days_of_week::DaysOfWeek::single_system(),
+        definition_method::DefinitionMethod::URL => definition_method::DefinitionMethod::single_system(),
+        definition_resource_types::DefinitionResourceTypes::URL => definition_resource_types::DefinitionResourceTypes::single_system(),
+        definition_topic::DefinitionTopic::URL => definition_topic::DefinitionTopic::single_system(),
+        definition_use::DefinitionUseCodes::URL => definition_use::DefinitionUseCodes::single_system(),
+        designation_use::DesignationUse::URL => designation_use::DesignationUse::single_system(),
+        detectedissue_category::DetectedIssueCategory::URL => detectedissue_category::DetectedIssueCategory::single_system(),
+        detectedissue_mitigation_action::DetectedIssueMitigationAction::URL => detectedissue_mitigation_action::DetectedIssueMitigationAction::single_system(),
+        detectedissue_severity::DetectedIssueSeverity::URL => detectedissue_severity::DetectedIssueSeverity::single_system(),
+        detectedissue_status::DetectedIssueStatus::URL => detectedissue_status::DetectedIssueStatus::single_system(),
+        device_action::ProcedureDeviceActionCodes::URL => device_action::ProcedureDeviceActionCodes::single_system(),
+        device_availability_status::FHIRDeviceAvailabilityStatus::URL => device_availability_status::FHIRDeviceAvailabilityStatus::single_system(),
+        device_category::FHIRDeviceCategory::URL => device_category::FHIRDeviceCategory::single_system(),
+        device_correctiveactionscope::DeviceCorrectiveActionScope::URL => device_correctiveactionscope::DeviceCorrectiveActionScope::single_system(),
+        device_nametype::DeviceNameType::URL => device_nametype::DeviceNameType::single_system(),
+        device_operation_mode::FHIRDeviceOperationMode::URL => device_operation_mode::FHIRDeviceOperationMode::single_system(),
+        device_productidentifierinudi::DeviceProductionIdentifierInUDI::URL => device_productidentifierinudi::DeviceProductionIdentifierInUDI::single_system(),
+        device_property_type::DeviceType::URL => device_property_type::DeviceType::single_system(),
+        device_safety::DeviceSafety::URL => device_safety::DeviceSafety::single_system(),
+        device_specification_category::DeviceSpecificationCategory::URL => device_specification_category::DeviceSpecificationCategory::single_system(),
+        device_specification_type::DeviceSpecificationType::URL => device_specification_type::DeviceSpecificationType::single_system(),
+        device_status::FHIRDeviceStatus::URL => device_status::FHIRDeviceStatus::single_system(),
+        device_type::DeviceType::URL => device_type::DeviceType::single_system(),
+        device_versiontype::DeviceVersionType::URL => device_versiontype::DeviceVersionType::single_system(),
+        deviceassociation_operationstatus::FHIRDeviceAssociationOperationStatus::URL => deviceassociation_operationstatus::FHIRDeviceAssociationOperationStatus::single_system(),
+        deviceassociation_status::DeviceAssociationCodes::URL => deviceassociation_status::DeviceAssociationCodes::single_system(),
+        deviceassociation_status_reason::DeviceAssociationCodes::URL => deviceassociation_status_reason::DeviceAssociationCodes::single_system(),
+        devicedefinition_regulatory_identifier_type::DeviceDefinitionRegulatoryIdentifierType::URL => devicedefinition_regulatory_identifier_type::DeviceDefinitionRegulatoryIdentifierType::single_system(),
+        devicedefinition_relationtype::DeviceDefinitionRelationType::URL => devicedefinition_relationtype::DeviceDefinitionRelationType::single_system(),
+        devicedispense_status::DeviceDispenseStatusCodes::URL => devicedispense_status::DeviceDispenseStatusCodes::single_system(),
+        devicedispense_status_reason::DeviceDispenseStatusReasonCodes::URL => devicedispense_status_reason::DeviceDispenseStatusReasonCodes::single_system(),
+        devicemetric_type::DeviceMetricAndComponentTypes::URL => devicemetric_type::DeviceMetricAndComponentTypes::single_system(),
+        deviceusage_adherence_code::DeviceUsageAdherenceCode::URL => deviceusage_adherence_code::DeviceUsageAdherenceCode::single_system(),
+        deviceusage_adherence_reason::DeviceUsageAdherenceReason::URL => deviceusage_adherence_reason::DeviceUsageAdherenceReason::single_system(),
+        deviceusage_status::DeviceUsageStatus::URL => deviceusage_status::DeviceUsageStatus::single_system(),
+        diagnosis_role::DiagnosisRole::URL => diagnosis_role::DiagnosisRole::single_system(),
+        diagnostic_report_status::DiagnosticReportStatus::URL => diagnostic_report_status::DiagnosticReportStatus::single_system(),
+        diagnostic_service_sections::DiagnosticServiceSectionCodes::URL => diagnostic_service_sections::DiagnosticServiceSectionCodes::single_system(),
+        diet_type::DietCodes::URL => diet_type::DietCodes::single_system(),
+        discriminator_type::DiscriminatorType::URL => discriminator_type::DiscriminatorType::single_system(),
+        disease_status::DiseaseStatus::URL => disease_status::DiseaseStatus::single_system(),
+        disease_symptom_procedure::DiseaseSymptomProcedure::URL => disease_symptom_procedure::DiseaseSymptomProcedure::single_system(),
+        distance_units::CommonUCUMCodesForDistance::URL => distance_units::CommonUCUMCodesForDistance::single_system(),
+        doc_section_codes::DocumentSectionCodes::URL => doc_section_codes::DocumentSectionCodes::single_system(),
+        doc_typecodes::FHIRDocumentTypeCodes::URL => doc_typecodes::FHIRDocumentTypeCodes::single_system(),
+        document_mode::DocumentMode::URL => document_mode::DocumentMode::single_system(),
+        document_reference_status::DocumentReferenceStatus::URL => document_reference_status::DocumentReferenceStatus::single_system(),
+        document_relationship_type::DocumentRelationshipType::URL => document_relationship_type::DocumentRelationshipType::single_system(),
+        duration_units::CommonUCUMCodesForDuration::URL => duration_units::CommonUCUMCodesForDuration::single_system(),
+        edible_substance_type::TypesOfEdibleSubstances::URL => edible_substance_type::TypesOfEdibleSubstances::single_system(),
+        elementdefinition_types::ElementDefinitionTypes::URL => elementdefinition_types::ElementDefinitionTypes::single_system(),
+        eligibility_outcome::EligibilityOutcome::URL => eligibility_outcome::EligibilityOutcome::single_system(),
+        eligibilityrequest_purpose::EligibilityRequestPurpose::URL => eligibilityrequest_purpose::EligibilityRequestPurpose::single_system(),
+        eligibilityresponse_purpose::EligibilityResponsePurpose::URL => eligibilityresponse_purpose::EligibilityResponsePurpose::single_system(),
+        encounter_admit_source::AdmitSource::URL => encounter_admit_source::AdmitSource::single_system(),
+        encounter_diagnosis_use::EncounterDiagnosisUse::URL => encounter_diagnosis_use::EncounterDiagnosisUse::single_system(),
+        encounter_diet::EncounterDiet::URL => encounter_diet::EncounterDiet::single_system(),
+        encounter_discharge_disposition::DischargeDisposition::URL => encounter_discharge_disposition::DischargeDisposition::single_system(),
+        encounter_location_status::EncounterLocationStatus::URL => encounter_location_status::EncounterLocationStatus::single_system(),
+        encounter_participant_type::ParticipantType::URL => encounter_participant_type::ParticipantType::single_system(),
+        encounter_reason::EncounterReasonCodes::URL => encounter_reason::EncounterReasonCodes::single_system(),
+        encounter_reason_use::EncounterReasonUse::URL => encounter_reason_use::EncounterReasonUse::single_system(),
+        encounter_special_arrangements::SpecialArrangements::URL => encounter_special_arrangements::SpecialArrangements::single_system(),
+        encounter_special_courtesy::SpecialCourtesy::URL => encounter_special_courtesy::SpecialCourtesy::single_system(),
+        encounter_status::EncounterStatus::URL => encounter_status::EncounterStatus::single_system(),
+        encounter_subject_status::EncounterSubjectStatus::URL => encounter_subject_status::EncounterSubjectStatus::single_system(),
+        encounter_type::EncounterType::URL => encounter_type::EncounterType::single_system(),
+        endpoint_connection_type::EndpointConnectionType::URL => endpoint_connection_type::EndpointConnectionType::single_system(),
+        endpoint_environment::EndpointEnvironment::URL => endpoint_environment::EndpointEnvironment::single_system(),
+        endpoint_payload_type::EndpointPayloadType::URL => endpoint_payload_type::EndpointPayloadType::single_system(),
+        endpoint_status::EndpointStatus::URL => endpoint_status::EndpointStatus::single_system(),
+        enrollment_outcome::EnrollmentOutcome::URL => enrollment_outcome::EnrollmentOutcome::single_system(),
+        enteral_route::EnteralRouteCodes::URL => enteral_route::EnteralRouteCodes::single_system(),
+        entformula_additive::EnteralFormulaAdditiveTypeCode::URL => entformula_additive::EnteralFormulaAdditiveTypeCode::single_system(),
+        entformula_type::EnteralFormulaTypeCodes::URL => entformula_type::EnteralFormulaTypeCodes::single_system(),
+        episode_of_care_status::EpisodeOfCareStatus::URL => episode_of_care_status::EpisodeOfCareStatus::single_system(),
+        episodeofcare_type::EpisodeOfCareType::URL => episodeofcare_type::EpisodeOfCareType::single_system(),
+        event_capability_mode::EventCapabilityMode::URL => event_capability_mode::EventCapabilityMode::single_system(),
+        event_resource_types::EventResourceTypes::URL => event_resource_types::EventResourceTypes::single_system(),
+        event_status::EventStatus::URL => event_status::EventStatus::single_system(),
+        event_timing::EventTiming::URL => event_timing::EventTiming::single_system(),
+        evidence_classifier_code::EvidenceClassifier::URL => evidence_classifier_code::EvidenceClassifier::single_system(),
+        evidence_report_section::ReportSectionType::URL => evidence_report_section::ReportSectionType::single_system(),
+        evidence_report_type::EvidenceReportType::URL => evidence_report_type::EvidenceReportType::single_system(),
+        evidence_variable_event::EvidenceVariableEvent::URL => evidence_variable_event::EvidenceVariableEvent::single_system(),
+        ex_benefitcategory::BenefitCategoryCodes::URL => ex_benefitcategory::BenefitCategoryCodes::single_system(),
+        ex_diagnosis_on_admission::ExampleDiagnosisOnAdmissionCodes::URL => ex_diagnosis_on_admission::ExampleDiagnosisOnAdmissionCodes::single_system(),
+        ex_diagnosisrelatedgroup::ExampleDiagnosisRelatedGroupCodes::URL => ex_diagnosisrelatedgroup::ExampleDiagnosisRelatedGroupCodes::single_system(),
+        ex_diagnosistype::ExampleDiagnosisTypeCodes::URL => ex_diagnosistype::ExampleDiagnosisTypeCodes::single_system(),
+        ex_paymenttype::ExamplePaymentTypeCodes::URL => ex_paymenttype::ExamplePaymentTypeCodes::single_system(),
+        ex_procedure_type::ExampleProcedureTypeCodes::URL => ex_procedure_type::ExampleProcedureTypeCodes::single_system(),
+        ex_program_code::ExampleProgramReasonCodes::URL => ex_program_code::ExampleProgramReasonCodes::single_system(),
+        ex_revenue_center::ExampleRevenueCenterCodes::URL => ex_revenue_center::ExampleRevenueCenterCodes::single_system(),
+        example::LOINCCodesForCholesterolInSerumPlasma::URL => example::LOINCCodesForCholesterolInSerumPlasma::single_system(),
+        examplescenario_actor_type::ExampleScenarioActorType::URL => examplescenario_actor_type::ExampleScenarioActorType::single_system(),
+        examplescenario_instance_type::ExampleScenarioResourceType::URL => examplescenario_instance_type::ExampleScenarioResourceType::single_system(),
+        explanationofbenefit_status::ExplanationOfBenefitStatus::URL => explanationofbenefit_status::ExplanationOfBenefitStatus::single_system(),
+        expression_language::ExpressionLanguage::URL => expression_language::ExpressionLanguage::single_system(),
+        extension_context_type::ExtensionContextType::URL => extension_context_type::ExtensionContextType::single_system(),
+        fhir_types::FHIRTypes::URL => fhir_types::FHIRTypes::single_system(),
+        fhirpath_types::FHIRPathTypes::URL => fhirpath_types::FHIRPathTypes::single_system(),
+        filter_operator::FilterOperator::URL => filter_operator::FilterOperator::single_system(),
+        flag_category::FlagCategory::URL => flag_category::FlagCategory::single_system(),
+        flag_code::FlagCode::URL => flag_code::FlagCode::single_system(),
+        flag_status::FlagStatus::URL => flag_status::FlagStatus::single_system(),
+        fm_status::FinancialResourceStatusCodes::URL => fm_status::FinancialResourceStatusCodes::single_system(),
+        focus_characteristic_code::FocusCharacteristicCode::URL => focus_characteristic_code::FocusCharacteristicCode::single_system(),
+        food_type::FoodTypeCodes::URL => food_type::FoodTypeCodes::single_system(),
+        forms::FormCodes::URL => forms::FormCodes::single_system(),
+        formularyitem_status::FormularyItemStatusCodes::URL => formularyitem_status::FormularyItemStatusCodes::single_system(),
+        fundsreserve::FundsReservationCodes::URL => fundsreserve::FundsReservationCodes::single_system(),
+        genomicstudy_changetype::GenomicStudyChangeType::URL => genomicstudy_changetype::GenomicStudyChangeType::single_system(),
+        genomicstudy_dataformat::GenomicStudyDataFormat::URL => genomicstudy_dataformat::GenomicStudyDataFormat::single_system(),
+        genomicstudy_methodtype::GenomicStudyMethodType::URL => genomicstudy_methodtype::GenomicStudyMethodType::single_system(),
+        genomicstudy_status::GenomicStudyStatus::URL => genomicstudy_status::GenomicStudyStatus::single_system(),
+        genomicstudy_type::GenomicStudyType::URL => genomicstudy_type::GenomicStudyType::single_system(),
+        goal_achievement::GoalAchievementStatus::URL => goal_achievement::GoalAchievementStatus::single_system(),
+        goal_category::GoalCategory::URL => goal_category::GoalCategory::single_system(),
+        goal_priority::GoalPriority::URL => goal_priority::GoalPriority::single_system(),
+        goal_start_event::GoalStartEvent::URL => goal_start_event::GoalStartEvent::single_system(),
+        goal_status::GoalLifecycleStatus::URL => goal_status::GoalLifecycleStatus::single_system(),
+        graph_compartment_rule::GraphCompartmentRule::URL => graph_compartment_rule::GraphCompartmentRule::single_system(),
+        graph_compartment_use::GraphCompartmentUse::URL => graph_compartment_use::GraphCompartmentUse::single_system(),
+        group_membership_basis::GroupMembershipBasis::URL => group_membership_basis::GroupMembershipBasis::single_system(),
+        group_type::GroupType::URL => group_type::GroupType::single_system(),
+        guidance_module_code::GuidanceModuleCode::URL => guidance_module_code::GuidanceModuleCode::single_system(),
+        guidance_response_status::GuidanceResponseStatus::URL => guidance_response_status::GuidanceResponseStatus::single_system(),
+        guide_page_generation::GuidePageGeneration::URL => guide_page_generation::GuidePageGeneration::single_system(),
+        guide_parameter_code::GuideParameterCode::URL => guide_parameter_code::GuideParameterCode::single_system(),
+        handling_condition::HandlingConditionSet::URL => handling_condition::HandlingConditionSet::single_system(),
+        history_absent_reason::FamilyHistoryAbsentReason::URL => history_absent_reason::FamilyHistoryAbsentReason::single_system(),
+        history_status::FamilyHistoryStatus::URL => history_status::FamilyHistoryStatus::single_system(),
+        http_operations::TestScriptRequestMethodCode::URL => http_operations::TestScriptRequestMethodCode::single_system(),
+        http_verb::HTTPVerb::URL => http_verb::HTTPVerb::single_system(),
+        iana_link_relations::LinkRelationTypes::URL => iana_link_relations::LinkRelationTypes::single_system(),
+        icd_10::ICD10Codes::URL => icd_10::ICD10Codes::single_system(),
+        icd_10_procedures::ICD10ProcedureCodes::URL => icd_10_procedures::ICD10ProcedureCodes::single_system(),
+        identifier_type::IdentifierTypeCodes::URL => identifier_type::IdentifierTypeCodes::single_system(),
+        identifier_use::IdentifierUse::URL => identifier_use::IdentifierUse::single_system(),
+        identity_assuranceLevel::IdentityAssuranceLevel::URL => identity_assuranceLevel::IdentityAssuranceLevel::single_system(),
+        imagingselection_2dgraphictype::ImagingSelection2DGraphicType::URL => imagingselection_2dgraphictype::ImagingSelection2DGraphicType::single_system(),
+        imagingselection_3dgraphictype::ImagingSelection3DGraphicType::URL => imagingselection_3dgraphictype::ImagingSelection3DGraphicType::single_system(),
+        imagingselection_status::ImagingSelectionStatus::URL => imagingselection_status::ImagingSelectionStatus::single_system(),
+        imagingstudy_status::ImagingStudyStatus::URL => imagingstudy_status::ImagingStudyStatus::single_system(),
+        immunization_evaluation_dose_status::ImmunizationEvaluationDoseStatusCodes::URL => immunization_evaluation_dose_status::ImmunizationEvaluationDoseStatusCodes::single_system(),
+        immunization_evaluation_dose_status_reason::ImmunizationEvaluationDoseStatusReasonCodes::URL => immunization_evaluation_dose_status_reason::ImmunizationEvaluationDoseStatusReasonCodes::single_system(),
+        immunization_evaluation_status::ImmunizationEvaluationStatusCodes::URL => immunization_evaluation_status::ImmunizationEvaluationStatusCodes::single_system(),
+        immunization_function::ImmunizationFunctionCodes::URL => immunization_function::ImmunizationFunctionCodes::single_system(),
+        immunization_funding_source::ImmunizationFundingSource::URL => immunization_funding_source::ImmunizationFundingSource::single_system(),
+        immunization_origin::ImmunizationOriginCodes::URL => immunization_origin::ImmunizationOriginCodes::single_system(),
+        immunization_program_eligibility::ImmunizationProgramEligibility::URL => immunization_program_eligibility::ImmunizationProgramEligibility::single_system(),
+        immunization_reason::ImmunizationReasonCodes::URL => immunization_reason::ImmunizationReasonCodes::single_system(),
+        immunization_recommendation_date_criterion::ImmunizationRecommendationDateCriterionCodes::URL => immunization_recommendation_date_criterion::ImmunizationRecommendationDateCriterionCodes::single_system(),
+        immunization_recommendation_reason::ImmunizationRecommendationReasonCodes::URL => immunization_recommendation_reason::ImmunizationRecommendationReasonCodes::single_system(),
+        immunization_recommendation_status::ImmunizationRecommendationStatusCodes::URL => immunization_recommendation_status::ImmunizationRecommendationStatusCodes::single_system(),
+        immunization_route::ImmunizationRouteCodes::URL => immunization_route::ImmunizationRouteCodes::single_system(),
+        immunization_site::CodesForImmunizationSiteOfAdministration::URL => immunization_site::CodesForImmunizationSiteOfAdministration::single_system(),
+        immunization_status::ImmunizationStatusCodes::URL => immunization_status::ImmunizationStatusCodes::single_system(),
+        immunization_status_reason::ImmunizationStatusReasonCodes::URL => immunization_status_reason::ImmunizationStatusReasonCodes::single_system(),
+        immunization_subpotent_reason::ImmunizationSubpotentReason::URL => immunization_subpotent_reason::ImmunizationSubpotentReason::single_system(),
+        immunization_target_disease::ImmunizationTargetDiseaseCodes::URL => immunization_target_disease::ImmunizationTargetDiseaseCodes::single_system(),
+        immunization_vaccine_funding_program::CodesForVaccineFundingPrograms::URL => immunization_vaccine_funding_program::CodesForVaccineFundingPrograms::single_system(),
+        inactive::ExampleInactive::URL => inactive::ExampleInactive::single_system(),
+        ingredient_function::IngredientFunction::URL => ingredient_function::IngredientFunction::single_system(),
+        ingredient_manufacturer_role::IngredientManufacturerRole::URL => ingredient_manufacturer_role::IngredientManufacturerRole::single_system(),
+        ingredient_role::IngredientRole::URL => ingredient_role::IngredientRole::single_system(),
+        insuranceplan_applicability::BenefitCostApplicability::URL => insuranceplan_applicability::BenefitCostApplicability::single_system(),
+        insuranceplan_type::InsurancePlanType::URL => insuranceplan_type::InsurancePlanType::single_system(),
+        interactant::Interactant::URL => interactant::Interactant::single_system(),
+        interaction_effect::InteractionEffect::URL => interaction_effect::InteractionEffect::single_system(),
+        interaction_incidence::InteractionIncidence::URL => interaction_incidence::InteractionIncidence::single_system(),
+        interaction_management::InteractionManagement::URL => interaction_management::InteractionManagement::single_system(),
+        interaction_trigger::InteractionTrigger::URL => interaction_trigger::InteractionTrigger::single_system(),
+        interaction_type::InteractionType::URL => interaction_type::InteractionType::single_system(),
+        inventoryitem_nametype::InventoryItemStatusCodes::URL => inventoryitem_nametype::InventoryItemStatusCodes::single_system(),
+        inventoryitem_status::InventoryItemStatusCodes::URL => inventoryitem_status::InventoryItemStatusCodes::single_system(),
+        inventoryreport_counttype::InventoryCountType::URL => inventoryreport_counttype::InventoryCountType::single_system(),
+        inventoryreport_status::InventoryReportStatus::URL => inventoryreport_status::InventoryReportStatus::single_system(),
+        invoice_status::InvoiceStatus::URL => invoice_status::InvoiceStatus::single_system(),
+        iso3166_1_2::Iso316612::URL => iso3166_1_2::Iso316612::single_system(),
+        iso3166_1_3::Iso316613::URL => iso3166_1_3::Iso316613::single_system(),
+        iso3166_1_N::Iso31661N::URL => iso3166_1_N::Iso31661N::single_system(),
+        issue_severity::IssueSeverity::URL => issue_severity::IssueSeverity::single_system(),
+        issue_type::IssueType::URL => issue_type::IssueType::single_system(),
+        item_type::QuestionnaireItemType::URL => item_type::QuestionnaireItemType::single_system(),
+        jurisdiction::JurisdictionValueSet::URL => jurisdiction::JurisdictionValueSet::single_system(),
+        knowledge_representation_level::KnowledgeRepresentationLevel::URL => knowledge_representation_level::KnowledgeRepresentationLevel::single_system(),
+        languages::CommonLanguages::URL => languages::CommonLanguages::single_system(),
+        legal_status_of_supply::LegalStatusOfSupply::URL => legal_status_of_supply::LegalStatusOfSupply::single_system(),
+        library_type::LibraryType::URL => library_type::LibraryType::single_system(),
+        link_type::LinkType::URL => link_type::LinkType::single_system(),
+        linkage_type::LinkageType::URL => linkage_type::LinkageType::single_system(),
+        lipid_ldl_codes::LDLCodes::URL => lipid_ldl_codes::LDLCodes::single_system(),
+        list_empty_reason::ListEmptyReasons::URL => list_empty_reason::ListEmptyReasons::single_system(),
+        list_example_codes::ExampleUseCodesForList::URL => list_example_codes::ExampleUseCodesForList::single_system(),
+        list_item_flag::PatientMedicineChangeTypes::URL => list_item_flag::PatientMedicineChangeTypes::single_system(),
+        list_mode::ListMode::URL => list_mode::ListMode::single_system(),
+        list_order::ListOrderCodes::URL => list_order::ListOrderCodes::single_system(),
+        list_status::ListStatus::URL => list_status::ListStatus::single_system(),
+        location_characteristic::LocationCharacteristic::URL => location_characteristic::LocationCharacteristic::single_system(),
+        location_form::LocationForm::URL => location_form::LocationForm::single_system(),
+        location_mode::LocationMode::URL => location_mode::LocationMode::single_system(),
+        location_status::LocationStatus::URL => location_status::LocationStatus::single_system(),
+        manifestation_or_symptom::ManifestationAndSymptomCodes::URL => manifestation_or_symptom::ManifestationAndSymptomCodes::single_system(),
+        manufactured_dose_form::ManufacturedDoseForm::URL => manufactured_dose_form::ManufacturedDoseForm::single_system(),
+        map_group_type_mode::StructureMapGroupTypeMode::URL => map_group_type_mode::StructureMapGroupTypeMode::single_system(),
+        map_input_mode::StructureMapInputMode::URL => map_input_mode::StructureMapInputMode::single_system(),
+        map_model_mode::StructureMapModelMode::URL => map_model_mode::StructureMapModelMode::single_system(),
+        map_source_list_mode::StructureMapSourceListMode::URL => map_source_list_mode::StructureMapSourceListMode::single_system(),
+        map_target_list_mode::StructureMapTargetListMode::URL => map_target_list_mode::StructureMapTargetListMode::single_system(),
+        map_transform::StructureMapTransform::URL => map_transform::StructureMapTransform::single_system(),
+        marital_status::MaritalStatusCodes::URL => marital_status::MaritalStatusCodes::single_system(),
+        measure_aggregate_method::MeasureAggregateMethod::URL => measure_aggregate_method::MeasureAggregateMethod::single_system(),
+        measure_data_usage::MeasureDataUsage::URL => measure_data_usage::MeasureDataUsage::single_system(),
+        measure_definition_example::MeasureDefinitionExample::URL => measure_definition_example::MeasureDefinitionExample::single_system(),
+        measure_group_example::MeasureGroupExample::URL => measure_group_example::MeasureGroupExample::single_system(),
+        measure_improvement_notation::MeasureImprovementNotation::URL => measure_improvement_notation::MeasureImprovementNotation::single_system(),
+        measure_population::MeasurePopulationType::URL => measure_population::MeasurePopulationType::single_system(),
+        measure_report_status::MeasureReportStatus::URL => measure_report_status::MeasureReportStatus::single_system(),
+        measure_report_type::MeasureReportType::URL => measure_report_type::MeasureReportType::single_system(),
+        measure_scoring_unit::MeasureScoringUnit::URL => measure_scoring_unit::MeasureScoringUnit::single_system(),
+        measure_stratifier_example::MeasureStratifierExample::URL => measure_stratifier_example::MeasureStratifierExample::single_system(),
+        measure_supplemental_data_example::MeasureSupplementalDataExample::URL => measure_supplemental_data_example::MeasureSupplementalDataExample::single_system(),
+        measure_type::MeasureType::URL => measure_type::MeasureType::single_system(),
+        measurement_property::CodesForProductCharacteristics::URL => measurement_property::CodesForProductCharacteristics::single_system(),
+        measurereport_stratifier_value_example::MeasureReportStratifierValueExample::URL => measurereport_stratifier_value_example::MeasureReportStratifierValueExample::single_system(),
+        med_admin_perform_function::MedicationAdministrationPerformerFunctionCodes::URL => med_admin_perform_function::MedicationAdministrationPerformerFunctionCodes::single_system(),
+        medication_admin_location::MedicationAdministrationLocationCodes::URL => medication_admin_location::MedicationAdministrationLocationCodes::single_system(),
+        medication_admin_status::MedicationAdministrationStatusCodes::URL => medication_admin_status::MedicationAdministrationStatusCodes::single_system(),
+        medication_as_needed_reason::SNOMEDCTMedicationAsNeededReasonCodes::URL => medication_as_needed_reason::SNOMEDCTMedicationAsNeededReasonCodes::single_system(),
+        medication_codes::SNOMEDCTMedicationCodes::URL => medication_codes::SNOMEDCTMedicationCodes::single_system(),
+        medication_cost_category::MedicationCostCategoryCodes::URL => medication_cost_category::MedicationCostCategoryCodes::single_system(),
+        medication_dose_aid::MedicationDoseAids::URL => medication_dose_aid::MedicationDoseAids::single_system(),
+        medication_form_codes::SNOMEDCTFormCodes::URL => medication_form_codes::SNOMEDCTFormCodes::single_system(),
+        medication_ingredientstrength::MedicationIngredientStrengthCodes::URL => medication_ingredientstrength::MedicationIngredientStrengthCodes::single_system(),
+        medication_intended_performer_role::MedicationIntendedPerformerRole::URL => medication_intended_performer_role::MedicationIntendedPerformerRole::single_system(),
+        medication_statement_adherence::MedicationStatementAdherenceCodes::URL => medication_statement_adherence::MedicationStatementAdherenceCodes::single_system(),
+        medication_statement_status::MedicationStatementStatusCodes::URL => medication_statement_status::MedicationStatementStatusCodes::single_system(),
+        medication_status::MedicationStatusCodes::URL => medication_status::MedicationStatusCodes::single_system(),
+        medicationdispense_admin_location::MedicationDispenseAdministrationLocationCodes::URL => medicationdispense_admin_location::MedicationDispenseAdministrationLocationCodes::single_system(),
+        medicationdispense_performer_function::MedicationDispensePerformerFunctionCodes::URL => medicationdispense_performer_function::MedicationDispensePerformerFunctionCodes::single_system(),
+        medicationdispense_status::MedicationDispenseStatusCodes::URL => medicationdispense_status::MedicationDispenseStatusCodes::single_system(),
+        medicationdispense_status_reason::MedicationDispenseStatusReasonCodes::URL => medicationdispense_status_reason::MedicationDispenseStatusReasonCodes::single_system(),
+        medicationknowledge_characteristic::MedicationKnowledgeCharacteristicCodes::URL => medicationknowledge_characteristic::MedicationKnowledgeCharacteristicCodes::single_system(),
+        medicationknowledge_status::MedicationKnowledgeStatusCodes::URL => medicationknowledge_status::MedicationKnowledgeStatusCodes::single_system(),
+        medicationrequest_admin_location::MedicationRequestAdministrationLocationCodes::URL => medicationrequest_admin_location::MedicationRequestAdministrationLocationCodes::single_system(),
+        medicationrequest_course_of_therapy::MedicationRequestCourseOfTherapyCodes::URL => medicationrequest_course_of_therapy::MedicationRequestCourseOfTherapyCodes::single_system(),
+        medicationrequest_intent::MedicationRequestIntent::URL => medicationrequest_intent::MedicationRequestIntent::single_system(),
+        medicationrequest_status::MedicationrequestStatus::URL => medicationrequest_status::MedicationrequestStatus::single_system(),
+        medicationrequest_status_reason::MedicationRequestStatusReasonCodes::URL => medicationrequest_status_reason::MedicationRequestStatusReasonCodes::single_system(),
+        medicinal_product_additional_monitoring::AdditionalMonitoring::URL => medicinal_product_additional_monitoring::AdditionalMonitoring::single_system(),
+        medicinal_product_classification::ProductClassification::URL => medicinal_product_classification::ProductClassification::single_system(),
+        medicinal_product_confidentiality::ProductConfidentiality::URL => medicinal_product_confidentiality::ProductConfidentiality::single_system(),
+        medicinal_product_contact_type::ProductContactType::URL => medicinal_product_contact_type::ProductContactType::single_system(),
+        medicinal_product_cross_reference_type::ProductCrossReferenceType::URL => medicinal_product_cross_reference_type::ProductCrossReferenceType::single_system(),
+        medicinal_product_domain::MedicinalProductDomain::URL => medicinal_product_domain::MedicinalProductDomain::single_system(),
+        medicinal_product_name_part_type::ProductNamePartType::URL => medicinal_product_name_part_type::ProductNamePartType::single_system(),
+        medicinal_product_name_type::ProductNameType::URL => medicinal_product_name_type::ProductNameType::single_system(),
+        medicinal_product_package_type::MedicinalProductPackageType::URL => medicinal_product_package_type::MedicinalProductPackageType::single_system(),
+        medicinal_product_pediatric_use::PediatricUse::URL => medicinal_product_pediatric_use::PediatricUse::single_system(),
+        medicinal_product_special_measures::SpecialMeasures::URL => medicinal_product_special_measures::SpecialMeasures::single_system(),
+        medicinal_product_type::MedicinalProductType::URL => medicinal_product_type::MedicinalProductType::single_system(),
+        message_events::MessageEvent::URL => message_events::MessageEvent::single_system(),
+        message_reason_encounter::ExampleMessageReasonCodes::URL => message_reason_encounter::ExampleMessageReasonCodes::single_system(),
+        message_significance_category::MessageSignificanceCategory::URL => message_significance_category::MessageSignificanceCategory::single_system(),
+        message_transport::MessageTransport::URL => message_transport::MessageTransport::single_system(),
+        messageheader_response_request::MessageheaderResponseRequest::URL => messageheader_response_request::MessageheaderResponseRequest::single_system(),
+        metric_calibration_state::DeviceMetricCalibrationState::URL => metric_calibration_state::DeviceMetricCalibrationState::single_system(),
+        metric_calibration_type::DeviceMetricCalibrationType::URL => metric_calibration_type::DeviceMetricCalibrationType::single_system(),
+        metric_category::DeviceMetricCategory::URL => metric_category::DeviceMetricCategory::single_system(),
+        metric_operational_status::DeviceMetricOperationalStatus::URL => metric_operational_status::DeviceMetricOperationalStatus::single_system(),
+        mimetypes::MimeTypes::URL => mimetypes::MimeTypes::single_system(),
+        missing_tooth_reason::MissingToothReasonCodes::URL => missing_tooth_reason::MissingToothReasonCodes::single_system(),
+        modified_foodtype::TextureModifiedFoodTypeCodes::URL => modified_foodtype::TextureModifiedFoodTypeCodes::single_system(),
+        name_use::NameUse::URL => name_use::NameUse::single_system(),
+        namingsystem_identifier_system_type::NamingSystemIdentifierSystemType::URL => namingsystem_identifier_system_type::NamingSystemIdentifierSystemType::single_system(),
+        namingsystem_identifier_type::NamingSystemIdentifierType::URL => namingsystem_identifier_type::NamingSystemIdentifierType::single_system(),
+        namingsystem_type::NamingSystemType::URL => namingsystem_type::NamingSystemType::single_system(),
+        narrative_status::NarrativeStatus::URL => narrative_status::NarrativeStatus::single_system(),
+        nhin_purposeofuse::NHINPurposeOfUse::URL => nhin_purposeofuse::NHINPurposeOfUse::single_system(),
+        not_consumed_reason::ReasonsFoodItemNotConsumed::URL => not_consumed_reason::ReasonsFoodItemNotConsumed::single_system(),
+        note_type::NoteType::URL => note_type::NoteType::single_system(),
+        nutrient_code::NutrientModifierCodes::URL => nutrient_code::NutrientModifierCodes::single_system(),
+        nutrition_product_category::CategoriesOfNutritionProducts::URL => nutrition_product_category::CategoriesOfNutritionProducts::single_system(),
+        nutrition_product_nutrient::CodesForNutritionProductNutrients::URL => nutrition_product_nutrient::CodesForNutritionProductNutrients::single_system(),
+        nutritionproduct_status::NutritionProductStatus::URL => nutritionproduct_status::NutritionProductStatus::single_system(),
+        object_role::AuditEventEntityRole::URL => object_role::AuditEventEntityRole::single_system(),
+        observation_category::ObservationCategoryCodes::URL => observation_category::ObservationCategoryCodes::single_system(),
+        observation_codes::LOINCCodes::URL => observation_codes::LOINCCodes::single_system(),
+        observation_interpretation::ObservationInterpretationCodes::URL => observation_interpretation::ObservationInterpretationCodes::single_system(),
+        observation_methods::ObservationMethods::URL => observation_methods::ObservationMethods::single_system(),
+        observation_range_category::ObservationRangeCategory::URL => observation_range_category::ObservationRangeCategory::single_system(),
+        observation_referencerange_normalvalue::ObservationReferenceRangeNormalValueCodes::URL => observation_referencerange_normalvalue::ObservationReferenceRangeNormalValueCodes::single_system(),
+        observation_statistics::StatisticsCode::URL => observation_statistics::StatisticsCode::single_system(),
+        observation_status::ObservationStatus::URL => observation_status::ObservationStatus::single_system(),
+        observation_triggeredbytype::TriggeredBytype::URL => observation_triggeredbytype::TriggeredBytype::single_system(),
+        observation_vitalsignresult::VitalSigns::URL => observation_vitalsignresult::VitalSigns::single_system(),
+        operation_kind::OperationKind::URL => operation_kind::OperationKind::single_system(),
+        operation_outcome::OperationOutcomeCodes::URL => operation_outcome::OperationOutcomeCodes::single_system(),
+        operation_parameter_scope::OperationParameterScope::URL => operation_parameter_scope::OperationParameterScope::single_system(),
+        operation_parameter_use::OperationParameterUse::URL => operation_parameter_use::OperationParameterUse::single_system(),
+        organization_role::OrganizationAffiliationRole::URL => organization_role::OrganizationAffiliationRole::single_system(),
+        organization_type::OrganizationType::URL => organization_type::OrganizationType::single_system(),
+        orientation_type::OrientationType::URL => orientation_type::OrientationType::single_system(),
+        package_material::PackageMaterial::URL => package_material::PackageMaterial::single_system(),
+        package_type::PackageType::URL => package_type::PackageType::single_system(),
+        packaging_type::PackagingType::URL => packaging_type::PackagingType::single_system(),
+        participant_resource_types::ParticipantResourceTypes::URL => participant_resource_types::ParticipantResourceTypes::single_system(),
+        participant_role::ParticipantRoles::URL => participant_role::ParticipantRoles::single_system(),
+        participation_role_type::ParticipationRoleType::URL => participation_role_type::ParticipationRoleType::single_system(),
+        participationstatus::ParticipationStatus::URL => participationstatus::ParticipationStatus::single_system(),
+        patient_contactrelationship::PatientContactRelationship::URL => patient_contactrelationship::PatientContactRelationship::single_system(),
+        payeetype::ClaimPayeeTypeCodes::URL => payeetype::ClaimPayeeTypeCodes::single_system(),
+        payment_adjustment_reason::PaymentAdjustmentReasonCodes::URL => payment_adjustment_reason::PaymentAdjustmentReasonCodes::single_system(),
+        payment_issuertype::PaymentIssuerType::URL => payment_issuertype::PaymentIssuerType::single_system(),
+        payment_kind::PaymentKind::URL => payment_kind::PaymentKind::single_system(),
+        payment_outcome::PaymentOutcome::URL => payment_outcome::PaymentOutcome::single_system(),
+        payment_status::PaymentStatusCodes::URL => payment_status::PaymentStatusCodes::single_system(),
+        payment_type::PaymentTypeCodes::URL => payment_type::PaymentTypeCodes::single_system(),
+        performer_function::PerformerFunctionCodes::URL => performer_function::PerformerFunctionCodes::single_system(),
+        performer_role::ProcedurePerformerRoleCodes::URL => performer_role::ProcedurePerformerRoleCodes::single_system(),
+        permission_rule_combining::PermissionRuleCombining::URL => permission_rule_combining::PermissionRuleCombining::single_system(),
+        permission_status::PermissionStatus::URL => permission_status::PermissionStatus::single_system(),
+        permitted_data_type::ObservationDataType::URL => permitted_data_type::ObservationDataType::single_system(),
+        plan_definition_type::PlanDefinitionType::URL => plan_definition_type::PlanDefinitionType::single_system(),
+        practitioner_role::PractitionerRole::URL => practitioner_role::PractitionerRole::single_system(),
+        prepare_patient_prior_specimen_collection::PreparePatient::URL => prepare_patient_prior_specimen_collection::PreparePatient::single_system(),
+        price_component_type::PriceComponentType::URL => price_component_type::PriceComponentType::single_system(),
+        procedure_category::ProcedureCategoryCodesSNOMEDCT::URL => procedure_category::ProcedureCategoryCodesSNOMEDCT::single_system(),
+        procedure_code::ProcedureCodesSNOMEDCT::URL => procedure_code::ProcedureCodesSNOMEDCT::single_system(),
+        procedure_followup::ProcedureFollowUpCodesSNOMEDCT::URL => procedure_followup::ProcedureFollowUpCodesSNOMEDCT::single_system(),
+        procedure_not_performed_reason::ProcedureNotPerformedReasonSNOMEDCT::URL => procedure_not_performed_reason::ProcedureNotPerformedReasonSNOMEDCT::single_system(),
+        procedure_outcome::ProcedureOutcomeCodesSNOMEDCT::URL => procedure_outcome::ProcedureOutcomeCodesSNOMEDCT::single_system(),
+        procedure_reason::ProcedureReasonCodes::URL => procedure_reason::ProcedureReasonCodes::single_system(),
+        process_priority::ProcessPriorityCodes::URL => process_priority::ProcessPriorityCodes::single_system(),
+        product_category::BiologicallyDerivedProductCategory::URL => product_category::BiologicallyDerivedProductCategory::single_system(),
+        product_characteristic_codes::ProductCharacteristic::URL => product_characteristic_codes::ProductCharacteristic::single_system(),
+        product_intended_use::ProductIntendedUse::URL => product_intended_use::ProductIntendedUse::single_system(),
+        product_status::ProductStatus::URL => product_status::ProductStatus::single_system(),
+        program::Program::URL => program::Program::single_system(),
+        property_representation::PropertyRepresentation::URL => property_representation::PropertyRepresentation::single_system(),
+        provenance_activity_type::ProvenanceActivityType::URL => provenance_activity_type::ProvenanceActivityType::single_system(),
+        provenance_entity_role::ProvenanceEntityRole::URL => provenance_entity_role::ProvenanceEntityRole::single_system(),
+        provenance_history_agent_type::ProvenanceEventHistoryAgentRoleCodes::URL => provenance_history_agent_type::ProvenanceEventHistoryAgentRoleCodes::single_system(),
+        provenance_history_record_activity::ProvenanceHistoryRecordActivityCodes::URL => provenance_history_record_activity::ProvenanceHistoryRecordActivityCodes::single_system(),
+        provider_qualification::ExampleProviderQualificationCodes::URL => provider_qualification::ExampleProviderQualificationCodes::single_system(),
+        provider_taxonomy::ProviderTaxonomyCodes::URL => provider_taxonomy::ProviderTaxonomyCodes::single_system(),
+        publication_status::PublicationStatus::URL => publication_status::PublicationStatus::single_system(),
+        published_in_type::PublishedInType::URL => published_in_type::PublishedInType::single_system(),
+        quantity_comparator::QuantityComparator::URL => quantity_comparator::QuantityComparator::single_system(),
+        questionnaire_answer_constraint::QuestionnaireAnswerConstraint::URL => questionnaire_answer_constraint::QuestionnaireAnswerConstraint::single_system(),
+        questionnaire_answers::QuestionnaireAnswerCodes::URL => questionnaire_answers::QuestionnaireAnswerCodes::single_system(),
+        questionnaire_answers_status::QuestionnaireResponseStatus::URL => questionnaire_answers_status::QuestionnaireResponseStatus::single_system(),
+        questionnaire_disabled_display::QuestionnaireItemDisabledDisplay::URL => questionnaire_disabled_display::QuestionnaireItemDisabledDisplay::single_system(),
+        questionnaire_enable_behavior::EnableWhenBehavior::URL => questionnaire_enable_behavior::EnableWhenBehavior::single_system(),
+        questionnaire_enable_operator::QuestionnaireItemOperator::URL => questionnaire_enable_operator::QuestionnaireItemOperator::single_system(),
+        questionnaire_questions::QuestionnaireQuestionCodes::URL => questionnaire_questions::QuestionnaireQuestionCodes::single_system(),
+        reaction_event_severity::AllergyIntoleranceSeverity::URL => reaction_event_severity::AllergyIntoleranceSeverity::single_system(),
+        reason_medication_given_codes::ReasonMedicationGivenCodes::URL => reason_medication_given_codes::ReasonMedicationGivenCodes::single_system(),
+        reason_medication_not_given_codes::SNOMEDCTReasonMedicationNotGivenCodes::URL => reason_medication_not_given_codes::SNOMEDCTReasonMedicationNotGivenCodes::single_system(),
+        reason_medication_status_codes::SNOMEDCTDrugTherapyStatusCodes::URL => reason_medication_status_codes::SNOMEDCTDrugTherapyStatusCodes::single_system(),
+        reference_handling_policy::ReferenceHandlingPolicy::URL => reference_handling_policy::ReferenceHandlingPolicy::single_system(),
+        reference_version_rules::ReferenceVersionRules::URL => reference_version_rules::ReferenceVersionRules::single_system(),
+        referenced_item_category::ReferencedItemCategoryValueSet::URL => referenced_item_category::ReferencedItemCategoryValueSet::single_system(),
+        referencerange_appliesto::ObservationReferenceRangeAppliesToCodes::URL => referencerange_appliesto::ObservationReferenceRangeAppliesToCodes::single_system(),
+        referencerange_meaning::ObservationReferenceRangeMeaningCodes::URL => referencerange_meaning::ObservationReferenceRangeMeaningCodes::single_system(),
+        regulated_authorization_basis::RegulatedAuthorizationBasis::URL => regulated_authorization_basis::RegulatedAuthorizationBasis::single_system(),
+        regulated_authorization_case_type::RegulatedAuthorizationCaseType::URL => regulated_authorization_case_type::RegulatedAuthorizationCaseType::single_system(),
+        regulated_authorization_type::RegulatedAuthorizationType::URL => regulated_authorization_type::RegulatedAuthorizationType::single_system(),
+        rejection_criteria::RejectionCriterion::URL => rejection_criteria::RejectionCriterion::single_system(),
+        related_artifact_type::RelatedArtifactType::URL => related_artifact_type::RelatedArtifactType::single_system(),
+        related_artifact_type_all::RelatedArtifactTypeExpanded::URL => related_artifact_type_all::RelatedArtifactTypeExpanded::single_system(),
+        related_artifact_type_expanded::RelatedArtifactTypeExpanded::URL => related_artifact_type_expanded::RelatedArtifactTypeExpanded::single_system(),
+        related_claim_relationship::ExampleRelatedClaimRelationshipCodes::URL => related_claim_relationship::ExampleRelatedClaimRelationshipCodes::single_system(),
+        relatedperson_relationshiptype::PatientRelationshipType::URL => relatedperson_relationshiptype::PatientRelationshipType::single_system(),
+        relationship::BeneficiaryRelationshipCodes::URL => relationship::BeneficiaryRelationshipCodes::single_system(),
+        remittance_outcome::RemittanceOutcome::URL => remittance_outcome::RemittanceOutcome::single_system(),
+        report_action_result_codes::TestReportActionResult::URL => report_action_result_codes::TestReportActionResult::single_system(),
+        report_codes::LOINCDiagnosticReportCodes::URL => report_codes::LOINCDiagnosticReportCodes::single_system(),
+        report_participant_type::TestReportParticipantType::URL => report_participant_type::TestReportParticipantType::single_system(),
+        report_relation_type::ReportRelationshipType::URL => report_relation_type::ReportRelationshipType::single_system(),
+        report_result_codes::TestReportResult::URL => report_result_codes::TestReportResult::single_system(),
+        report_status_codes::TestReportStatus::URL => report_status_codes::TestReportStatus::single_system(),
+        request_intent::RequestIntent::URL => request_intent::RequestIntent::single_system(),
+        request_priority::RequestPriority::URL => request_priority::RequestPriority::single_system(),
+        request_resource_types::RequestResourceTypes::URL => request_resource_types::RequestResourceTypes::single_system(),
+        request_status::RequestStatus::URL => request_status::RequestStatus::single_system(),
+        research_study_arm_type::ResearchStudyArmType::URL => research_study_arm_type::ResearchStudyArmType::single_system(),
+        research_study_classifiers::ResearchStudyClassifiers::URL => research_study_classifiers::ResearchStudyClassifiers::single_system(),
+        research_study_focus_type::ResearchStudyFocusType::URL => research_study_focus_type::ResearchStudyFocusType::single_system(),
+        research_study_objective_type::ResearchStudyObjectiveType::URL => research_study_objective_type::ResearchStudyObjectiveType::single_system(),
+        research_study_party_organization_type::ResearchStudyPartyOrgType::URL => research_study_party_organization_type::ResearchStudyPartyOrgType::single_system(),
+        research_study_party_role::ResearchStudyPartyRole::URL => research_study_party_role::ResearchStudyPartyRole::single_system(),
+        research_study_phase::ResearchStudyPhase::URL => research_study_phase::ResearchStudyPhase::single_system(),
+        research_study_prim_purp_type::ResearchStudyPrimaryPurposeType::URL => research_study_prim_purp_type::ResearchStudyPrimaryPurposeType::single_system(),
+        research_study_reason_stopped::ResearchStudyReasonStopped::URL => research_study_reason_stopped::ResearchStudyReasonStopped::single_system(),
+        research_study_status::ResearchStudyStatus::URL => research_study_status::ResearchStudyStatus::single_system(),
+        research_subject_milestone::ResearchSubjectMilestone::URL => research_subject_milestone::ResearchSubjectMilestone::single_system(),
+        research_subject_state::ResearchSubjectState::URL => research_subject_state::ResearchSubjectState::single_system(),
+        research_subject_state_type::ResearchSubjectStateType::URL => research_subject_state_type::ResearchSubjectStateType::single_system(),
+        resource_aggregation_mode::AggregationMode::URL => resource_aggregation_mode::AggregationMode::single_system(),
+        resource_slicing_rules::SlicingRules::URL => resource_slicing_rules::SlicingRules::single_system(),
+        resource_status::CanonicalStatusCodesForFHIRResources::URL => resource_status::CanonicalStatusCodesForFHIRResources::single_system(),
+        resource_types::ResourceType::URL => resource_types::ResourceType::single_system(),
+        resource_validation_mode::ResourceValidationMode::URL => resource_validation_mode::ResourceValidationMode::single_system(),
+        response_code::ResponseType::URL => response_code::ResponseType::single_system(),
+        restful_capability_mode::RestfulCapabilityMode::URL => restful_capability_mode::RestfulCapabilityMode::single_system(),
+        restful_security_service::RestfulSecurityService::URL => restful_security_service::RestfulSecurityService::single_system(),
+        risk_probability::RiskProbability::URL => risk_probability::RiskProbability::single_system(),
+        route_codes::SNOMEDCTRouteCodes::URL => route_codes::SNOMEDCTRouteCodes::single_system(),
+        search_comparator::SearchComparator::URL => search_comparator::SearchComparator::single_system(),
+        search_entry_mode::SearchEntryMode::URL => search_entry_mode::SearchEntryMode::single_system(),
+        search_modifier_code::SearchModifierCode::URL => search_modifier_code::SearchModifierCode::single_system(),
+        search_param_type::SearchParamType::URL => search_param_type::SearchParamType::single_system(),
+        search_processingmode::SearchProcessingModeType::URL => search_processingmode::SearchProcessingModeType::single_system(),
+        security_label_data_examples::SecurityLabelDataExamples::URL => security_label_data_examples::SecurityLabelDataExamples::single_system(),
+        security_label_event_examples::SecurityLabelEventExamples::URL => security_label_event_examples::SecurityLabelEventExamples::single_system(),
+        security_label_examples::SecurityLabelExamples::URL => security_label_examples::SecurityLabelExamples::single_system(),
+        security_labels::AllSecurityLabels::URL => security_labels::AllSecurityLabels::single_system(),
+        security_role_type::SecurityRoleType::URL => security_role_type::SecurityRoleType::single_system(),
+        security_source_type::AuditEventSourceType::URL => security_source_type::AuditEventSourceType::single_system(),
+        sequence_type::SequenceType::URL => sequence_type::SequenceType::single_system(),
+        series_performer_function::ImagingStudySeriesPerformerFunction::URL => series_performer_function::ImagingStudySeriesPerformerFunction::single_system(),
+        service_category::ServiceCategory::URL => service_category::ServiceCategory::single_system(),
+        service_mode::ServiceMode::URL => service_mode::ServiceMode::single_system(),
+        service_place::ExampleServicePlaceCodes::URL => service_place::ExampleServicePlaceCodes::single_system(),
+        service_provision_conditions::ServiceProvisionConditions::URL => service_provision_conditions::ServiceProvisionConditions::single_system(),
+        service_referral_method::ReferralMethod::URL => service_referral_method::ReferralMethod::single_system(),
+        service_type::ServiceType::URL => service_type::ServiceType::single_system(),
+        service_uscls::USCLSCodes::URL => service_uscls::USCLSCodes::single_system(),
+        servicerequest_category::ServiceRequestCategoryCodes::URL => servicerequest_category::ServiceRequestCategoryCodes::single_system(),
+        servicerequest_orderdetail_parameter_code::ServiceRequestOrderDetailParameterCode::URL => servicerequest_orderdetail_parameter_code::ServiceRequestOrderDetailParameterCode::single_system(),
+        signature_type::SignatureTypeCodes::URL => signature_type::SignatureTypeCodes::single_system(),
+        slotstatus::SlotStatus::URL => slotstatus::SlotStatus::single_system(),
+        sort_direction::SortDirection::URL => sort_direction::SortDirection::single_system(),
+        spdx_license::SPDXLicense::URL => spdx_license::SPDXLicense::single_system(),
+        specimen_collection::SpecimenCollection::URL => specimen_collection::SpecimenCollection::single_system(),
+        specimen_collection_method::FHIRSpecimenCollectionMethod::URL => specimen_collection_method::FHIRSpecimenCollectionMethod::single_system(),
+        specimen_combined::SpecimenCombined::URL => specimen_combined::SpecimenCombined::single_system(),
+        specimen_contained_preference::SpecimenContainedPreference::URL => specimen_contained_preference::SpecimenContainedPreference::single_system(),
+        specimen_container_type::SpecimenContainerType::URL => specimen_container_type::SpecimenContainerType::single_system(),
+        specimen_processing_method::SpecimenProcessingMethod::URL => specimen_processing_method::SpecimenProcessingMethod::single_system(),
+        specimen_role::SpecimenRole::URL => specimen_role::SpecimenRole::single_system(),
+        specimen_status::SpecimenStatus::URL => specimen_status::SpecimenStatus::single_system(),
+        statistic_model_code::StatisticModelCode::URL => statistic_model_code::StatisticModelCode::single_system(),
+        statistic_type::StatisticType::URL => statistic_type::StatisticType::single_system(),
+        strand_type::StrandType::URL => strand_type::StrandType::single_system(),
+        structure_definition_kind::StructureDefinitionKind::URL => structure_definition_kind::StructureDefinitionKind::single_system(),
+        study_design::StudyDesign::URL => study_design::StudyDesign::single_system(),
+        submit_data_update_type::SubmitDataUpdateType::URL => submit_data_update_type::SubmitDataUpdateType::single_system(),
+        subscriber_relationship::SubscriberRelationshipCodes::URL => subscriber_relationship::SubscriberRelationshipCodes::single_system(),
+        subscription_channel_type::SubscriptionChannelType::URL => subscription_channel_type::SubscriptionChannelType::single_system(),
+        subscription_error::SubscriptionErrorCodes::URL => subscription_error::SubscriptionErrorCodes::single_system(),
+        subscription_notification_type::SubscriptionNotificationType::URL => subscription_notification_type::SubscriptionNotificationType::single_system(),
+        subscription_payload_content::SubscriptionPayloadContent::URL => subscription_payload_content::SubscriptionPayloadContent::single_system(),
+        subscription_status::SubscriptionStatusCodes::URL => subscription_status::SubscriptionStatusCodes::single_system(),
+        subscription_types::SubscriptionTypes::URL => subscription_types::SubscriptionTypes::single_system(),
+        subscriptiontopic_cr_behavior::CriteriaNotExistsBehavior::URL => subscriptiontopic_cr_behavior::CriteriaNotExistsBehavior::single_system(),
+        substance_amount_type::SubstanceAmountType::URL => substance_amount_type::SubstanceAmountType::single_system(),
+        substance_category::SubstanceCategoryCodes::URL => substance_category::SubstanceCategoryCodes::single_system(),
+        substance_code::SubstanceCode::URL => substance_code::SubstanceCode::single_system(),
+        substance_codes::SNOMEDCTSubstanceCodes::URL => substance_codes::SNOMEDCTSubstanceCodes::single_system(),
+        substance_form::SubstanceForm::URL => substance_form::SubstanceForm::single_system(),
+        substance_grade::SubstanceGrade::URL => substance_grade::SubstanceGrade::single_system(),
+        substance_name_authority::SubstanceNameAuthority::URL => substance_name_authority::SubstanceNameAuthority::single_system(),
+        substance_name_domain::SubstanceNameDomain::URL => substance_name_domain::SubstanceNameDomain::single_system(),
+        substance_name_type::SubstanceNameType::URL => substance_name_type::SubstanceNameType::single_system(),
+        substance_optical_activity::OpticalActivity::URL => substance_optical_activity::OpticalActivity::single_system(),
+        substance_relationship_type::SubstanceRelationshipType::URL => substance_relationship_type::SubstanceRelationshipType::single_system(),
+        substance_representation_format::SubstanceRepresentationFormat::URL => substance_representation_format::SubstanceRepresentationFormat::single_system(),
+        substance_representation_type::SubstanceRepresentationType::URL => substance_representation_type::SubstanceRepresentationType::single_system(),
+        substance_source_material_genus::SourceMaterialGenus::URL => substance_source_material_genus::SourceMaterialGenus::single_system(),
+        substance_source_material_part::SourceMaterialPart::URL => substance_source_material_part::SourceMaterialPart::single_system(),
+        substance_source_material_species::SourceMaterialSpecies::URL => substance_source_material_species::SourceMaterialSpecies::single_system(),
+        substance_source_material_type::SourceMaterialType::URL => substance_source_material_type::SourceMaterialType::single_system(),
+        substance_status::FHIRSubstanceStatus::URL => substance_status::FHIRSubstanceStatus::single_system(),
+        substance_stereochemistry::Stereochemistry::URL => substance_stereochemistry::Stereochemistry::single_system(),
+        substance_structure_technique::StructureTechnique::URL => substance_structure_technique::StructureTechnique::single_system(),
+        substance_weight_method::WeightMethod::URL => substance_weight_method::WeightMethod::single_system(),
+        substance_weight_type::WeightType::URL => substance_weight_type::WeightType::single_system(),
+        supplement_type::SupplementTypeCodes::URL => supplement_type::SupplementTypeCodes::single_system(),
+        supply_item::SNOMEDCTSupplyItem::URL => supply_item::SNOMEDCTSupplyItem::single_system(),
+        supplydelivery_status::SupplyDeliveryStatus::URL => supplydelivery_status::SupplyDeliveryStatus::single_system(),
+        supplydelivery_supplyitemtype::SupplyDeliverySupplyItemType::URL => supplydelivery_supplyitemtype::SupplyDeliverySupplyItemType::single_system(),
+        supplyrequest_kind::SupplyType::URL => supplyrequest_kind::SupplyType::single_system(),
+        supplyrequest_reason::SupplyRequestReason::URL => supplyrequest_reason::SupplyRequestReason::single_system(),
+        supplyrequest_status::SupplyRequestStatus::URL => supplyrequest_status::SupplyRequestStatus::single_system(),
+        surface::SurfaceCodes::URL => surface::SurfaceCodes::single_system(),
+        system_restful_interaction::SystemRestfulInteraction::URL => system_restful_interaction::SystemRestfulInteraction::single_system(),
+        target_species::TargetSpecies::URL => target_species::TargetSpecies::single_system(),
+        task_code::TaskCode::URL => task_code::TaskCode::single_system(),
+        task_intent::TaskIntent::URL => task_intent::TaskIntent::single_system(),
+        task_status::TaskStatus::URL => task_status::TaskStatus::single_system(),
+        task_status_reason::TaskStatusReason::URL => task_status_reason::TaskStatusReason::single_system(),
+        testscript_operation_codes::TestScriptOperationCode::URL => testscript_operation_codes::TestScriptOperationCode::single_system(),
+        testscript_profile_destination_types::TestScriptProfileDestinationType::URL => testscript_profile_destination_types::TestScriptProfileDestinationType::single_system(),
+        testscript_profile_origin_types::TestScriptProfileOriginType::URL => testscript_profile_origin_types::TestScriptProfileOriginType::single_system(),
+        testscript_scope_conformance_codes::TestScriptScopeConformanceType::URL => testscript_scope_conformance_codes::TestScriptScopeConformanceType::single_system(),
+        testscript_scope_phase_codes::TestScriptScopePhaseType::URL => testscript_scope_phase_codes::TestScriptScopePhaseType::single_system(),
+        texture_code::TextureModifierCodes::URL => texture_code::TextureModifierCodes::single_system(),
+        therapy::Therapy::URL => therapy::Therapy::single_system(),
+        therapy_relationship_type::TherapyRelationshipType::URL => therapy_relationship_type::TherapyRelationshipType::single_system(),
+        timezones::IANATimezones::URL => timezones::IANATimezones::single_system(),
+        timing_abbreviation::TimingAbbreviation::URL => timing_abbreviation::TimingAbbreviation::single_system(),
+        title_type::TitleType::URL => title_type::TitleType::single_system(),
+        tooth::OralSiteCodes::URL => tooth::OralSiteCodes::single_system(),
+        transport_code::TransportCode::URL => transport_code::TransportCode::single_system(),
+        transport_intent::TransportIntent::URL => transport_intent::TransportIntent::single_system(),
+        transport_status::TransportStatus::URL => transport_status::TransportStatus::single_system(),
+        transport_status_reason::TransportStatusReason::URL => transport_status_reason::TransportStatusReason::single_system(),
+        trigger_type::TriggerType::URL => trigger_type::TriggerType::single_system(),
+        type_derivation_rule::TypeDerivationRule::URL => type_derivation_rule::TypeDerivationRule::single_system(),
+        type_restful_interaction::TypeRestfulInteraction::URL => type_restful_interaction::TypeRestfulInteraction::single_system(),
+        ucum_bodylength::BodyLengthUnits::URL => ucum_bodylength::BodyLengthUnits::single_system(),
+        ucum_bodytemp::BodyTemperatureUnits::URL => ucum_bodytemp::BodyTemperatureUnits::single_system(),
+        ucum_bodyweight::BodyWeightUnits::URL => ucum_bodyweight::BodyWeightUnits::single_system(),
+        ucum_common::CommonUCUMUnits::URL => ucum_common::CommonUCUMUnits::single_system(),
+        ucum_units::UCUMCodes::URL => ucum_units::UCUMCodes::single_system(),
+        ucum_vitals_common::VitalSignsUnits::URL => ucum_vitals_common::VitalSignsUnits::single_system(),
+        udi_entry_type::UDIEntryType::URL => udi_entry_type::UDIEntryType::single_system(),
+        undesirable_effect_classification::UndesirableEffectClassification::URL => undesirable_effect_classification::UndesirableEffectClassification::single_system(),
+        undesirable_effect_frequency::UndesirablEffectFrequency::URL => undesirable_effect_frequency::UndesirablEffectFrequency::single_system(),
+        undesirable_effect_symptom::UndesirableEffectSymptom::URL => undesirable_effect_symptom::UndesirableEffectSymptom::single_system(),
+        unit_of_presentation::UnitOfPresentation::URL => unit_of_presentation::UnitOfPresentation::single_system(),
+        units_of_time::UnitsOfTime::URL => units_of_time::UnitsOfTime::single_system(),
+        usage_context_agreement_scope::UsageContextAgreementScope::URL => usage_context_agreement_scope::UsageContextAgreementScope::single_system(),
+        use_context::ContextOfUseValueSet::URL => use_context::ContextOfUseValueSet::single_system(),
+        vaccine_code::VaccineAdministeredValueSet::URL => vaccine_code::VaccineAdministeredValueSet::single_system(),
+        value_filter_comparator::ValueFilterComparator::URL => value_filter_comparator::ValueFilterComparator::single_system(),
+        variable_handling::EvidenceVariableHandling::URL => variable_handling::EvidenceVariableHandling::single_system(),
+        variable_role::EvidenceVariableRole::URL => variable_role::EvidenceVariableRole::single_system(),
+        verificationresult_can_push_updates::CanPushUpdates::URL => verificationresult_can_push_updates::CanPushUpdates::single_system(),
+        verificationresult_communication_method::VerificationresultCommunicationMethod::URL => verificationresult_communication_method::VerificationresultCommunicationMethod::single_system(),
+        verificationresult_failure_action::FailureAction::URL => verificationresult_failure_action::FailureAction::single_system(),
+        verificationresult_need::Need::URL => verificationresult_need::Need::single_system(),
+        verificationresult_primary_source_type::PrimarySourceType::URL => verificationresult_primary_source_type::PrimarySourceType::single_system(),
+        verificationresult_push_type_available::PushTypeAvailable::URL => verificationresult_push_type_available::PushTypeAvailable::single_system(),
+        verificationresult_status::VerificationResultStatus::URL => verificationresult_status::VerificationResultStatus::single_system(),
+        verificationresult_validation_process::ValidationProcess::URL => verificationresult_validation_process::ValidationProcess::single_system(),
+        verificationresult_validation_status::ValidationStatus::URL => verificationresult_validation_status::ValidationStatus::single_system(),
+        verificationresult_validation_type::ValidationType::URL => verificationresult_validation_type::ValidationType::single_system(),
+        version_algorithm::VersionAlgorithm::URL => version_algorithm::VersionAlgorithm::single_system(),
+        version_independent_all_resource_types::VersionIndependentResourceTypesAll::URL => version_independent_all_resource_types::VersionIndependentResourceTypesAll::single_system(),
+        version_independent_resource_types::VersionIndependentResourceTypes::URL => version_independent_resource_types::VersionIndependentResourceTypes::single_system(),
+        versioning_policy::ResourceVersionPolicy::URL => versioning_policy::ResourceVersionPolicy::single_system(),
+        virtual_service_type::VirtualServiceType::URL => virtual_service_type::VirtualServiceType::single_system(),
+        vision_base_codes::VisionBase::URL => vision_base_codes::VisionBase::single_system(),
+        vision_eye_codes::VisionEyes::URL => vision_eye_codes::VisionEyes::single_system(),
+        vision_product::ExampleVisionPrescriptionProductCodes::URL => vision_product::ExampleVisionPrescriptionProductCodes::single_system(),
+        warning_type::WarningType::URL => warning_type::WarningType::single_system(),
+        week_of_month::WeekOfMonth::URL => week_of_month::WeekOfMonth::single_system(),
+        written_languages::CommonLanguagesWritten::URL => written_languages::CommonLanguagesWritten::single_system(),
+        yesnodontknow::YesNoDontKnow::URL => yesnodontknow::YesNoDontKnow::single_system(),
+        _ => None,
+    }
+}
+
+/// Lookup whether a ValueSet is a pure whole-system include (membership == CodeSystem membership).
+///
+/// NOTE: URLs may include an optional `|x.y.z` version suffix; this function matches on the base URL.
+pub fn valueset_is_pure_whole_system_by_url(url: &str) -> Option<bool> {
+    let base = url.split('|').next().unwrap_or(url);
+    match base {
+        FHIR_version::FHIRVersion::URL => Some(FHIR_version::FHIRVersion::is_pure_whole_system()),
+        account_aggregate::AccountAggregate::URL => Some(account_aggregate::AccountAggregate::is_pure_whole_system()),
+        account_balance_term::AccountBalanceTerm::URL => Some(account_balance_term::AccountBalanceTerm::is_pure_whole_system()),
+        account_billing_status::AccountBillingStatus::URL => Some(account_billing_status::AccountBillingStatus::is_pure_whole_system()),
+        account_relationship::AccountRelationship::URL => Some(account_relationship::AccountRelationship::is_pure_whole_system()),
+        account_status::AccountStatus::URL => Some(account_status::AccountStatus::is_pure_whole_system()),
+        account_type::AccountTypes::URL => Some(account_type::AccountTypes::is_pure_whole_system()),
+        action_cardinality_behavior::ActionCardinalityBehavior::URL => Some(action_cardinality_behavior::ActionCardinalityBehavior::is_pure_whole_system()),
+        action_code::ActionCode::URL => Some(action_code::ActionCode::is_pure_whole_system()),
+        action_condition_kind::ActionConditionKind::URL => Some(action_condition_kind::ActionConditionKind::is_pure_whole_system()),
+        action_grouping_behavior::ActionGroupingBehavior::URL => Some(action_grouping_behavior::ActionGroupingBehavior::is_pure_whole_system()),
+        action_participant_function::ActionParticipantFunction::URL => Some(action_participant_function::ActionParticipantFunction::is_pure_whole_system()),
+        action_participant_type::ActionParticipantType::URL => Some(action_participant_type::ActionParticipantType::is_pure_whole_system()),
+        action_precheck_behavior::ActionPrecheckBehavior::URL => Some(action_precheck_behavior::ActionPrecheckBehavior::is_pure_whole_system()),
+        action_reason_code::ActionReasonCode::URL => Some(action_reason_code::ActionReasonCode::is_pure_whole_system()),
+        action_relationship_type::ActionRelationshipType::URL => Some(action_relationship_type::ActionRelationshipType::is_pure_whole_system()),
+        action_required_behavior::ActionRequiredBehavior::URL => Some(action_required_behavior::ActionRequiredBehavior::is_pure_whole_system()),
+        action_selection_behavior::ActionSelectionBehavior::URL => Some(action_selection_behavior::ActionSelectionBehavior::is_pure_whole_system()),
+        action_type::ActionType::URL => Some(action_type::ActionType::is_pure_whole_system()),
+        additional_binding_purpose::AdditionalBindingPurposeVS::URL => Some(additional_binding_purpose::AdditionalBindingPurposeVS::is_pure_whole_system()),
+        additional_instruction_codes::SNOMEDCTAdditionalDosageInstructions::URL => Some(additional_instruction_codes::SNOMEDCTAdditionalDosageInstructions::is_pure_whole_system()),
+        address_type::AddressType::URL => Some(address_type::AddressType::is_pure_whole_system()),
+        address_use::AddressUse::URL => Some(address_use::AddressUse::is_pure_whole_system()),
+        adjudication::AdjudicationValueCodes::URL => Some(adjudication::AdjudicationValueCodes::is_pure_whole_system()),
+        adjudication_error::AdjudicationErrorCodes::URL => Some(adjudication_error::AdjudicationErrorCodes::is_pure_whole_system()),
+        adjudication_reason::AdjudicationReasonCodes::URL => Some(adjudication_reason::AdjudicationReasonCodes::is_pure_whole_system()),
+        administrable_dose_form::AdministrableDoseForm::URL => Some(administrable_dose_form::AdministrableDoseForm::is_pure_whole_system()),
+        administration_method_codes::SNOMEDCTAdministrationMethodCodes::URL => Some(administration_method_codes::SNOMEDCTAdministrationMethodCodes::is_pure_whole_system()),
+        administration_subpotent_reason::MedicationAdministrationSubpotentReason::URL => Some(administration_subpotent_reason::MedicationAdministrationSubpotentReason::is_pure_whole_system()),
+        administrative_gender::AdministrativeGender::URL => Some(administrative_gender::AdministrativeGender::is_pure_whole_system()),
+        adverse_event_actuality::AdverseEventActuality::URL => Some(adverse_event_actuality::AdverseEventActuality::is_pure_whole_system()),
+        adverse_event_category::AdverseEventCategory::URL => Some(adverse_event_category::AdverseEventCategory::is_pure_whole_system()),
+        adverse_event_causality_assess::AdverseEventCausalityAssessment::URL => Some(adverse_event_causality_assess::AdverseEventCausalityAssessment::is_pure_whole_system()),
+        adverse_event_causality_method::AdverseEventCausalityMethod::URL => Some(adverse_event_causality_method::AdverseEventCausalityMethod::is_pure_whole_system()),
+        adverse_event_contributing_factor::AdverseEventContributingFactor::URL => Some(adverse_event_contributing_factor::AdverseEventContributingFactor::is_pure_whole_system()),
+        adverse_event_mitigating_action::AdverseEventMitigatingAction::URL => Some(adverse_event_mitigating_action::AdverseEventMitigatingAction::is_pure_whole_system()),
+        adverse_event_outcome::AdverseEventOutcome::URL => Some(adverse_event_outcome::AdverseEventOutcome::is_pure_whole_system()),
+        adverse_event_participant_function::AdverseEventParticipantFunction::URL => Some(adverse_event_participant_function::AdverseEventParticipantFunction::is_pure_whole_system()),
+        adverse_event_preventive_action::AdverseEventPreventiveAction::URL => Some(adverse_event_preventive_action::AdverseEventPreventiveAction::is_pure_whole_system()),
+        adverse_event_seriousness::AdverseEventSeriousness::URL => Some(adverse_event_seriousness::AdverseEventSeriousness::is_pure_whole_system()),
+        adverse_event_status::AdverseEventStatus::URL => Some(adverse_event_status::AdverseEventStatus::is_pure_whole_system()),
+        adverse_event_supporting_info::AdverseEventSupportingInforation::URL => Some(adverse_event_supporting_info::AdverseEventSupportingInforation::is_pure_whole_system()),
+        adverse_event_type::AdverseEventType::URL => Some(adverse_event_type::AdverseEventType::is_pure_whole_system()),
+        age_units::CommonUCUMCodesForAge::URL => Some(age_units::CommonUCUMCodesForAge::is_pure_whole_system()),
+        all_distance_units::AllUCUMExpressionForDistance::URL => Some(all_distance_units::AllUCUMExpressionForDistance::is_pure_whole_system()),
+        all_languages::AllLanguages::URL => Some(all_languages::AllLanguages::is_pure_whole_system()),
+        all_resource_types::AllResourceTypes::URL => Some(all_resource_types::AllResourceTypes::is_pure_whole_system()),
+        all_time_units::AllUCUMExpressionForTime::URL => Some(all_time_units::AllUCUMExpressionForTime::is_pure_whole_system()),
+        allergen_class::CodesForAllergenClasses::URL => Some(allergen_class::CodesForAllergenClasses::is_pure_whole_system()),
+        allergy_intolerance_category::AllergyIntoleranceCategory::URL => Some(allergy_intolerance_category::AllergyIntoleranceCategory::is_pure_whole_system()),
+        allergy_intolerance_criticality::AllergyIntoleranceCriticality::URL => Some(allergy_intolerance_criticality::AllergyIntoleranceCriticality::is_pure_whole_system()),
+        allergy_intolerance_type::AllergyIntoleranceType::URL => Some(allergy_intolerance_type::AllergyIntoleranceType::is_pure_whole_system()),
+        allergyintolerance_clinical::AllergyIntoleranceClinicalStatusCodes::URL => Some(allergyintolerance_clinical::AllergyIntoleranceClinicalStatusCodes::is_pure_whole_system()),
+        allergyintolerance_code::SubstanceProductAndConditionAndNegationCodes::URL => Some(allergyintolerance_code::SubstanceProductAndConditionAndNegationCodes::is_pure_whole_system()),
+        allergyintolerance_verification::AllergyIntoleranceVerificationStatus::URL => Some(allergyintolerance_verification::AllergyIntoleranceVerificationStatus::is_pure_whole_system()),
+        animal_tissue_type::AnimalTissueType::URL => Some(animal_tissue_type::AnimalTissueType::is_pure_whole_system()),
+        appointment_cancellation_reason::AppointmentCancellationReason::URL => Some(appointment_cancellation_reason::AppointmentCancellationReason::is_pure_whole_system()),
+        appointment_recurrrence_type::AppointmentRecurrenceType::URL => Some(appointment_recurrrence_type::AppointmentRecurrenceType::is_pure_whole_system()),
+        appointmentresponse_status::AppointmentResponseStatus::URL => Some(appointmentresponse_status::AppointmentResponseStatus::is_pure_whole_system()),
+        appointmentstatus::AppointmentStatus::URL => Some(appointmentstatus::AppointmentStatus::is_pure_whole_system()),
+        approach_site_codes::SNOMEDCTAnatomicalStructureAdministrationSites::URL => Some(approach_site_codes::SNOMEDCTAnatomicalStructureAdministrationSites::is_pure_whole_system()),
+        artifact_contribution_instance_type::ArtifactContributionInstanceType::URL => Some(artifact_contribution_instance_type::ArtifactContributionInstanceType::is_pure_whole_system()),
+        artifact_contribution_type::ArtifactContributionType::URL => Some(artifact_contribution_type::ArtifactContributionType::is_pure_whole_system()),
+        artifact_url_classifier::ArtifactUrlClassifier::URL => Some(artifact_url_classifier::ArtifactUrlClassifier::is_pure_whole_system()),
+        artifactassessment_disposition::ArtifactAssessmentDisposition::URL => Some(artifactassessment_disposition::ArtifactAssessmentDisposition::is_pure_whole_system()),
+        artifactassessment_information_type::ArtifactAssessmentInformationType::URL => Some(artifactassessment_information_type::ArtifactAssessmentInformationType::is_pure_whole_system()),
+        artifactassessment_workflow_status::ArtifactAssessmentWorkflowStatus::URL => Some(artifactassessment_workflow_status::ArtifactAssessmentWorkflowStatus::is_pure_whole_system()),
+        assert_direction_codes::AssertionDirectionType::URL => Some(assert_direction_codes::AssertionDirectionType::is_pure_whole_system()),
+        assert_manual_completion_codes::AssertionManualCompletionType::URL => Some(assert_manual_completion_codes::AssertionManualCompletionType::is_pure_whole_system()),
+        assert_operator_codes::AssertionOperatorType::URL => Some(assert_operator_codes::AssertionOperatorType::is_pure_whole_system()),
+        assert_response_code_types::AssertionResponseTypes::URL => Some(assert_response_code_types::AssertionResponseTypes::is_pure_whole_system()),
+        asset_availability::ContractResourceAssetAvailiabilityCodes::URL => Some(asset_availability::ContractResourceAssetAvailiabilityCodes::is_pure_whole_system()),
+        attribute_estimate_type::AttributeEstimateType::URL => Some(attribute_estimate_type::AttributeEstimateType::is_pure_whole_system()),
+        audit_event_action::AuditEventAction::URL => Some(audit_event_action::AuditEventAction::is_pure_whole_system()),
+        audit_event_outcome::AuditEventOutcome::URL => Some(audit_event_outcome::AuditEventOutcome::is_pure_whole_system()),
+        audit_event_outcome_detail::AuditEventOutcomeDetail::URL => Some(audit_event_outcome_detail::AuditEventOutcomeDetail::is_pure_whole_system()),
+        audit_event_severity::AuditEventSeverity::URL => Some(audit_event_severity::AuditEventSeverity::is_pure_whole_system()),
+        audit_event_sub_type::AuditEventSubType::URL => Some(audit_event_sub_type::AuditEventSubType::is_pure_whole_system()),
+        audit_event_type::AuditEventID::URL => Some(audit_event_type::AuditEventID::is_pure_whole_system()),
+        basic_resource_type::BasicResourceTypes::URL => Some(basic_resource_type::BasicResourceTypes::is_pure_whole_system()),
+        benefit_network::NetworkTypeCodes::URL => Some(benefit_network::NetworkTypeCodes::is_pure_whole_system()),
+        benefit_term::BenefitTermCodes::URL => Some(benefit_term::BenefitTermCodes::is_pure_whole_system()),
+        benefit_type::BenefitTypeCodes::URL => Some(benefit_type::BenefitTypeCodes::is_pure_whole_system()),
+        benefit_unit::UnitTypeCodes::URL => Some(benefit_unit::UnitTypeCodes::is_pure_whole_system()),
+        binding_strength::BindingStrength::URL => Some(binding_strength::BindingStrength::is_pure_whole_system()),
+        biologicallyderived_product_property_type_codes::BiologicallyDerivedProductPropertyTypeCodes::URL => Some(biologicallyderived_product_property_type_codes::BiologicallyDerivedProductPropertyTypeCodes::is_pure_whole_system()),
+        biologicallyderived_product_status::BiologicallyDerivedProductStatus::URL => Some(biologicallyderived_product_status::BiologicallyDerivedProductStatus::is_pure_whole_system()),
+        biologicallyderived_productcodes::BiologicallyDerivedProductCodes::URL => Some(biologicallyderived_productcodes::BiologicallyDerivedProductCodes::is_pure_whole_system()),
+        biologicallyderivedproductdispense_match_status::BiologicallyDerivedProductDispenseMatchStatus::URL => Some(biologicallyderivedproductdispense_match_status::BiologicallyDerivedProductDispenseMatchStatus::is_pure_whole_system()),
+        biologicallyderivedproductdispense_origin_relationship::BiologicallyDerivedProductDispenseOriginRelationship::URL => Some(biologicallyderivedproductdispense_origin_relationship::BiologicallyDerivedProductDispenseOriginRelationship::is_pure_whole_system()),
+        biologicallyderivedproductdispense_performer_function::BiologicallyDerivedProductDispensePerformerFunction::URL => Some(biologicallyderivedproductdispense_performer_function::BiologicallyDerivedProductDispensePerformerFunction::is_pure_whole_system()),
+        biologicallyderivedproductdispense_status::BiologicallyDerivedProductDispenseCodes::URL => Some(biologicallyderivedproductdispense_status::BiologicallyDerivedProductDispenseCodes::is_pure_whole_system()),
+        body_site::SNOMEDCTBodyStructures::URL => Some(body_site::SNOMEDCTBodyStructures::is_pure_whole_system()),
+        bodystructure_bodylandmarkorientation_clockface_position::BodystructureBodyLandmarkClockFacePosition::URL => Some(bodystructure_bodylandmarkorientation_clockface_position::BodystructureBodyLandmarkClockFacePosition::is_pure_whole_system()),
+        bodystructure_code::SNOMEDCTMorphologicAbnormalities::URL => Some(bodystructure_code::SNOMEDCTMorphologicAbnormalities::is_pure_whole_system()),
+        bodystructure_relative_location::BodystructureLocationQualifier::URL => Some(bodystructure_relative_location::BodystructureLocationQualifier::is_pure_whole_system()),
+        bundle_type::BundleType::URL => Some(bundle_type::BundleType::is_pure_whole_system()),
+        c80_facilitycodes::FacilityTypeCodeValueSet::URL => Some(c80_facilitycodes::FacilityTypeCodeValueSet::is_pure_whole_system()),
+        c80_practice_codes::PracticeSettingCodeValueSet::URL => Some(c80_practice_codes::PracticeSettingCodeValueSet::is_pure_whole_system()),
+        capability_format_type::CapabilityFormatType::URL => Some(capability_format_type::CapabilityFormatType::is_pure_whole_system()),
+        capability_statement_kind::CapabilityStatementKind::URL => Some(capability_statement_kind::CapabilityStatementKind::is_pure_whole_system()),
+        care_plan_activity_performed::CarePlanActivityPerformed::URL => Some(care_plan_activity_performed::CarePlanActivityPerformed::is_pure_whole_system()),
+        care_plan_category::CarePlanCategory::URL => Some(care_plan_category::CarePlanCategory::is_pure_whole_system()),
+        care_plan_intent::CarePlanIntent::URL => Some(care_plan_intent::CarePlanIntent::is_pure_whole_system()),
+        care_team_category::CareTeamCategory::URL => Some(care_team_category::CareTeamCategory::is_pure_whole_system()),
+        care_team_status::CareTeamStatus::URL => Some(care_team_status::CareTeamStatus::is_pure_whole_system()),
+        catalogType::CatalogType::URL => Some(catalogType::CatalogType::is_pure_whole_system()),
+        cdshooks_indicator::Indicator::URL => Some(cdshooks_indicator::Indicator::is_pure_whole_system()),
+        certainty_rating::EvidenceCertaintyRating::URL => Some(certainty_rating::EvidenceCertaintyRating::is_pure_whole_system()),
+        certainty_type::EvidenceCertaintyType::URL => Some(certainty_type::EvidenceCertaintyType::is_pure_whole_system()),
+        characteristic_combination::CharacteristicCombination::URL => Some(characteristic_combination::CharacteristicCombination::is_pure_whole_system()),
+        characteristic_offset::CharacteristicOffset::URL => Some(characteristic_offset::CharacteristicOffset::is_pure_whole_system()),
+        chargeitem_billingcodes::ChargeItemCode::URL => Some(chargeitem_billingcodes::ChargeItemCode::is_pure_whole_system()),
+        chargeitem_status::ChargeItemStatus::URL => Some(chargeitem_status::ChargeItemStatus::is_pure_whole_system()),
+        citation_artifact_classifier::CitationArtifactClassifier::URL => Some(citation_artifact_classifier::CitationArtifactClassifier::is_pure_whole_system()),
+        citation_classification_type::CitationClassificationType::URL => Some(citation_classification_type::CitationClassificationType::is_pure_whole_system()),
+        citation_status_type::CitationStatusType::URL => Some(citation_status_type::CitationStatusType::is_pure_whole_system()),
+        citation_summary_style::CitationSummaryStyle::URL => Some(citation_summary_style::CitationSummaryStyle::is_pure_whole_system()),
+        cited_artifact_abstract_type::CitedArtifactAbstractType::URL => Some(cited_artifact_abstract_type::CitedArtifactAbstractType::is_pure_whole_system()),
+        cited_artifact_classification_type::CitedArtifactClassificationType::URL => Some(cited_artifact_classification_type::CitedArtifactClassificationType::is_pure_whole_system()),
+        cited_artifact_part_type::CitedArtifactPartType::URL => Some(cited_artifact_part_type::CitedArtifactPartType::is_pure_whole_system()),
+        cited_artifact_status_type::CitedArtifactStatusType::URL => Some(cited_artifact_status_type::CitedArtifactStatusType::is_pure_whole_system()),
+        cited_medium::CitedMedium::URL => Some(cited_medium::CitedMedium::is_pure_whole_system()),
+        claim_careteamrole::ClaimCareTeamRoleCodes::URL => Some(claim_careteamrole::ClaimCareTeamRoleCodes::is_pure_whole_system()),
+        claim_decision::ClaimAdjudicationDecisionsCodes::URL => Some(claim_decision::ClaimAdjudicationDecisionsCodes::is_pure_whole_system()),
+        claim_decision_reason::ClaimAdjudicationDecisionReasonCodes::URL => Some(claim_decision_reason::ClaimAdjudicationDecisionReasonCodes::is_pure_whole_system()),
+        claim_exception::ExceptionCodes::URL => Some(claim_exception::ExceptionCodes::is_pure_whole_system()),
+        claim_informationcategory::ClaimInformationCategoryCodes::URL => Some(claim_informationcategory::ClaimInformationCategoryCodes::is_pure_whole_system()),
+        claim_modifiers::ModifierTypeCodes::URL => Some(claim_modifiers::ModifierTypeCodes::is_pure_whole_system()),
+        claim_outcome::ClaimProcessingCodes::URL => Some(claim_outcome::ClaimProcessingCodes::is_pure_whole_system()),
+        claim_subtype::ExampleClaimSubTypeCodes::URL => Some(claim_subtype::ExampleClaimSubTypeCodes::is_pure_whole_system()),
+        claim_type::ClaimTypeCodes::URL => Some(claim_type::ClaimTypeCodes::is_pure_whole_system()),
+        claim_use::Use::URL => Some(claim_use::Use::is_pure_whole_system()),
+        clinical_findings::SNOMEDCTClinicalFindings::URL => Some(clinical_findings::SNOMEDCTClinicalFindings::is_pure_whole_system()),
+        clinical_use_definition_category::ClinicalUseDefinitionCategory::URL => Some(clinical_use_definition_category::ClinicalUseDefinitionCategory::is_pure_whole_system()),
+        clinical_use_definition_type::ClinicalUseDefinitionType::URL => Some(clinical_use_definition_type::ClinicalUseDefinitionType::is_pure_whole_system()),
+        clinicalimpression_change_pattern::ClinicalImpressionChangePatter::URL => Some(clinicalimpression_change_pattern::ClinicalImpressionChangePatter::is_pure_whole_system()),
+        clinicalimpression_prognosis::ClinicalImpressionPrognosis::URL => Some(clinicalimpression_prognosis::ClinicalImpressionPrognosis::is_pure_whole_system()),
+        clinicalimpression_status_reason::ClinicalImpressionStatusReason::URL => Some(clinicalimpression_status_reason::ClinicalImpressionStatusReason::is_pure_whole_system()),
+        code_search_support::CodeSearchSupport::URL => Some(code_search_support::CodeSearchSupport::is_pure_whole_system()),
+        codesystem_content_mode::CodeSystemContentMode::URL => Some(codesystem_content_mode::CodeSystemContentMode::is_pure_whole_system()),
+        codesystem_hierarchy_meaning::CodeSystemHierarchyMeaning::URL => Some(codesystem_hierarchy_meaning::CodeSystemHierarchyMeaning::is_pure_whole_system()),
+        color_codes::ColorCodesOrRGB::URL => Some(color_codes::ColorCodesOrRGB::is_pure_whole_system()),
+        combined_dose_form::CombinedDoseForm::URL => Some(combined_dose_form::CombinedDoseForm::is_pure_whole_system()),
+        common_tags::CommonTags::URL => Some(common_tags::CommonTags::is_pure_whole_system()),
+        communication_category::CommunicationCategory::URL => Some(communication_category::CommunicationCategory::is_pure_whole_system()),
+        communication_not_done_reason::CommunicationNotDoneReason::URL => Some(communication_not_done_reason::CommunicationNotDoneReason::is_pure_whole_system()),
+        communication_request_status_reason::CommunicationRequestStatusReason::URL => Some(communication_request_status_reason::CommunicationRequestStatusReason::is_pure_whole_system()),
+        communication_topic::CommunicationTopic::URL => Some(communication_topic::CommunicationTopic::is_pure_whole_system()),
+        compartment_type::CompartmentType::URL => Some(compartment_type::CompartmentType::is_pure_whole_system()),
+        composite_measure_scoring::CompositeMeasureScoring::URL => Some(composite_measure_scoring::CompositeMeasureScoring::is_pure_whole_system()),
+        composition_attestation_mode::CompositionAttestationMode::URL => Some(composition_attestation_mode::CompositionAttestationMode::is_pure_whole_system()),
+        composition_status::CompositionStatus::URL => Some(composition_status::CompositionStatus::is_pure_whole_system()),
+        concept_map_relationship::ConceptMapRelationship::URL => Some(concept_map_relationship::ConceptMapRelationship::is_pure_whole_system()),
+        concept_property_type::PropertyType::URL => Some(concept_property_type::PropertyType::is_pure_whole_system()),
+        concept_subsumption_outcome::ConceptSubsumptionOutcome::URL => Some(concept_subsumption_outcome::ConceptSubsumptionOutcome::is_pure_whole_system()),
+        conceptmap_attribute_type::ConceptMapAttributeType::URL => Some(conceptmap_attribute_type::ConceptMapAttributeType::is_pure_whole_system()),
+        conceptmap_property_type::ConceptMapPropertyType::URL => Some(conceptmap_property_type::ConceptMapPropertyType::is_pure_whole_system()),
+        conceptmap_unmapped_mode::ConceptMapGroupUnmappedMode::URL => Some(conceptmap_unmapped_mode::ConceptMapGroupUnmappedMode::is_pure_whole_system()),
+        concrete_fhir_types::ConcreteFHIRTypes::URL => Some(concrete_fhir_types::ConcreteFHIRTypes::is_pure_whole_system()),
+        condition_category::ConditionCategoryCodes::URL => Some(condition_category::ConditionCategoryCodes::is_pure_whole_system()),
+        condition_clinical::ConditionClinicalStatusCodes::URL => Some(condition_clinical::ConditionClinicalStatusCodes::is_pure_whole_system()),
+        condition_code::ConditionProblemDiagnosisCodes::URL => Some(condition_code::ConditionProblemDiagnosisCodes::is_pure_whole_system()),
+        condition_outcome::ConditionOutcomeCodes::URL => Some(condition_outcome::ConditionOutcomeCodes::is_pure_whole_system()),
+        condition_precondition_type::ConditionPreconditionType::URL => Some(condition_precondition_type::ConditionPreconditionType::is_pure_whole_system()),
+        condition_questionnaire_purpose::ConditionQuestionnairePurpose::URL => Some(condition_questionnaire_purpose::ConditionQuestionnairePurpose::is_pure_whole_system()),
+        condition_severity::ConditionDiagnosisSeverity::URL => Some(condition_severity::ConditionDiagnosisSeverity::is_pure_whole_system()),
+        condition_stage::ConditionStage::URL => Some(condition_stage::ConditionStage::is_pure_whole_system()),
+        condition_stage_type::ConditionStageType::URL => Some(condition_stage_type::ConditionStageType::is_pure_whole_system()),
+        condition_ver_status::ConditionVerificationStatus::URL => Some(condition_ver_status::ConditionVerificationStatus::is_pure_whole_system()),
+        conditional_delete_status::ConditionalDeleteStatus::URL => Some(conditional_delete_status::ConditionalDeleteStatus::is_pure_whole_system()),
+        conditional_read_status::ConditionalReadStatus::URL => Some(conditional_read_status::ConditionalReadStatus::is_pure_whole_system()),
+        conformance_expectation::ConformanceExpectation::URL => Some(conformance_expectation::ConformanceExpectation::is_pure_whole_system()),
+        consent_action::ConsentActionCodes::URL => Some(consent_action::ConsentActionCodes::is_pure_whole_system()),
+        consent_category::ConsentCategoryCodes::URL => Some(consent_category::ConsentCategoryCodes::is_pure_whole_system()),
+        consent_content_class::ConsentContentClass::URL => Some(consent_content_class::ConsentContentClass::is_pure_whole_system()),
+        consent_content_code::ConsentContentCodes::URL => Some(consent_content_code::ConsentContentCodes::is_pure_whole_system()),
+        consent_data_meaning::ConsentDataMeaning::URL => Some(consent_data_meaning::ConsentDataMeaning::is_pure_whole_system()),
+        consent_policy::ConsentPolicyRuleCodes::URL => Some(consent_policy::ConsentPolicyRuleCodes::is_pure_whole_system()),
+        consent_provision_type::ConsentProvisionType::URL => Some(consent_provision_type::ConsentProvisionType::is_pure_whole_system()),
+        consent_state_codes::ConsentState::URL => Some(consent_state_codes::ConsentState::is_pure_whole_system()),
+        consent_verification::ConsentVerificationCodes::URL => Some(consent_verification::ConsentVerificationCodes::is_pure_whole_system()),
+        consistency_type::FluidConsistencyTypeCodes::URL => Some(consistency_type::FluidConsistencyTypeCodes::is_pure_whole_system()),
+        constraint_severity::ConstraintSeverity::URL => Some(constraint_severity::ConstraintSeverity::is_pure_whole_system()),
+        contact_point_system::ContactPointSystem::URL => Some(contact_point_system::ContactPointSystem::is_pure_whole_system()),
+        contact_point_use::ContactPointUse::URL => Some(contact_point_use::ContactPointUse::is_pure_whole_system()),
+        container_cap::ContainerCap::URL => Some(container_cap::ContainerCap::is_pure_whole_system()),
+        container_material::ContainerMaterials::URL => Some(container_material::ContainerMaterials::is_pure_whole_system()),
+        contract_action::ContractActionCodes::URL => Some(contract_action::ContractActionCodes::is_pure_whole_system()),
+        contract_actionstatus::ContractResourceActionStatusCodes::URL => Some(contract_actionstatus::ContractResourceActionStatusCodes::is_pure_whole_system()),
+        contract_actorrole::ContractActorRoleCodes::URL => Some(contract_actorrole::ContractActorRoleCodes::is_pure_whole_system()),
+        contract_assetcontext::ContractResourceAssetContextCodes::URL => Some(contract_assetcontext::ContractResourceAssetContextCodes::is_pure_whole_system()),
+        contract_assetscope::ContractResourceAssetScopeCodes::URL => Some(contract_assetscope::ContractResourceAssetScopeCodes::is_pure_whole_system()),
+        contract_assetsubtype::ContractResourceAssetSubTypeCodes::URL => Some(contract_assetsubtype::ContractResourceAssetSubTypeCodes::is_pure_whole_system()),
+        contract_assettype::ContractResourceAssetTypeCodes::URL => Some(contract_assettype::ContractResourceAssetTypeCodes::is_pure_whole_system()),
+        contract_content_derivative::ContractContentDerivationCodes::URL => Some(contract_content_derivative::ContractContentDerivationCodes::is_pure_whole_system()),
+        contract_decision_mode::ContractResourceDecisionModeCodes::URL => Some(contract_decision_mode::ContractResourceDecisionModeCodes::is_pure_whole_system()),
+        contract_definition_subtype::ContractResourceDefinitionSubtypeCodes::URL => Some(contract_definition_subtype::ContractResourceDefinitionSubtypeCodes::is_pure_whole_system()),
+        contract_definition_type::ContractResourceDefinitionTypeCodes::URL => Some(contract_definition_type::ContractResourceDefinitionTypeCodes::is_pure_whole_system()),
+        contract_expiration_type::ContractResourceExpirationTypeCodes::URL => Some(contract_expiration_type::ContractResourceExpirationTypeCodes::is_pure_whole_system()),
+        contract_legalstate::ContractResourceLegalStateCodes::URL => Some(contract_legalstate::ContractResourceLegalStateCodes::is_pure_whole_system()),
+        contract_party_role::ContractResourcePartyRoleCodes::URL => Some(contract_party_role::ContractResourcePartyRoleCodes::is_pure_whole_system()),
+        contract_publicationstatus::ContractResourcePublicationStatusCodes::URL => Some(contract_publicationstatus::ContractResourcePublicationStatusCodes::is_pure_whole_system()),
+        contract_scope::ContractResourceScopeCodes::URL => Some(contract_scope::ContractResourceScopeCodes::is_pure_whole_system()),
+        contract_security_category::ContractResourceScopeCodes::URL => Some(contract_security_category::ContractResourceScopeCodes::is_pure_whole_system()),
+        contract_security_classification::ContractResourceScopeCodes::URL => Some(contract_security_classification::ContractResourceScopeCodes::is_pure_whole_system()),
+        contract_security_control::ContractResourceSecurityControlCodes::URL => Some(contract_security_control::ContractResourceSecurityControlCodes::is_pure_whole_system()),
+        contract_signer_type::ContractSignerTypeCodes::URL => Some(contract_signer_type::ContractSignerTypeCodes::is_pure_whole_system()),
+        contract_status::ContractResourceStatusCodes::URL => Some(contract_status::ContractResourceStatusCodes::is_pure_whole_system()),
+        contract_subtype::ContractSubtypeCodes::URL => Some(contract_subtype::ContractSubtypeCodes::is_pure_whole_system()),
+        contract_term_subtype::ContractTermSubtypeCodes::URL => Some(contract_term_subtype::ContractTermSubtypeCodes::is_pure_whole_system()),
+        contract_term_type::ContractTermTypeCodes::URL => Some(contract_term_type::ContractTermTypeCodes::is_pure_whole_system()),
+        contract_type::ContractTypeCodes::URL => Some(contract_type::ContractTypeCodes::is_pure_whole_system()),
+        contributor_role::ContributorRole::URL => Some(contributor_role::ContributorRole::is_pure_whole_system()),
+        contributor_summary_source::ContributorSummarySource::URL => Some(contributor_summary_source::ContributorSummarySource::is_pure_whole_system()),
+        contributor_summary_style::ContributorSummaryStyle::URL => Some(contributor_summary_style::ContributorSummaryStyle::is_pure_whole_system()),
+        contributor_summary_type::ContributorSummaryType::URL => Some(contributor_summary_type::ContributorSummaryType::is_pure_whole_system()),
+        contributor_type::ContributorType::URL => Some(contributor_type::ContributorType::is_pure_whole_system()),
+        country::CountryValueSet::URL => Some(country::CountryValueSet::is_pure_whole_system()),
+        coverage_class::CoverageClassCodes::URL => Some(coverage_class::CoverageClassCodes::is_pure_whole_system()),
+        coverage_copay_type::CoverageCopayTypeCodes::URL => Some(coverage_copay_type::CoverageCopayTypeCodes::is_pure_whole_system()),
+        coverage_financial_exception::ExampleCoverageFinancialExceptionCodes::URL => Some(coverage_financial_exception::ExampleCoverageFinancialExceptionCodes::is_pure_whole_system()),
+        coverage_kind::Kind::URL => Some(coverage_kind::Kind::is_pure_whole_system()),
+        coverage_type::CoverageTypeAndSelfPayCodes::URL => Some(coverage_type::CoverageTypeAndSelfPayCodes::is_pure_whole_system()),
+        coverageeligibilityresponse_ex_auth_support::CoverageEligibilityResponseAuthSupportCodes::URL => Some(coverageeligibilityresponse_ex_auth_support::CoverageEligibilityResponseAuthSupportCodes::is_pure_whole_system()),
+        currencies::Currencies::URL => Some(currencies::Currencies::is_pure_whole_system()),
+        data_absent_reason::DataAbsentReason::URL => Some(data_absent_reason::DataAbsentReason::is_pure_whole_system()),
+        data_types::FHIRTypes::URL => Some(data_types::FHIRTypes::is_pure_whole_system()),
+        datestype::DatesTypeCodes::URL => Some(datestype::DatesTypeCodes::is_pure_whole_system()),
+        days_of_week::DaysOfWeek::URL => Some(days_of_week::DaysOfWeek::is_pure_whole_system()),
+        definition_method::DefinitionMethod::URL => Some(definition_method::DefinitionMethod::is_pure_whole_system()),
+        definition_resource_types::DefinitionResourceTypes::URL => Some(definition_resource_types::DefinitionResourceTypes::is_pure_whole_system()),
+        definition_topic::DefinitionTopic::URL => Some(definition_topic::DefinitionTopic::is_pure_whole_system()),
+        definition_use::DefinitionUseCodes::URL => Some(definition_use::DefinitionUseCodes::is_pure_whole_system()),
+        designation_use::DesignationUse::URL => Some(designation_use::DesignationUse::is_pure_whole_system()),
+        detectedissue_category::DetectedIssueCategory::URL => Some(detectedissue_category::DetectedIssueCategory::is_pure_whole_system()),
+        detectedissue_mitigation_action::DetectedIssueMitigationAction::URL => Some(detectedissue_mitigation_action::DetectedIssueMitigationAction::is_pure_whole_system()),
+        detectedissue_severity::DetectedIssueSeverity::URL => Some(detectedissue_severity::DetectedIssueSeverity::is_pure_whole_system()),
+        detectedissue_status::DetectedIssueStatus::URL => Some(detectedissue_status::DetectedIssueStatus::is_pure_whole_system()),
+        device_action::ProcedureDeviceActionCodes::URL => Some(device_action::ProcedureDeviceActionCodes::is_pure_whole_system()),
+        device_availability_status::FHIRDeviceAvailabilityStatus::URL => Some(device_availability_status::FHIRDeviceAvailabilityStatus::is_pure_whole_system()),
+        device_category::FHIRDeviceCategory::URL => Some(device_category::FHIRDeviceCategory::is_pure_whole_system()),
+        device_correctiveactionscope::DeviceCorrectiveActionScope::URL => Some(device_correctiveactionscope::DeviceCorrectiveActionScope::is_pure_whole_system()),
+        device_nametype::DeviceNameType::URL => Some(device_nametype::DeviceNameType::is_pure_whole_system()),
+        device_operation_mode::FHIRDeviceOperationMode::URL => Some(device_operation_mode::FHIRDeviceOperationMode::is_pure_whole_system()),
+        device_productidentifierinudi::DeviceProductionIdentifierInUDI::URL => Some(device_productidentifierinudi::DeviceProductionIdentifierInUDI::is_pure_whole_system()),
+        device_property_type::DeviceType::URL => Some(device_property_type::DeviceType::is_pure_whole_system()),
+        device_safety::DeviceSafety::URL => Some(device_safety::DeviceSafety::is_pure_whole_system()),
+        device_specification_category::DeviceSpecificationCategory::URL => Some(device_specification_category::DeviceSpecificationCategory::is_pure_whole_system()),
+        device_specification_type::DeviceSpecificationType::URL => Some(device_specification_type::DeviceSpecificationType::is_pure_whole_system()),
+        device_status::FHIRDeviceStatus::URL => Some(device_status::FHIRDeviceStatus::is_pure_whole_system()),
+        device_type::DeviceType::URL => Some(device_type::DeviceType::is_pure_whole_system()),
+        device_versiontype::DeviceVersionType::URL => Some(device_versiontype::DeviceVersionType::is_pure_whole_system()),
+        deviceassociation_operationstatus::FHIRDeviceAssociationOperationStatus::URL => Some(deviceassociation_operationstatus::FHIRDeviceAssociationOperationStatus::is_pure_whole_system()),
+        deviceassociation_status::DeviceAssociationCodes::URL => Some(deviceassociation_status::DeviceAssociationCodes::is_pure_whole_system()),
+        deviceassociation_status_reason::DeviceAssociationCodes::URL => Some(deviceassociation_status_reason::DeviceAssociationCodes::is_pure_whole_system()),
+        devicedefinition_regulatory_identifier_type::DeviceDefinitionRegulatoryIdentifierType::URL => Some(devicedefinition_regulatory_identifier_type::DeviceDefinitionRegulatoryIdentifierType::is_pure_whole_system()),
+        devicedefinition_relationtype::DeviceDefinitionRelationType::URL => Some(devicedefinition_relationtype::DeviceDefinitionRelationType::is_pure_whole_system()),
+        devicedispense_status::DeviceDispenseStatusCodes::URL => Some(devicedispense_status::DeviceDispenseStatusCodes::is_pure_whole_system()),
+        devicedispense_status_reason::DeviceDispenseStatusReasonCodes::URL => Some(devicedispense_status_reason::DeviceDispenseStatusReasonCodes::is_pure_whole_system()),
+        devicemetric_type::DeviceMetricAndComponentTypes::URL => Some(devicemetric_type::DeviceMetricAndComponentTypes::is_pure_whole_system()),
+        deviceusage_adherence_code::DeviceUsageAdherenceCode::URL => Some(deviceusage_adherence_code::DeviceUsageAdherenceCode::is_pure_whole_system()),
+        deviceusage_adherence_reason::DeviceUsageAdherenceReason::URL => Some(deviceusage_adherence_reason::DeviceUsageAdherenceReason::is_pure_whole_system()),
+        deviceusage_status::DeviceUsageStatus::URL => Some(deviceusage_status::DeviceUsageStatus::is_pure_whole_system()),
+        diagnosis_role::DiagnosisRole::URL => Some(diagnosis_role::DiagnosisRole::is_pure_whole_system()),
+        diagnostic_report_status::DiagnosticReportStatus::URL => Some(diagnostic_report_status::DiagnosticReportStatus::is_pure_whole_system()),
+        diagnostic_service_sections::DiagnosticServiceSectionCodes::URL => Some(diagnostic_service_sections::DiagnosticServiceSectionCodes::is_pure_whole_system()),
+        diet_type::DietCodes::URL => Some(diet_type::DietCodes::is_pure_whole_system()),
+        discriminator_type::DiscriminatorType::URL => Some(discriminator_type::DiscriminatorType::is_pure_whole_system()),
+        disease_status::DiseaseStatus::URL => Some(disease_status::DiseaseStatus::is_pure_whole_system()),
+        disease_symptom_procedure::DiseaseSymptomProcedure::URL => Some(disease_symptom_procedure::DiseaseSymptomProcedure::is_pure_whole_system()),
+        distance_units::CommonUCUMCodesForDistance::URL => Some(distance_units::CommonUCUMCodesForDistance::is_pure_whole_system()),
+        doc_section_codes::DocumentSectionCodes::URL => Some(doc_section_codes::DocumentSectionCodes::is_pure_whole_system()),
+        doc_typecodes::FHIRDocumentTypeCodes::URL => Some(doc_typecodes::FHIRDocumentTypeCodes::is_pure_whole_system()),
+        document_mode::DocumentMode::URL => Some(document_mode::DocumentMode::is_pure_whole_system()),
+        document_reference_status::DocumentReferenceStatus::URL => Some(document_reference_status::DocumentReferenceStatus::is_pure_whole_system()),
+        document_relationship_type::DocumentRelationshipType::URL => Some(document_relationship_type::DocumentRelationshipType::is_pure_whole_system()),
+        duration_units::CommonUCUMCodesForDuration::URL => Some(duration_units::CommonUCUMCodesForDuration::is_pure_whole_system()),
+        edible_substance_type::TypesOfEdibleSubstances::URL => Some(edible_substance_type::TypesOfEdibleSubstances::is_pure_whole_system()),
+        elementdefinition_types::ElementDefinitionTypes::URL => Some(elementdefinition_types::ElementDefinitionTypes::is_pure_whole_system()),
+        eligibility_outcome::EligibilityOutcome::URL => Some(eligibility_outcome::EligibilityOutcome::is_pure_whole_system()),
+        eligibilityrequest_purpose::EligibilityRequestPurpose::URL => Some(eligibilityrequest_purpose::EligibilityRequestPurpose::is_pure_whole_system()),
+        eligibilityresponse_purpose::EligibilityResponsePurpose::URL => Some(eligibilityresponse_purpose::EligibilityResponsePurpose::is_pure_whole_system()),
+        encounter_admit_source::AdmitSource::URL => Some(encounter_admit_source::AdmitSource::is_pure_whole_system()),
+        encounter_diagnosis_use::EncounterDiagnosisUse::URL => Some(encounter_diagnosis_use::EncounterDiagnosisUse::is_pure_whole_system()),
+        encounter_diet::EncounterDiet::URL => Some(encounter_diet::EncounterDiet::is_pure_whole_system()),
+        encounter_discharge_disposition::DischargeDisposition::URL => Some(encounter_discharge_disposition::DischargeDisposition::is_pure_whole_system()),
+        encounter_location_status::EncounterLocationStatus::URL => Some(encounter_location_status::EncounterLocationStatus::is_pure_whole_system()),
+        encounter_participant_type::ParticipantType::URL => Some(encounter_participant_type::ParticipantType::is_pure_whole_system()),
+        encounter_reason::EncounterReasonCodes::URL => Some(encounter_reason::EncounterReasonCodes::is_pure_whole_system()),
+        encounter_reason_use::EncounterReasonUse::URL => Some(encounter_reason_use::EncounterReasonUse::is_pure_whole_system()),
+        encounter_special_arrangements::SpecialArrangements::URL => Some(encounter_special_arrangements::SpecialArrangements::is_pure_whole_system()),
+        encounter_special_courtesy::SpecialCourtesy::URL => Some(encounter_special_courtesy::SpecialCourtesy::is_pure_whole_system()),
+        encounter_status::EncounterStatus::URL => Some(encounter_status::EncounterStatus::is_pure_whole_system()),
+        encounter_subject_status::EncounterSubjectStatus::URL => Some(encounter_subject_status::EncounterSubjectStatus::is_pure_whole_system()),
+        encounter_type::EncounterType::URL => Some(encounter_type::EncounterType::is_pure_whole_system()),
+        endpoint_connection_type::EndpointConnectionType::URL => Some(endpoint_connection_type::EndpointConnectionType::is_pure_whole_system()),
+        endpoint_environment::EndpointEnvironment::URL => Some(endpoint_environment::EndpointEnvironment::is_pure_whole_system()),
+        endpoint_payload_type::EndpointPayloadType::URL => Some(endpoint_payload_type::EndpointPayloadType::is_pure_whole_system()),
+        endpoint_status::EndpointStatus::URL => Some(endpoint_status::EndpointStatus::is_pure_whole_system()),
+        enrollment_outcome::EnrollmentOutcome::URL => Some(enrollment_outcome::EnrollmentOutcome::is_pure_whole_system()),
+        enteral_route::EnteralRouteCodes::URL => Some(enteral_route::EnteralRouteCodes::is_pure_whole_system()),
+        entformula_additive::EnteralFormulaAdditiveTypeCode::URL => Some(entformula_additive::EnteralFormulaAdditiveTypeCode::is_pure_whole_system()),
+        entformula_type::EnteralFormulaTypeCodes::URL => Some(entformula_type::EnteralFormulaTypeCodes::is_pure_whole_system()),
+        episode_of_care_status::EpisodeOfCareStatus::URL => Some(episode_of_care_status::EpisodeOfCareStatus::is_pure_whole_system()),
+        episodeofcare_type::EpisodeOfCareType::URL => Some(episodeofcare_type::EpisodeOfCareType::is_pure_whole_system()),
+        event_capability_mode::EventCapabilityMode::URL => Some(event_capability_mode::EventCapabilityMode::is_pure_whole_system()),
+        event_resource_types::EventResourceTypes::URL => Some(event_resource_types::EventResourceTypes::is_pure_whole_system()),
+        event_status::EventStatus::URL => Some(event_status::EventStatus::is_pure_whole_system()),
+        event_timing::EventTiming::URL => Some(event_timing::EventTiming::is_pure_whole_system()),
+        evidence_classifier_code::EvidenceClassifier::URL => Some(evidence_classifier_code::EvidenceClassifier::is_pure_whole_system()),
+        evidence_report_section::ReportSectionType::URL => Some(evidence_report_section::ReportSectionType::is_pure_whole_system()),
+        evidence_report_type::EvidenceReportType::URL => Some(evidence_report_type::EvidenceReportType::is_pure_whole_system()),
+        evidence_variable_event::EvidenceVariableEvent::URL => Some(evidence_variable_event::EvidenceVariableEvent::is_pure_whole_system()),
+        ex_benefitcategory::BenefitCategoryCodes::URL => Some(ex_benefitcategory::BenefitCategoryCodes::is_pure_whole_system()),
+        ex_diagnosis_on_admission::ExampleDiagnosisOnAdmissionCodes::URL => Some(ex_diagnosis_on_admission::ExampleDiagnosisOnAdmissionCodes::is_pure_whole_system()),
+        ex_diagnosisrelatedgroup::ExampleDiagnosisRelatedGroupCodes::URL => Some(ex_diagnosisrelatedgroup::ExampleDiagnosisRelatedGroupCodes::is_pure_whole_system()),
+        ex_diagnosistype::ExampleDiagnosisTypeCodes::URL => Some(ex_diagnosistype::ExampleDiagnosisTypeCodes::is_pure_whole_system()),
+        ex_paymenttype::ExamplePaymentTypeCodes::URL => Some(ex_paymenttype::ExamplePaymentTypeCodes::is_pure_whole_system()),
+        ex_procedure_type::ExampleProcedureTypeCodes::URL => Some(ex_procedure_type::ExampleProcedureTypeCodes::is_pure_whole_system()),
+        ex_program_code::ExampleProgramReasonCodes::URL => Some(ex_program_code::ExampleProgramReasonCodes::is_pure_whole_system()),
+        ex_revenue_center::ExampleRevenueCenterCodes::URL => Some(ex_revenue_center::ExampleRevenueCenterCodes::is_pure_whole_system()),
+        example::LOINCCodesForCholesterolInSerumPlasma::URL => Some(example::LOINCCodesForCholesterolInSerumPlasma::is_pure_whole_system()),
+        examplescenario_actor_type::ExampleScenarioActorType::URL => Some(examplescenario_actor_type::ExampleScenarioActorType::is_pure_whole_system()),
+        examplescenario_instance_type::ExampleScenarioResourceType::URL => Some(examplescenario_instance_type::ExampleScenarioResourceType::is_pure_whole_system()),
+        explanationofbenefit_status::ExplanationOfBenefitStatus::URL => Some(explanationofbenefit_status::ExplanationOfBenefitStatus::is_pure_whole_system()),
+        expression_language::ExpressionLanguage::URL => Some(expression_language::ExpressionLanguage::is_pure_whole_system()),
+        extension_context_type::ExtensionContextType::URL => Some(extension_context_type::ExtensionContextType::is_pure_whole_system()),
+        fhir_types::FHIRTypes::URL => Some(fhir_types::FHIRTypes::is_pure_whole_system()),
+        fhirpath_types::FHIRPathTypes::URL => Some(fhirpath_types::FHIRPathTypes::is_pure_whole_system()),
+        filter_operator::FilterOperator::URL => Some(filter_operator::FilterOperator::is_pure_whole_system()),
+        flag_category::FlagCategory::URL => Some(flag_category::FlagCategory::is_pure_whole_system()),
+        flag_code::FlagCode::URL => Some(flag_code::FlagCode::is_pure_whole_system()),
+        flag_status::FlagStatus::URL => Some(flag_status::FlagStatus::is_pure_whole_system()),
+        fm_status::FinancialResourceStatusCodes::URL => Some(fm_status::FinancialResourceStatusCodes::is_pure_whole_system()),
+        focus_characteristic_code::FocusCharacteristicCode::URL => Some(focus_characteristic_code::FocusCharacteristicCode::is_pure_whole_system()),
+        food_type::FoodTypeCodes::URL => Some(food_type::FoodTypeCodes::is_pure_whole_system()),
+        forms::FormCodes::URL => Some(forms::FormCodes::is_pure_whole_system()),
+        formularyitem_status::FormularyItemStatusCodes::URL => Some(formularyitem_status::FormularyItemStatusCodes::is_pure_whole_system()),
+        fundsreserve::FundsReservationCodes::URL => Some(fundsreserve::FundsReservationCodes::is_pure_whole_system()),
+        genomicstudy_changetype::GenomicStudyChangeType::URL => Some(genomicstudy_changetype::GenomicStudyChangeType::is_pure_whole_system()),
+        genomicstudy_dataformat::GenomicStudyDataFormat::URL => Some(genomicstudy_dataformat::GenomicStudyDataFormat::is_pure_whole_system()),
+        genomicstudy_methodtype::GenomicStudyMethodType::URL => Some(genomicstudy_methodtype::GenomicStudyMethodType::is_pure_whole_system()),
+        genomicstudy_status::GenomicStudyStatus::URL => Some(genomicstudy_status::GenomicStudyStatus::is_pure_whole_system()),
+        genomicstudy_type::GenomicStudyType::URL => Some(genomicstudy_type::GenomicStudyType::is_pure_whole_system()),
+        goal_achievement::GoalAchievementStatus::URL => Some(goal_achievement::GoalAchievementStatus::is_pure_whole_system()),
+        goal_category::GoalCategory::URL => Some(goal_category::GoalCategory::is_pure_whole_system()),
+        goal_priority::GoalPriority::URL => Some(goal_priority::GoalPriority::is_pure_whole_system()),
+        goal_start_event::GoalStartEvent::URL => Some(goal_start_event::GoalStartEvent::is_pure_whole_system()),
+        goal_status::GoalLifecycleStatus::URL => Some(goal_status::GoalLifecycleStatus::is_pure_whole_system()),
+        graph_compartment_rule::GraphCompartmentRule::URL => Some(graph_compartment_rule::GraphCompartmentRule::is_pure_whole_system()),
+        graph_compartment_use::GraphCompartmentUse::URL => Some(graph_compartment_use::GraphCompartmentUse::is_pure_whole_system()),
+        group_membership_basis::GroupMembershipBasis::URL => Some(group_membership_basis::GroupMembershipBasis::is_pure_whole_system()),
+        group_type::GroupType::URL => Some(group_type::GroupType::is_pure_whole_system()),
+        guidance_module_code::GuidanceModuleCode::URL => Some(guidance_module_code::GuidanceModuleCode::is_pure_whole_system()),
+        guidance_response_status::GuidanceResponseStatus::URL => Some(guidance_response_status::GuidanceResponseStatus::is_pure_whole_system()),
+        guide_page_generation::GuidePageGeneration::URL => Some(guide_page_generation::GuidePageGeneration::is_pure_whole_system()),
+        guide_parameter_code::GuideParameterCode::URL => Some(guide_parameter_code::GuideParameterCode::is_pure_whole_system()),
+        handling_condition::HandlingConditionSet::URL => Some(handling_condition::HandlingConditionSet::is_pure_whole_system()),
+        history_absent_reason::FamilyHistoryAbsentReason::URL => Some(history_absent_reason::FamilyHistoryAbsentReason::is_pure_whole_system()),
+        history_status::FamilyHistoryStatus::URL => Some(history_status::FamilyHistoryStatus::is_pure_whole_system()),
+        http_operations::TestScriptRequestMethodCode::URL => Some(http_operations::TestScriptRequestMethodCode::is_pure_whole_system()),
+        http_verb::HTTPVerb::URL => Some(http_verb::HTTPVerb::is_pure_whole_system()),
+        iana_link_relations::LinkRelationTypes::URL => Some(iana_link_relations::LinkRelationTypes::is_pure_whole_system()),
+        icd_10::ICD10Codes::URL => Some(icd_10::ICD10Codes::is_pure_whole_system()),
+        icd_10_procedures::ICD10ProcedureCodes::URL => Some(icd_10_procedures::ICD10ProcedureCodes::is_pure_whole_system()),
+        identifier_type::IdentifierTypeCodes::URL => Some(identifier_type::IdentifierTypeCodes::is_pure_whole_system()),
+        identifier_use::IdentifierUse::URL => Some(identifier_use::IdentifierUse::is_pure_whole_system()),
+        identity_assuranceLevel::IdentityAssuranceLevel::URL => Some(identity_assuranceLevel::IdentityAssuranceLevel::is_pure_whole_system()),
+        imagingselection_2dgraphictype::ImagingSelection2DGraphicType::URL => Some(imagingselection_2dgraphictype::ImagingSelection2DGraphicType::is_pure_whole_system()),
+        imagingselection_3dgraphictype::ImagingSelection3DGraphicType::URL => Some(imagingselection_3dgraphictype::ImagingSelection3DGraphicType::is_pure_whole_system()),
+        imagingselection_status::ImagingSelectionStatus::URL => Some(imagingselection_status::ImagingSelectionStatus::is_pure_whole_system()),
+        imagingstudy_status::ImagingStudyStatus::URL => Some(imagingstudy_status::ImagingStudyStatus::is_pure_whole_system()),
+        immunization_evaluation_dose_status::ImmunizationEvaluationDoseStatusCodes::URL => Some(immunization_evaluation_dose_status::ImmunizationEvaluationDoseStatusCodes::is_pure_whole_system()),
+        immunization_evaluation_dose_status_reason::ImmunizationEvaluationDoseStatusReasonCodes::URL => Some(immunization_evaluation_dose_status_reason::ImmunizationEvaluationDoseStatusReasonCodes::is_pure_whole_system()),
+        immunization_evaluation_status::ImmunizationEvaluationStatusCodes::URL => Some(immunization_evaluation_status::ImmunizationEvaluationStatusCodes::is_pure_whole_system()),
+        immunization_function::ImmunizationFunctionCodes::URL => Some(immunization_function::ImmunizationFunctionCodes::is_pure_whole_system()),
+        immunization_funding_source::ImmunizationFundingSource::URL => Some(immunization_funding_source::ImmunizationFundingSource::is_pure_whole_system()),
+        immunization_origin::ImmunizationOriginCodes::URL => Some(immunization_origin::ImmunizationOriginCodes::is_pure_whole_system()),
+        immunization_program_eligibility::ImmunizationProgramEligibility::URL => Some(immunization_program_eligibility::ImmunizationProgramEligibility::is_pure_whole_system()),
+        immunization_reason::ImmunizationReasonCodes::URL => Some(immunization_reason::ImmunizationReasonCodes::is_pure_whole_system()),
+        immunization_recommendation_date_criterion::ImmunizationRecommendationDateCriterionCodes::URL => Some(immunization_recommendation_date_criterion::ImmunizationRecommendationDateCriterionCodes::is_pure_whole_system()),
+        immunization_recommendation_reason::ImmunizationRecommendationReasonCodes::URL => Some(immunization_recommendation_reason::ImmunizationRecommendationReasonCodes::is_pure_whole_system()),
+        immunization_recommendation_status::ImmunizationRecommendationStatusCodes::URL => Some(immunization_recommendation_status::ImmunizationRecommendationStatusCodes::is_pure_whole_system()),
+        immunization_route::ImmunizationRouteCodes::URL => Some(immunization_route::ImmunizationRouteCodes::is_pure_whole_system()),
+        immunization_site::CodesForImmunizationSiteOfAdministration::URL => Some(immunization_site::CodesForImmunizationSiteOfAdministration::is_pure_whole_system()),
+        immunization_status::ImmunizationStatusCodes::URL => Some(immunization_status::ImmunizationStatusCodes::is_pure_whole_system()),
+        immunization_status_reason::ImmunizationStatusReasonCodes::URL => Some(immunization_status_reason::ImmunizationStatusReasonCodes::is_pure_whole_system()),
+        immunization_subpotent_reason::ImmunizationSubpotentReason::URL => Some(immunization_subpotent_reason::ImmunizationSubpotentReason::is_pure_whole_system()),
+        immunization_target_disease::ImmunizationTargetDiseaseCodes::URL => Some(immunization_target_disease::ImmunizationTargetDiseaseCodes::is_pure_whole_system()),
+        immunization_vaccine_funding_program::CodesForVaccineFundingPrograms::URL => Some(immunization_vaccine_funding_program::CodesForVaccineFundingPrograms::is_pure_whole_system()),
+        inactive::ExampleInactive::URL => Some(inactive::ExampleInactive::is_pure_whole_system()),
+        ingredient_function::IngredientFunction::URL => Some(ingredient_function::IngredientFunction::is_pure_whole_system()),
+        ingredient_manufacturer_role::IngredientManufacturerRole::URL => Some(ingredient_manufacturer_role::IngredientManufacturerRole::is_pure_whole_system()),
+        ingredient_role::IngredientRole::URL => Some(ingredient_role::IngredientRole::is_pure_whole_system()),
+        insuranceplan_applicability::BenefitCostApplicability::URL => Some(insuranceplan_applicability::BenefitCostApplicability::is_pure_whole_system()),
+        insuranceplan_type::InsurancePlanType::URL => Some(insuranceplan_type::InsurancePlanType::is_pure_whole_system()),
+        interactant::Interactant::URL => Some(interactant::Interactant::is_pure_whole_system()),
+        interaction_effect::InteractionEffect::URL => Some(interaction_effect::InteractionEffect::is_pure_whole_system()),
+        interaction_incidence::InteractionIncidence::URL => Some(interaction_incidence::InteractionIncidence::is_pure_whole_system()),
+        interaction_management::InteractionManagement::URL => Some(interaction_management::InteractionManagement::is_pure_whole_system()),
+        interaction_trigger::InteractionTrigger::URL => Some(interaction_trigger::InteractionTrigger::is_pure_whole_system()),
+        interaction_type::InteractionType::URL => Some(interaction_type::InteractionType::is_pure_whole_system()),
+        inventoryitem_nametype::InventoryItemStatusCodes::URL => Some(inventoryitem_nametype::InventoryItemStatusCodes::is_pure_whole_system()),
+        inventoryitem_status::InventoryItemStatusCodes::URL => Some(inventoryitem_status::InventoryItemStatusCodes::is_pure_whole_system()),
+        inventoryreport_counttype::InventoryCountType::URL => Some(inventoryreport_counttype::InventoryCountType::is_pure_whole_system()),
+        inventoryreport_status::InventoryReportStatus::URL => Some(inventoryreport_status::InventoryReportStatus::is_pure_whole_system()),
+        invoice_status::InvoiceStatus::URL => Some(invoice_status::InvoiceStatus::is_pure_whole_system()),
+        iso3166_1_2::Iso316612::URL => Some(iso3166_1_2::Iso316612::is_pure_whole_system()),
+        iso3166_1_3::Iso316613::URL => Some(iso3166_1_3::Iso316613::is_pure_whole_system()),
+        iso3166_1_N::Iso31661N::URL => Some(iso3166_1_N::Iso31661N::is_pure_whole_system()),
+        issue_severity::IssueSeverity::URL => Some(issue_severity::IssueSeverity::is_pure_whole_system()),
+        issue_type::IssueType::URL => Some(issue_type::IssueType::is_pure_whole_system()),
+        item_type::QuestionnaireItemType::URL => Some(item_type::QuestionnaireItemType::is_pure_whole_system()),
+        jurisdiction::JurisdictionValueSet::URL => Some(jurisdiction::JurisdictionValueSet::is_pure_whole_system()),
+        knowledge_representation_level::KnowledgeRepresentationLevel::URL => Some(knowledge_representation_level::KnowledgeRepresentationLevel::is_pure_whole_system()),
+        languages::CommonLanguages::URL => Some(languages::CommonLanguages::is_pure_whole_system()),
+        legal_status_of_supply::LegalStatusOfSupply::URL => Some(legal_status_of_supply::LegalStatusOfSupply::is_pure_whole_system()),
+        library_type::LibraryType::URL => Some(library_type::LibraryType::is_pure_whole_system()),
+        link_type::LinkType::URL => Some(link_type::LinkType::is_pure_whole_system()),
+        linkage_type::LinkageType::URL => Some(linkage_type::LinkageType::is_pure_whole_system()),
+        lipid_ldl_codes::LDLCodes::URL => Some(lipid_ldl_codes::LDLCodes::is_pure_whole_system()),
+        list_empty_reason::ListEmptyReasons::URL => Some(list_empty_reason::ListEmptyReasons::is_pure_whole_system()),
+        list_example_codes::ExampleUseCodesForList::URL => Some(list_example_codes::ExampleUseCodesForList::is_pure_whole_system()),
+        list_item_flag::PatientMedicineChangeTypes::URL => Some(list_item_flag::PatientMedicineChangeTypes::is_pure_whole_system()),
+        list_mode::ListMode::URL => Some(list_mode::ListMode::is_pure_whole_system()),
+        list_order::ListOrderCodes::URL => Some(list_order::ListOrderCodes::is_pure_whole_system()),
+        list_status::ListStatus::URL => Some(list_status::ListStatus::is_pure_whole_system()),
+        location_characteristic::LocationCharacteristic::URL => Some(location_characteristic::LocationCharacteristic::is_pure_whole_system()),
+        location_form::LocationForm::URL => Some(location_form::LocationForm::is_pure_whole_system()),
+        location_mode::LocationMode::URL => Some(location_mode::LocationMode::is_pure_whole_system()),
+        location_status::LocationStatus::URL => Some(location_status::LocationStatus::is_pure_whole_system()),
+        manifestation_or_symptom::ManifestationAndSymptomCodes::URL => Some(manifestation_or_symptom::ManifestationAndSymptomCodes::is_pure_whole_system()),
+        manufactured_dose_form::ManufacturedDoseForm::URL => Some(manufactured_dose_form::ManufacturedDoseForm::is_pure_whole_system()),
+        map_group_type_mode::StructureMapGroupTypeMode::URL => Some(map_group_type_mode::StructureMapGroupTypeMode::is_pure_whole_system()),
+        map_input_mode::StructureMapInputMode::URL => Some(map_input_mode::StructureMapInputMode::is_pure_whole_system()),
+        map_model_mode::StructureMapModelMode::URL => Some(map_model_mode::StructureMapModelMode::is_pure_whole_system()),
+        map_source_list_mode::StructureMapSourceListMode::URL => Some(map_source_list_mode::StructureMapSourceListMode::is_pure_whole_system()),
+        map_target_list_mode::StructureMapTargetListMode::URL => Some(map_target_list_mode::StructureMapTargetListMode::is_pure_whole_system()),
+        map_transform::StructureMapTransform::URL => Some(map_transform::StructureMapTransform::is_pure_whole_system()),
+        marital_status::MaritalStatusCodes::URL => Some(marital_status::MaritalStatusCodes::is_pure_whole_system()),
+        measure_aggregate_method::MeasureAggregateMethod::URL => Some(measure_aggregate_method::MeasureAggregateMethod::is_pure_whole_system()),
+        measure_data_usage::MeasureDataUsage::URL => Some(measure_data_usage::MeasureDataUsage::is_pure_whole_system()),
+        measure_definition_example::MeasureDefinitionExample::URL => Some(measure_definition_example::MeasureDefinitionExample::is_pure_whole_system()),
+        measure_group_example::MeasureGroupExample::URL => Some(measure_group_example::MeasureGroupExample::is_pure_whole_system()),
+        measure_improvement_notation::MeasureImprovementNotation::URL => Some(measure_improvement_notation::MeasureImprovementNotation::is_pure_whole_system()),
+        measure_population::MeasurePopulationType::URL => Some(measure_population::MeasurePopulationType::is_pure_whole_system()),
+        measure_report_status::MeasureReportStatus::URL => Some(measure_report_status::MeasureReportStatus::is_pure_whole_system()),
+        measure_report_type::MeasureReportType::URL => Some(measure_report_type::MeasureReportType::is_pure_whole_system()),
+        measure_scoring_unit::MeasureScoringUnit::URL => Some(measure_scoring_unit::MeasureScoringUnit::is_pure_whole_system()),
+        measure_stratifier_example::MeasureStratifierExample::URL => Some(measure_stratifier_example::MeasureStratifierExample::is_pure_whole_system()),
+        measure_supplemental_data_example::MeasureSupplementalDataExample::URL => Some(measure_supplemental_data_example::MeasureSupplementalDataExample::is_pure_whole_system()),
+        measure_type::MeasureType::URL => Some(measure_type::MeasureType::is_pure_whole_system()),
+        measurement_property::CodesForProductCharacteristics::URL => Some(measurement_property::CodesForProductCharacteristics::is_pure_whole_system()),
+        measurereport_stratifier_value_example::MeasureReportStratifierValueExample::URL => Some(measurereport_stratifier_value_example::MeasureReportStratifierValueExample::is_pure_whole_system()),
+        med_admin_perform_function::MedicationAdministrationPerformerFunctionCodes::URL => Some(med_admin_perform_function::MedicationAdministrationPerformerFunctionCodes::is_pure_whole_system()),
+        medication_admin_location::MedicationAdministrationLocationCodes::URL => Some(medication_admin_location::MedicationAdministrationLocationCodes::is_pure_whole_system()),
+        medication_admin_status::MedicationAdministrationStatusCodes::URL => Some(medication_admin_status::MedicationAdministrationStatusCodes::is_pure_whole_system()),
+        medication_as_needed_reason::SNOMEDCTMedicationAsNeededReasonCodes::URL => Some(medication_as_needed_reason::SNOMEDCTMedicationAsNeededReasonCodes::is_pure_whole_system()),
+        medication_codes::SNOMEDCTMedicationCodes::URL => Some(medication_codes::SNOMEDCTMedicationCodes::is_pure_whole_system()),
+        medication_cost_category::MedicationCostCategoryCodes::URL => Some(medication_cost_category::MedicationCostCategoryCodes::is_pure_whole_system()),
+        medication_dose_aid::MedicationDoseAids::URL => Some(medication_dose_aid::MedicationDoseAids::is_pure_whole_system()),
+        medication_form_codes::SNOMEDCTFormCodes::URL => Some(medication_form_codes::SNOMEDCTFormCodes::is_pure_whole_system()),
+        medication_ingredientstrength::MedicationIngredientStrengthCodes::URL => Some(medication_ingredientstrength::MedicationIngredientStrengthCodes::is_pure_whole_system()),
+        medication_intended_performer_role::MedicationIntendedPerformerRole::URL => Some(medication_intended_performer_role::MedicationIntendedPerformerRole::is_pure_whole_system()),
+        medication_statement_adherence::MedicationStatementAdherenceCodes::URL => Some(medication_statement_adherence::MedicationStatementAdherenceCodes::is_pure_whole_system()),
+        medication_statement_status::MedicationStatementStatusCodes::URL => Some(medication_statement_status::MedicationStatementStatusCodes::is_pure_whole_system()),
+        medication_status::MedicationStatusCodes::URL => Some(medication_status::MedicationStatusCodes::is_pure_whole_system()),
+        medicationdispense_admin_location::MedicationDispenseAdministrationLocationCodes::URL => Some(medicationdispense_admin_location::MedicationDispenseAdministrationLocationCodes::is_pure_whole_system()),
+        medicationdispense_performer_function::MedicationDispensePerformerFunctionCodes::URL => Some(medicationdispense_performer_function::MedicationDispensePerformerFunctionCodes::is_pure_whole_system()),
+        medicationdispense_status::MedicationDispenseStatusCodes::URL => Some(medicationdispense_status::MedicationDispenseStatusCodes::is_pure_whole_system()),
+        medicationdispense_status_reason::MedicationDispenseStatusReasonCodes::URL => Some(medicationdispense_status_reason::MedicationDispenseStatusReasonCodes::is_pure_whole_system()),
+        medicationknowledge_characteristic::MedicationKnowledgeCharacteristicCodes::URL => Some(medicationknowledge_characteristic::MedicationKnowledgeCharacteristicCodes::is_pure_whole_system()),
+        medicationknowledge_status::MedicationKnowledgeStatusCodes::URL => Some(medicationknowledge_status::MedicationKnowledgeStatusCodes::is_pure_whole_system()),
+        medicationrequest_admin_location::MedicationRequestAdministrationLocationCodes::URL => Some(medicationrequest_admin_location::MedicationRequestAdministrationLocationCodes::is_pure_whole_system()),
+        medicationrequest_course_of_therapy::MedicationRequestCourseOfTherapyCodes::URL => Some(medicationrequest_course_of_therapy::MedicationRequestCourseOfTherapyCodes::is_pure_whole_system()),
+        medicationrequest_intent::MedicationRequestIntent::URL => Some(medicationrequest_intent::MedicationRequestIntent::is_pure_whole_system()),
+        medicationrequest_status::MedicationrequestStatus::URL => Some(medicationrequest_status::MedicationrequestStatus::is_pure_whole_system()),
+        medicationrequest_status_reason::MedicationRequestStatusReasonCodes::URL => Some(medicationrequest_status_reason::MedicationRequestStatusReasonCodes::is_pure_whole_system()),
+        medicinal_product_additional_monitoring::AdditionalMonitoring::URL => Some(medicinal_product_additional_monitoring::AdditionalMonitoring::is_pure_whole_system()),
+        medicinal_product_classification::ProductClassification::URL => Some(medicinal_product_classification::ProductClassification::is_pure_whole_system()),
+        medicinal_product_confidentiality::ProductConfidentiality::URL => Some(medicinal_product_confidentiality::ProductConfidentiality::is_pure_whole_system()),
+        medicinal_product_contact_type::ProductContactType::URL => Some(medicinal_product_contact_type::ProductContactType::is_pure_whole_system()),
+        medicinal_product_cross_reference_type::ProductCrossReferenceType::URL => Some(medicinal_product_cross_reference_type::ProductCrossReferenceType::is_pure_whole_system()),
+        medicinal_product_domain::MedicinalProductDomain::URL => Some(medicinal_product_domain::MedicinalProductDomain::is_pure_whole_system()),
+        medicinal_product_name_part_type::ProductNamePartType::URL => Some(medicinal_product_name_part_type::ProductNamePartType::is_pure_whole_system()),
+        medicinal_product_name_type::ProductNameType::URL => Some(medicinal_product_name_type::ProductNameType::is_pure_whole_system()),
+        medicinal_product_package_type::MedicinalProductPackageType::URL => Some(medicinal_product_package_type::MedicinalProductPackageType::is_pure_whole_system()),
+        medicinal_product_pediatric_use::PediatricUse::URL => Some(medicinal_product_pediatric_use::PediatricUse::is_pure_whole_system()),
+        medicinal_product_special_measures::SpecialMeasures::URL => Some(medicinal_product_special_measures::SpecialMeasures::is_pure_whole_system()),
+        medicinal_product_type::MedicinalProductType::URL => Some(medicinal_product_type::MedicinalProductType::is_pure_whole_system()),
+        message_events::MessageEvent::URL => Some(message_events::MessageEvent::is_pure_whole_system()),
+        message_reason_encounter::ExampleMessageReasonCodes::URL => Some(message_reason_encounter::ExampleMessageReasonCodes::is_pure_whole_system()),
+        message_significance_category::MessageSignificanceCategory::URL => Some(message_significance_category::MessageSignificanceCategory::is_pure_whole_system()),
+        message_transport::MessageTransport::URL => Some(message_transport::MessageTransport::is_pure_whole_system()),
+        messageheader_response_request::MessageheaderResponseRequest::URL => Some(messageheader_response_request::MessageheaderResponseRequest::is_pure_whole_system()),
+        metric_calibration_state::DeviceMetricCalibrationState::URL => Some(metric_calibration_state::DeviceMetricCalibrationState::is_pure_whole_system()),
+        metric_calibration_type::DeviceMetricCalibrationType::URL => Some(metric_calibration_type::DeviceMetricCalibrationType::is_pure_whole_system()),
+        metric_category::DeviceMetricCategory::URL => Some(metric_category::DeviceMetricCategory::is_pure_whole_system()),
+        metric_operational_status::DeviceMetricOperationalStatus::URL => Some(metric_operational_status::DeviceMetricOperationalStatus::is_pure_whole_system()),
+        mimetypes::MimeTypes::URL => Some(mimetypes::MimeTypes::is_pure_whole_system()),
+        missing_tooth_reason::MissingToothReasonCodes::URL => Some(missing_tooth_reason::MissingToothReasonCodes::is_pure_whole_system()),
+        modified_foodtype::TextureModifiedFoodTypeCodes::URL => Some(modified_foodtype::TextureModifiedFoodTypeCodes::is_pure_whole_system()),
+        name_use::NameUse::URL => Some(name_use::NameUse::is_pure_whole_system()),
+        namingsystem_identifier_system_type::NamingSystemIdentifierSystemType::URL => Some(namingsystem_identifier_system_type::NamingSystemIdentifierSystemType::is_pure_whole_system()),
+        namingsystem_identifier_type::NamingSystemIdentifierType::URL => Some(namingsystem_identifier_type::NamingSystemIdentifierType::is_pure_whole_system()),
+        namingsystem_type::NamingSystemType::URL => Some(namingsystem_type::NamingSystemType::is_pure_whole_system()),
+        narrative_status::NarrativeStatus::URL => Some(narrative_status::NarrativeStatus::is_pure_whole_system()),
+        nhin_purposeofuse::NHINPurposeOfUse::URL => Some(nhin_purposeofuse::NHINPurposeOfUse::is_pure_whole_system()),
+        not_consumed_reason::ReasonsFoodItemNotConsumed::URL => Some(not_consumed_reason::ReasonsFoodItemNotConsumed::is_pure_whole_system()),
+        note_type::NoteType::URL => Some(note_type::NoteType::is_pure_whole_system()),
+        nutrient_code::NutrientModifierCodes::URL => Some(nutrient_code::NutrientModifierCodes::is_pure_whole_system()),
+        nutrition_product_category::CategoriesOfNutritionProducts::URL => Some(nutrition_product_category::CategoriesOfNutritionProducts::is_pure_whole_system()),
+        nutrition_product_nutrient::CodesForNutritionProductNutrients::URL => Some(nutrition_product_nutrient::CodesForNutritionProductNutrients::is_pure_whole_system()),
+        nutritionproduct_status::NutritionProductStatus::URL => Some(nutritionproduct_status::NutritionProductStatus::is_pure_whole_system()),
+        object_role::AuditEventEntityRole::URL => Some(object_role::AuditEventEntityRole::is_pure_whole_system()),
+        observation_category::ObservationCategoryCodes::URL => Some(observation_category::ObservationCategoryCodes::is_pure_whole_system()),
+        observation_codes::LOINCCodes::URL => Some(observation_codes::LOINCCodes::is_pure_whole_system()),
+        observation_interpretation::ObservationInterpretationCodes::URL => Some(observation_interpretation::ObservationInterpretationCodes::is_pure_whole_system()),
+        observation_methods::ObservationMethods::URL => Some(observation_methods::ObservationMethods::is_pure_whole_system()),
+        observation_range_category::ObservationRangeCategory::URL => Some(observation_range_category::ObservationRangeCategory::is_pure_whole_system()),
+        observation_referencerange_normalvalue::ObservationReferenceRangeNormalValueCodes::URL => Some(observation_referencerange_normalvalue::ObservationReferenceRangeNormalValueCodes::is_pure_whole_system()),
+        observation_statistics::StatisticsCode::URL => Some(observation_statistics::StatisticsCode::is_pure_whole_system()),
+        observation_status::ObservationStatus::URL => Some(observation_status::ObservationStatus::is_pure_whole_system()),
+        observation_triggeredbytype::TriggeredBytype::URL => Some(observation_triggeredbytype::TriggeredBytype::is_pure_whole_system()),
+        observation_vitalsignresult::VitalSigns::URL => Some(observation_vitalsignresult::VitalSigns::is_pure_whole_system()),
+        operation_kind::OperationKind::URL => Some(operation_kind::OperationKind::is_pure_whole_system()),
+        operation_outcome::OperationOutcomeCodes::URL => Some(operation_outcome::OperationOutcomeCodes::is_pure_whole_system()),
+        operation_parameter_scope::OperationParameterScope::URL => Some(operation_parameter_scope::OperationParameterScope::is_pure_whole_system()),
+        operation_parameter_use::OperationParameterUse::URL => Some(operation_parameter_use::OperationParameterUse::is_pure_whole_system()),
+        organization_role::OrganizationAffiliationRole::URL => Some(organization_role::OrganizationAffiliationRole::is_pure_whole_system()),
+        organization_type::OrganizationType::URL => Some(organization_type::OrganizationType::is_pure_whole_system()),
+        orientation_type::OrientationType::URL => Some(orientation_type::OrientationType::is_pure_whole_system()),
+        package_material::PackageMaterial::URL => Some(package_material::PackageMaterial::is_pure_whole_system()),
+        package_type::PackageType::URL => Some(package_type::PackageType::is_pure_whole_system()),
+        packaging_type::PackagingType::URL => Some(packaging_type::PackagingType::is_pure_whole_system()),
+        participant_resource_types::ParticipantResourceTypes::URL => Some(participant_resource_types::ParticipantResourceTypes::is_pure_whole_system()),
+        participant_role::ParticipantRoles::URL => Some(participant_role::ParticipantRoles::is_pure_whole_system()),
+        participation_role_type::ParticipationRoleType::URL => Some(participation_role_type::ParticipationRoleType::is_pure_whole_system()),
+        participationstatus::ParticipationStatus::URL => Some(participationstatus::ParticipationStatus::is_pure_whole_system()),
+        patient_contactrelationship::PatientContactRelationship::URL => Some(patient_contactrelationship::PatientContactRelationship::is_pure_whole_system()),
+        payeetype::ClaimPayeeTypeCodes::URL => Some(payeetype::ClaimPayeeTypeCodes::is_pure_whole_system()),
+        payment_adjustment_reason::PaymentAdjustmentReasonCodes::URL => Some(payment_adjustment_reason::PaymentAdjustmentReasonCodes::is_pure_whole_system()),
+        payment_issuertype::PaymentIssuerType::URL => Some(payment_issuertype::PaymentIssuerType::is_pure_whole_system()),
+        payment_kind::PaymentKind::URL => Some(payment_kind::PaymentKind::is_pure_whole_system()),
+        payment_outcome::PaymentOutcome::URL => Some(payment_outcome::PaymentOutcome::is_pure_whole_system()),
+        payment_status::PaymentStatusCodes::URL => Some(payment_status::PaymentStatusCodes::is_pure_whole_system()),
+        payment_type::PaymentTypeCodes::URL => Some(payment_type::PaymentTypeCodes::is_pure_whole_system()),
+        performer_function::PerformerFunctionCodes::URL => Some(performer_function::PerformerFunctionCodes::is_pure_whole_system()),
+        performer_role::ProcedurePerformerRoleCodes::URL => Some(performer_role::ProcedurePerformerRoleCodes::is_pure_whole_system()),
+        permission_rule_combining::PermissionRuleCombining::URL => Some(permission_rule_combining::PermissionRuleCombining::is_pure_whole_system()),
+        permission_status::PermissionStatus::URL => Some(permission_status::PermissionStatus::is_pure_whole_system()),
+        permitted_data_type::ObservationDataType::URL => Some(permitted_data_type::ObservationDataType::is_pure_whole_system()),
+        plan_definition_type::PlanDefinitionType::URL => Some(plan_definition_type::PlanDefinitionType::is_pure_whole_system()),
+        practitioner_role::PractitionerRole::URL => Some(practitioner_role::PractitionerRole::is_pure_whole_system()),
+        prepare_patient_prior_specimen_collection::PreparePatient::URL => Some(prepare_patient_prior_specimen_collection::PreparePatient::is_pure_whole_system()),
+        price_component_type::PriceComponentType::URL => Some(price_component_type::PriceComponentType::is_pure_whole_system()),
+        procedure_category::ProcedureCategoryCodesSNOMEDCT::URL => Some(procedure_category::ProcedureCategoryCodesSNOMEDCT::is_pure_whole_system()),
+        procedure_code::ProcedureCodesSNOMEDCT::URL => Some(procedure_code::ProcedureCodesSNOMEDCT::is_pure_whole_system()),
+        procedure_followup::ProcedureFollowUpCodesSNOMEDCT::URL => Some(procedure_followup::ProcedureFollowUpCodesSNOMEDCT::is_pure_whole_system()),
+        procedure_not_performed_reason::ProcedureNotPerformedReasonSNOMEDCT::URL => Some(procedure_not_performed_reason::ProcedureNotPerformedReasonSNOMEDCT::is_pure_whole_system()),
+        procedure_outcome::ProcedureOutcomeCodesSNOMEDCT::URL => Some(procedure_outcome::ProcedureOutcomeCodesSNOMEDCT::is_pure_whole_system()),
+        procedure_reason::ProcedureReasonCodes::URL => Some(procedure_reason::ProcedureReasonCodes::is_pure_whole_system()),
+        process_priority::ProcessPriorityCodes::URL => Some(process_priority::ProcessPriorityCodes::is_pure_whole_system()),
+        product_category::BiologicallyDerivedProductCategory::URL => Some(product_category::BiologicallyDerivedProductCategory::is_pure_whole_system()),
+        product_characteristic_codes::ProductCharacteristic::URL => Some(product_characteristic_codes::ProductCharacteristic::is_pure_whole_system()),
+        product_intended_use::ProductIntendedUse::URL => Some(product_intended_use::ProductIntendedUse::is_pure_whole_system()),
+        product_status::ProductStatus::URL => Some(product_status::ProductStatus::is_pure_whole_system()),
+        program::Program::URL => Some(program::Program::is_pure_whole_system()),
+        property_representation::PropertyRepresentation::URL => Some(property_representation::PropertyRepresentation::is_pure_whole_system()),
+        provenance_activity_type::ProvenanceActivityType::URL => Some(provenance_activity_type::ProvenanceActivityType::is_pure_whole_system()),
+        provenance_entity_role::ProvenanceEntityRole::URL => Some(provenance_entity_role::ProvenanceEntityRole::is_pure_whole_system()),
+        provenance_history_agent_type::ProvenanceEventHistoryAgentRoleCodes::URL => Some(provenance_history_agent_type::ProvenanceEventHistoryAgentRoleCodes::is_pure_whole_system()),
+        provenance_history_record_activity::ProvenanceHistoryRecordActivityCodes::URL => Some(provenance_history_record_activity::ProvenanceHistoryRecordActivityCodes::is_pure_whole_system()),
+        provider_qualification::ExampleProviderQualificationCodes::URL => Some(provider_qualification::ExampleProviderQualificationCodes::is_pure_whole_system()),
+        provider_taxonomy::ProviderTaxonomyCodes::URL => Some(provider_taxonomy::ProviderTaxonomyCodes::is_pure_whole_system()),
+        publication_status::PublicationStatus::URL => Some(publication_status::PublicationStatus::is_pure_whole_system()),
+        published_in_type::PublishedInType::URL => Some(published_in_type::PublishedInType::is_pure_whole_system()),
+        quantity_comparator::QuantityComparator::URL => Some(quantity_comparator::QuantityComparator::is_pure_whole_system()),
+        questionnaire_answer_constraint::QuestionnaireAnswerConstraint::URL => Some(questionnaire_answer_constraint::QuestionnaireAnswerConstraint::is_pure_whole_system()),
+        questionnaire_answers::QuestionnaireAnswerCodes::URL => Some(questionnaire_answers::QuestionnaireAnswerCodes::is_pure_whole_system()),
+        questionnaire_answers_status::QuestionnaireResponseStatus::URL => Some(questionnaire_answers_status::QuestionnaireResponseStatus::is_pure_whole_system()),
+        questionnaire_disabled_display::QuestionnaireItemDisabledDisplay::URL => Some(questionnaire_disabled_display::QuestionnaireItemDisabledDisplay::is_pure_whole_system()),
+        questionnaire_enable_behavior::EnableWhenBehavior::URL => Some(questionnaire_enable_behavior::EnableWhenBehavior::is_pure_whole_system()),
+        questionnaire_enable_operator::QuestionnaireItemOperator::URL => Some(questionnaire_enable_operator::QuestionnaireItemOperator::is_pure_whole_system()),
+        questionnaire_questions::QuestionnaireQuestionCodes::URL => Some(questionnaire_questions::QuestionnaireQuestionCodes::is_pure_whole_system()),
+        reaction_event_severity::AllergyIntoleranceSeverity::URL => Some(reaction_event_severity::AllergyIntoleranceSeverity::is_pure_whole_system()),
+        reason_medication_given_codes::ReasonMedicationGivenCodes::URL => Some(reason_medication_given_codes::ReasonMedicationGivenCodes::is_pure_whole_system()),
+        reason_medication_not_given_codes::SNOMEDCTReasonMedicationNotGivenCodes::URL => Some(reason_medication_not_given_codes::SNOMEDCTReasonMedicationNotGivenCodes::is_pure_whole_system()),
+        reason_medication_status_codes::SNOMEDCTDrugTherapyStatusCodes::URL => Some(reason_medication_status_codes::SNOMEDCTDrugTherapyStatusCodes::is_pure_whole_system()),
+        reference_handling_policy::ReferenceHandlingPolicy::URL => Some(reference_handling_policy::ReferenceHandlingPolicy::is_pure_whole_system()),
+        reference_version_rules::ReferenceVersionRules::URL => Some(reference_version_rules::ReferenceVersionRules::is_pure_whole_system()),
+        referenced_item_category::ReferencedItemCategoryValueSet::URL => Some(referenced_item_category::ReferencedItemCategoryValueSet::is_pure_whole_system()),
+        referencerange_appliesto::ObservationReferenceRangeAppliesToCodes::URL => Some(referencerange_appliesto::ObservationReferenceRangeAppliesToCodes::is_pure_whole_system()),
+        referencerange_meaning::ObservationReferenceRangeMeaningCodes::URL => Some(referencerange_meaning::ObservationReferenceRangeMeaningCodes::is_pure_whole_system()),
+        regulated_authorization_basis::RegulatedAuthorizationBasis::URL => Some(regulated_authorization_basis::RegulatedAuthorizationBasis::is_pure_whole_system()),
+        regulated_authorization_case_type::RegulatedAuthorizationCaseType::URL => Some(regulated_authorization_case_type::RegulatedAuthorizationCaseType::is_pure_whole_system()),
+        regulated_authorization_type::RegulatedAuthorizationType::URL => Some(regulated_authorization_type::RegulatedAuthorizationType::is_pure_whole_system()),
+        rejection_criteria::RejectionCriterion::URL => Some(rejection_criteria::RejectionCriterion::is_pure_whole_system()),
+        related_artifact_type::RelatedArtifactType::URL => Some(related_artifact_type::RelatedArtifactType::is_pure_whole_system()),
+        related_artifact_type_all::RelatedArtifactTypeExpanded::URL => Some(related_artifact_type_all::RelatedArtifactTypeExpanded::is_pure_whole_system()),
+        related_artifact_type_expanded::RelatedArtifactTypeExpanded::URL => Some(related_artifact_type_expanded::RelatedArtifactTypeExpanded::is_pure_whole_system()),
+        related_claim_relationship::ExampleRelatedClaimRelationshipCodes::URL => Some(related_claim_relationship::ExampleRelatedClaimRelationshipCodes::is_pure_whole_system()),
+        relatedperson_relationshiptype::PatientRelationshipType::URL => Some(relatedperson_relationshiptype::PatientRelationshipType::is_pure_whole_system()),
+        relationship::BeneficiaryRelationshipCodes::URL => Some(relationship::BeneficiaryRelationshipCodes::is_pure_whole_system()),
+        remittance_outcome::RemittanceOutcome::URL => Some(remittance_outcome::RemittanceOutcome::is_pure_whole_system()),
+        report_action_result_codes::TestReportActionResult::URL => Some(report_action_result_codes::TestReportActionResult::is_pure_whole_system()),
+        report_codes::LOINCDiagnosticReportCodes::URL => Some(report_codes::LOINCDiagnosticReportCodes::is_pure_whole_system()),
+        report_participant_type::TestReportParticipantType::URL => Some(report_participant_type::TestReportParticipantType::is_pure_whole_system()),
+        report_relation_type::ReportRelationshipType::URL => Some(report_relation_type::ReportRelationshipType::is_pure_whole_system()),
+        report_result_codes::TestReportResult::URL => Some(report_result_codes::TestReportResult::is_pure_whole_system()),
+        report_status_codes::TestReportStatus::URL => Some(report_status_codes::TestReportStatus::is_pure_whole_system()),
+        request_intent::RequestIntent::URL => Some(request_intent::RequestIntent::is_pure_whole_system()),
+        request_priority::RequestPriority::URL => Some(request_priority::RequestPriority::is_pure_whole_system()),
+        request_resource_types::RequestResourceTypes::URL => Some(request_resource_types::RequestResourceTypes::is_pure_whole_system()),
+        request_status::RequestStatus::URL => Some(request_status::RequestStatus::is_pure_whole_system()),
+        research_study_arm_type::ResearchStudyArmType::URL => Some(research_study_arm_type::ResearchStudyArmType::is_pure_whole_system()),
+        research_study_classifiers::ResearchStudyClassifiers::URL => Some(research_study_classifiers::ResearchStudyClassifiers::is_pure_whole_system()),
+        research_study_focus_type::ResearchStudyFocusType::URL => Some(research_study_focus_type::ResearchStudyFocusType::is_pure_whole_system()),
+        research_study_objective_type::ResearchStudyObjectiveType::URL => Some(research_study_objective_type::ResearchStudyObjectiveType::is_pure_whole_system()),
+        research_study_party_organization_type::ResearchStudyPartyOrgType::URL => Some(research_study_party_organization_type::ResearchStudyPartyOrgType::is_pure_whole_system()),
+        research_study_party_role::ResearchStudyPartyRole::URL => Some(research_study_party_role::ResearchStudyPartyRole::is_pure_whole_system()),
+        research_study_phase::ResearchStudyPhase::URL => Some(research_study_phase::ResearchStudyPhase::is_pure_whole_system()),
+        research_study_prim_purp_type::ResearchStudyPrimaryPurposeType::URL => Some(research_study_prim_purp_type::ResearchStudyPrimaryPurposeType::is_pure_whole_system()),
+        research_study_reason_stopped::ResearchStudyReasonStopped::URL => Some(research_study_reason_stopped::ResearchStudyReasonStopped::is_pure_whole_system()),
+        research_study_status::ResearchStudyStatus::URL => Some(research_study_status::ResearchStudyStatus::is_pure_whole_system()),
+        research_subject_milestone::ResearchSubjectMilestone::URL => Some(research_subject_milestone::ResearchSubjectMilestone::is_pure_whole_system()),
+        research_subject_state::ResearchSubjectState::URL => Some(research_subject_state::ResearchSubjectState::is_pure_whole_system()),
+        research_subject_state_type::ResearchSubjectStateType::URL => Some(research_subject_state_type::ResearchSubjectStateType::is_pure_whole_system()),
+        resource_aggregation_mode::AggregationMode::URL => Some(resource_aggregation_mode::AggregationMode::is_pure_whole_system()),
+        resource_slicing_rules::SlicingRules::URL => Some(resource_slicing_rules::SlicingRules::is_pure_whole_system()),
+        resource_status::CanonicalStatusCodesForFHIRResources::URL => Some(resource_status::CanonicalStatusCodesForFHIRResources::is_pure_whole_system()),
+        resource_types::ResourceType::URL => Some(resource_types::ResourceType::is_pure_whole_system()),
+        resource_validation_mode::ResourceValidationMode::URL => Some(resource_validation_mode::ResourceValidationMode::is_pure_whole_system()),
+        response_code::ResponseType::URL => Some(response_code::ResponseType::is_pure_whole_system()),
+        restful_capability_mode::RestfulCapabilityMode::URL => Some(restful_capability_mode::RestfulCapabilityMode::is_pure_whole_system()),
+        restful_security_service::RestfulSecurityService::URL => Some(restful_security_service::RestfulSecurityService::is_pure_whole_system()),
+        risk_probability::RiskProbability::URL => Some(risk_probability::RiskProbability::is_pure_whole_system()),
+        route_codes::SNOMEDCTRouteCodes::URL => Some(route_codes::SNOMEDCTRouteCodes::is_pure_whole_system()),
+        search_comparator::SearchComparator::URL => Some(search_comparator::SearchComparator::is_pure_whole_system()),
+        search_entry_mode::SearchEntryMode::URL => Some(search_entry_mode::SearchEntryMode::is_pure_whole_system()),
+        search_modifier_code::SearchModifierCode::URL => Some(search_modifier_code::SearchModifierCode::is_pure_whole_system()),
+        search_param_type::SearchParamType::URL => Some(search_param_type::SearchParamType::is_pure_whole_system()),
+        search_processingmode::SearchProcessingModeType::URL => Some(search_processingmode::SearchProcessingModeType::is_pure_whole_system()),
+        security_label_data_examples::SecurityLabelDataExamples::URL => Some(security_label_data_examples::SecurityLabelDataExamples::is_pure_whole_system()),
+        security_label_event_examples::SecurityLabelEventExamples::URL => Some(security_label_event_examples::SecurityLabelEventExamples::is_pure_whole_system()),
+        security_label_examples::SecurityLabelExamples::URL => Some(security_label_examples::SecurityLabelExamples::is_pure_whole_system()),
+        security_labels::AllSecurityLabels::URL => Some(security_labels::AllSecurityLabels::is_pure_whole_system()),
+        security_role_type::SecurityRoleType::URL => Some(security_role_type::SecurityRoleType::is_pure_whole_system()),
+        security_source_type::AuditEventSourceType::URL => Some(security_source_type::AuditEventSourceType::is_pure_whole_system()),
+        sequence_type::SequenceType::URL => Some(sequence_type::SequenceType::is_pure_whole_system()),
+        series_performer_function::ImagingStudySeriesPerformerFunction::URL => Some(series_performer_function::ImagingStudySeriesPerformerFunction::is_pure_whole_system()),
+        service_category::ServiceCategory::URL => Some(service_category::ServiceCategory::is_pure_whole_system()),
+        service_mode::ServiceMode::URL => Some(service_mode::ServiceMode::is_pure_whole_system()),
+        service_place::ExampleServicePlaceCodes::URL => Some(service_place::ExampleServicePlaceCodes::is_pure_whole_system()),
+        service_provision_conditions::ServiceProvisionConditions::URL => Some(service_provision_conditions::ServiceProvisionConditions::is_pure_whole_system()),
+        service_referral_method::ReferralMethod::URL => Some(service_referral_method::ReferralMethod::is_pure_whole_system()),
+        service_type::ServiceType::URL => Some(service_type::ServiceType::is_pure_whole_system()),
+        service_uscls::USCLSCodes::URL => Some(service_uscls::USCLSCodes::is_pure_whole_system()),
+        servicerequest_category::ServiceRequestCategoryCodes::URL => Some(servicerequest_category::ServiceRequestCategoryCodes::is_pure_whole_system()),
+        servicerequest_orderdetail_parameter_code::ServiceRequestOrderDetailParameterCode::URL => Some(servicerequest_orderdetail_parameter_code::ServiceRequestOrderDetailParameterCode::is_pure_whole_system()),
+        signature_type::SignatureTypeCodes::URL => Some(signature_type::SignatureTypeCodes::is_pure_whole_system()),
+        slotstatus::SlotStatus::URL => Some(slotstatus::SlotStatus::is_pure_whole_system()),
+        sort_direction::SortDirection::URL => Some(sort_direction::SortDirection::is_pure_whole_system()),
+        spdx_license::SPDXLicense::URL => Some(spdx_license::SPDXLicense::is_pure_whole_system()),
+        specimen_collection::SpecimenCollection::URL => Some(specimen_collection::SpecimenCollection::is_pure_whole_system()),
+        specimen_collection_method::FHIRSpecimenCollectionMethod::URL => Some(specimen_collection_method::FHIRSpecimenCollectionMethod::is_pure_whole_system()),
+        specimen_combined::SpecimenCombined::URL => Some(specimen_combined::SpecimenCombined::is_pure_whole_system()),
+        specimen_contained_preference::SpecimenContainedPreference::URL => Some(specimen_contained_preference::SpecimenContainedPreference::is_pure_whole_system()),
+        specimen_container_type::SpecimenContainerType::URL => Some(specimen_container_type::SpecimenContainerType::is_pure_whole_system()),
+        specimen_processing_method::SpecimenProcessingMethod::URL => Some(specimen_processing_method::SpecimenProcessingMethod::is_pure_whole_system()),
+        specimen_role::SpecimenRole::URL => Some(specimen_role::SpecimenRole::is_pure_whole_system()),
+        specimen_status::SpecimenStatus::URL => Some(specimen_status::SpecimenStatus::is_pure_whole_system()),
+        statistic_model_code::StatisticModelCode::URL => Some(statistic_model_code::StatisticModelCode::is_pure_whole_system()),
+        statistic_type::StatisticType::URL => Some(statistic_type::StatisticType::is_pure_whole_system()),
+        strand_type::StrandType::URL => Some(strand_type::StrandType::is_pure_whole_system()),
+        structure_definition_kind::StructureDefinitionKind::URL => Some(structure_definition_kind::StructureDefinitionKind::is_pure_whole_system()),
+        study_design::StudyDesign::URL => Some(study_design::StudyDesign::is_pure_whole_system()),
+        submit_data_update_type::SubmitDataUpdateType::URL => Some(submit_data_update_type::SubmitDataUpdateType::is_pure_whole_system()),
+        subscriber_relationship::SubscriberRelationshipCodes::URL => Some(subscriber_relationship::SubscriberRelationshipCodes::is_pure_whole_system()),
+        subscription_channel_type::SubscriptionChannelType::URL => Some(subscription_channel_type::SubscriptionChannelType::is_pure_whole_system()),
+        subscription_error::SubscriptionErrorCodes::URL => Some(subscription_error::SubscriptionErrorCodes::is_pure_whole_system()),
+        subscription_notification_type::SubscriptionNotificationType::URL => Some(subscription_notification_type::SubscriptionNotificationType::is_pure_whole_system()),
+        subscription_payload_content::SubscriptionPayloadContent::URL => Some(subscription_payload_content::SubscriptionPayloadContent::is_pure_whole_system()),
+        subscription_status::SubscriptionStatusCodes::URL => Some(subscription_status::SubscriptionStatusCodes::is_pure_whole_system()),
+        subscription_types::SubscriptionTypes::URL => Some(subscription_types::SubscriptionTypes::is_pure_whole_system()),
+        subscriptiontopic_cr_behavior::CriteriaNotExistsBehavior::URL => Some(subscriptiontopic_cr_behavior::CriteriaNotExistsBehavior::is_pure_whole_system()),
+        substance_amount_type::SubstanceAmountType::URL => Some(substance_amount_type::SubstanceAmountType::is_pure_whole_system()),
+        substance_category::SubstanceCategoryCodes::URL => Some(substance_category::SubstanceCategoryCodes::is_pure_whole_system()),
+        substance_code::SubstanceCode::URL => Some(substance_code::SubstanceCode::is_pure_whole_system()),
+        substance_codes::SNOMEDCTSubstanceCodes::URL => Some(substance_codes::SNOMEDCTSubstanceCodes::is_pure_whole_system()),
+        substance_form::SubstanceForm::URL => Some(substance_form::SubstanceForm::is_pure_whole_system()),
+        substance_grade::SubstanceGrade::URL => Some(substance_grade::SubstanceGrade::is_pure_whole_system()),
+        substance_name_authority::SubstanceNameAuthority::URL => Some(substance_name_authority::SubstanceNameAuthority::is_pure_whole_system()),
+        substance_name_domain::SubstanceNameDomain::URL => Some(substance_name_domain::SubstanceNameDomain::is_pure_whole_system()),
+        substance_name_type::SubstanceNameType::URL => Some(substance_name_type::SubstanceNameType::is_pure_whole_system()),
+        substance_optical_activity::OpticalActivity::URL => Some(substance_optical_activity::OpticalActivity::is_pure_whole_system()),
+        substance_relationship_type::SubstanceRelationshipType::URL => Some(substance_relationship_type::SubstanceRelationshipType::is_pure_whole_system()),
+        substance_representation_format::SubstanceRepresentationFormat::URL => Some(substance_representation_format::SubstanceRepresentationFormat::is_pure_whole_system()),
+        substance_representation_type::SubstanceRepresentationType::URL => Some(substance_representation_type::SubstanceRepresentationType::is_pure_whole_system()),
+        substance_source_material_genus::SourceMaterialGenus::URL => Some(substance_source_material_genus::SourceMaterialGenus::is_pure_whole_system()),
+        substance_source_material_part::SourceMaterialPart::URL => Some(substance_source_material_part::SourceMaterialPart::is_pure_whole_system()),
+        substance_source_material_species::SourceMaterialSpecies::URL => Some(substance_source_material_species::SourceMaterialSpecies::is_pure_whole_system()),
+        substance_source_material_type::SourceMaterialType::URL => Some(substance_source_material_type::SourceMaterialType::is_pure_whole_system()),
+        substance_status::FHIRSubstanceStatus::URL => Some(substance_status::FHIRSubstanceStatus::is_pure_whole_system()),
+        substance_stereochemistry::Stereochemistry::URL => Some(substance_stereochemistry::Stereochemistry::is_pure_whole_system()),
+        substance_structure_technique::StructureTechnique::URL => Some(substance_structure_technique::StructureTechnique::is_pure_whole_system()),
+        substance_weight_method::WeightMethod::URL => Some(substance_weight_method::WeightMethod::is_pure_whole_system()),
+        substance_weight_type::WeightType::URL => Some(substance_weight_type::WeightType::is_pure_whole_system()),
+        supplement_type::SupplementTypeCodes::URL => Some(supplement_type::SupplementTypeCodes::is_pure_whole_system()),
+        supply_item::SNOMEDCTSupplyItem::URL => Some(supply_item::SNOMEDCTSupplyItem::is_pure_whole_system()),
+        supplydelivery_status::SupplyDeliveryStatus::URL => Some(supplydelivery_status::SupplyDeliveryStatus::is_pure_whole_system()),
+        supplydelivery_supplyitemtype::SupplyDeliverySupplyItemType::URL => Some(supplydelivery_supplyitemtype::SupplyDeliverySupplyItemType::is_pure_whole_system()),
+        supplyrequest_kind::SupplyType::URL => Some(supplyrequest_kind::SupplyType::is_pure_whole_system()),
+        supplyrequest_reason::SupplyRequestReason::URL => Some(supplyrequest_reason::SupplyRequestReason::is_pure_whole_system()),
+        supplyrequest_status::SupplyRequestStatus::URL => Some(supplyrequest_status::SupplyRequestStatus::is_pure_whole_system()),
+        surface::SurfaceCodes::URL => Some(surface::SurfaceCodes::is_pure_whole_system()),
+        system_restful_interaction::SystemRestfulInteraction::URL => Some(system_restful_interaction::SystemRestfulInteraction::is_pure_whole_system()),
+        target_species::TargetSpecies::URL => Some(target_species::TargetSpecies::is_pure_whole_system()),
+        task_code::TaskCode::URL => Some(task_code::TaskCode::is_pure_whole_system()),
+        task_intent::TaskIntent::URL => Some(task_intent::TaskIntent::is_pure_whole_system()),
+        task_status::TaskStatus::URL => Some(task_status::TaskStatus::is_pure_whole_system()),
+        task_status_reason::TaskStatusReason::URL => Some(task_status_reason::TaskStatusReason::is_pure_whole_system()),
+        testscript_operation_codes::TestScriptOperationCode::URL => Some(testscript_operation_codes::TestScriptOperationCode::is_pure_whole_system()),
+        testscript_profile_destination_types::TestScriptProfileDestinationType::URL => Some(testscript_profile_destination_types::TestScriptProfileDestinationType::is_pure_whole_system()),
+        testscript_profile_origin_types::TestScriptProfileOriginType::URL => Some(testscript_profile_origin_types::TestScriptProfileOriginType::is_pure_whole_system()),
+        testscript_scope_conformance_codes::TestScriptScopeConformanceType::URL => Some(testscript_scope_conformance_codes::TestScriptScopeConformanceType::is_pure_whole_system()),
+        testscript_scope_phase_codes::TestScriptScopePhaseType::URL => Some(testscript_scope_phase_codes::TestScriptScopePhaseType::is_pure_whole_system()),
+        texture_code::TextureModifierCodes::URL => Some(texture_code::TextureModifierCodes::is_pure_whole_system()),
+        therapy::Therapy::URL => Some(therapy::Therapy::is_pure_whole_system()),
+        therapy_relationship_type::TherapyRelationshipType::URL => Some(therapy_relationship_type::TherapyRelationshipType::is_pure_whole_system()),
+        timezones::IANATimezones::URL => Some(timezones::IANATimezones::is_pure_whole_system()),
+        timing_abbreviation::TimingAbbreviation::URL => Some(timing_abbreviation::TimingAbbreviation::is_pure_whole_system()),
+        title_type::TitleType::URL => Some(title_type::TitleType::is_pure_whole_system()),
+        tooth::OralSiteCodes::URL => Some(tooth::OralSiteCodes::is_pure_whole_system()),
+        transport_code::TransportCode::URL => Some(transport_code::TransportCode::is_pure_whole_system()),
+        transport_intent::TransportIntent::URL => Some(transport_intent::TransportIntent::is_pure_whole_system()),
+        transport_status::TransportStatus::URL => Some(transport_status::TransportStatus::is_pure_whole_system()),
+        transport_status_reason::TransportStatusReason::URL => Some(transport_status_reason::TransportStatusReason::is_pure_whole_system()),
+        trigger_type::TriggerType::URL => Some(trigger_type::TriggerType::is_pure_whole_system()),
+        type_derivation_rule::TypeDerivationRule::URL => Some(type_derivation_rule::TypeDerivationRule::is_pure_whole_system()),
+        type_restful_interaction::TypeRestfulInteraction::URL => Some(type_restful_interaction::TypeRestfulInteraction::is_pure_whole_system()),
+        ucum_bodylength::BodyLengthUnits::URL => Some(ucum_bodylength::BodyLengthUnits::is_pure_whole_system()),
+        ucum_bodytemp::BodyTemperatureUnits::URL => Some(ucum_bodytemp::BodyTemperatureUnits::is_pure_whole_system()),
+        ucum_bodyweight::BodyWeightUnits::URL => Some(ucum_bodyweight::BodyWeightUnits::is_pure_whole_system()),
+        ucum_common::CommonUCUMUnits::URL => Some(ucum_common::CommonUCUMUnits::is_pure_whole_system()),
+        ucum_units::UCUMCodes::URL => Some(ucum_units::UCUMCodes::is_pure_whole_system()),
+        ucum_vitals_common::VitalSignsUnits::URL => Some(ucum_vitals_common::VitalSignsUnits::is_pure_whole_system()),
+        udi_entry_type::UDIEntryType::URL => Some(udi_entry_type::UDIEntryType::is_pure_whole_system()),
+        undesirable_effect_classification::UndesirableEffectClassification::URL => Some(undesirable_effect_classification::UndesirableEffectClassification::is_pure_whole_system()),
+        undesirable_effect_frequency::UndesirablEffectFrequency::URL => Some(undesirable_effect_frequency::UndesirablEffectFrequency::is_pure_whole_system()),
+        undesirable_effect_symptom::UndesirableEffectSymptom::URL => Some(undesirable_effect_symptom::UndesirableEffectSymptom::is_pure_whole_system()),
+        unit_of_presentation::UnitOfPresentation::URL => Some(unit_of_presentation::UnitOfPresentation::is_pure_whole_system()),
+        units_of_time::UnitsOfTime::URL => Some(units_of_time::UnitsOfTime::is_pure_whole_system()),
+        usage_context_agreement_scope::UsageContextAgreementScope::URL => Some(usage_context_agreement_scope::UsageContextAgreementScope::is_pure_whole_system()),
+        use_context::ContextOfUseValueSet::URL => Some(use_context::ContextOfUseValueSet::is_pure_whole_system()),
+        vaccine_code::VaccineAdministeredValueSet::URL => Some(vaccine_code::VaccineAdministeredValueSet::is_pure_whole_system()),
+        value_filter_comparator::ValueFilterComparator::URL => Some(value_filter_comparator::ValueFilterComparator::is_pure_whole_system()),
+        variable_handling::EvidenceVariableHandling::URL => Some(variable_handling::EvidenceVariableHandling::is_pure_whole_system()),
+        variable_role::EvidenceVariableRole::URL => Some(variable_role::EvidenceVariableRole::is_pure_whole_system()),
+        verificationresult_can_push_updates::CanPushUpdates::URL => Some(verificationresult_can_push_updates::CanPushUpdates::is_pure_whole_system()),
+        verificationresult_communication_method::VerificationresultCommunicationMethod::URL => Some(verificationresult_communication_method::VerificationresultCommunicationMethod::is_pure_whole_system()),
+        verificationresult_failure_action::FailureAction::URL => Some(verificationresult_failure_action::FailureAction::is_pure_whole_system()),
+        verificationresult_need::Need::URL => Some(verificationresult_need::Need::is_pure_whole_system()),
+        verificationresult_primary_source_type::PrimarySourceType::URL => Some(verificationresult_primary_source_type::PrimarySourceType::is_pure_whole_system()),
+        verificationresult_push_type_available::PushTypeAvailable::URL => Some(verificationresult_push_type_available::PushTypeAvailable::is_pure_whole_system()),
+        verificationresult_status::VerificationResultStatus::URL => Some(verificationresult_status::VerificationResultStatus::is_pure_whole_system()),
+        verificationresult_validation_process::ValidationProcess::URL => Some(verificationresult_validation_process::ValidationProcess::is_pure_whole_system()),
+        verificationresult_validation_status::ValidationStatus::URL => Some(verificationresult_validation_status::ValidationStatus::is_pure_whole_system()),
+        verificationresult_validation_type::ValidationType::URL => Some(verificationresult_validation_type::ValidationType::is_pure_whole_system()),
+        version_algorithm::VersionAlgorithm::URL => Some(version_algorithm::VersionAlgorithm::is_pure_whole_system()),
+        version_independent_all_resource_types::VersionIndependentResourceTypesAll::URL => Some(version_independent_all_resource_types::VersionIndependentResourceTypesAll::is_pure_whole_system()),
+        version_independent_resource_types::VersionIndependentResourceTypes::URL => Some(version_independent_resource_types::VersionIndependentResourceTypes::is_pure_whole_system()),
+        versioning_policy::ResourceVersionPolicy::URL => Some(versioning_policy::ResourceVersionPolicy::is_pure_whole_system()),
+        virtual_service_type::VirtualServiceType::URL => Some(virtual_service_type::VirtualServiceType::is_pure_whole_system()),
+        vision_base_codes::VisionBase::URL => Some(vision_base_codes::VisionBase::is_pure_whole_system()),
+        vision_eye_codes::VisionEyes::URL => Some(vision_eye_codes::VisionEyes::is_pure_whole_system()),
+        vision_product::ExampleVisionPrescriptionProductCodes::URL => Some(vision_product::ExampleVisionPrescriptionProductCodes::is_pure_whole_system()),
+        warning_type::WarningType::URL => Some(warning_type::WarningType::is_pure_whole_system()),
+        week_of_month::WeekOfMonth::URL => Some(week_of_month::WeekOfMonth::is_pure_whole_system()),
+        written_languages::CommonLanguagesWritten::URL => Some(written_languages::CommonLanguagesWritten::is_pure_whole_system()),
+        yesnodontknow::YesNoDontKnow::URL => Some(yesnodontknow::YesNoDontKnow::is_pure_whole_system()),
         _ => None,
     }
 }

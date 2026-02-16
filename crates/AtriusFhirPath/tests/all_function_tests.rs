@@ -1,7 +1,7 @@
 use chumsky::Parser;
-use helios_fhirpath::EvaluationResult;
-use helios_fhirpath::evaluator::{EvaluationContext, evaluate};
-use helios_fhirpath::parser::parser;
+use atrius_fhir_path::EvaluationResult;
+use atrius_fhir_path::evaluator::{EvaluationContext, evaluate};
+use atrius_fhir_path::parser::parser;
 use std::collections::HashMap;
 
 /// Helper function to create a nested collection structure for testing

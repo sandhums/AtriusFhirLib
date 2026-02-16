@@ -15,13 +15,14 @@ use super::super::super::string::String as FhirString;
 ///Title: FHIRVersion
 ///Status: active
 ///All published FHIR Versions.
-///Compose includes 23 explicit concept codes
+///Compose includes 57 explicit concept codes
 ///Includes systems:
 ///- http://hl7.org/fhir/FHIR-version
 pub struct FHIRVersion;
 impl FHIRVersion {
     pub const URL: &'static str = "http://hl7.org/fhir/ValueSet/FHIR-version";
     pub const HAS_NONLOCAL_RULES: bool = false;
+    pub const HAS_FILTERS: bool = false;
     pub fn version() -> Option<&'static str> {
         Some("5.0.0")
     }
@@ -31,11 +32,31 @@ impl FHIRVersion {
     pub fn include_value_sets() -> &'static [&'static str] {
         &[]
     }
+    /// compose.include.filter / compose.exclude.filter rules.
+    ///
+    /// These are NOT evaluated locally; they are emitted for diagnostics/routing.
+    pub fn filter_rules() -> &'static [(&'static str, &'static str, &'static str)] {
+        &[]
+    }
     /// Systems that are included as whole CodeSystems but are not locally enumerable.
     ///
     /// If this is non-empty, callers should use a terminology server for definitive validation.
     pub fn include_whole_systems() -> &'static [&'static str] {
         &[]
+    }
+    /// Return the implied system if this ValueSet constrains codes to exactly one system.
+    ///
+    /// This is used to allow limited validation of primitive `code` bindings.
+    pub fn single_system() -> Option<&'static str> {
+        let systems = Self::include_systems();
+        if systems.len() == 1 {
+            return Some(systems[0]);
+        }
+        let whole = Self::include_whole_systems();
+        if whole.len() == 1 {
+            return Some(whole[0]);
+        }
+        None
     }
     /// Returns true only when this ValueSet can be treated as fully locally checkable.
     ///
@@ -45,6 +66,34 @@ impl FHIRVersion {
         !Self::HAS_NONLOCAL_RULES
             && (!Self::expansion_pairs().is_empty() || !Self::include_pairs().is_empty())
     }
+    /// Returns true if this ValueSet is a "pure whole-system" include.
+    ///
+    /// Pure whole-system means membership is equivalent to validating the code exists in the
+    /// included CodeSystem (no explicit include/exclude concepts, no expansion, no include.valueSet,
+    /// and no filter rules).
+    ///
+    /// This enables routing remote checks to `CodeSystem/$validate-code` for Snowstorm and efficiency.
+    pub fn is_pure_whole_system() -> bool {
+        if Self::include_whole_systems().len() != 1 {
+            return false;
+        }
+        if !Self::filter_rules().is_empty() {
+            return false;
+        }
+        if !Self::include_value_sets().is_empty() {
+            return false;
+        }
+        if !Self::include_pairs().is_empty() {
+            return false;
+        }
+        if !Self::expansion_pairs().is_empty() {
+            return false;
+        }
+        if !Self::exclude_pairs().is_empty() {
+            return false;
+        }
+        true
+    }
     fn include_pairs() -> &'static [(&'static str, &'static str)] {
         &[
             ("http://hl7.org/fhir/FHIR-version", "0.01"),
@@ -52,24 +101,58 @@ impl FHIRVersion {
             ("http://hl7.org/fhir/FHIR-version", "0.06"),
             ("http://hl7.org/fhir/FHIR-version", "0.11"),
             ("http://hl7.org/fhir/FHIR-version", "0.0"),
+            ("http://hl7.org/fhir/FHIR-version", "0.0.80"),
+            ("http://hl7.org/fhir/FHIR-version", "0.0.81"),
+            ("http://hl7.org/fhir/FHIR-version", "0.0.82"),
             ("http://hl7.org/fhir/FHIR-version", "0.4"),
+            ("http://hl7.org/fhir/FHIR-version", "0.4.0"),
             ("http://hl7.org/fhir/FHIR-version", "0.5"),
+            ("http://hl7.org/fhir/FHIR-version", "0.5.0"),
             ("http://hl7.org/fhir/FHIR-version", "1.0"),
+            ("http://hl7.org/fhir/FHIR-version", "1.0.0"),
+            ("http://hl7.org/fhir/FHIR-version", "1.0.1"),
+            ("http://hl7.org/fhir/FHIR-version", "1.0.2"),
             ("http://hl7.org/fhir/FHIR-version", "1.1"),
+            ("http://hl7.org/fhir/FHIR-version", "1.1.0"),
             ("http://hl7.org/fhir/FHIR-version", "1.4"),
+            ("http://hl7.org/fhir/FHIR-version", "1.4.0"),
             ("http://hl7.org/fhir/FHIR-version", "1.6"),
+            ("http://hl7.org/fhir/FHIR-version", "1.6.0"),
             ("http://hl7.org/fhir/FHIR-version", "1.8"),
+            ("http://hl7.org/fhir/FHIR-version", "1.8.0"),
             ("http://hl7.org/fhir/FHIR-version", "3.0"),
+            ("http://hl7.org/fhir/FHIR-version", "3.0.0"),
+            ("http://hl7.org/fhir/FHIR-version", "3.0.1"),
+            ("http://hl7.org/fhir/FHIR-version", "3.0.2"),
             ("http://hl7.org/fhir/FHIR-version", "3.3"),
+            ("http://hl7.org/fhir/FHIR-version", "3.3.0"),
             ("http://hl7.org/fhir/FHIR-version", "3.5"),
+            ("http://hl7.org/fhir/FHIR-version", "3.5.0"),
             ("http://hl7.org/fhir/FHIR-version", "4.0"),
+            ("http://hl7.org/fhir/FHIR-version", "4.0.0"),
+            ("http://hl7.org/fhir/FHIR-version", "4.0.1"),
             ("http://hl7.org/fhir/FHIR-version", "4.1"),
+            ("http://hl7.org/fhir/FHIR-version", "4.1.0"),
             ("http://hl7.org/fhir/FHIR-version", "4.2"),
+            ("http://hl7.org/fhir/FHIR-version", "4.2.0"),
             ("http://hl7.org/fhir/FHIR-version", "4.3"),
+            ("http://hl7.org/fhir/FHIR-version", "4.3.0"),
+            ("http://hl7.org/fhir/FHIR-version", "4.3.0-cibuild"),
+            ("http://hl7.org/fhir/FHIR-version", "4.3.0-snapshot1"),
             ("http://hl7.org/fhir/FHIR-version", "4.4"),
+            ("http://hl7.org/fhir/FHIR-version", "4.4.0"),
             ("http://hl7.org/fhir/FHIR-version", "4.5"),
+            ("http://hl7.org/fhir/FHIR-version", "4.5.0"),
             ("http://hl7.org/fhir/FHIR-version", "4.6"),
+            ("http://hl7.org/fhir/FHIR-version", "4.6.0"),
             ("http://hl7.org/fhir/FHIR-version", "5.0"),
+            ("http://hl7.org/fhir/FHIR-version", "5.0.0"),
+            ("http://hl7.org/fhir/FHIR-version", "5.0.0-cibuild"),
+            ("http://hl7.org/fhir/FHIR-version", "5.0.0-snapshot1"),
+            ("http://hl7.org/fhir/FHIR-version", "5.0.0-snapshot2"),
+            ("http://hl7.org/fhir/FHIR-version", "5.0.0-ballot"),
+            ("http://hl7.org/fhir/FHIR-version", "5.0.0-snapshot3"),
+            ("http://hl7.org/fhir/FHIR-version", "5.0.0-draft-final"),
         ]
     }
     fn include_entries() -> &'static [(
@@ -84,6 +167,24 @@ impl FHIRVersion {
                 "0.0",
                 Some("0.0"),
                 Some("DSTU 1 version."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "0.0.80",
+                Some("0.0.80"),
+                Some("DSTU 1 Official version."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "0.0.81",
+                Some("0.0.81"),
+                Some("DSTU 1 Official version Technical Errata #1."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "0.0.82",
+                Some("0.0.82"),
+                Some("DSTU 1 Official version Technical Errata #2."),
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
@@ -117,9 +218,21 @@ impl FHIRVersion {
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
+                "0.4.0",
+                Some("0.4.0"),
+                Some("Draft For Comment (January 2015 Ballot)."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
                 "0.5",
                 Some("0.5"),
                 Some("May 2015 Ballot."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "0.5.0",
+                Some("0.5.0"),
+                Some("DSTU 2 Ballot version (May 2015 Ballot)."),
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
@@ -129,9 +242,33 @@ impl FHIRVersion {
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
+                "1.0.0",
+                Some("1.0.0"),
+                Some("DSTU 2 QA Preview + CQIF Ballot (Sep 2015)."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "1.0.1",
+                Some("1.0.1"),
+                Some("DSTU 2 (Official version)."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "1.0.2",
+                Some("1.0.2"),
+                Some("DSTU 2 (Official version) with 1 technical errata."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
                 "1.1",
                 Some("1.1"),
                 Some("GAO Ballot version."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "1.1.0",
+                Some("1.1.0"),
+                Some("GAO Ballot + draft changes to main FHIR standard."),
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
@@ -141,9 +278,21 @@ impl FHIRVersion {
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
+                "1.4.0",
+                Some("1.4.0"),
+                Some("CQF on FHIR Ballot + Connectathon 12 (Montreal)."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
                 "1.6",
                 Some("1.6"),
                 Some("Connectathon 13 (Baltimore) version."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "1.6.0",
+                Some("1.6.0"),
+                Some("FHIR STU3 Ballot + Connectathon 13 (Baltimore)."),
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
@@ -153,9 +302,33 @@ impl FHIRVersion {
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
+                "1.8.0",
+                Some("1.8.0"),
+                Some("FHIR STU3 Candidate + Connectathon 14 (San Antonio)."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
                 "3.0",
                 Some("3.0"),
                 Some("STU3 version."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "3.0.0",
+                Some("3.0.0"),
+                Some("FHIR Release 3 (STU)."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "3.0.1",
+                Some("3.0.1"),
+                Some("FHIR Release 3 (STU) with 1 technical errata."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "3.0.2",
+                Some("3.0.2"),
+                Some("FHIR Release 3 (STU) with 2 technical errata."),
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
@@ -165,9 +338,21 @@ impl FHIRVersion {
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
+                "3.3.0",
+                Some("3.3.0"),
+                Some("R4 Ballot #1 + Connectaton 18 (Cologne)."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
                 "3.5",
                 Some("3.5"),
                 Some("R4 Ballot #2 version."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "3.5.0",
+                Some("3.5.0"),
+                Some("R4 Ballot #2 + Connectathon 19 (Baltimore)."),
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
@@ -177,9 +362,27 @@ impl FHIRVersion {
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
+                "4.0.0",
+                Some("4.0.0"),
+                Some("FHIR Release 4 (Normative + STU)."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "4.0.1",
+                Some("4.0.1"),
+                Some("FHIR Release 4 (Normative + STU) with 1 technical errata."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
                 "4.1",
                 Some("4.1"),
                 Some("R4B Ballot #1 version."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "4.1.0",
+                Some("4.1.0"),
+                Some("R4B Ballot #1 + Connectathon 27 (Virtual)."),
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
@@ -189,9 +392,33 @@ impl FHIRVersion {
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
+                "4.2.0",
+                Some("4.2.0"),
+                Some("R5 Preview #1 + Connectathon 23 (Sydney)."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
                 "4.3",
                 Some("4.3"),
                 Some("R4B version."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "4.3.0",
+                Some("4.3.0"),
+                Some("FHIR Release 4B (Normative + STU)."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "4.3.0-cibuild",
+                Some("4.3.0-cibuild"),
+                Some("FHIR Release 4B CI-Builld."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "4.3.0-snapshot1",
+                Some("4.3.0-snapshot1"),
+                Some("FHIR Release 4B Snapshot #1."),
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
@@ -201,9 +428,21 @@ impl FHIRVersion {
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
+                "4.4.0",
+                Some("4.4.0"),
+                Some("R5 Preview #2 + Connectathon 24 (Virtual)."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
                 "4.5",
                 Some("4.5"),
                 Some("R5 Preview #3 version."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "4.5.0",
+                Some("4.5.0"),
+                Some("R5 Preview #3 + Connectathon 25 (Virtual)."),
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
@@ -213,9 +452,57 @@ impl FHIRVersion {
             ),
             (
                 "http://hl7.org/fhir/FHIR-version",
+                "4.6.0",
+                Some("4.6.0"),
+                Some("R5 Draft Ballot + Connectathon 27 (Virtual)."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
                 "5.0",
                 Some("5.0"),
                 Some("R5 Versions."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "5.0.0",
+                Some("5.0.0"),
+                Some("R5 Final Version."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "5.0.0-ballot",
+                Some("5.0.0-ballot"),
+                Some("R5 Ballot."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "5.0.0-cibuild",
+                Some("5.0.0-cibuild"),
+                Some("R5 Rolling ci-build."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "5.0.0-draft-final",
+                Some("5.0.0-draft-final"),
+                Some("R5 Final QA."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "5.0.0-snapshot1",
+                Some("5.0.0-snapshot1"),
+                Some("R5 Preview #2."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "5.0.0-snapshot2",
+                Some("5.0.0-snapshot2"),
+                Some("R5 Interim tooling stage."),
+            ),
+            (
+                "http://hl7.org/fhir/FHIR-version",
+                "5.0.0-snapshot3",
+                Some("5.0.0-snapshot3"),
+                Some("R5 January 2023 Staging Release + Connectathon 32."),
             ),
         ]
     }
@@ -387,17 +674,5 @@ impl super::super::bindings::ValueSetMembership<CodeableConcept> for FHIRVersion
     fn contains(v: &CodeableConcept) -> bool {
         Self::contains_codeable_concept(v)
     }
-}
-fn is_rgb_hex(code: &str) -> bool {
-    let b = code.as_bytes();
-    if b.len() != 7 || b[0] != b'#' {
-        return false;
-    }
-    fn is_hex(x: u8) -> bool {
-        (b'0'..=b'9').contains(&x) || (b'a'..=b'f').contains(&x)
-            || (b'A'..=b'F').contains(&x)
-    }
-    is_hex(b[1]) && is_hex(b[2]) && is_hex(b[3]) && is_hex(b[4]) && is_hex(b[5])
-        && is_hex(b[6])
 }
 

@@ -15,13 +15,14 @@ use super::super::super::string::String as FhirString;
 ///Title: Issue Type
 ///Status: active
 ///A code that describes the type of issue.
-///Compose includes 6 explicit concept codes
+///Compose includes 33 explicit concept codes
 ///Includes systems:
 ///- http://hl7.org/fhir/issue-type
 pub struct IssueType;
 impl IssueType {
     pub const URL: &'static str = "http://hl7.org/fhir/ValueSet/issue-type";
     pub const HAS_NONLOCAL_RULES: bool = false;
+    pub const HAS_FILTERS: bool = false;
     pub fn version() -> Option<&'static str> {
         Some("5.0.0")
     }
@@ -31,11 +32,31 @@ impl IssueType {
     pub fn include_value_sets() -> &'static [&'static str] {
         &[]
     }
+    /// compose.include.filter / compose.exclude.filter rules.
+    ///
+    /// These are NOT evaluated locally; they are emitted for diagnostics/routing.
+    pub fn filter_rules() -> &'static [(&'static str, &'static str, &'static str)] {
+        &[]
+    }
     /// Systems that are included as whole CodeSystems but are not locally enumerable.
     ///
     /// If this is non-empty, callers should use a terminology server for definitive validation.
     pub fn include_whole_systems() -> &'static [&'static str] {
         &[]
+    }
+    /// Return the implied system if this ValueSet constrains codes to exactly one system.
+    ///
+    /// This is used to allow limited validation of primitive `code` bindings.
+    pub fn single_system() -> Option<&'static str> {
+        let systems = Self::include_systems();
+        if systems.len() == 1 {
+            return Some(systems[0]);
+        }
+        let whole = Self::include_whole_systems();
+        if whole.len() == 1 {
+            return Some(whole[0]);
+        }
+        None
     }
     /// Returns true only when this ValueSet can be treated as fully locally checkable.
     ///
@@ -45,12 +66,67 @@ impl IssueType {
         !Self::HAS_NONLOCAL_RULES
             && (!Self::expansion_pairs().is_empty() || !Self::include_pairs().is_empty())
     }
+    /// Returns true if this ValueSet is a "pure whole-system" include.
+    ///
+    /// Pure whole-system means membership is equivalent to validating the code exists in the
+    /// included CodeSystem (no explicit include/exclude concepts, no expansion, no include.valueSet,
+    /// and no filter rules).
+    ///
+    /// This enables routing remote checks to `CodeSystem/$validate-code` for Snowstorm and efficiency.
+    pub fn is_pure_whole_system() -> bool {
+        if Self::include_whole_systems().len() != 1 {
+            return false;
+        }
+        if !Self::filter_rules().is_empty() {
+            return false;
+        }
+        if !Self::include_value_sets().is_empty() {
+            return false;
+        }
+        if !Self::include_pairs().is_empty() {
+            return false;
+        }
+        if !Self::expansion_pairs().is_empty() {
+            return false;
+        }
+        if !Self::exclude_pairs().is_empty() {
+            return false;
+        }
+        true
+    }
     fn include_pairs() -> &'static [(&'static str, &'static str)] {
         &[
             ("http://hl7.org/fhir/issue-type", "invalid"),
+            ("http://hl7.org/fhir/issue-type", "structure"),
+            ("http://hl7.org/fhir/issue-type", "required"),
+            ("http://hl7.org/fhir/issue-type", "value"),
+            ("http://hl7.org/fhir/issue-type", "invariant"),
             ("http://hl7.org/fhir/issue-type", "security"),
+            ("http://hl7.org/fhir/issue-type", "login"),
+            ("http://hl7.org/fhir/issue-type", "unknown"),
+            ("http://hl7.org/fhir/issue-type", "expired"),
+            ("http://hl7.org/fhir/issue-type", "forbidden"),
+            ("http://hl7.org/fhir/issue-type", "suppressed"),
             ("http://hl7.org/fhir/issue-type", "processing"),
+            ("http://hl7.org/fhir/issue-type", "not-supported"),
+            ("http://hl7.org/fhir/issue-type", "duplicate"),
+            ("http://hl7.org/fhir/issue-type", "multiple-matches"),
+            ("http://hl7.org/fhir/issue-type", "not-found"),
+            ("http://hl7.org/fhir/issue-type", "deleted"),
+            ("http://hl7.org/fhir/issue-type", "too-long"),
+            ("http://hl7.org/fhir/issue-type", "code-invalid"),
+            ("http://hl7.org/fhir/issue-type", "extension"),
+            ("http://hl7.org/fhir/issue-type", "too-costly"),
+            ("http://hl7.org/fhir/issue-type", "business-rule"),
+            ("http://hl7.org/fhir/issue-type", "conflict"),
+            ("http://hl7.org/fhir/issue-type", "limited-filter"),
             ("http://hl7.org/fhir/issue-type", "transient"),
+            ("http://hl7.org/fhir/issue-type", "lock-error"),
+            ("http://hl7.org/fhir/issue-type", "no-store"),
+            ("http://hl7.org/fhir/issue-type", "exception"),
+            ("http://hl7.org/fhir/issue-type", "timeout"),
+            ("http://hl7.org/fhir/issue-type", "incomplete"),
+            ("http://hl7.org/fhir/issue-type", "throttled"),
             ("http://hl7.org/fhir/issue-type", "informational"),
             ("http://hl7.org/fhir/issue-type", "success"),
         ]
@@ -62,6 +138,78 @@ impl IssueType {
         Option<&'static str>,
     )] {
         &[
+            (
+                "http://hl7.org/fhir/issue-type",
+                "business-rule",
+                Some("Business Rule Violation"),
+                Some(
+                    "The content/operation failed to pass some business rule and so could not proceed.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "code-invalid",
+                Some("Invalid Code"),
+                Some(
+                    "The code or system could not be understood, or it was not valid in the context of a particular ValueSet.code.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "conflict",
+                Some("Edit Version Conflict"),
+                Some(
+                    "Content could not be accepted because of an edit conflict (i.e. version aware updates). (In a pure RESTful environment, this would be an HTTP 409 error, but this code may be used where the conflict is discovered further into the application architecture.).",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "deleted",
+                Some("Deleted"),
+                Some(
+                    "The reference pointed to content (usually a resource) that has been deleted.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "duplicate",
+                Some("Duplicate"),
+                Some("An attempt was made to create a duplicate record."),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "exception",
+                Some("Exception"),
+                Some("An unexpected internal error has occurred."),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "expired",
+                Some("Session Expired"),
+                Some("User session expired; a login may be required."),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "extension",
+                Some("Unacceptable Extension"),
+                Some(
+                    "An extension was found that was not acceptable, could not be resolved, or a modifierExtension was not recognized.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "forbidden",
+                Some("Forbidden"),
+                Some("The user does not have the rights to perform this action."),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "incomplete",
+                Some("Incomplete Results"),
+                Some(
+                    "Not all data sources typically accessed could be reached or responded in time, so the returned information might not be complete (applies to search interactions and some operations).",
+                ),
+            ),
             (
                 "http://hl7.org/fhir/issue-type",
                 "informational",
@@ -78,11 +226,75 @@ impl IssueType {
             ),
             (
                 "http://hl7.org/fhir/issue-type",
+                "invariant",
+                Some("Validation rule failed"),
+                Some("A content validation rule failed - e.g. a schematron rule."),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "limited-filter",
+                Some("Limited Filter Application"),
+                Some(
+                    "Some search filters might not have applied on all results.  Data may have been included that does not meet all of the filters listed in the `self` `Bundle.link`.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "lock-error",
+                Some("Lock Error"),
+                Some(
+                    "A resource/record locking failure (usually in an underlying database).",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "login",
+                Some("Login Required"),
+                Some("The client needs to initiate an authentication process."),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "multiple-matches",
+                Some("Multiple Matches"),
+                Some(
+                    "Multiple matching records were found when the operation required only one match.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "no-store",
+                Some("No Store Available"),
+                Some(
+                    "The persistent store is unavailable; e.g. the database is down for maintenance or similar action, and the interaction or operation cannot be processed.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "not-found",
+                Some("Not Found"),
+                Some(
+                    "The reference provided was not found. In a pure RESTful environment, this would be an HTTP 404 error, but this code may be used where the content is not found further into the application architecture.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "not-supported",
+                Some("Content not supported"),
+                Some("The interaction, operation, resource or profile is not supported."),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
                 "processing",
                 Some("Processing Failure"),
                 Some(
                     "Processing issues. These are expected to be final e.g. there is no point resubmitting the same content unchanged.",
                 ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "required",
+                Some("Required element missing"),
+                Some("A required element is missing."),
             ),
             (
                 "http://hl7.org/fhir/issue-type",
@@ -92,9 +304,55 @@ impl IssueType {
             ),
             (
                 "http://hl7.org/fhir/issue-type",
+                "structure",
+                Some("Structural Issue"),
+                Some(
+                    "A structural issue in the content such as wrong namespace, unable to parse the content completely, invalid syntax, etc.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
                 "success",
                 Some("Operation Successful"),
                 Some("The operation completed successfully."),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "suppressed",
+                Some("Information  Suppressed"),
+                Some(
+                    "Some information was not or might not have been returned due to business rules, consent or privacy rules, or access permission constraints.  This information may be accessible through alternate processes.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "throttled",
+                Some("Throttled"),
+                Some(
+                    "The system is not prepared to handle this request due to load management.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "timeout",
+                Some("Timeout"),
+                Some("An internal timeout has occurred."),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "too-costly",
+                Some("Operation Too Costly"),
+                Some(
+                    "The operation was stopped to protect server resources; e.g. a request for a value set expansion on all of SNOMED CT.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "too-long",
+                Some("Content Too Long"),
+                Some(
+                    "Provided content is too long (typically, this is a denial of service protection type of error).",
+                ),
             ),
             (
                 "http://hl7.org/fhir/issue-type",
@@ -103,6 +361,20 @@ impl IssueType {
                 Some(
                     "Transient processing issues. The system receiving the message may be able to resubmit the same content once an underlying issue is resolved.",
                 ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "unknown",
+                Some("Unknown User"),
+                Some(
+                    "The user or system was not able to be authenticated (either there is no process, or the proferred token is unacceptable).",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/issue-type",
+                "value",
+                Some("Element value invalid"),
+                Some("An element or header value is invalid."),
             ),
         ]
     }
@@ -272,17 +544,5 @@ impl super::super::bindings::ValueSetMembership<CodeableConcept> for IssueType {
     fn contains(v: &CodeableConcept) -> bool {
         Self::contains_codeable_concept(v)
     }
-}
-fn is_rgb_hex(code: &str) -> bool {
-    let b = code.as_bytes();
-    if b.len() != 7 || b[0] != b'#' {
-        return false;
-    }
-    fn is_hex(x: u8) -> bool {
-        (b'0'..=b'9').contains(&x) || (b'a'..=b'f').contains(&x)
-            || (b'A'..=b'F').contains(&x)
-    }
-    is_hex(b[1]) && is_hex(b[2]) && is_hex(b[3]) && is_hex(b[4]) && is_hex(b[5])
-        && is_hex(b[6])
 }
 

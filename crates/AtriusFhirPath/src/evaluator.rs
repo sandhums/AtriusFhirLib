@@ -76,7 +76,7 @@
 use crate::parser::{Expression, Invocation, Literal, Term, TypeSpecifier};
 use chrono::{Datelike, Duration, Local, NaiveDate, NaiveDateTime, Timelike};
 use atrius_fhir_lib::fhir_version::{FhirResource, FhirVersion};
-use atrius_fhirpath_support::evaluation_result::EvaluationError;
+use atrius_fhirpath_support::evaluation_result::{EvaluationError, TriBool};
 use atrius_fhirpath_support::evaluation_result::EvaluationResult;
 use atrius_fhirpath_support::type_info::{TypeInfoResult};
 use atrius_fhirpath_support::traits::IntoEvaluationResult;
@@ -162,6 +162,12 @@ pub struct EvaluationContext {
     pub terminology_server_url: Option<String>,
 
     pub terminology_client: Option<Arc<TerminologyClient>>,
+
+    /// The top-level resource for this evaluation (FHIRPath: %rootResource)
+    pub root_resource: Arc<Mutex<Option<EvaluationResult>>>,
+
+    /// The current resource for this evaluation (FHIRPath: %resource)
+    pub current_resource: Arc<Mutex<Option<EvaluationResult>>>,
 }
 
 impl Clone for EvaluationContext {
@@ -181,6 +187,8 @@ impl Clone for EvaluationContext {
             parent_context: self.parent_context.clone(),
             terminology_server_url: self.terminology_server_url.clone(),
             terminology_client: self.terminology_client.clone(),
+            root_resource: self.root_resource.clone(),
+            current_resource: self.current_resource.clone(),
         }
     }
 }
@@ -245,6 +253,8 @@ impl EvaluationContext {
             parent_context: None,           // No parent context by default
             terminology_server_url: None,   // No terminology server by default
             terminology_client: None,
+            root_resource: Arc::new(Mutex::new(None)),
+            current_resource: Arc::new(Mutex::new(None)),
         }
     }
 
@@ -278,6 +288,8 @@ impl EvaluationContext {
             parent_context: None,           // No parent context by default
             terminology_server_url: None,   // No terminology server by default
             terminology_client: None,
+            root_resource: Arc::new(Mutex::new(None)),
+            current_resource: Arc::new(Mutex::new(None)),
         }
     }
 
@@ -308,6 +320,8 @@ impl EvaluationContext {
             parent_context: None,           // No parent context by default
             terminology_server_url: None,   // No terminology server by default
             terminology_client: None,
+            root_resource: Arc::new(Mutex::new(None)),
+            current_resource: Arc::new(Mutex::new(None)),
         }
     }
 
@@ -522,9 +536,11 @@ impl EvaluationContext {
             current_aggregate_total: self.current_aggregate_total.clone(),
             current_index: self.current_index, // Inherit current index from parent
             trace_outputs: Arc::new(Mutex::new(Vec::new())), // New trace outputs for child
-            parent_context: Some(Box::new(self.clone())), // Clone entire parent context
+            parent_context: None, // no parent chain (avoid deep recursive clones) New Code
             terminology_server_url: self.terminology_server_url.clone(), // Inherit terminology server from parent
             terminology_client: self.terminology_client.clone(),
+            root_resource: self.root_resource.clone(),
+            current_resource: self.current_resource.clone(),
         }
     }
 
@@ -643,6 +659,35 @@ impl EvaluationContext {
 
     pub fn set_terminology_client(&mut self, client: Arc<TerminologyClient>) {
         self.terminology_client = Some(client);
+    }
+
+    pub fn init_root_and_current(&self, root: EvaluationResult) {
+        {
+            let mut rr = self.root_resource.lock();
+            if rr.is_none() {
+                *rr = Some(root.clone());
+            }
+        }
+        {
+            let mut cr = self.current_resource.lock();
+            if cr.is_none() {
+                *cr = Some(root);
+            }
+        }
+    }
+
+    pub fn get_root_resource_result(&self) -> EvaluationResult {
+        self.root_resource
+            .lock()
+            .clone()
+            .unwrap_or(EvaluationResult::Empty)
+    }
+
+    pub fn get_current_resource_result(&self) -> EvaluationResult {
+        self.current_resource
+            .lock()
+            .clone()
+            .unwrap_or(EvaluationResult::Empty)
     }
 }
 
@@ -771,19 +816,13 @@ pub fn evaluate(
             } else {
                 EvaluationResult::Empty
             };
-
-            if let EvaluationResult::Object {
-                map: obj_map,
-                type_info: _,
-            } = &global_context_item
-            {
-                if let Some(EvaluationResult::String(ctx_type, _)) = obj_map.get("resourceType") {
-                    // The parser ensures initial_name is cleaned of backticks.
-                    if initial_name.eq_ignore_ascii_case(ctx_type) {
-                        // The initial identifier matches the context type.
-                        // The expression resolves to the context item itself.
-                        return Ok(global_context_item);
-                    }
+            context.init_root_and_current(global_context_item.clone());
+            if let Some(ctx_type) = resource_type_of(&global_context_item) {
+                // The parser ensures initial_name is cleaned of backticks.
+                if initial_name.eq_ignore_ascii_case(&ctx_type) {
+                    // The initial identifier matches the context type.
+                    // The expression resolves to the context item itself.
+                    return Ok(global_context_item);
                 }
             }
             // If no match, or context is not an Object with resourceType,
@@ -976,316 +1015,127 @@ pub fn evaluate(
             check_membership(&left_result, op, &right_result, context)
         }
         Expression::And(left, right) => {
-            // Evaluate left operand first
+            // FHIRPath three-valued logic (true/false/empty).
+            //
+            // Spec note: implementations MUST NOT change semantics with short-circuiting.
+            // To preserve observable behavior (including evaluation errors), we evaluate
+            // both operands and then apply the three-valued truth table.
+            //
+            // and:
+            //   true  and true  => true
+            //   false and X     => false
+            //   true  and false => false
+            //   empty and false => false
+            //   empty and true  => empty
+            //   empty and empty => empty
+
             let left_eval = evaluate(left, context, current_item)?;
+            let left_tri = to_tribool_operand(&left_eval, "and")?;
 
-            // Convert left to boolean using singleton evaluation rules
-            let left_bool = match &left_eval {
-                // Direct boolean values
-                EvaluationResult::Boolean(_, _) => left_eval.to_boolean_for_logic()?,
-                // Empty evaluates to empty in logical context
-                EvaluationResult::Empty => EvaluationResult::Empty,
-                // For non-boolean singletons, apply singleton evaluation:
-                // A single value is considered true
-                EvaluationResult::String(_, _)
-                | EvaluationResult::Integer(_, _)
-                | EvaluationResult::Integer64(_, _)
-                | EvaluationResult::Decimal(_, _)
-                | EvaluationResult::Date(_, _)
-                | EvaluationResult::DateTime(_, _)
-                | EvaluationResult::Time(_, _)
-                | EvaluationResult::Quantity(_, _, _)
-                | EvaluationResult::Object { .. } => EvaluationResult::boolean(true),
-                // Collections follow singleton evaluation rules
-                EvaluationResult::Collection { items, .. } => {
-                    match items.len() {
-                        0 => EvaluationResult::Empty,
-                        1 => {
-                            // For single-item collections, apply singleton evaluation recursively
-                            match &items[0] {
-                                EvaluationResult::Boolean(_, _) => {
-                                    items[0].to_boolean_for_logic()?
-                                }
-                                EvaluationResult::Empty => EvaluationResult::Empty,
-                                _ => EvaluationResult::boolean(true), // Non-boolean singleton is true
-                            }
-                        }
-                        _ => {
-                            return Err(EvaluationError::SingletonEvaluationError(format!(
-                                "Operator 'and' requires singleton values, left operand has {} items",
-                                items.len()
-                            )));
-                        }
-                    }
-                }
-            };
+            let right_eval = evaluate(right, context, current_item)?;
+            let right_tri = to_tribool_operand(&right_eval, "and")?;
 
-            match left_bool {
-                EvaluationResult::Boolean(false, _) => Ok(EvaluationResult::boolean(false)), // false and X -> false
-                EvaluationResult::Boolean(true, _) => {
-                    // Evaluate right operand
+            let out = left_tri.and(right_tri);
+            Ok(match out {
+                TriBool::True => EvaluationResult::boolean(true),
+                TriBool::False => EvaluationResult::boolean(false),
+                TriBool::Empty => EvaluationResult::Empty,
+            })
+        }
+        Expression::Or(left, op, right) => {
+            // FHIRPath three-valued logic (true/false/empty) with short-circuiting.
+            //
+            // or:
+            //   true  or X     => true   (do not evaluate X)
+            //   false or X     => X
+            //   empty or true  => true
+            //   empty or false => empty
+            //   empty or empty => empty
+            //
+            // xor:
+            //   if either operand is empty => empty
+
+            // Evaluate left first
+            let left_eval = evaluate(left, context, current_item)?;
+            let left_tri = to_tribool_operand(&left_eval, op.as_str())?;
+
+            match op.as_str() {
+                "or" => {
+                    // FHIRPath three-valued logic (true/false/empty).
+                    //
+                    // Spec note: implementations MUST NOT change semantics with short-circuiting.
+                    // To preserve observable behavior (including evaluation errors), we evaluate
+                    // both operands and then apply the three-valued truth table.
+                    //
+                    // or:
+                    //   true  or X     => true
+                    //   false or true  => true
+                    //   false or false => false
+                    //   false or empty => empty
+                    //   empty or true  => true
+                    //   empty or false => empty
+                    //   empty or empty => empty
+
                     let right_eval = evaluate(right, context, current_item)?;
+                    let right_tri = to_tribool_operand(&right_eval, "or")?;
 
-                    // Apply singleton evaluation to right operand
-                    let right_bool = match &right_eval {
-                        // Direct boolean values
-                        EvaluationResult::Boolean(_, _) => right_eval.to_boolean_for_logic()?,
-                        // Empty evaluates to empty in logical context
-                        EvaluationResult::Empty => EvaluationResult::Empty,
-                        // For non-boolean singletons, apply singleton evaluation:
-                        // A single value is considered true
-                        EvaluationResult::String(_, _)
-                        | EvaluationResult::Integer(_, _)
-                        | EvaluationResult::Integer64(_, _)
-                        | EvaluationResult::Decimal(_, _)
-                        | EvaluationResult::Date(_, _)
-                        | EvaluationResult::DateTime(_, _)
-                        | EvaluationResult::Time(_, _)
-                        | EvaluationResult::Quantity(_, _, _)
-                        | EvaluationResult::Object { .. } => EvaluationResult::boolean(true),
-                        // Collections follow singleton evaluation rules
-                        EvaluationResult::Collection { items, .. } => {
-                            match items.len() {
-                                0 => EvaluationResult::Empty,
-                                1 => {
-                                    // For single-item collections, apply singleton evaluation recursively
-                                    match &items[0] {
-                                        EvaluationResult::Boolean(_, _) => {
-                                            items[0].to_boolean_for_logic()?
-                                        }
-                                        EvaluationResult::Empty => EvaluationResult::Empty,
-                                        _ => EvaluationResult::boolean(true), // Non-boolean singleton is true
-                                    }
-                                }
-                                _ => {
-                                    return Err(EvaluationError::SingletonEvaluationError(
-                                        format!(
-                                            "Operator 'and' requires singleton values, right operand has {} items",
-                                            items.len()
-                                        ),
-                                    ));
-                                }
-                            }
-                        }
-                    };
-
-                    Ok(right_bool) // true and X -> X
+                    let out = left_tri.or(right_tri);
+                    Ok(match out {
+                        TriBool::True => EvaluationResult::boolean(true),
+                        TriBool::False => EvaluationResult::boolean(false),
+                        TriBool::Empty => EvaluationResult::Empty,
+                    })
                 }
-                EvaluationResult::Empty => {
-                    // Evaluate right operand
-                    let right_eval = evaluate(right, context, current_item)?;
 
-                    // Apply singleton evaluation to right operand
-                    let right_bool = match &right_eval {
-                        // Direct boolean values
-                        EvaluationResult::Boolean(_, _) => right_eval.to_boolean_for_logic()?,
-                        // Empty evaluates to empty in logical context
-                        EvaluationResult::Empty => EvaluationResult::Empty,
-                        // For non-boolean singletons, apply singleton evaluation:
-                        // A single value is considered true
-                        EvaluationResult::String(_, _)
-                        | EvaluationResult::Integer(_, _)
-                        | EvaluationResult::Integer64(_, _)
-                        | EvaluationResult::Decimal(_, _)
-                        | EvaluationResult::Date(_, _)
-                        | EvaluationResult::DateTime(_, _)
-                        | EvaluationResult::Time(_, _)
-                        | EvaluationResult::Quantity(_, _, _)
-                        | EvaluationResult::Object { .. } => EvaluationResult::boolean(true),
-                        // Collections follow singleton evaluation rules
-                        EvaluationResult::Collection { items, .. } => {
-                            match items.len() {
-                                0 => EvaluationResult::Empty,
-                                1 => {
-                                    // For single-item collections, apply singleton evaluation recursively
-                                    match &items[0] {
-                                        EvaluationResult::Boolean(_, _) => {
-                                            items[0].to_boolean_for_logic()?
-                                        }
-                                        EvaluationResult::Empty => EvaluationResult::Empty,
-                                        _ => EvaluationResult::boolean(true), // Non-boolean singleton is true
-                                    }
-                                }
-                                _ => {
-                                    return Err(EvaluationError::SingletonEvaluationError(
-                                        format!(
-                                            "Operator 'and' requires singleton values, right operand has {} items",
-                                            items.len()
-                                        ),
-                                    ));
-                                }
-                            }
-                        }
-                    };
-
-                    // Apply 3-valued logic for Empty and X
-                    match right_bool {
-                        EvaluationResult::Boolean(false, _) => Ok(EvaluationResult::boolean(false)), // {} and false -> false
-                        _ => Ok(EvaluationResult::Empty), // {} and (true | {}) -> {}
+                "xor" => {
+                    // FHIRPath: if either operand is empty => empty
+                    if matches!(left_tri, TriBool::Empty) {
+                        return Ok(EvaluationResult::Empty);
                     }
+
+                    let right_eval = evaluate(right, context, current_item)?;
+                    let right_tri = to_tribool_operand(&right_eval, "xor")?;
+
+                    let out = left_tri.xor(right_tri);
+                    Ok(match out {
+                        TriBool::True => EvaluationResult::boolean(true),
+                        TriBool::False => EvaluationResult::boolean(false),
+                        TriBool::Empty => EvaluationResult::Empty,
+                    })
                 }
-                // This case should be unreachable with proper singleton evaluation
-                _ => Err(EvaluationError::TypeError(format!(
-                    "Invalid type for 'and' left operand after singleton evaluation: {}",
-                    left_bool.type_name()
+
+                _ => Err(EvaluationError::InvalidOperation(format!(
+                    "Unknown logical operator '{}'", op
                 ))),
             }
         }
-        Expression::Or(left, op, right) => {
-            // Evaluate left, handle potential error
-            let left_eval = evaluate(left, context, current_item)?;
-            let left_bool = left_eval.to_boolean_for_logic()?; // Propagate error
-
-            // Evaluate right, handle potential error
-            let right_eval = evaluate(right, context, current_item)?;
-
-            // Check types *before* logical conversion
-            if !matches!(
-                left_eval,
-                EvaluationResult::Boolean(_, _) | EvaluationResult::Empty
-            ) || !matches!(
-                right_eval,
-                EvaluationResult::Boolean(_, _) | EvaluationResult::Empty
-            ) {
-                // Allow Empty for 3-valued logic, but reject other types
-                if !matches!(left_eval, EvaluationResult::Empty)
-                    && !matches!(right_eval, EvaluationResult::Empty)
-                {
-                    return Err(EvaluationError::TypeError(format!(
-                        "Operator '{}' requires Boolean operands, found {} and {}",
-                        op,
-                        left_eval.type_name(),
-                        right_eval.type_name()
-                    )));
-                }
-            }
-
-            // Convert to boolean for logic AFTER type check
-            let _left_bool = left_eval.to_boolean_for_logic()?; // Propagate error (prefix to silence warning)
-            let right_bool = right_eval.to_boolean_for_logic()?; // Propagate error
-
-            // Re-evaluate left_bool for the match to ensure it's used correctly
-            let left_bool_match = left_eval.to_boolean_for_logic()?;
-
-            // Ensure both operands resolved to Boolean or Empty (redundant after above check, but safe)
-            if !matches!(
-                left_bool_match,
-                EvaluationResult::Boolean(_, _) | EvaluationResult::Empty
-            ) {
-                return Err(EvaluationError::TypeError(format!(
-                    // Should be unreachable
-                    "Invalid type for '{}' left operand after conversion: {}",
-                    op,
-                    left_bool.type_name()
-                )));
-            }
-            if !matches!(
-                right_bool,
-                EvaluationResult::Boolean(_, _) | EvaluationResult::Empty
-            ) {
-                return Err(EvaluationError::TypeError(format!(
-                    // Should be unreachable
-                    "Invalid type for '{}' right operand after conversion: {}",
-                    op,
-                    right_bool.type_name()
-                )));
-            }
-
-            if op == "or" {
-                // Use the re-evaluated left_bool_match here
-                match (&left_bool_match, &right_bool) {
-                    (EvaluationResult::Boolean(true, _), _)
-                    | (_, EvaluationResult::Boolean(true, _)) => {
-                        Ok(EvaluationResult::boolean(true))
-                    }
-                    (EvaluationResult::Empty, EvaluationResult::Empty) => {
-                        Ok(EvaluationResult::Empty)
-                    }
-                    (EvaluationResult::Empty, EvaluationResult::Boolean(false, _)) => {
-                        Ok(EvaluationResult::Empty)
-                    }
-                    (EvaluationResult::Boolean(false, _), EvaluationResult::Empty) => {
-                        Ok(EvaluationResult::Empty)
-                    }
-                    (EvaluationResult::Boolean(false, _), EvaluationResult::Boolean(false, _)) => {
-                        Ok(EvaluationResult::boolean(false))
-                    }
-                    // Cases involving Empty handled above, this should not be reached with invalid types
-                    _ => unreachable!("Invalid types should have been caught earlier for 'or'"),
-                }
-            } else {
-                // xor
-                // Use the re-evaluated left_bool_match here
-                match (&left_bool_match, &right_bool) {
-                    (EvaluationResult::Empty, _) | (_, EvaluationResult::Empty) => {
-                        Ok(EvaluationResult::Empty)
-                    }
-                    (EvaluationResult::Boolean(l, _), EvaluationResult::Boolean(r, _)) => {
-                        Ok(EvaluationResult::boolean(l != r))
-                    }
-                    // Cases involving Empty handled above, this should not be reached with invalid types
-                    _ => unreachable!("Invalid types should have been caught earlier for 'xor'"),
-                }
-            }
-        }
         Expression::Implies(left, right) => {
-            // Evaluate left, handle potential error
+            // FHIRPath implies is defined as: (not left) or right
+            // with three-valued logic.
+            //
+            // Spec note: implementations MUST NOT change semantics with short-circuiting.
+            // To preserve observable behavior (including evaluation errors), we evaluate
+            // both operands and then apply the three-valued truth table.
+            //
+            // implies:
+            //   false implies X => true
+            //   true implies X  => X
+            //   empty implies true  => true
+            //   empty implies false => empty
+            //   empty implies empty => empty
+
             let left_eval = evaluate(left, context, current_item)?;
-            let left_bool = left_eval.to_boolean_for_logic()?; // Propagate error
+            let left_tri = to_tribool_operand(&left_eval, "implies")?;
 
-            // Check type *before* logical conversion
-            if !matches!(
-                left_eval,
-                EvaluationResult::Boolean(_, _) | EvaluationResult::Empty
-            ) {
-                return Err(EvaluationError::TypeError(format!(
-                    "Operator 'implies' requires Boolean left operand, found {}",
-                    left_eval.type_name()
-                )));
-            }
+            let right_eval = evaluate(right, context, current_item)?;
+            let right_tri = to_tribool_operand(&right_eval, "implies")?;
 
-            match left_bool {
-                EvaluationResult::Boolean(false, _) => Ok(EvaluationResult::boolean(true)), // false implies X -> true
-                EvaluationResult::Empty => {
-                    // Evaluate right, handle potential error
-                    let right_eval = evaluate(right, context, current_item)?;
-                    // Check type *before* logical conversion
-                    if !matches!(
-                        right_eval,
-                        EvaluationResult::Boolean(_, _) | EvaluationResult::Empty
-                    ) {
-                        return Err(EvaluationError::TypeError(format!(
-                            "Operator 'implies' requires Boolean right operand when left is Empty, found {}",
-                            right_eval.type_name()
-                        )));
-                    }
-                    let right_bool = right_eval.to_boolean_for_logic()?; // Propagate error
-                    match right_bool {
-                        EvaluationResult::Boolean(true, _) => Ok(EvaluationResult::boolean(true)), // {} implies true -> true
-                        _ => Ok(EvaluationResult::Empty), // {} implies (false | {}) -> {}
-                    }
-                }
-                EvaluationResult::Boolean(true, _) => {
-                    // Evaluate right, handle potential error
-                    let right_eval = evaluate(right, context, current_item)?;
-                    // Check type *before* logical conversion
-                    if !matches!(
-                        right_eval,
-                        EvaluationResult::Boolean(_, _) | EvaluationResult::Empty
-                    ) {
-                        return Err(EvaluationError::TypeError(format!(
-                            "Operator 'implies' requires Boolean right operand when left is True, found {}",
-                            right_eval.type_name()
-                        )));
-                    }
-                    let right_bool = right_eval.to_boolean_for_logic()?; // Propagate error
-                    Ok(right_bool) // true implies X -> X (Boolean or Empty)
-                }
-                // This case should be unreachable if to_boolean_for_logic works correctly
-                _ => {
-                    unreachable!("Invalid type for 'implies' left operand should have been caught")
-                }
-            }
+            let out = left_tri.implies(right_tri);
+            Ok(match out {
+                TriBool::True => EvaluationResult::boolean(true),
+                TriBool::False => EvaluationResult::boolean(false),
+                TriBool::Empty => EvaluationResult::Empty,
+            })
         }
         Expression::Lambda(_, _) => {
             // Lambda expressions are not directly evaluated here.
@@ -1293,6 +1143,30 @@ pub fn evaluate(
             // Return Ok(Empty) as it's not an error, just not evaluated yet.
             Ok(EvaluationResult::Empty)
         }
+    }
+}
+
+// Local helper: convert an evaluated result into tri-valued boolean for logical ops.
+fn to_tribool_operand(
+    v: &EvaluationResult,
+    op: &str,
+) -> Result<TriBool, EvaluationError> {
+    match v {
+        EvaluationResult::Boolean(b, _) => Ok(TriBool::from_bool(*b)),
+        EvaluationResult::Empty => Ok(TriBool::Empty),
+        EvaluationResult::Collection { items, .. } => match items.len() {
+            0 => Ok(TriBool::Empty),
+            1 => to_tribool_operand(&items[0], op),
+            n => Err(EvaluationError::SingletonEvaluationError(format!(
+                "Operator '{}' requires singleton values, found {} items",
+                op, n
+            ))),
+        },
+        _ => Err(EvaluationError::TypeError(format!(
+            "Operator '{}' requires Boolean operands, found {}",
+            op,
+            v.type_name()
+        ))),
     }
 }
 
@@ -1328,16 +1202,10 @@ fn evaluate_with_context(
         } else {
             EvaluationResult::Empty
         };
-
-        if let EvaluationResult::Object {
-            map: obj_map,
-            type_info: _,
-        } = &global_context_item
-        {
-            if let Some(EvaluationResult::String(ctx_type, _)) = obj_map.get("resourceType") {
-                if initial_name.eq_ignore_ascii_case(ctx_type) {
-                    return Ok((global_context_item, context));
-                }
+        context.init_root_and_current(global_context_item.clone());
+        if let Some(ctx_type) = resource_type_of(&global_context_item) {
+            if initial_name.eq_ignore_ascii_case(&ctx_type) {
+                return Ok((global_context_item, context));
             }
         }
     }
@@ -1439,6 +1307,48 @@ fn flatten_collections_recursive(result: EvaluationResult) -> (Vec<EvaluationRes
     (flattened_items, any_undefined_order)
 }
 
+/// Builds the FHIRPath `%context` value from `context.resources` (singleton or collection).
+fn context_value(context: &EvaluationContext) -> EvaluationResult {
+    if context.resources.is_empty() {
+        EvaluationResult::Empty
+    } else if context.resources.len() == 1 {
+        convert_resource_to_result(&context.resources[0])
+    } else {
+        EvaluationResult::Collection {
+            items: context
+                .resources
+                .iter()
+                .map(convert_resource_to_result)
+                .collect(),
+            has_undefined_order: false,
+            type_info: None,
+        }
+    }
+}
+
+/// Returns the top-level resource being evaluated (`%rootResource`).
+/// Prefers the explicitly initialized root resource (set by `init_root_and_current`).
+/// Falls back to `%context`.
+fn root_resource_value(context: &EvaluationContext) -> EvaluationResult {
+    if let Some(root) = context.root_resource.lock().as_ref() {
+        root.clone()
+    } else {
+        context_value(context)
+    }
+}
+
+/// Returns the current top-level resource in scope (`%resource`).
+/// IMPORTANT: This must remain the top-level/current resource, NOT the lambda focus.
+/// Prefers the explicitly initialized current resource (set by `init_root_and_current`).
+/// Falls back to `%context`.
+fn resource_value(context: &EvaluationContext) -> EvaluationResult {
+    if let Some(current) = context.current_resource.lock().as_ref() {
+        current.clone()
+    } else {
+        context_value(context)
+    }
+}
+
 /// Evaluates a FHIRPath term in the given context
 ///
 /// This function handles the evaluation of basic FHIRPath terms:
@@ -1507,23 +1417,11 @@ fn evaluate_term(
             if let Invocation::Member(name) = invocation {
                 if let Some(var_name) = name.strip_prefix('%') {
                     if var_name == "context" {
-                        // Return %context value
-                        // Correctly wrap the entire conditional result in Ok()
-                        return Ok(if context.resources.is_empty() {
-                            EvaluationResult::Empty
-                        } else if context.resources.len() == 1 {
-                            convert_resource_to_result(&context.resources[0])
-                        } else {
-                            EvaluationResult::Collection {
-                                items: context
-                                    .resources
-                                    .iter()
-                                    .map(convert_resource_to_result)
-                                    .collect(),
-                                has_undefined_order: false, // Resources in context are typically ordered
-                                type_info: None,
-                            }
-                        });
+                        return Ok(context_value(context));
+                    } else if var_name == "rootResource" {
+                        return Ok(root_resource_value(context));
+                    } else if var_name == "resource" {
+                        return Ok(resource_value(context));
                     } else if var_name == "ucum" {
                         // Return %ucum system variable - the UCUM system URI
                         return Ok(EvaluationResult::string(
@@ -1601,14 +1499,20 @@ fn evaluate_term(
                         type_info: None,
                     } = &base_context
                     {
-                        if let Some(EvaluationResult::String(ctx_type, _)) =
-                            obj_map.get("resourceType")
-                        {
-                            // The parser ensures 'name' is cleaned of backticks if it was a delimited identifier.
-                            if name.eq_ignore_ascii_case(ctx_type) {
+                        // New Code
+                        if let Some(ctx_type) = resource_type_of(&base_context) {
+                            if name.eq_ignore_ascii_case(&ctx_type) {
                                 return Ok(base_context.clone());
                             }
                         }
+                        // if let Some(EvaluationResult::String(ctx_type, _)) =
+                        //     obj_map.get("resourceType")
+                        // {
+                        //     // The parser ensures 'name' is cleaned of backticks if it was a delimited identifier.
+                        //     if name.eq_ignore_ascii_case(ctx_type) {
+                        //         return Ok(base_context.clone());
+                        //     }
+                        // }
                     }
                 }
             }
@@ -1621,24 +1525,15 @@ fn evaluate_term(
         }
         Term::Literal(literal) => Ok(evaluate_literal(literal)), // Wrap in Ok
         Term::ExternalConstant(name) => {
-            // Look up external constant in the context
-            // Special handling for %context
+            // External constants are referenced in FHIRPath as %name, but different parsers
+            // may or may not include the leading '%' in the AST. Normalize here.
+            let name = name.strip_prefix('%').unwrap_or(name);
             if name == "context" {
-                Ok(if context.resources.is_empty() {
-                    EvaluationResult::Empty
-                } else if context.resources.len() == 1 {
-                    convert_resource_to_result(&context.resources[0])
-                } else {
-                    EvaluationResult::Collection {
-                        items: context
-                            .resources
-                            .iter()
-                            .map(convert_resource_to_result)
-                            .collect(),
-                        has_undefined_order: false, // Resources in context are typically ordered
-                        type_info: None,
-                    }
-                }) // Correctly placed Ok() wrapping
+                Ok(context_value(context))
+            } else if name == "rootResource" {
+                Ok(root_resource_value(context))
+            } else if name == "resource" {
+                Ok(resource_value(context))
             } else if name == "ucum" {
                 // Return %ucum system variable - the UCUM system URI
                 Ok(EvaluationResult::string(
@@ -1679,12 +1574,11 @@ fn evaluate_term(
                     type_info: Some(TypeInfoResult::new("System", "TerminologyFunctions")),
                 })
             } else {
-                // Return variable value or error if undefined
-                // ExternalConstant name doesn't include %, but variables are stored with %
-                let var_name = format!("%{}", name);
-                match context.lookup_variable(&var_name) {
+                // Return user-defined variable value or error if undefined.
+                // `lookup_variable()` expects the un-prefixed name (consistent with %var handling).
+                match context.lookup_variable(name) {
                     Some(value) => Ok(value.clone()),
-                    None => Err(EvaluationError::UndefinedVariable(var_name)),
+                    None => Err(EvaluationError::UndefinedVariable(format!("%{}", name))),
                 }
             }
         }
@@ -1812,7 +1706,7 @@ fn evaluate_invocation_with_context(
                     };
 
                     // Check if trying to override system variables
-                    let system_vars = ["%context", "%ucum", "%sct", "%loinc", "%vs"];
+                    let system_vars = ["%context", "%ucum", "%rootResource", "%resource","%sct", "%loinc", "%vs"];
                     if system_vars.contains(&var_name.as_str()) {
                         return Err(EvaluationError::SemanticError(format!(
                             "Cannot override system variable '{}'",
@@ -1985,7 +1879,12 @@ fn evaluate_invocation(
             } else if name == "false" && matches!(invocation_base, EvaluationResult::Empty) {
                 return Ok(EvaluationResult::boolean(false));
             }
-
+            if name == "resourceType" {
+                return Ok(match resource_type_of(invocation_base) {
+                    Some(rt) => EvaluationResult::string(rt),
+                    None => EvaluationResult::Empty,
+                });
+            }
             // Access a member of the invocation_base
             match invocation_base {
                 EvaluationResult::Object {
@@ -2480,7 +2379,7 @@ fn evaluate_invocation(
                     };
 
                     // Check if trying to override system variables
-                    let system_vars = ["%context", "%ucum", "%sct", "%loinc", "%vs"];
+                    let system_vars = ["%context", "%ucum", "%rootResource", "%resource", "%sct", "%loinc", "%vs"];
                     if system_vars.contains(&var_name.as_str()) {
                         return Err(EvaluationError::SemanticError(format!(
                             "Cannot override system variable '{}'",
@@ -2745,8 +2644,27 @@ fn evaluate_exists_with_criteria(
         // Evaluate the criteria expression with the current item as $this, propagate error
         let criteria_result = evaluate(criteria_expr, context, Some(&item))?;
         // exists returns true if the criteria evaluates to true for *any* item
-        if criteria_result.to_boolean() {
-            return Ok(EvaluationResult::boolean(true)); // Ensure this return is Ok()
+        // if criteria_result.to_boolean() {
+        //     return Ok(EvaluationResult::boolean(true)); // Ensure this return is Ok()
+        // }
+
+        // New Code Per FHIRPath collection semantics, exists(criteria) expects a boolean criteria.
+        // - true  => this item matches
+        // - false/empty => this item does not match
+        // - anything else => type error
+        match criteria_result {
+            EvaluationResult::Boolean(true, _) => {
+                return Ok(EvaluationResult::boolean(true));
+            }
+            EvaluationResult::Boolean(false, _) | EvaluationResult::Empty => {
+                // keep searching
+            }
+            other => {
+                return Err(EvaluationError::TypeError(format!(
+                    "exists(criteria) evaluated to non-boolean: {:?}",
+                    other
+                )));
+            }
         }
     }
 
@@ -2822,22 +2740,49 @@ fn evaluate_where(
         input_was_unordered,
     ))
 }
-
-/// Evaluates the 'where' function with context threading.
+/// Evaluates the FHIRPath `where()` function with context threading.
 ///
-/// This version of evaluate_where properly threads the evaluation context through
-/// the where operation, allowing functions like defineVariable to persist their
-/// context modifications.
+/// This version is used when the expression tree contains context-modifying
+/// functions (e.g. `defineVariable`) and therefore requires proper context
+/// propagation across the invocation chain.
 ///
-/// # Arguments
+/// Unlike `evaluate_where`, this function:
+/// - Accepts ownership of an `EvaluationContext`
+/// - Creates an isolated per-item child context
+/// - Prevents variable leakage between iterations
+/// - Avoids recursive parent-context chains (which previously caused stack overflow)
 ///
-/// * `collection` - The collection to filter
-/// * `criteria_expr` - The criteria expression to evaluate for each item
-/// * `context` - The evaluation context to thread through
+/// ## Scoping Model
 ///
-/// # Returns
+/// FHIRPath requires that variables defined inside a lambda (such as inside
+/// `where()`) are scoped to that evaluation only. They must:
 ///
-/// A tuple containing the evaluation result and the potentially modified context
+/// - Be visible inside the lambda body
+/// - NOT leak to sibling iterations
+/// - NOT leak to outer scopes
+///
+/// To enforce this:
+///
+/// 1. A base child context is created for the `where()` scope.
+/// 2. For each collection item, a fresh per-item context is derived.
+/// 3. The updated context returned from `evaluate_with_context` is intentionally discarded.
+/// 4. The original context is returned unchanged.
+///
+/// This prevents:
+/// - Cross-iteration variable contamination
+/// - Deep recursive parent-context chains
+/// - Stack overflow due to context cloning
+///
+/// ## Returns
+///
+/// Returns a tuple:
+/// - `EvaluationResult` — the filtered collection
+/// - `EvaluationContext` — the original (unmodified) context
+///
+/// ## Specification Reference
+///
+/// FHIRPath §3.4 Collection operators (`where`)
+/// FHIRPath §4 Variable scoping semantics
 fn evaluate_where_with_context(
     collection: &EvaluationResult,
     criteria_expr: &Expression,
@@ -2855,23 +2800,29 @@ fn evaluate_where_with_context(
 
     let mut filtered_items = Vec::new();
 
-    // Create a child context for the where scope
-    let mut child_context = context.create_child_context();
+    // Create a base child context for the where() scope.
+    // IMPORTANT: variables created inside the where() criteria must NOT leak across iterations.
+    // To avoid expensive/deep cloning (and potential stack overflow) we create a fresh per-item
+    // context derived from this base for each iteration.
+    let base_child_context = context.create_child_context();
 
     for (index, item) in items_to_filter.iter().enumerate() {
-        // Set the current index for $index variable
-        child_context.current_index = Some(index);
+        // Fresh context per item (no cross-item variable leakage)
+        let mut iter_context = base_child_context.create_child_context();
+        iter_context.current_index = Some(index);
 
-        // Evaluate criteria with child context
-        let (criteria_result, _updated_child) =
-            evaluate_with_context(criteria_expr, child_context.clone(), Some(item))?;
-        // Note: For now we don't merge contexts from each iteration
-        // This is a limitation but matches the current where() behavior
+        // Evaluate criteria with context threading
+        // NOTE: We intentionally ignore the returned updated context because where() criteria
+        // runs per-item; any defineVariable() effects should only apply within the evaluation
+        // of that item and must not persist to other items.
+        let (criteria_result, _updated_iter_ctx) =
+            evaluate_with_context(criteria_expr, iter_context, Some(item))?;
 
-        // Check if criteria is boolean, otherwise error per spec
         match criteria_result {
             EvaluationResult::Boolean(true, _) => filtered_items.push(item.clone()),
-            EvaluationResult::Boolean(false, _) | EvaluationResult::Empty => {} // Ignore false/empty
+            EvaluationResult::Boolean(false, _) | EvaluationResult::Empty => {
+                // Ignore false/empty
+            }
             other => {
                 return Err(EvaluationError::TypeError(format!(
                     "where criteria evaluated to non-boolean: {:?}",
@@ -2883,7 +2834,6 @@ fn evaluate_where_with_context(
 
     // Handle nested collections in the filtered results
     if !filtered_items.is_empty() {
-        // Check if any filtered items are collections themselves
         let has_nested_collections = filtered_items
             .iter()
             .any(|item| matches!(item, EvaluationResult::Collection { .. }));
@@ -3046,33 +2996,88 @@ fn evaluate_select_with_context(
 }
 
 /// Checks if an expression contains defineVariable function calls
+///
+/// NOTE: This must be iterative (not recursive) to avoid stack overflows on deep ASTs
+/// (e.g., large invariant expressions with nested where/select/descendants chains).
 fn expression_contains_define_variable(expr: &Expression) -> bool {
-    match expr {
-        Expression::Term(term) => term_contains_define_variable(term),
-        Expression::Invocation(left, inv) => {
-            expression_contains_define_variable(left) || invocation_contains_define_variable(inv)
+    // Walk the expression tree iteratively.
+    let mut expr_stack: Vec<&Expression> = vec![expr];
+
+    // Also allow scanning from Term/Invocation without recursion.
+    let mut term_stack: Vec<&Term> = Vec::new();
+    let mut inv_stack: Vec<&Invocation> = Vec::new();
+
+    while let Some(e) = expr_stack.pop() {
+        match e {
+            Expression::Term(t) => term_stack.push(t),
+
+            Expression::Invocation(left, inv) => {
+                expr_stack.push(left.as_ref());
+                inv_stack.push(inv);
+            }
+
+            Expression::Indexer(left, index) => {
+                expr_stack.push(left.as_ref());
+                expr_stack.push(index.as_ref());
+            }
+
+            Expression::Polarity(_, inner) => {
+                expr_stack.push(inner.as_ref());
+            }
+
+            Expression::Multiplicative(left, _, right)
+            | Expression::Additive(left, _, right)
+            | Expression::Union(left, right)
+            | Expression::Inequality(left, _, right)
+            | Expression::Equality(left, _, right)
+            | Expression::Membership(left, _, right)
+            | Expression::And(left, right)
+            | Expression::Or(left, _, right)
+            | Expression::Implies(left, right) => {
+                expr_stack.push(left.as_ref());
+                expr_stack.push(right.as_ref());
+            }
+
+            Expression::Type(left, _, _) => {
+                expr_stack.push(left.as_ref());
+            }
+
+            Expression::Lambda(_, body) => {
+                expr_stack.push(body.as_ref());
+            }
         }
-        Expression::Indexer(left, index) => {
-            expression_contains_define_variable(left) || expression_contains_define_variable(index)
+
+        // Drain any pending term/invocation nodes without recursion.
+        while let Some(t) = term_stack.pop() {
+            match t {
+                Term::Invocation(inv) => inv_stack.push(inv),
+                Term::Parenthesized(inner) => expr_stack.push(inner.as_ref()),
+                _ => {}
+            }
         }
-        Expression::Polarity(_, expr) => expression_contains_define_variable(expr),
-        Expression::Multiplicative(left, _, right)
-        | Expression::Additive(left, _, right)
-        | Expression::Union(left, right)
-        | Expression::Inequality(left, _, right)
-        | Expression::Equality(left, _, right)
-        | Expression::Membership(left, _, right)
-        | Expression::And(left, right)
-        | Expression::Or(left, _, right)
-        | Expression::Implies(left, right) => {
-            expression_contains_define_variable(left) || expression_contains_define_variable(right)
+
+        while let Some(inv) = inv_stack.pop() {
+            match inv {
+                Invocation::Function(name, args) => {
+                    if name == "defineVariable" {
+                        return true;
+                    }
+                    // Scan function argument expressions.
+                    for a in args {
+                        expr_stack.push(a);
+                    }
+                }
+                _ => {}
+            }
         }
-        Expression::Type(left, _, _) => expression_contains_define_variable(left),
-        Expression::Lambda(_, body) => expression_contains_define_variable(body),
     }
+
+    false
 }
 
-/// Checks if a term contains defineVariable function calls
+/// Checks if a term contains defineVariable function calls.
+///
+/// Implemented iteratively via `expression_contains_define_variable`.
 fn term_contains_define_variable(term: &Term) -> bool {
     match term {
         Term::Invocation(inv) => invocation_contains_define_variable(inv),
@@ -3081,15 +3086,23 @@ fn term_contains_define_variable(term: &Term) -> bool {
     }
 }
 
-/// Checks if an invocation contains defineVariable function calls
+/// Checks if an invocation contains defineVariable function calls.
+///
+/// Implemented iteratively over the invocation arguments (no recursion).
 fn invocation_contains_define_variable(inv: &Invocation) -> bool {
     match inv {
         Invocation::Function(name, args) => {
             if name == "defineVariable" {
-                true
-            } else {
-                args.iter().any(expression_contains_define_variable)
+                return true;
             }
+            // Scan the argument expressions iteratively.
+            let mut stack: Vec<&Expression> = args.iter().collect();
+            while let Some(e) = stack.pop() {
+                if expression_contains_define_variable(e) {
+                    return true;
+                }
+            }
+            false
         }
         _ => false,
     }
@@ -6321,6 +6334,7 @@ fn call_function(
                 "highBoundary",
                 "getResourceKey",
                 "getReferenceKey",
+                "htmlChecks",
             ];
             if !handled_functions.contains(&name) {
                 eprintln!("Warning: Unsupported function called: {}", name); // Keep this warning for truly unhandled functions
@@ -8651,4 +8665,23 @@ fn extract_potential_polymorphic_base(field_name: &str) -> String {
     }
 
     field_name.to_string()
+}
+// New Code
+/// Returns the FHIR `resourceType` for a focus value.
+///
+/// Many evaluation results do not carry a literal `resourceType` property in their map;
+/// instead, the resource type is represented by the runtime `type_info`. This helper
+/// returns the literal `resourceType` if present, otherwise falls back to `type_info.name`.
+fn resource_type_of(v: &EvaluationResult) -> Option<String> {
+    match v {
+        EvaluationResult::Object { map, type_info } => {
+            // Prefer explicit resourceType when available
+            if let Some(EvaluationResult::String(s, _)) = map.get("resourceType") {
+                return Some(s.clone());
+            }
+            // Fall back to runtime type_info
+            type_info.as_ref().map(|ti| ti.name.clone())
+        }
+        _ => None,
+    }
 }

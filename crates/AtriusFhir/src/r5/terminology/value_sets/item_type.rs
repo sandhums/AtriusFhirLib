@@ -15,13 +15,14 @@ use super::super::super::string::String as FhirString;
 ///Title: Questionnaire Item Type
 ///Status: draft
 ///Distinguishes groups from questions and display text and indicates data type for questions.
-///Compose includes 3 explicit concept codes
+///Compose includes 16 explicit concept codes
 ///Includes systems:
 ///- http://hl7.org/fhir/item-type
 pub struct QuestionnaireItemType;
 impl QuestionnaireItemType {
     pub const URL: &'static str = "http://hl7.org/fhir/ValueSet/item-type";
     pub const HAS_NONLOCAL_RULES: bool = false;
+    pub const HAS_FILTERS: bool = false;
     pub fn version() -> Option<&'static str> {
         Some("5.0.0")
     }
@@ -31,11 +32,31 @@ impl QuestionnaireItemType {
     pub fn include_value_sets() -> &'static [&'static str] {
         &[]
     }
+    /// compose.include.filter / compose.exclude.filter rules.
+    ///
+    /// These are NOT evaluated locally; they are emitted for diagnostics/routing.
+    pub fn filter_rules() -> &'static [(&'static str, &'static str, &'static str)] {
+        &[]
+    }
     /// Systems that are included as whole CodeSystems but are not locally enumerable.
     ///
     /// If this is non-empty, callers should use a terminology server for definitive validation.
     pub fn include_whole_systems() -> &'static [&'static str] {
         &[]
+    }
+    /// Return the implied system if this ValueSet constrains codes to exactly one system.
+    ///
+    /// This is used to allow limited validation of primitive `code` bindings.
+    pub fn single_system() -> Option<&'static str> {
+        let systems = Self::include_systems();
+        if systems.len() == 1 {
+            return Some(systems[0]);
+        }
+        let whole = Self::include_whole_systems();
+        if whole.len() == 1 {
+            return Some(whole[0]);
+        }
+        None
     }
     /// Returns true only when this ValueSet can be treated as fully locally checkable.
     ///
@@ -45,11 +66,52 @@ impl QuestionnaireItemType {
         !Self::HAS_NONLOCAL_RULES
             && (!Self::expansion_pairs().is_empty() || !Self::include_pairs().is_empty())
     }
+    /// Returns true if this ValueSet is a "pure whole-system" include.
+    ///
+    /// Pure whole-system means membership is equivalent to validating the code exists in the
+    /// included CodeSystem (no explicit include/exclude concepts, no expansion, no include.valueSet,
+    /// and no filter rules).
+    ///
+    /// This enables routing remote checks to `CodeSystem/$validate-code` for Snowstorm and efficiency.
+    pub fn is_pure_whole_system() -> bool {
+        if Self::include_whole_systems().len() != 1 {
+            return false;
+        }
+        if !Self::filter_rules().is_empty() {
+            return false;
+        }
+        if !Self::include_value_sets().is_empty() {
+            return false;
+        }
+        if !Self::include_pairs().is_empty() {
+            return false;
+        }
+        if !Self::expansion_pairs().is_empty() {
+            return false;
+        }
+        if !Self::exclude_pairs().is_empty() {
+            return false;
+        }
+        true
+    }
     fn include_pairs() -> &'static [(&'static str, &'static str)] {
         &[
             ("http://hl7.org/fhir/item-type", "group"),
             ("http://hl7.org/fhir/item-type", "display"),
             ("http://hl7.org/fhir/item-type", "question"),
+            ("http://hl7.org/fhir/item-type", "boolean"),
+            ("http://hl7.org/fhir/item-type", "decimal"),
+            ("http://hl7.org/fhir/item-type", "integer"),
+            ("http://hl7.org/fhir/item-type", "date"),
+            ("http://hl7.org/fhir/item-type", "dateTime"),
+            ("http://hl7.org/fhir/item-type", "time"),
+            ("http://hl7.org/fhir/item-type", "string"),
+            ("http://hl7.org/fhir/item-type", "text"),
+            ("http://hl7.org/fhir/item-type", "url"),
+            ("http://hl7.org/fhir/item-type", "coding"),
+            ("http://hl7.org/fhir/item-type", "attachment"),
+            ("http://hl7.org/fhir/item-type", "reference"),
+            ("http://hl7.org/fhir/item-type", "quantity"),
         ]
     }
     fn include_entries() -> &'static [(
@@ -59,6 +121,48 @@ impl QuestionnaireItemType {
         Option<&'static str>,
     )] {
         &[
+            (
+                "http://hl7.org/fhir/item-type",
+                "attachment",
+                Some("Attachment"),
+                Some(
+                    "Question with binary content such as an image, PDF, etc. as an answer (valueAttachment).",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/item-type",
+                "boolean",
+                Some("Boolean"),
+                Some("Question with a yes/no answer (valueBoolean)."),
+            ),
+            (
+                "http://hl7.org/fhir/item-type",
+                "coding",
+                Some("Coding"),
+                Some(
+                    "Question with a Coding - generally drawn from a list of possible answers (valueCoding)",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/item-type",
+                "date",
+                Some("Date"),
+                Some("Question with a date answer (valueDate)."),
+            ),
+            (
+                "http://hl7.org/fhir/item-type",
+                "dateTime",
+                Some("Date Time"),
+                Some("Question with a date and time answer (valueDateTime)."),
+            ),
+            (
+                "http://hl7.org/fhir/item-type",
+                "decimal",
+                Some("Decimal"),
+                Some(
+                    "Question with is a real number answer (valueDecimal).  There is an extension 'http://hl7.org/fhir/StructureDefinition/questionnaire-unit' that can be used to computably convey the unit of measure associated with the answer for use when performing data extraction to an element of type Quantity.",
+                ),
+            ),
             (
                 "http://hl7.org/fhir/item-type",
                 "display",
@@ -77,11 +181,65 @@ impl QuestionnaireItemType {
             ),
             (
                 "http://hl7.org/fhir/item-type",
+                "integer",
+                Some("Integer"),
+                Some(
+                    "Question with an integer answer (valueInteger).  There is an extension 'http://hl7.org/fhir/StructureDefinition/questionnaire-unit' that can be used to computably convey the unit of measure associated with the answer for use when performing data extraction to an element of type Quantity.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/item-type",
+                "quantity",
+                Some("Quantity"),
+                Some(
+                    "Question with a combination of a numeric value and unit as an answer. (valueSimpleQuantity)  There are two extensions ('http://hl7.org/fhir/StructureDefinition/questionnaire-unitOption' and 'http://hl7.org/fhir/StructureDefinition/questionnaire-unitValueSet')  that can be used to define what unit should be selected for the Quantity.code and Quantity.system.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/item-type",
                 "question",
                 Some("Question"),
                 Some(
                     "An item that defines a specific answer to be captured, and which may have child items. (the answer provided in the QuestionnaireResponse should be of the defined datatype).",
                 ),
+            ),
+            (
+                "http://hl7.org/fhir/item-type",
+                "reference",
+                Some("Reference"),
+                Some(
+                    "Question with a reference to another resource (practitioner, organization, etc.) as an answer (valueReference).",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/item-type",
+                "string",
+                Some("String"),
+                Some(
+                    "Question with a short (few words to short sentence) free-text entry answer (valueString).  Strings SHOULD NOT contain carriage return or newline characters.  If multi-line answers are needed, use the 'text' type.",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/item-type",
+                "text",
+                Some("Text"),
+                Some(
+                    "Question with a long (potentially multi-paragraph) free-text entry answer (valueString).",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/item-type",
+                "time",
+                Some("Time"),
+                Some(
+                    "Question with a time (hour:minute:second) answer independent of date. (valueTime).",
+                ),
+            ),
+            (
+                "http://hl7.org/fhir/item-type",
+                "url",
+                Some("Url"),
+                Some("Question with a URL (website, FTP site, etc.) answer (valueUri)."),
             ),
         ]
     }
@@ -254,17 +412,5 @@ for QuestionnaireItemType {
     fn contains(v: &CodeableConcept) -> bool {
         Self::contains_codeable_concept(v)
     }
-}
-fn is_rgb_hex(code: &str) -> bool {
-    let b = code.as_bytes();
-    if b.len() != 7 || b[0] != b'#' {
-        return false;
-    }
-    fn is_hex(x: u8) -> bool {
-        (b'0'..=b'9').contains(&x) || (b'a'..=b'f').contains(&x)
-            || (b'A'..=b'F').contains(&x)
-    }
-    is_hex(b[1]) && is_hex(b[2]) && is_hex(b[3]) && is_hex(b[4]) && is_hex(b[5])
-        && is_hex(b[6])
 }
 

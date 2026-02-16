@@ -1,8 +1,8 @@
 #[cfg(test)]
 mod tests {
     use axum::{Json, response::Response};
-    use helios_fhirpath::handlers::evaluate_fhirpath;
-    use helios_fhirpath::models::FhirPathParameters;
+    use atrius_fhir_path::handlers::evaluate_fhirpath;
+    use atrius_fhir_path::models::FhirPathParameters;
     use serde_json::json;
 
     #[tokio::test]
